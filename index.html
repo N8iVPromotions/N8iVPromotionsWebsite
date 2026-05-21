@@ -1,310 +1,367 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="N8iV Promotions — Premium event promotions, artist management, and live experiences." />
-  <title>N8iV Promotions</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>N8iV Promotions — Turn Marketing Into Revenue</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="css/animations.css" />
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/tweaks.css" />
+<script>
+  (function(){
+    var TWEAKS_KEY="n8iv_site_tweaks_v1";
+    try{var t=JSON.parse(localStorage.getItem(TWEAKS_KEY)||"{}");
+    document.documentElement.setAttribute("data-accent",t.accent||"purple");
+    document.documentElement.setAttribute("data-display",t.display||"anton");}
+    catch(e){document.documentElement.setAttribute("data-accent","purple");document.documentElement.setAttribute("data-display","anton");}
+  })();
+</script>
 </head>
-<body>
+<body data-page-name="Home">
 
-  <!-- ═══ NAV ════════════════════════════════════════════════ -->
-  <nav class="nav" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="#" class="nav-logo">
-        <span class="logo-dot" aria-hidden="true"></span>
-        N8iV<span class="text-gold">&nbsp;Promotions</span>
+<div class="grid-overlay"></div>
+
+<!-- ══════════ NAV ══════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">N8iV<span class="dot">.</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta-wrap">
+      <span class="nav-status"><span class="dot"></span>Onboarding Q3</span>
+      <a href="contact.html" class="btn btn-primary">Book Audit
+        <svg class="icon-arrow" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
       </a>
-      <ul class="nav-links">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#events">Events</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="eyebrow reveal">Performance Attribution Specialists</div>
+      <ul class="hero-services-list reveal">
+        <li><span class="num">//01</span><span class="dash"></span>Closed-Loop Attribution</li>
+        <li><span class="num">//02</span><span class="dash"></span>Channel Performance Audits</li>
+        <li><span class="num">//03</span><span class="dash"></span>Pipeline Source Modeling</li>
+        <li><span class="num">//04</span><span class="dash"></span>Monthly Revenue Reporting</li>
       </ul>
     </div>
-  </nav>
 
-  <!-- ═══ HERO ════════════════════════════════════════════════ -->
-  <section class="hero parallax-section">
-    <!-- Parallax background -->
-    <div class="hero-bg" data-parallax="0.25" aria-hidden="true"></div>
+    <h1 class="display huge hero-headline reveal">
+      We Turn<br>
+      Ad Spend<br>
+      Into <span class="accent-block">Revenue.</span>
+    </h1>
 
-    <!-- Floating orbs -->
-    <div class="orb orb-1" aria-hidden="true"></div>
-    <div class="orb orb-2" aria-hidden="true"></div>
-    <div class="orb orb-3" aria-hidden="true"></div>
+    <div class="hero-sub-card reveal">
+      An attribution service for independent businesses and boutique agencies — connecting every ad dollar to <strong>closed deals and collected cash</strong>, automated every month.
+    </div>
 
-    <div class="hero-content">
-      <div class="hero-badge" data-animate data-delay="100">
-        Native &bull; Authentic &bull; Unstoppable
-      </div>
-
-      <!-- Word-by-word heading -->
-      <h1>
-        <span data-word-animate class="text-gold">We Amplify</span><br />
-        <span data-word-animate data-delay="200">Your Vision</span>
-      </h1>
-
-      <p class="hero-sub" data-animate data-delay="300">
-        Premium event promotions, artist management, and unforgettable live experiences — rooted in culture, driven by passion.
-      </p>
-
-      <div class="hero-cta" data-animate data-delay="400">
-        <a href="#events" class="btn btn-glow">
-          <span class="btn-icon" aria-hidden="true">&#9733;</span>
-          View Events
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:56px;gap:24px;flex-wrap:wrap;">
+      <div class="reveal" style="display:flex;gap:14px;flex-wrap:wrap;">
+        <a href="contact.html" class="btn btn-dark btn-lg">Book Your Free Audit
+          <svg class="icon-arrow" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
         </a>
-        <a href="#contact" class="btn btn-outline">Work With Us</a>
+        <a href="work.html" class="btn btn-ghost btn-lg">See Case Studies</a>
+      </div>
+      <a href="work.html" class="circle-arrow reveal">
+        Explore Work
+        <span class="ring">
+          <svg width="20" height="20" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ STATS ══════════ -->
+<section class="stats-wrap">
+  <div class="wrap">
+    <div class="stats reveal">
+      <div class="stat">
+        <div class="stat-num" data-stat-num="stat1Num">240+</div>
+        <div class="stat-label" data-stat-label="stat1Label">Attribution reports delivered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-stat-num="stat2Num">$48M</div>
+        <div class="stat-label" data-stat-label="stat2Label">Tracked revenue under management</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-stat-num="stat3Num">42%</div>
+        <div class="stat-label" data-stat-label="stat3Label">Average CPA reduction</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-stat-num="stat4Num">3.5x</div>
+        <div class="stat-label" data-stat-label="stat4Label">ROAS growth across cohort</div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="scroll-indicator" aria-hidden="true">
-      <span>Scroll</span>
-      <div class="arrow"></div>
+<!-- ══════════ ABOUT INTRO ══════════ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="label-sm">— About / 01</div>
+      <div></div>
     </div>
-  </section>
-
-  <!-- ═══ SERVICES ════════════════════════════════════════════ -->
-  <section class="services" id="services">
-    <div class="container">
-      <div class="text-center">
-        <span class="section-label" data-animate>What We Do</span>
-        <h2 data-word-animate>Our Services</h2>
-        <div class="section-divider" data-animate data-delay="200"></div>
-      </div>
-
-      <div class="services-grid">
-        <div class="service-card" data-animate data-delay="100">
-          <span class="service-icon" aria-hidden="true">🎤</span>
-          <h3>Artist Management</h3>
-          <p>Full-spectrum talent development, booking, and career strategy tailored to authentic storytelling.</p>
-        </div>
-        <div class="service-card" data-animate data-delay="200">
-          <span class="service-icon" aria-hidden="true">🎪</span>
-          <h3>Event Production</h3>
-          <p>End-to-end live event execution — logistics, staging, AV, and crowd experience design.</p>
-        </div>
-        <div class="service-card" data-animate data-delay="300">
-          <span class="service-icon" aria-hidden="true">📣</span>
-          <h3>Digital Promotion</h3>
-          <p>Targeted campaigns across social, streaming, and press that connect artists with the right audiences.</p>
-        </div>
-        <div class="service-card" data-animate data-delay="400">
-          <span class="service-icon" aria-hidden="true">🤝</span>
-          <h3>Brand Partnerships</h3>
-          <p>Curated sponsorships and partnerships that align brand values with cultural moments.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ STATS ════════════════════════════════════════════════ -->
-  <section class="stats">
-    <div class="container">
-      <div class="stats-grid">
-        <div data-animate>
-          <span class="stat-number" data-count="350" data-suffix="+">0</span>
-          <p class="stat-label">Events Produced</p>
-        </div>
-        <div data-animate data-delay="100">
-          <span class="stat-number" data-count="120" data-suffix="+">0</span>
-          <p class="stat-label">Artists Managed</p>
-        </div>
-        <div data-animate data-delay="200">
-          <span class="stat-number" data-count="50" data-suffix="k+">0</span>
-          <p class="stat-label">Fans Reached</p>
-        </div>
-        <div data-animate data-delay="300">
-          <span class="stat-number" data-count="12">0</span>
-          <p class="stat-label">Years of Impact</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ PARALLAX SHOWCASE ════════════════════════════════════ -->
-  <section class="showcase parallax-section" id="about">
-    <div class="showcase-bg" data-parallax="0.35" aria-hidden="true"></div>
-
-    <div class="container">
-      <div class="showcase-content">
-        <span class="section-label" data-animate>Our Philosophy</span>
-        <blockquote data-animate data-delay="100">
-          "<span data-word-animate>Culture isn't a backdrop — it's the stage.</span>"
-        </blockquote>
-        <cite data-animate data-delay="200">— N8iV Promotions Team</cite>
-
-        <p class="mt-4" style="color: var(--color-text-muted); max-width: 540px;" data-animate data-delay="300">
-          We believe every event is a ceremony. We build experiences that honour the community, celebrate the artist, and leave audiences changed.
-        </p>
-
-        <div class="mt-4" data-animate data-delay="400">
-          <a href="#contact" class="btn btn-shimmer">
-            <span class="btn-icon" aria-hidden="true">&#8594;</span>
-            Start a Conversation
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ EVENTS ════════════════════════════════════════════════ -->
-  <section class="events" id="events">
-    <div class="container">
+    <div class="two-col reveal">
       <div>
-        <span class="section-label" data-animate>Upcoming</span>
-        <h2 data-word-animate>Live Events</h2>
-        <div class="section-divider" data-animate data-delay="200" style="margin: 1.25rem 0;"></div>
+        <h2 class="display lg">
+          We Are A<br>
+          <span class="accent">Revenue<br>Machine.</span>
+        </h2>
       </div>
-
-      <div class="events-list">
-
-        <div class="event-card" data-animate>
-          <div class="event-date">
-            <div class="day">14</div>
-            <div class="month">Jun</div>
+      <div>
+        <p class="body-lg" style="margin-top:8px;">
+          Most dashboards lie. Form fills and click-throughs feel like progress, but they don't pay rent. We rebuild your marketing measurement around one question: <em>did this dollar earn another one back?</em>
+        </p>
+        <p class="body" style="margin-top:24px;">
+          Each month we deliver a closed-loop report that ties every ad platform, channel and campaign to the deals your CRM actually closes. No vanity metrics. No dashboards to babysit. Just clear answers.
+        </p>
+        <div class="spacer-md"></div>
+        <div style="display:flex;gap:48px;flex-wrap:wrap;">
+          <div>
+            <div class="display sm accent">04</div>
+            <div class="label-sm" style="margin-top:6px;">Years operating</div>
           </div>
-          <div class="event-info">
-            <h3>Roots &amp; Rhythm Festival</h3>
-            <p>&#128205; Phoenix, AZ &nbsp;&bull;&nbsp; Outdoor Amphitheatre</p>
+          <div>
+            <div class="display sm">62</div>
+            <div class="label-sm" style="margin-top:6px;">Active clients</div>
           </div>
-          <div class="event-cta">
-            <a href="#" class="btn btn-scale" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">
-              <span class="btn-icon" aria-hidden="true">&#9654;</span>
-              Tickets
-            </a>
-          </div>
-        </div>
-
-        <div class="event-card" data-animate data-delay="100">
-          <div class="event-date">
-            <div class="day">28</div>
-            <div class="month">Jun</div>
-          </div>
-          <div class="event-info">
-            <h3>Summer Solstice Showcase</h3>
-            <p>&#128205; Albuquerque, NM &nbsp;&bull;&nbsp; Hard Rock Hotel</p>
-          </div>
-          <div class="event-cta">
-            <a href="#" class="btn btn-scale" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">
-              <span class="btn-icon" aria-hidden="true">&#9654;</span>
-              Tickets
-            </a>
+          <div>
+            <div class="display sm">11</div>
+            <div class="label-sm" style="margin-top:6px;">Industries served</div>
           </div>
         </div>
-
-        <div class="event-card" data-animate data-delay="200">
-          <div class="event-date">
-            <div class="day">19</div>
-            <div class="month">Jul</div>
-          </div>
-          <div class="event-info">
-            <h3>N8iV Sounds Vol. III</h3>
-            <p>&#128205; Denver, CO &nbsp;&bull;&nbsp; Red Rocks Amphitheatre</p>
-          </div>
-          <div class="event-cta">
-            <a href="#" class="btn btn-scale" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">
-              <span class="btn-icon" aria-hidden="true">&#9654;</span>
-              Tickets
-            </a>
-          </div>
-        </div>
-
-        <div class="event-card" data-animate data-delay="300">
-          <div class="event-date">
-            <div class="day">02</div>
-            <div class="month">Aug</div>
-          </div>
-          <div class="event-info">
-            <h3>Gathering of Nations Afterparty</h3>
-            <p>&#128205; Albuquerque, NM &nbsp;&bull;&nbsp; The Pit</p>
-          </div>
-          <div class="event-cta">
-            <a href="#" class="btn btn-scale" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">
-              <span class="btn-icon" aria-hidden="true">&#9654;</span>
-              Tickets
-            </a>
-          </div>
-        </div>
-
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ═══ BUTTON SHOWCASE ══════════════════════════════════════ -->
-  <section class="buttons-demo">
-    <div class="container">
-      <span class="section-label" data-animate>Interaction Design</span>
-      <h2 data-animate data-delay="100">Hover the Buttons</h2>
-      <p style="color: var(--color-text-muted); margin-top: 0.5rem;" data-animate data-delay="200">
-        Five distinct hover effects — glow, scale + icon rotate, shimmer sweep, outline fill, and neon pulse.
+<!-- ══════════ MARQUEE ══════════ -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Attribution</span>
+    <span class="outline">Revenue</span>
+    <span>Certainty</span>
+    <span class="outline">Clarity</span>
+    <span>No Vanity Metrics</span>
+    <span class="outline">Closed-Loop</span>
+    <span>Attribution</span>
+    <span class="outline">Revenue</span>
+    <span>Certainty</span>
+    <span class="outline">Clarity</span>
+    <span>No Vanity Metrics</span>
+    <span class="outline">Closed-Loop</span>
+  </div>
+</div>
+
+<!-- ══════════ SERVICES PREVIEW ══════════ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="label-sm">— Services / 02</div>
+      <h2 class="display md">
+        Four Disciplines.<br>
+        <span class="accent">One Outcome.</span>
+      </h2>
+    </div>
+
+    <div class="service-rows reveal">
+      <a class="service-row" href="services.html">
+        <div class="num">//01</div>
+        <div class="title">Closed-Loop Attribution</div>
+        <div class="desc">CRM, ad platforms and call data unified into a single pipeline-to-revenue model. No more guessing which channels paid for themselves.</div>
+        <div class="meta">
+          <span>Always-On</span>
+          <span class="arrow">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+          </span>
+        </div>
+      </a>
+      <a class="service-row" href="services.html">
+        <div class="num">//02</div>
+        <div class="title">Channel Performance Audit</div>
+        <div class="desc">A one-time deep dive that exposes wasted spend across Meta, Google, LinkedIn and TikTok — usually inside 14 days.</div>
+        <div class="meta">
+          <span>14-Day Sprint</span>
+          <span class="arrow">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+          </span>
+        </div>
+      </a>
+      <a class="service-row" href="services.html">
+        <div class="num">//03</div>
+        <div class="title">Pipeline Source Modeling</div>
+        <div class="desc">Multi-touch models built around your sales cycle. We weight first-touch, last-touch and assist credit the way your business actually closes.</div>
+        <div class="meta">
+          <span>Quarterly</span>
+          <span class="arrow">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+          </span>
+        </div>
+      </a>
+      <a class="service-row" href="services.html">
+        <div class="num">//04</div>
+        <div class="title">Monthly Revenue Reporting</div>
+        <div class="desc">A signed report on your desk every month: which campaigns earned, which didn't, and what to do about it next cycle.</div>
+        <div class="meta">
+          <span>Monthly</span>
+          <span class="arrow">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FEATURED WORK ══════════ -->
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="label-sm">— Selected Work / 03</div>
+      <h2 class="display md">
+        Receipts.<br>
+        <span class="accent">Not Promises.</span>
+      </h2>
+    </div>
+
+    <div class="work-grid reveal">
+      <a class="case" href="work.html">
+        <div class="case-cover">
+          <span class="case-tag">Home Services</span>
+          <img src="assets/case-study-1.png" alt="Cedar &amp; Stone Roofing case study" />
+        </div>
+        <div class="case-meta">
+          <div>
+            <div class="label-sm">Cedar &amp; Stone Roofing</div>
+            <div class="case-title">−51% CPA<br>In One Quarter</div>
+          </div>
+          <div>
+            <div class="case-stat">3.8×</div>
+            <div class="case-stat-label">ROAS</div>
+          </div>
+        </div>
+      </a>
+      <a class="case" href="work.html">
+        <div class="case-cover">
+          <span class="case-tag">B2B SaaS</span>
+          <img src="assets/case-study-2.png" alt="Halcyon Logistics case study" />
+        </div>
+        <div class="case-meta">
+          <div>
+            <div class="label-sm">Halcyon Logistics</div>
+            <div class="case-title">$2.1M Hidden<br>Pipeline Found</div>
+          </div>
+          <div>
+            <div class="case-stat">+62%</div>
+            <div class="case-stat-label">Win rate</div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;margin-top:48px;">
+      <a href="work.html" class="circle-arrow">
+        All Case Studies
+        <span class="ring">
+          <svg width="20" height="20" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CTA ══════════ -->
+<section class="cta-section">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="color:#fff;">— Free Revenue Audit / 04</div>
+    <div style="margin-top:24px;"></div>
+    <h2 class="display xl reveal">
+      Stop Guessing.<br>
+      Start <span class="accent-block">Measuring.</span>
+    </h2>
+    <div class="cta-bottom reveal">
+      <p class="body-lg" style="max-width:540px;color:#C5C0B6;">
+        A 30-minute call. We map your funnel, audit your tracking, and tell you (free) where your money is leaking. No pitch. No fluff.
       </p>
+      <a href="contact.html" class="btn btn-primary btn-xl">Book Your Audit
+        <svg class="icon-arrow" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
 
-      <div class="buttons-row mt-4">
-        <button class="btn btn-glow" data-animate>
-          <span class="btn-icon" aria-hidden="true">&#10022;</span>
-          Glow Effect
-        </button>
-        <button class="btn btn-scale" data-animate data-delay="100">
-          <span class="btn-icon" aria-hidden="true">&#8599;</span>
-          Scale + Rotate
-        </button>
-        <button class="btn btn-shimmer" data-animate data-delay="200">
-          <span aria-hidden="true">&#10024;</span>
-          Shimmer Sweep
-        </button>
-        <button class="btn btn-outline" data-animate data-delay="300">
-          Outline Fill
-        </button>
-        <button class="btn btn-neon" data-animate data-delay="400">
-          Neon Pulse
-        </button>
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-cols">
+      <div>
+        <div class="signoff">N8iV.</div>
+        <p style="color:#888;max-width:340px;margin-top:24px;font-size:14px;line-height:1.55;letter-spacing:0;text-transform:none;">
+          Precision marketing attribution for independent businesses and boutique agencies.
+        </p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Attribution</a></li>
+          <li><a href="services.html">Channel Audits</a></li>
+          <li><a href="services.html">Pipeline Modeling</a></li>
+          <li><a href="services.html">Monthly Reporting</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="contact.html">hello@n8iv.co</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Twitter / X</a></li>
+          <li><a href="#">Substack</a></li>
+        </ul>
       </div>
     </div>
-  </section>
-
-  <!-- ═══ CTA BANNER ══════════════════════════════════════════ -->
-  <section class="cta-banner parallax-section" id="contact">
-    <div class="cta-banner-bg" data-parallax="0.2" aria-hidden="true"></div>
-    <div class="container cta-banner-content">
-      <span class="section-label" data-animate>Get In Touch</span>
-      <h2 data-word-animate="blur">Ready to make something unforgettable?</h2>
-      <p data-animate data-delay="200">
-        Whether you're an artist, brand, or venue — let's build something that matters.
-      </p>
-      <div data-animate data-delay="300">
-        <a href="mailto:hello@n8ivpromotions.com" class="btn btn-glow" style="font-size: 1.1rem; padding: 1rem 2.5rem;">
-          <span class="btn-icon" aria-hidden="true">&#9993;</span>
-          hello@n8ivpromotions.com
-        </a>
+    <div class="footer-inner">
+      <span>© 2026 N8iV Promotions LLC</span>
+      <span>Brooklyn / Austin</span>
+      <div style="display:flex;gap:24px;">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Imprint</a>
       </div>
     </div>
-  </section>
+  </div>
+</footer>
 
-  <!-- ═══ FOOTER ════════════════════════════════════════════════ -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-logo">N8iV<span style="color: #fff; opacity:0.4;">&nbsp;Promotions</span></div>
-      <ul class="footer-links">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#events">Events</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <p class="footer-copy">&copy; 2026 N8iV Promotions. All rights reserved.</p>
-    </div>
-  </footer>
+<div id="tweaks-root"></div>
+<script src="js/main.js" defer></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="js/tweaks-app.jsx"></script>
 
-  <!-- Scripts -->
-  <script src="js/main.js" defer></script>
 </body>
 </html>

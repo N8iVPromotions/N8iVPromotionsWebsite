@@ -1,143 +1,104 @@
 /* ============================================================
-   N8iV Promotions — main.js
-   1. Nav scroll effect
-   2. Fade-up on scroll  (IntersectionObserver)
-   3. Parallax backgrounds
-   4. Word-by-word text animation
-   5. Counter animation (stats)
+   N8iV — shared site behaviour
    ============================================================ */
 
-/* ─── 1. NAV SCROLL EFFECT ────────────────────────────────── */
-(function initNav() {
-  const nav = document.querySelector('.nav');
-  if (!nav) return;
-  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 60);
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-})();
+const TWEAKS_KEY = "n8iv_site_tweaks_v1";
+const DEFAULT_TWEAKS = {
+  accent:     "purple",
+  display:    "anton",
+  stat1Num:   "240+",
+  stat1Label: "Attribution reports delivered",
+  stat2Num:   "$48M",
+  stat2Label: "Tracked revenue under management",
+  stat3Num:   "42%",
+  stat3Label: "Average CPA reduction",
+  stat4Num:   "3.5x",
+  stat4Label: "ROAS growth across cohort",
+};
 
-/* ─── 2. FADE-UP ON SCROLL ────────────────────────────────── */
-(function initFadeUp() {
-  const targets = document.querySelectorAll('[data-animate]');
-  if (!targets.length) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-  targets.forEach(el => observer.observe(el));
-})();
-
-/* ─── 3. PARALLAX BACKGROUNDS ─────────────────────────────── */
-(function initParallax() {
-  const layers = Array.from(document.querySelectorAll('[data-parallax]'));
-  if (!layers.length) return;
-
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) return;
-
-  let ticking = false;
-
-  const update = () => {
-    const scrollY = window.scrollY;
-
-    layers.forEach(el => {
-      const speed  = parseFloat(el.dataset.parallax) || 0.3;
-      const rect   = el.closest('.parallax-section, .showcase, .cta-banner')?.getBoundingClientRect();
-      if (!rect) return;
-
-      // Only update when the section is visible in the viewport
-      if (rect.bottom < -200 || rect.top > window.innerHeight + 200) return;
-
-      const center = rect.top + rect.height / 2 - window.innerHeight / 2;
-      const shift  = center * speed;
-      el.style.transform = `translateY(${shift}px)`;
-    });
-
-    ticking = false;
-  };
-
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(update);
-      ticking = true;
-    }
-  }, { passive: true });
-
-  update();
-})();
-
-/* ─── 4. WORD-BY-WORD TEXT ANIMATION ──────────────────────── */
-(function initWordAnimation() {
-  const elements = document.querySelectorAll('[data-word-animate]');
-  if (!elements.length) return;
-
-  elements.forEach(el => {
-    const blurMode = el.dataset.wordAnimate === 'blur';
-    if (blurMode) el.classList.add('text-animate-blur');
-    else          el.classList.add('text-animate');
-
-    // Split text into word spans
-    const rawText = el.textContent.trim();
-    const words   = rawText.split(/\s+/);
-
-    el.innerHTML = words
-      .map((word, i) =>
-        `<span class="word-wrap"><span class="word" style="--word-index:${i}" aria-hidden="false">${word}</span></span>`
-      )
-      .join(' ');
-
-    // Trigger when visible
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
-
-    observer.observe(el);
+function readTweaks() {
+  try {
+    const raw = localStorage.getItem(TWEAKS_KEY);
+    if (!raw) return { ...DEFAULT_TWEAKS };
+    return { ...DEFAULT_TWEAKS, ...JSON.parse(raw) };
+  } catch { return { ...DEFAULT_TWEAKS }; }
+}
+function writeTweaks(t) {
+  try { localStorage.setItem(TWEAKS_KEY, JSON.stringify(t)); } catch {}
+}
+function applyTweaks(t) {
+  const root = document.documentElement;
+  root.setAttribute("data-accent",  t.accent);
+  root.setAttribute("data-display", t.display);
+  document.querySelectorAll("[data-stat-num]").forEach(el => {
+    const k = el.getAttribute("data-stat-num");
+    if (t[k]) el.textContent = t[k];
   });
-})();
+  document.querySelectorAll("[data-stat-label]").forEach(el => {
+    const k = el.getAttribute("data-stat-label");
+    if (t[k]) el.textContent = t[k];
+  });
+}
 
-/* ─── 5. COUNTER ANIMATION ────────────────────────────────── */
-(function initCounters() {
-  const counters = document.querySelectorAll('[data-count]');
-  if (!counters.length) return;
+window.__applyInitialTweaks = function () {
+  const t = readTweaks();
+  document.documentElement.setAttribute("data-accent",  t.accent);
+  document.documentElement.setAttribute("data-display", t.display);
+};
 
-  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+window.addEventListener("DOMContentLoaded", () => {
+  applyTweaks(readTweaks());
 
-  const animateCounter = (el) => {
-    const target   = parseInt(el.dataset.count, 10);
-    const suffix   = el.dataset.suffix || '';
-    const duration = 1800;
-    const start    = performance.now();
-
-    const step = (now) => {
-      const elapsed  = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const value    = Math.round(easeOut(progress) * target);
-      el.textContent = value.toLocaleString() + suffix;
-      if (progress < 1) requestAnimationFrame(step);
-    };
-
-    requestAnimationFrame(step);
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        observer.unobserve(entry.target);
-      }
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.12, rootMargin: "0px 0px -60px" });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
-  counters.forEach(el => observer.observe(el));
-})();
+  // Active nav link
+  const path = location.pathname.split("/").pop().toLowerCase();
+  document.querySelectorAll(".nav-links a").forEach(a => {
+    const href = (a.getAttribute("href") || "").toLowerCase();
+    if (href && href === path) a.classList.add("active");
+  });
+
+  // Custom cursor
+  const cursor = document.createElement("div");
+  cursor.className = "cursor";
+  document.body.appendChild(cursor);
+  let cx = 0, cy = 0, tx = 0, ty = 0;
+  window.addEventListener("mousemove", e => { tx = e.clientX; ty = e.clientY; });
+  (function loop() {
+    cx += (tx - cx) * 0.18;
+    cy += (ty - cy) * 0.18;
+    cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll("a, button, .service-row, .case, .circle-arrow").forEach(el => {
+    el.addEventListener("mouseenter", () => cursor.classList.add("lg"));
+    el.addEventListener("mouseleave", () => cursor.classList.remove("lg"));
+  });
+
+  // Page intro wipe — once per page per session
+  if (!sessionStorage.getItem("n8iv_intro_played_" + path)) {
+    sessionStorage.setItem("n8iv_intro_played_" + path, "1");
+    const intro = document.createElement("div");
+    intro.className = "page-intro";
+    const word = document.createElement("div");
+    word.className = "word";
+    word.textContent = document.body.getAttribute("data-page-name") || "N8iV";
+    intro.appendChild(word);
+    document.body.appendChild(intro);
+    setTimeout(() => intro.remove(), 1000);
+  }
+});
+
+// Tweaks API for the embedded React panel
+window.__siteTweaks = {
+  read:     readTweaks,
+  write:    writeTweaks,
+  apply:    applyTweaks,
+  defaults: DEFAULT_TWEAKS,
+};
