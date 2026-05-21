@@ -1,104 +1,120 @@
-/* ============================================================
-   N8iV — shared site behaviour
-   ============================================================ */
+/* ================================================================
+   N8iV Intelligence — main.js
+   Scroll reveals, counter animation, bar chart animation,
+   nav scroll behavior, attribution flow
+   ================================================================ */
 
-const TWEAKS_KEY = "n8iv_site_tweaks_v1";
-const DEFAULT_TWEAKS = {
-  accent:     "purple",
-  display:    "anton",
-  stat1Num:   "240+",
-  stat1Label: "Attribution reports delivered",
-  stat2Num:   "$48M",
-  stat2Label: "Tracked revenue under management",
-  stat3Num:   "42%",
-  stat3Label: "Average CPA reduction",
-  stat4Num:   "3.5x",
-  stat4Label: "ROAS growth across cohort",
-};
+// ── 1. NAV: switch to light style over light sections ──────────
+(function initNav() {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+  const lightSections = document.querySelectorAll('.bg-surface, .bg-page');
 
-function readTweaks() {
-  try {
-    const raw = localStorage.getItem(TWEAKS_KEY);
-    if (!raw) return { ...DEFAULT_TWEAKS };
-    return { ...DEFAULT_TWEAKS, ...JSON.parse(raw) };
-  } catch { return { ...DEFAULT_TWEAKS }; }
-}
-function writeTweaks(t) {
-  try { localStorage.setItem(TWEAKS_KEY, JSON.stringify(t)); } catch {}
-}
-function applyTweaks(t) {
-  const root = document.documentElement;
-  root.setAttribute("data-accent",  t.accent);
-  root.setAttribute("data-display", t.display);
-  document.querySelectorAll("[data-stat-num]").forEach(el => {
-    const k = el.getAttribute("data-stat-num");
-    if (t[k]) el.textContent = t[k];
-  });
-  document.querySelectorAll("[data-stat-label]").forEach(el => {
-    const k = el.getAttribute("data-stat-label");
-    if (t[k]) el.textContent = t[k];
-  });
-}
-
-window.__applyInitialTweaks = function () {
-  const t = readTweaks();
-  document.documentElement.setAttribute("data-accent",  t.accent);
-  document.documentElement.setAttribute("data-display", t.display);
-};
-
-window.addEventListener("DOMContentLoaded", () => {
-  applyTweaks(readTweaks());
-
-  // Reveal on scroll
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+  function update() {
+    let overLight = false;
+    const navBottom = nav.getBoundingClientRect().bottom;
+    lightSections.forEach(sec => {
+      const r = sec.getBoundingClientRect();
+      if (r.top <= navBottom && r.bottom >= navBottom) overLight = true;
     });
-  }, { threshold: 0.12, rootMargin: "0px 0px -60px" });
-  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
-
-  // Active nav link
-  const path = location.pathname.split("/").pop().toLowerCase();
-  document.querySelectorAll(".nav-links a").forEach(a => {
-    const href = (a.getAttribute("href") || "").toLowerCase();
-    if (href && href === path) a.classList.add("active");
-  });
-
-  // Custom cursor
-  const cursor = document.createElement("div");
-  cursor.className = "cursor";
-  document.body.appendChild(cursor);
-  let cx = 0, cy = 0, tx = 0, ty = 0;
-  window.addEventListener("mousemove", e => { tx = e.clientX; ty = e.clientY; });
-  (function loop() {
-    cx += (tx - cx) * 0.18;
-    cy += (ty - cy) * 0.18;
-    cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
-    requestAnimationFrame(loop);
-  })();
-  document.querySelectorAll("a, button, .service-row, .case, .circle-arrow").forEach(el => {
-    el.addEventListener("mouseenter", () => cursor.classList.add("lg"));
-    el.addEventListener("mouseleave", () => cursor.classList.remove("lg"));
-  });
-
-  // Page intro wipe — once per page per session
-  if (!sessionStorage.getItem("n8iv_intro_played_" + path)) {
-    sessionStorage.setItem("n8iv_intro_played_" + path, "1");
-    const intro = document.createElement("div");
-    intro.className = "page-intro";
-    const word = document.createElement("div");
-    word.className = "word";
-    word.textContent = document.body.getAttribute("data-page-name") || "N8iV";
-    intro.appendChild(word);
-    document.body.appendChild(intro);
-    setTimeout(() => intro.remove(), 1000);
+    nav.classList.toggle('light', overLight);
   }
-});
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
 
-// Tweaks API for the embedded React panel
-window.__siteTweaks = {
-  read:     readTweaks,
-  write:    writeTweaks,
-  apply:    applyTweaks,
-  defaults: DEFAULT_TWEAKS,
-};
+// ── 2. REVEAL ON SCROLL ────────────────────────────────────────
+(function initReveal() {
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(el => io.observe(el));
+})();
+
+// ── 3. COUNTER ANIMATION ───────────────────────────────────────
+(function initCounters() {
+  const els = document.querySelectorAll('[data-count]');
+  if (!els.length) return;
+
+  const ease = t => 1 - Math.pow(1 - t, 3);
+
+  function run(el) {
+    const target   = parseFloat(el.dataset.count);
+    const prefix   = el.dataset.prefix   || '';
+    const suffix   = el.dataset.suffix   || '';
+    const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals) : 0;
+    const dur      = 1600;
+    const start    = performance.now();
+
+    function step(now) {
+      const t   = Math.min((now - start) / dur, 1);
+      const val = target * ease(t);
+      el.textContent = prefix + val.toFixed(decimals) + suffix;
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  els.forEach(el => io.observe(el));
+})();
+
+// ── 4. BAR CHART ANIMATION ─────────────────────────────────────
+(function initBars() {
+  const bars = document.querySelectorAll('[data-bar]');
+  if (!bars.length) return;
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const pct = e.target.dataset.bar;
+        e.target.style.width = pct + '%';
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  // Set initial width to 0
+  bars.forEach(el => { el.style.width = '0'; io.observe(el); });
+})();
+
+// ── 5. ATTRIBUTION FLOW PARTICLES ─────────────────────────────
+(function initFlow() {
+  const canvas = document.getElementById('flow-canvas');
+  if (!canvas) return;
+
+  // We use CSS-animated particles injected per path
+  // Already handled via CSS + inline HTML
+})();
+
+// ── 6. ACTIVE NAV LINK ──────────────────────────────────────────
+(function initActiveNav() {
+  const path = location.pathname.split('/').pop().toLowerCase() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    const href = (a.getAttribute('href') || '').toLowerCase();
+    if (href === path || (path === '' && href === 'index.html')) {
+      a.classList.add('active');
+    }
+  });
+})();
+
+// ── 7. PROBLEM CARD HOVER PARALLAX ────────────────────────────
+(function initCardTilt() {
+  document.querySelectorAll('.problem-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width  - 0.5) * 6;
+      const y = ((e.clientY - r.top)  / r.height - 0.5) * 6;
+      card.style.transform = `perspective(600px) rotateY(${x}deg) rotateX(${-y}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+})();
