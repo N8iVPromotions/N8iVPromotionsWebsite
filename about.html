@@ -3,196 +3,451 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>About — N8iV Promotions</title>
-
+<title>About — N8iV Intelligence</title>
+<meta name="description" content="N8iV Intelligence builds closed-loop attribution infrastructure that was previously only available to enterprise companies with seven-figure analytics budgets." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  /* Philosophy section */
+  .philosophy-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: start;
+  }
+  .philosophy-right p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--ink-3);
+    margin: 0 0 20px;
+  }
+  .philosophy-right p:last-child { margin-bottom: 0; }
 
-<link rel="stylesheet" href="css/styles.css" />
-<link rel="stylesheet" href="css/tweaks.css" />
-<script>
-  (function(){
-    var TWEAKS_KEY="n8iv_site_tweaks_v1";
-    try{var t=JSON.parse(localStorage.getItem(TWEAKS_KEY)||"{}");
-    document.documentElement.setAttribute("data-accent",t.accent||"purple");
-    document.documentElement.setAttribute("data-display",t.display||"anton");}
-    catch(e){document.documentElement.setAttribute("data-accent","purple");document.documentElement.setAttribute("data-display","anton");}
-  })();
-</script>
+  /* Comparison table */
+  .comparison {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+  }
+  .comparison-col {
+    padding: 32px 28px;
+    border-right: 1px solid var(--border);
+  }
+  .comparison-col:last-child { border-right: none; }
+  .comparison-col.highlighted {
+    border: 2px solid var(--blue);
+    border-radius: var(--r-xl);
+    margin: -1px;
+    padding: 33px 29px;
+    background: var(--blue-light);
+    position: relative;
+    z-index: 1;
+  }
+  .comparison-col-header {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .comparison-col.highlighted .comparison-col-header {
+    border-bottom-color: rgba(69,105,245,0.2);
+  }
+  .comparison-col-title {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 4px;
+  }
+  .comparison-col.highlighted .comparison-col-title {
+    color: var(--blue);
+    font-size: 17px;
+  }
+  .comparison-col-sub {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .comparison-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .comparison-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-3);
+  }
+  .comparison-item-icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 10px;
+    font-weight: 800;
+  }
+  .comparison-item-icon.check {
+    background: var(--green);
+    color: #fff;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L3.5 6.5L9 1' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .comparison-item-icon.dot {
+    background: var(--surface-3);
+    color: var(--muted);
+  }
+  .comparison-item-icon.lock {
+    background: var(--surface-3);
+    color: var(--muted);
+  }
+
+  /* Methodology 2×2 grid */
+  .methodology-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .method-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-xl);
+    padding: 32px;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .method-card:hover {
+    border-color: var(--blue);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  .method-num {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-family: var(--ff-mono);
+    margin-bottom: 12px;
+  }
+  .method-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 12px;
+  }
+  .method-card p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  /* Stats band dark */
+  .dark-stats-band {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .dark-stat-cell {
+    padding: 48px 32px;
+    text-align: center;
+    border-right: 1px solid var(--dark-border);
+  }
+  .dark-stat-cell:last-child { border-right: none; }
+  .dark-stat-val {
+    font-size: 64px;
+    font-weight: 800;
+    letter-spacing: -0.06em;
+    line-height: 1;
+    color: var(--green);
+    font-family: var(--ff-mono);
+    margin-bottom: 10px;
+  }
+  .dark-stat-val.blue { color: var(--blue); }
+  .dark-stat-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--on-dark-2);
+  }
+
+  @media (max-width: 900px) {
+    .philosophy-cols { grid-template-columns: 1fr; gap: 48px; }
+    .comparison { grid-template-columns: 1fr; }
+    .comparison-col { border-right: none; border-bottom: 1px solid var(--border); }
+    .comparison-col.highlighted { margin: 0; padding: 32px 28px; }
+    .comparison-col:last-child { border-bottom: none; }
+    .methodology-grid { grid-template-columns: 1fr; }
+    .dark-stats-band { grid-template-columns: repeat(2, 1fr); }
+    .dark-stat-cell:nth-child(2) { border-right: none; }
+    .dark-stat-cell:nth-child(3) { border-right: 1px solid var(--dark-border); border-top: 1px solid var(--dark-border); }
+    .dark-stat-cell:nth-child(4) { border-right: none; border-top: 1px solid var(--dark-border); }
+  }
+</style>
 </head>
-<body data-page-name="About">
+<body>
 
-<div class="grid-overlay"></div>
-
-<!-- ══════════ NAV ══════════ -->
+<!-- ════════════════════ NAV ════════════════════ -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="logo">N8iV<span class="dot">.</span></a>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">N</div>
+      <div>N8iV Intelligence<span class="nav-logo-sub">by N8iV Promotions</span></div>
+    </a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="work.html">Work</a></li>
-      <li><a href="services.html">Services</a></li>
+      <li><a href="index.html">Platform</a></li>
+      <li><a href="case-studies.html">Case Studies</a></li>
+      <li><a href="insights.html">Insights</a></li>
       <li><a href="about.html" class="active">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
     </ul>
-    <div class="nav-cta-wrap">
-      <span class="nav-status"><span class="dot"></span>Onboarding Q3</span>
-      <a href="contact.html" class="btn btn-primary">Book Audit <svg class="icon-arrow" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg></a>
+    <div class="nav-right">
+      <span class="nav-badge"><span class="dot"></span>Accepting Q3 Clients</span>
+      <a href="contact.html" class="btn btn-primary btn-sm">Book a Call</a>
     </div>
   </div>
 </nav>
 
-<!-- ══════════ HERO ══════════ -->
+<!-- ════════════════════ HERO ════════════════════ -->
 <section class="hero">
-  <div class="wrap">
-    <div class="eyebrow reveal">About</div>
-    <h1 class="display xl hero-headline reveal">
-      Turning Marketing<br><span class="accent">Into Certainty.</span>
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="wrap hero-content on-dark">
+    <div class="eyebrow reveal">About N8iV Intelligence</div>
+    <h1 class="display-xl reveal stagger-1" style="max-width: 860px; margin: 0 0 24px;">
+      We Built the Attribution Layer<br>Most Agencies Won't Touch.
     </h1>
+    <p class="hero-sub reveal stagger-2" style="max-width: 620px;">
+      We're analysts, not marketers. We built N8iV Intelligence to give businesses the closed-loop data infrastructure that was previously only available to enterprise companies with 7-figure analytics budgets.
+    </p>
   </div>
 </section>
 
-<!-- ══════════ MISSION TWO-COL ══════════ -->
-<section class="section" style="padding-top:0;">
+<!-- ════════════════════ PHILOSOPHY ════════════════════ -->
+<section class="section bg-surface">
   <div class="wrap">
-    <div class="two-col reveal">
+    <div class="philosophy-cols">
+      <!-- Left: headline -->
       <div>
-        <h2 class="display lg">
-          We're a team of analysts,<br>not marketers.
-        </h2>
+        <div class="eyebrow reveal">Our Philosophy</div>
+        <h2 class="display-md reveal stagger-1" style="margin: 8px 0 0;">Revenue is the only metric that matters.</h2>
       </div>
-      <div>
-        <p class="body-lg" style="margin-top:8px;">
-          N8iV was built on a simple frustration: too many smart businesses were making million-dollar media decisions based on click-through rates and form fills that never tracked back to actual revenue. We fix that. Our job is to close the loop between ad spend and closed deals — with data, not dashboards.
+
+      <!-- Right: paragraphs -->
+      <div class="philosophy-right reveal stagger-2">
+        <p>
+          Most marketing agencies are optimized for activity, not outcomes. They report on clicks, impressions, and form fills because those numbers are easy to produce, easy to inflate, and easy to show in a polished deck. The actual question — how many dollars of revenue did this campaign generate? — is rarely answered honestly.
         </p>
-        <p class="body" style="margin-top:24px;">
-          We work with independent businesses and boutique agencies who are tired of paying for marketing they can't measure. Every engagement starts with a full audit of your current tracking architecture, and ends with a model that tells you — in plain language — which channels, campaigns, and creatives are actually driving revenue and which are just burning budget.
+        <p>
+          N8iV Intelligence was built on a different premise. We start with closed revenue and work backwards. Every campaign, channel, and creative is evaluated against a single standard: did it contribute to a customer who paid? Everything else is noise.
+        </p>
+        <p>
+          Our mission is to make closed-loop attribution a standard practice, not a luxury. The infrastructure exists. The APIs are available. The only thing missing is the analyst who knows how to connect them — and the discipline to stand behind the numbers that come out.
         </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════ STATS BAND ══════════ -->
-<section class="stats-wrap">
+<!-- ════════════════════ HOW WE'RE DIFFERENT ════════════════════ -->
+<section class="section bg-page">
   <div class="wrap">
-    <div class="stats reveal">
-      <div class="stat">
-        <div class="stat-num">04</div>
-        <div class="stat-label">Years operating</div>
+    <div class="section-label reveal" style="text-align: center; max-width: 600px; margin: 0 auto 56px;">
+      <div class="eyebrow">Comparison</div>
+      <h2 class="display-md" style="margin: 8px 0 0;">How We're Different</h2>
+    </div>
+
+    <div class="comparison reveal stagger-1">
+      <!-- Column 1: Generic Agency -->
+      <div class="comparison-col">
+        <div class="comparison-col-header">
+          <div class="comparison-col-title">Generic Marketing Agency</div>
+          <div class="comparison-col-sub">The standard engagement</div>
+        </div>
+        <div class="comparison-list">
+          <div class="comparison-item">
+            <div class="comparison-item-icon dot">—</div>
+            <span>Optimize for leads and form fills</span>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-item-icon dot">—</div>
+            <span>Report on clicks, impressions, and CTR</span>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-item-icon dot">—</div>
+            <span>Rely on platform-reported conversion data</span>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-item-icon dot">—</div>
+            <span>No access to CRM or closed revenue data</span>
+          </div>
+        </div>
       </div>
-      <div class="stat">
-        <div class="stat-num">62</div>
-        <div class="stat-label">Clients served</div>
+
+      <!-- Column 2: N8iV Intelligence (highlighted) -->
+      <div class="comparison-col highlighted">
+        <div class="comparison-col-header">
+          <div class="comparison-col-title">N8iV Intelligence</div>
+          <div class="comparison-col-sub" style="color: rgba(69,105,245,0.7);">What we do instead</div>
+        </div>
+        <div class="comparison-list">
+          <div class="comparison-item">
+            <div class="comparison-item-icon check"></div>
+            <span><strong>Optimize for closed revenue</strong> — not lead volume</span>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-item-icon check"></div>
+            <span><strong>Attribute every channel to deals</strong> won in your CRM</span>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-item-icon check"></div>
+            <span><strong>Verify against first-party data</strong> — server-side and CRM</span>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-item-icon check"></div>
+            <span><strong>Monthly revenue reports</strong> — signed, not screenshotted</span>
+          </div>
+        </div>
       </div>
-      <div class="stat">
-        <div class="stat-num">11</div>
-        <div class="stat-label">Industries covered</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">$48M</div>
-        <div class="stat-label">Revenue tracked</div>
+
+      <!-- Column 3: Enterprise Analytics Team -->
+      <div class="comparison-col">
+        <div class="comparison-col-header">
+          <div class="comparison-col-title">Enterprise Analytics Team</div>
+          <div class="comparison-col-sub">If you have the budget</div>
+        </div>
+        <div class="comparison-list">
+          <div class="comparison-item">
+            <div class="comparison-item-icon lock">$</div>
+            <span>Requires a 7-figure analytics budget</span>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-item-icon lock">$</div>
+            <span>6–12 month implementation timeline</span>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-item-icon lock">$</div>
+            <span>Custom data engineering work required</span>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-item-icon lock">$</div>
+            <span>Dedicated headcount needed to maintain</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════ MARQUEE ══════════ -->
-<div class="marquee">
-  <div class="marquee-track">
-    <span>Attribution</span>
-    <span class="outline">Revenue</span>
-    <span>Certainty</span>
-    <span class="outline">Clarity</span>
-    <span>No Vanity Metrics</span>
-    <span class="outline">Closed-Loop</span>
-    <span>Attribution</span>
-    <span class="outline">Revenue</span>
-    <span>Certainty</span>
-    <span class="outline">Clarity</span>
-    <span>No Vanity Metrics</span>
-    <span class="outline">Closed-Loop</span>
-  </div>
-</div>
-
-<!-- ══════════ CTA ══════════ -->
-<section class="cta-section">
+<!-- ════════════════════ METHODOLOGY ════════════════════ -->
+<section class="section bg-surface">
   <div class="wrap">
-    <div class="eyebrow reveal" style="color:#fff;">— Free Revenue Audit</div>
-    <div style="margin-top:24px;"></div>
-    <h2 class="display xl reveal">
-      Stop Guessing.<br>
-      Start <span class="accent-block">Measuring.</span>
-    </h2>
-    <div class="cta-bottom reveal">
-      <p class="body-lg" style="max-width:540px;color:#C5C0B6;">
-        A 30-minute call. We map your funnel, audit your tracking, and tell you (free) where your money is leaking. No pitch. No fluff.
+    <div style="text-align: center; max-width: 640px; margin: 0 auto;">
+      <div class="eyebrow reveal">Methodology</div>
+      <h2 class="display-md reveal stagger-1" style="margin: 8px 0 0;">Our Attribution Framework.</h2>
+      <p class="lead reveal stagger-2" style="margin-top: 16px;">
+        Four principles guide every engagement. They're not aspirational values — they're operational requirements that every report, audit, and model is built against.
       </p>
-      <a href="contact.html" class="btn btn-primary btn-xl">Book Your Audit
-        <svg class="icon-arrow" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
-      </a>
+    </div>
+
+    <div class="methodology-grid">
+      <div class="method-card reveal stagger-1">
+        <div class="method-num">01</div>
+        <h3>Revenue Verification First</h3>
+        <p>Every attribution number is verified against CRM-closed revenue, not platform reports. If we can't trace a number to an actual closed deal, we don't report it.</p>
+      </div>
+      <div class="method-card reveal stagger-2">
+        <div class="method-num">02</div>
+        <h3>First-Party Data Priority</h3>
+        <p>Server-side signals and CRM events are prioritized over third-party pixels. We build attribution systems that will outlast every cookie policy update.</p>
+      </div>
+      <div class="method-card reveal stagger-3">
+        <div class="method-num">03</div>
+        <h3>Model Calibration</h3>
+        <p>Attribution models are calibrated specifically to each client's sales cycle length and deal complexity — not pulled from generic platform presets.</p>
+      </div>
+      <div class="method-card reveal stagger-4">
+        <div class="method-num">04</div>
+        <h3>Monthly Accountability</h3>
+        <p>Signed reports every month. We stand behind every number we put in front of you. If the data changes, we explain why. No hiding behind dashboard complexity.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════ FOOTER ══════════ -->
+<!-- ════════════════════ STATS BAND (DARK) ════════════════════ -->
+<section class="section-sm bg-dark">
+  <div class="wrap on-dark">
+    <div class="dark-stats-band">
+      <div class="dark-stat-cell reveal stagger-1">
+        <div class="dark-stat-val blue" data-count="4">04</div>
+        <div class="dark-stat-label">Years in Attribution</div>
+      </div>
+      <div class="dark-stat-cell reveal stagger-2">
+        <div class="dark-stat-val" data-count="62">62</div>
+        <div class="dark-stat-label">Active Clients</div>
+      </div>
+      <div class="dark-stat-cell reveal stagger-3">
+        <div class="dark-stat-val blue">$48M</div>
+        <div class="dark-stat-label">Revenue Attributed</div>
+      </div>
+      <div class="dark-stat-cell reveal stagger-4">
+        <div class="dark-stat-val" data-count="11">11</div>
+        <div class="dark-stat-label">Industries Served</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CTA ════════════════════ -->
+<section class="section-lg cta-section">
+  <div class="wrap on-dark">
+    <div class="eyebrow reveal">Work With Us</div>
+    <h2 class="display-xl reveal stagger-1" style="max-width: 700px; margin: 8px auto 0;">
+      Work with analysts who put<br>revenue first.
+    </h2>
+    <p class="lead reveal stagger-2" style="margin: 20px auto 0; max-width: 540px;">
+      We take a limited number of clients per quarter so we can do the work properly. If you're serious about building a closed-loop attribution system, let's talk.
+    </p>
+    <div class="cta-actions reveal stagger-3">
+      <a href="contact.html" class="btn btn-green btn-xl">
+        Book a Call
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M10 5l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="case-studies.html" class="btn btn-ghost-dark btn-xl">See Our Work</a>
+    </div>
+    <p class="body-sm reveal stagger-4" style="color: var(--on-dark-2); margin-top: 24px; text-align: center;">Currently accepting Q3 2026 clients. Spots are limited.</p>
+  </div>
+</section>
+
+<!-- ════════════════════ FOOTER ════════════════════ -->
 <footer class="footer">
   <div class="wrap">
-    <div class="footer-cols">
-      <div>
-        <div class="signoff">N8iV.</div>
-        <p style="color:#888;max-width:340px;margin-top:24px;font-size:14px;line-height:1.55;letter-spacing:0;text-transform:none;">
-          Precision marketing attribution for independent businesses and boutique agencies.
-        </p>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo-wrap"><div class="nav-logo-mark">N</div> N8iV Intelligence</div>
+        <p class="footer-tagline">Precision closed-loop attribution for B2B companies, SaaS, agencies, and high-ticket service businesses.</p>
+        <a href="contact.html" class="btn btn-primary btn-sm">Book a Call</a>
       </div>
-      <div>
-        <h4>Navigate</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="work.html">Work</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Services</h4>
-        <ul>
-          <li><a href="services.html">Attribution</a></li>
-          <li><a href="services.html">Channel Audits</a></li>
-          <li><a href="services.html">Pipeline Modeling</a></li>
-          <li><a href="services.html">Monthly Reporting</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Connect</h4>
-        <ul>
-          <li><a href="contact.html">hello@n8iv.co</a></li>
-          <li><a href="#">LinkedIn</a></li>
-          <li><a href="#">Twitter / X</a></li>
-          <li><a href="#">Substack</a></li>
-        </ul>
-      </div>
+      <div class="footer-col"><h4>Platform</h4><ul><li><a href="index.html#system">How It Works</a></li><li><a href="index.html#platform">Dashboard</a></li><li><a href="index.html#integrations">Integrations</a></li><li><a href="services.html">All Services</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="case-studies.html">Case Studies</a></li><li><a href="insights.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Connect</h4><ul><li><a href="mailto:hello@n8ivintelligence.com">hello@n8ivintelligence.com</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li></ul></div>
     </div>
-    <div class="footer-inner">
-      <span>© 2026 N8iV Promotions LLC</span>
-      <span>Brooklyn / Austin</span>
-      <div style="display:flex;gap:24px;">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Imprint</a>
-      </div>
-    </div>
+    <div class="footer-bottom"><span>© 2026 N8iV Promotions LLC — N8iV Intelligence.</span><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
   </div>
 </footer>
 
-<div id="tweaks-root"></div>
 <script src="js/main.js" defer></script>
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel" src="js/tweaks-app.jsx"></script>
-
 </body>
 </html>

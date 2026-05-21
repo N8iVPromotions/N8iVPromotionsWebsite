@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Case Studies — N8iV Intelligence</title>
+<meta name="description" content="Real closed-loop attribution work. Real business outcomes. Every metric verified against CRM-closed revenue." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  /* Stats bar */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--border);
+  }
+  .stats-bar-cell {
+    padding: 40px 32px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+  }
+  .stats-bar-cell:last-child { border-right: none; }
+  .stats-bar-val {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: var(--blue);
+    font-family: var(--ff-mono);
+    margin-bottom: 8px;
+  }
+  .stats-bar-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Full case study two-col layout */
+  .cs-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .cs-layout.reversed {
+    direction: rtl;
+  }
+  .cs-layout.reversed > * {
+    direction: ltr;
+  }
+
+  /* Case study tag */
+  .cs-tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: var(--blue-light);
+    border: 1px solid rgba(69,105,245,0.2);
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+
+  .cs-headline {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 0 0 24px;
+  }
+
+  .cs-metrics-row {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .cs-metric {
+    display: flex;
+    flex-direction: column;
+  }
+  .cs-metric-val {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--green);
+    font-family: var(--ff-mono);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .cs-metric-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Before/after insight card */
+  .ba-card {
+    background: var(--dark);
+    border: 1px solid var(--dark-border-2);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+  }
+  .ba-half {
+    padding: 28px 32px;
+  }
+  .ba-half + .ba-half {
+    border-top: 1px solid var(--dark-border);
+  }
+  .ba-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .ba-label.before { color: var(--red); }
+  .ba-label.after  { color: var(--green); }
+  .ba-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--dark-border);
+    font-family: var(--ff-mono);
+  }
+  .ba-stat:last-child { border-bottom: none; }
+  .ba-stat-key {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--on-dark-2);
+    flex: 1;
+  }
+  .ba-stat-val {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .ba-stat-val.bad  { color: var(--red); }
+  .ba-stat-val.good { color: var(--green); }
+  .ba-stat-val.neutral { color: var(--on-dark); }
+
+  /* E-comm case study */
+  .cs-body-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-3);
+    margin: 0 0 16px;
+  }
+  .cs-body-text:last-child { margin-bottom: 0; }
+
+  @media (max-width: 900px) {
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .stats-bar-cell:nth-child(2) { border-right: none; }
+    .stats-bar-cell:nth-child(3) { border-right: 1px solid var(--border); border-top: 1px solid var(--border); }
+    .stats-bar-cell:nth-child(4) { border-right: none; border-top: 1px solid var(--border); }
+    .cs-layout { grid-template-columns: 1fr; gap: 40px; }
+    .cs-layout.reversed { direction: ltr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════ NAV ════════════════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">N</div>
+      <div>N8iV Intelligence<span class="nav-logo-sub">by N8iV Promotions</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Platform</a></li>
+      <li><a href="case-studies.html" class="active">Case Studies</a></li>
+      <li><a href="insights.html">Insights</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="nav-badge"><span class="dot"></span>Accepting Q3 Clients</span>
+      <a href="contact.html" class="btn btn-primary btn-sm">Book a Call</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<section class="hero">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="wrap hero-content on-dark">
+    <div class="eyebrow reveal">Case Studies</div>
+    <h1 class="display-xl reveal stagger-1" style="max-width: 700px; margin: 0 0 24px;">
+      Receipts.<br>Not Promises.
+    </h1>
+    <p class="hero-sub reveal stagger-2">
+      Real attribution work, real business outcomes. Every metric verified against closed CRM data. No platform screenshots. No modeled estimates.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════ STATS BAR ════════════════════ -->
+<section class="bg-surface" style="border-bottom: 1px solid var(--border);">
+  <div class="wrap">
+    <div class="stats-bar">
+      <div class="stats-bar-cell reveal stagger-1">
+        <div class="stats-bar-val" data-count="240" data-suffix="+">240+</div>
+        <div class="stats-bar-label">Reports Delivered</div>
+      </div>
+      <div class="stats-bar-cell reveal stagger-2">
+        <div class="stats-bar-val" data-count="48" data-prefix="$" data-suffix="M">$48M</div>
+        <div class="stats-bar-label">Revenue Attributed</div>
+      </div>
+      <div class="stats-bar-cell reveal stagger-3">
+        <div class="stats-bar-val" data-count="42" data-suffix="%">42%</div>
+        <div class="stats-bar-label">Avg CPA Reduction</div>
+      </div>
+      <div class="stats-bar-cell reveal stagger-4">
+        <div class="stats-bar-val" data-count="3.5" data-suffix="×" data-decimals="1">3.5×</div>
+        <div class="stats-bar-label">Avg ROAS Growth</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CASE STUDY 1: CEDAR & STONE ════════════════════ -->
+<section class="section bg-page" id="cedar-stone">
+  <div class="wrap">
+    <div class="cs-layout">
+      <!-- Left: story -->
+      <div>
+        <div class="cs-tag reveal">Home Services</div>
+        <h2 class="cs-headline reveal stagger-1">−51% CPA in One Quarter</h2>
+        <div class="cs-metrics-row reveal stagger-2">
+          <div class="cs-metric">
+            <div class="cs-metric-val">3.8×</div>
+            <div class="cs-metric-label">True ROAS</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-val">$340K</div>
+            <div class="cs-metric-label">Budget Recovered</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-val">14 days</div>
+            <div class="cs-metric-label">Audit to Findings</div>
+          </div>
+        </div>
+
+        <p class="cs-body-text reveal stagger-3">
+          <strong>The problem:</strong> Cedar &amp; Stone Roofing was running $68K/month across Meta, Google Search, and Google Display. Their platform dashboards showed strong conversion volume. Their CRM showed something different — only a fraction of those "conversions" ever became signed contracts.
+        </p>
+        <p class="cs-body-text reveal stagger-4">
+          <strong>The insight:</strong> After connecting their ad platforms to HubSpot and verified invoice data, we found that 42% of Meta spend was attributed to leads who never closed. Google Display was generating clicks at scale with zero correlation to closed revenue. Meanwhile, Google Brand exact-match was producing a 6.1× true ROAS and was significantly underfunded.
+        </p>
+        <p class="cs-body-text reveal stagger-5">
+          <strong>The outcome:</strong> We reallocated $28K/month from Meta prospecting and Display to Google Brand and LSA campaigns. Within one quarter, CPA dropped 51% and true ROAS rose from 1.2× to 3.8×. The $340K in recovered budget was reinvested into channels with verified revenue track records.
+        </p>
+      </div>
+
+      <!-- Right: before/after card -->
+      <div class="reveal stagger-2">
+        <div class="ba-card">
+          <div class="ba-half">
+            <div class="ba-label before">Before Attribution Audit</div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">CPA</span>
+              <span class="ba-stat-val bad">$847</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">True ROAS</span>
+              <span class="ba-stat-val bad">1.2×</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">Wasted spend</span>
+              <span class="ba-stat-val bad">42%</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">CRM visibility</span>
+              <span class="ba-stat-val bad">None</span>
+            </div>
+          </div>
+          <div class="ba-half">
+            <div class="ba-label after">After Reallocation — Q1 2026</div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">CPA</span>
+              <span class="ba-stat-val good">$415</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">True ROAS</span>
+              <span class="ba-stat-val good">3.8×</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">Wasted spend</span>
+              <span class="ba-stat-val good">8%</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">CRM visibility</span>
+              <span class="ba-stat-val good">100% attributed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CASE STUDY 2: HALCYON LOGISTICS ════════════════════ -->
+<section class="section bg-surface" id="halcyon">
+  <div class="wrap">
+    <div class="cs-layout reversed">
+      <!-- Right (visually left due to reversed): before/after card -->
+      <div class="reveal stagger-1">
+        <div class="ba-card">
+          <div class="ba-half">
+            <div class="ba-label before">Before Pipeline Modeling</div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">LinkedIn attribution</span>
+              <span class="ba-stat-val bad">0%</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">Pipeline visibility</span>
+              <span class="ba-stat-val bad">None</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">LinkedIn ROAS</span>
+              <span class="ba-stat-val bad">Unknown</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">Win rate</span>
+              <span class="ba-stat-val neutral">Baseline</span>
+            </div>
+          </div>
+          <div class="ba-half">
+            <div class="ba-label after">After Full-Funnel Attribution</div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">LinkedIn ROAS</span>
+              <span class="ba-stat-val good">4.4×</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">Pipeline attributed</span>
+              <span class="ba-stat-val good">$2.1M</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">Win rate</span>
+              <span class="ba-stat-val good">+62%</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">Budget reallocation</span>
+              <span class="ba-stat-val good">+$18K/mo to LI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Left (visually right): story -->
+      <div>
+        <div class="cs-tag reveal">B2B SaaS</div>
+        <h2 class="cs-headline reveal stagger-1">$2.1M Hidden Pipeline Found</h2>
+        <div class="cs-metrics-row reveal stagger-2">
+          <div class="cs-metric">
+            <div class="cs-metric-val">+62%</div>
+            <div class="cs-metric-label">Win Rate</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-val">4.4×</div>
+            <div class="cs-metric-label">LinkedIn ROAS</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-val">$2.1M</div>
+            <div class="cs-metric-label">Pipeline Attributed</div>
+          </div>
+        </div>
+
+        <p class="cs-body-text reveal stagger-3">
+          <strong>The problem:</strong> Halcyon Logistics had a 9-month enterprise sales cycle. Their attribution stopped at demo request. LinkedIn spend was being justified on faith — no one could prove it was producing revenue. Finance was pushing to cut the LinkedIn budget entirely.
+        </p>
+        <p class="cs-body-text reveal stagger-4">
+          <strong>The insight:</strong> We built a full pipeline source model connecting LinkedIn ad impressions and form fills to Salesforce opportunity data and CRM-closed revenue. Using time-decay attribution calibrated to a 9-month cycle, we traced $2.1M of closed pipeline to LinkedIn touchpoints that would have shown zero credit in a last-click model. LinkedIn was the primary assist channel for 73% of enterprise deals.
+        </p>
+        <p class="cs-body-text reveal stagger-5">
+          <strong>The outcome:</strong> The LinkedIn budget was preserved and increased by $18K/month. Sales and marketing aligned on a shared attribution framework. Win rate improved 62% as the sales team received better-qualified pipeline with richer touchpoint history — allowing for more relevant outreach at each stage.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CASE STUDY 3: MERIDIAN OUTDOOR ════════════════════ -->
+<section class="section bg-page" id="meridian">
+  <div class="wrap">
+    <div class="cs-layout">
+      <!-- Left: story -->
+      <div>
+        <div class="cs-tag reveal">E-commerce</div>
+        <h2 class="cs-headline reveal stagger-1">7.2× ROAS Hiding<br>in Plain Sight</h2>
+        <div class="cs-metrics-row reveal stagger-2">
+          <div class="cs-metric">
+            <div class="cs-metric-val">+$900K</div>
+            <div class="cs-metric-label">Revenue Added</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-val">−38%</div>
+            <div class="cs-metric-label">Blended CAC</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-val">7.2×</div>
+            <div class="cs-metric-label">Google Shopping ROAS</div>
+          </div>
+        </div>
+
+        <p class="cs-body-text reveal stagger-3">
+          <strong>The problem:</strong> Meridian Outdoor Co. was running a blended paid media strategy across Google Shopping, Meta, and Pinterest. Their optimization strategy was built on add-to-cart events — because that's what their pixel data made easy to track. Their agency was reporting strong engagement across every channel.
+        </p>
+        <p class="cs-body-text reveal stagger-4">
+          <strong>The insight:</strong> We rebuilt their entire attribution layer around Stripe-verified purchases, eliminating reliance on pixel-reported events that were inflated by cart abandonment. When we mapped ad spend to actual completed transactions, the channel picture inverted entirely. Google Shopping was driving a verified 7.2× ROAS. Meta was producing a 1.1× true ROAS — effectively breaking even after platform fees and creative costs. Pinterest was worse.
+        </p>
+        <p class="cs-body-text reveal stagger-5">
+          <strong>The outcome:</strong> $22K/month shifted from Meta and Pinterest to Google Shopping and Performance Max. Blended CAC dropped 38% within two months. Annual revenue run rate increased by $900K with no increase in total ad spend. The brand had found the highest-performing channel in their stack — they just couldn't see it through pixel-based reporting.
+        </p>
+      </div>
+
+      <!-- Right: before/after card -->
+      <div class="reveal stagger-2">
+        <div class="ba-card">
+          <div class="ba-half">
+            <div class="ba-label before">Before — Add-to-Cart Attribution</div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">Google Shopping ROAS</span>
+              <span class="ba-stat-val neutral">Undervalued</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">Meta ROAS (reported)</span>
+              <span class="ba-stat-val bad">3.1× (pixel)</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">Blended CAC</span>
+              <span class="ba-stat-val bad">$148</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">Revenue visibility</span>
+              <span class="ba-stat-val bad">Pixel only</span>
+            </div>
+          </div>
+          <div class="ba-half">
+            <div class="ba-label after">After — Stripe-Verified Attribution</div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">Google Shopping ROAS</span>
+              <span class="ba-stat-val good">7.2× verified</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">Meta ROAS (true)</span>
+              <span class="ba-stat-val bad">1.1× true</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">Blended CAC</span>
+              <span class="ba-stat-val good">$92 (−38%)</span>
+            </div>
+            <div class="ba-stat">
+              <span class="ba-stat-key">Revenue visibility</span>
+              <span class="ba-stat-val good">100% Stripe-verified</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CTA ════════════════════ -->
+<section class="section-lg cta-section">
+  <div class="wrap on-dark">
+    <div class="eyebrow reveal">Your Turn</div>
+    <h2 class="display-xl reveal stagger-1" style="max-width: 720px; margin: 8px auto 0;">
+      Your Data Is Telling<br>a Story. Let's Find It.
+    </h2>
+    <p class="lead reveal stagger-2" style="margin: 20px auto 0;">
+      Every business we've worked with had the same reaction when they saw their real attribution data: "We had no idea." Book a free audit call and find out what your numbers are actually saying.
+    </p>
+    <div class="cta-actions reveal stagger-3">
+      <a href="contact.html" class="btn btn-green btn-xl">
+        Book Attribution Audit
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M10 5l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="services.html" class="btn btn-ghost-dark btn-xl">See All Services</a>
+    </div>
+    <p class="body-sm reveal stagger-4" style="color: var(--on-dark-2); margin-top: 24px; text-align: center;">Every metric in every case study is verified against closed CRM data. We don't report platform numbers.</p>
+  </div>
+</section>
+
+<!-- ════════════════════ FOOTER ════════════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo-wrap"><div class="nav-logo-mark">N</div> N8iV Intelligence</div>
+        <p class="footer-tagline">Precision closed-loop attribution for B2B companies, SaaS, agencies, and high-ticket service businesses.</p>
+        <a href="contact.html" class="btn btn-primary btn-sm">Book a Call</a>
+      </div>
+      <div class="footer-col"><h4>Platform</h4><ul><li><a href="index.html#system">How It Works</a></li><li><a href="index.html#platform">Dashboard</a></li><li><a href="index.html#integrations">Integrations</a></li><li><a href="services.html">All Services</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="case-studies.html">Case Studies</a></li><li><a href="insights.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Connect</h4><ul><li><a href="mailto:hello@n8ivintelligence.com">hello@n8ivintelligence.com</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 N8iV Promotions LLC — N8iV Intelligence.</span><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

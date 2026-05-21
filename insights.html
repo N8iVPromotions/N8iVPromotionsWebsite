@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Insights — N8iV Intelligence</title>
+<meta name="description" content="Practical guides on closed-loop attribution, CAC, ROAS, and RevOps. Written for revenue-focused operators." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  /* Featured article card */
+  .featured-card {
+    background: var(--dark);
+    border: 1px solid var(--dark-border-2);
+    border-radius: var(--r-xl);
+    padding: 48px 52px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .featured-tag {
+    display: inline-flex;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.2);
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .featured-headline {
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: var(--on-dark);
+    margin: 0 0 20px;
+  }
+  .featured-meta {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: var(--on-dark-2);
+  }
+  .featured-meta-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--on-dark-2);
+    flex-shrink: 0;
+  }
+  .featured-excerpt {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--on-dark-2);
+    margin-bottom: 28px;
+  }
+  .featured-link {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--green);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s;
+  }
+  .featured-link:hover { gap: 10px; }
+
+  /* Featured visual side */
+  .featured-visual {
+    background: var(--dark-3);
+    border: 1px solid var(--dark-border-2);
+    border-radius: var(--r-xl);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .featured-visual-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--on-dark-2);
+    margin-bottom: 4px;
+  }
+  .featured-stat-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--dark-border);
+  }
+  .featured-stat-row:last-child { border-bottom: none; }
+  .featured-stat-row-label { font-size: 13px; color: var(--on-dark-2); font-family: var(--ff-mono); }
+  .featured-stat-row-val { font-size: 15px; font-weight: 700; font-family: var(--ff-mono); }
+  .featured-stat-row-val.up   { color: var(--green); }
+  .featured-stat-row-val.down { color: var(--red); }
+  .featured-stat-row-val.neutral { color: var(--on-dark); }
+
+  /* Article grid */
+  .article-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .article-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-xl);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .article-card:hover {
+    border-color: var(--blue);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  .article-cat {
+    display: inline-flex;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: var(--blue-light);
+    padding: 4px 10px;
+    border-radius: 100px;
+    align-self: flex-start;
+  }
+  .article-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 0;
+  }
+  .article-meta {
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .article-meta-sep { color: var(--border-2); }
+  .article-excerpt {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--muted);
+    margin: 0;
+    flex: 1;
+  }
+  .article-link {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--blue);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: gap 0.2s;
+    margin-top: auto;
+  }
+  .article-link:hover { gap: 9px; }
+
+  /* Newsletter form */
+  .newsletter-form {
+    display: flex;
+    gap: 12px;
+    max-width: 480px;
+    margin: 32px auto 0;
+  }
+  .newsletter-input {
+    flex: 1;
+    padding: 13px 18px;
+    border: 1px solid var(--dark-border-2);
+    border-radius: var(--r-md);
+    background: var(--dark-3);
+    color: var(--on-dark);
+    font: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .newsletter-input::placeholder { color: var(--on-dark-2); }
+  .newsletter-input:focus { border-color: var(--blue); }
+
+  @media (max-width: 1024px) {
+    .article-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .featured-card { grid-template-columns: 1fr; gap: 32px; padding: 32px; }
+    .featured-visual { display: none; }
+    .article-grid { grid-template-columns: 1fr; }
+    .newsletter-form { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════ NAV ════════════════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">N</div>
+      <div>N8iV Intelligence<span class="nav-logo-sub">by N8iV Promotions</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Platform</a></li>
+      <li><a href="case-studies.html">Case Studies</a></li>
+      <li><a href="insights.html" class="active">Insights</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="nav-badge"><span class="dot"></span>Accepting Q3 Clients</span>
+      <a href="contact.html" class="btn btn-primary btn-sm">Book a Call</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<section class="hero">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="wrap hero-content on-dark">
+    <div class="eyebrow reveal">Insights</div>
+    <h1 class="display-xl reveal stagger-1" style="max-width: 760px; margin: 0 0 24px;">
+      The Attribution<br>Intelligence Blog.
+    </h1>
+    <p class="hero-sub reveal stagger-2">
+      Practical guides on closed-loop attribution, CAC, ROAS, and RevOps. Written for revenue-focused operators who need real answers, not agency spin.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════ FEATURED ARTICLE ════════════════════ -->
+<section class="section bg-surface">
+  <div class="wrap">
+    <div class="section-label reveal">
+      <div class="eyebrow">Featured</div>
+    </div>
+
+    <div class="featured-card reveal stagger-1">
+      <!-- Left: text -->
+      <div>
+        <div class="featured-tag">Attribution Guide</div>
+        <h2 class="featured-headline">Why Your ROAS Is Lying to You (And How to Fix It)</h2>
+        <div class="featured-meta">
+          <span>May 15, 2026</span>
+          <span class="featured-meta-dot"></span>
+          <span>8 min read</span>
+        </div>
+        <p class="featured-excerpt">
+          Every major ad platform uses a different attribution window, a different conversion model, and a different counting methodology. The result is that the ROAS number you see in your dashboard is almost certainly wrong — not by a little, but often by a factor of 2× or more. Here's how to find the real number and what to do with it.
+        </p>
+        <a href="#" class="featured-link">
+          Read Article
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+
+      <!-- Right: visual illustration -->
+      <div class="featured-visual">
+        <div class="featured-visual-label">Example: Same Campaign, Different Platforms</div>
+        <div class="featured-stat-row">
+          <span class="featured-stat-row-label">Meta reported ROAS</span>
+          <span class="featured-stat-row-val up">4.8×</span>
+        </div>
+        <div class="featured-stat-row">
+          <span class="featured-stat-row-label">Google reported ROAS</span>
+          <span class="featured-stat-row-val up">3.9×</span>
+        </div>
+        <div class="featured-stat-row">
+          <span class="featured-stat-row-label">LinkedIn reported ROAS</span>
+          <span class="featured-stat-row-val up">2.7×</span>
+        </div>
+        <div class="featured-stat-row">
+          <span class="featured-stat-row-label">CRM-verified blended</span>
+          <span class="featured-stat-row-val neutral">2.1×</span>
+        </div>
+        <div class="featured-stat-row">
+          <span class="featured-stat-row-label">True closed ROAS</span>
+          <span class="featured-stat-row-val down">1.4×</span>
+        </div>
+        <div style="margin-top: 4px; padding: 12px 14px; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: var(--r-md);">
+          <div style="font-size: 12px; font-weight: 600; color: var(--red);">Platform inflation: 3.4× vs reality</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ ARTICLE GRID ════════════════════ -->
+<section class="section bg-page">
+  <div class="wrap">
+    <div class="section-label-inline reveal">
+      <div>
+        <div class="eyebrow">All Articles</div>
+        <h2 class="display-md" style="margin: 8px 0 0;">Revenue Intelligence Library</h2>
+      </div>
+    </div>
+
+    <div class="article-grid">
+      <!-- Article 1 -->
+      <div class="article-card reveal stagger-1">
+        <span class="article-cat">Attribution</span>
+        <h3>The True Cost of Last-Click Attribution</h3>
+        <div class="article-meta">
+          <span>April 28, 2026</span>
+          <span class="article-meta-sep">·</span>
+          <span>6 min read</span>
+        </div>
+        <p class="article-excerpt">Last-click gives 100% of the credit to the final touchpoint before conversion. Here's what that's hiding in your channel mix — and how much it's costing you in misallocated budget.</p>
+        <a href="#" class="article-link">
+          Read Article
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+
+      <!-- Article 2 -->
+      <div class="article-card reveal stagger-2">
+        <span class="article-cat">RevOps</span>
+        <h3>How to Calculate Real CAC When You Have a Long Sales Cycle</h3>
+        <div class="article-meta">
+          <span>April 14, 2026</span>
+          <span class="article-meta-sep">·</span>
+          <span>7 min read</span>
+        </div>
+        <p class="article-excerpt">Standard CAC formulas assume a short feedback loop. B2B companies with 6–12 month sales cycles need a different approach — one that accounts for in-flight pipeline and multi-quarter cohort data.</p>
+        <a href="#" class="article-link">
+          Read Article
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+
+      <!-- Article 3 -->
+      <div class="article-card reveal stagger-3">
+        <span class="article-cat">Tracking</span>
+        <h3>First-Party Data Attribution: A Technical Setup Guide</h3>
+        <div class="article-meta">
+          <span>March 31, 2026</span>
+          <span class="article-meta-sep">·</span>
+          <span>9 min read</span>
+        </div>
+        <p class="article-excerpt">With third-party cookies fading, first-party data is the only durable attribution signal. This guide walks through server-side tracking setup, CRM event mapping, and data layer configuration.</p>
+        <a href="#" class="article-link">
+          Read Article
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+
+      <!-- Article 4 -->
+      <div class="article-card reveal stagger-1">
+        <span class="article-cat">Attribution</span>
+        <h3>Multi-Touch Attribution Models Explained</h3>
+        <div class="article-meta">
+          <span>March 18, 2026</span>
+          <span class="article-meta-sep">·</span>
+          <span>5 min read</span>
+        </div>
+        <p class="article-excerpt">First-touch, last-touch, linear, time-decay, position-based, data-driven — each model tells a different story about your funnel. Here's when to use each one and what the differences reveal about your customer journey.</p>
+        <a href="#" class="article-link">
+          Read Article
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+
+      <!-- Article 5 -->
+      <div class="article-card reveal stagger-2">
+        <span class="article-cat">Case Study</span>
+        <h3>How We Found $2.1M in Unattributed Pipeline</h3>
+        <div class="article-meta">
+          <span>March 5, 2026</span>
+          <span class="article-meta-sep">·</span>
+          <span>6 min read</span>
+        </div>
+        <p class="article-excerpt">A B2B SaaS company with a 9-month sales cycle was about to cut LinkedIn entirely. Here's the attribution model we built that changed that decision and revealed $2.1M in pipeline no one knew LinkedIn was driving.</p>
+        <a href="#" class="article-link">
+          Read Article
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+
+      <!-- Article 6 -->
+      <div class="article-card reveal stagger-3">
+        <span class="article-cat">RevOps</span>
+        <h3>Building a Revenue Intelligence Stack From Scratch</h3>
+        <div class="article-meta">
+          <span>Feb 20, 2026</span>
+          <span class="article-meta-sep">·</span>
+          <span>10 min read</span>
+        </div>
+        <p class="article-excerpt">What tools, integrations, and data architecture do you actually need to build a closed-loop revenue intelligence system? This guide covers the full stack — from ad platform APIs to CRM data modeling to reporting layer.</p>
+        <a href="#" class="article-link">
+          Read Article
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ NEWSLETTER CTA ════════════════════ -->
+<section class="section bg-dark">
+  <div class="wrap on-dark" style="text-align: center;">
+    <div class="eyebrow reveal">Weekly Intelligence</div>
+    <h2 class="display-md reveal stagger-1" style="margin: 8px auto 0; max-width: 560px;">Attribution insights in your inbox.</h2>
+    <p class="lead reveal stagger-2" style="margin: 16px auto 0; max-width: 480px;">
+      One email per week. Practical attribution breakdowns, framework guides, and revenue intelligence you can actually use.
+    </p>
+    <form class="newsletter-form reveal stagger-3" onsubmit="return false;">
+      <input class="newsletter-input" type="email" placeholder="your@email.com" autocomplete="email" />
+      <button type="submit" class="btn btn-primary btn-lg">Subscribe</button>
+    </form>
+    <p class="body-sm reveal stagger-4" style="color: var(--on-dark-2); margin-top: 16px;">No spam. Unsubscribe any time. We don't sell your data.</p>
+  </div>
+</section>
+
+<!-- ════════════════════ FOOTER ════════════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo-wrap"><div class="nav-logo-mark">N</div> N8iV Intelligence</div>
+        <p class="footer-tagline">Precision closed-loop attribution for B2B companies, SaaS, agencies, and high-ticket service businesses.</p>
+        <a href="contact.html" class="btn btn-primary btn-sm">Book a Call</a>
+      </div>
+      <div class="footer-col"><h4>Platform</h4><ul><li><a href="index.html#system">How It Works</a></li><li><a href="index.html#platform">Dashboard</a></li><li><a href="index.html#integrations">Integrations</a></li><li><a href="services.html">All Services</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="case-studies.html">Case Studies</a></li><li><a href="insights.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Connect</h4><ul><li><a href="mailto:hello@n8ivintelligence.com">hello@n8ivintelligence.com</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 N8iV Promotions LLC — N8iV Intelligence.</span><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

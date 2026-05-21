@@ -3,142 +3,154 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Contact — N8iV Promotions</title>
-
+<title>Book a Strategy Call — N8iV Intelligence</title>
+<meta name="description" content="Book a free attribution audit with N8iV Intelligence. 30 minutes to map your funnel and find where revenue is leaking." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="css/styles.css" />
-<link rel="stylesheet" href="css/tweaks.css" />
-<script>
-  (function(){
-    var TWEAKS_KEY="n8iv_site_tweaks_v1";
-    try{var t=JSON.parse(localStorage.getItem(TWEAKS_KEY)||"{}");
-    document.documentElement.setAttribute("data-accent",t.accent||"purple");
-    document.documentElement.setAttribute("data-display",t.display||"anton");}
-    catch(e){document.documentElement.setAttribute("data-accent","purple");document.documentElement.setAttribute("data-display","anton");}
-  })();
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start; padding:80px 0; }
+  .contact-form-wrap { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-xl); padding:40px; }
+  .form-field { display:grid; gap:6px; margin-bottom:20px; }
+  .form-field label { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .form-field input,.form-field select,.form-field textarea { font:inherit; font-size:15px; color:var(--ink); background:var(--page); border:1px solid var(--border-2); border-radius:var(--r-md); padding:12px 14px; outline:none; transition:border-color .2s,box-shadow .2s; width:100%; }
+  .form-field input:focus,.form-field select:focus,.form-field textarea:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(69,105,245,.1); }
+  .form-field textarea { min-height:120px; resize:vertical; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .contact-detail { display:flex; align-items:flex-start; gap:16px; padding:24px 0; border-bottom:1px solid var(--border); }
+  .contact-detail:first-of-type { border-top:1px solid var(--border); margin-top:32px; padding-top:24px; }
+  .contact-detail-icon { width:40px; height:40px; background:var(--blue-light); border-radius:var(--r-md); display:grid; place-items:center; font-size:18px; flex-shrink:0; }
+  .contact-detail-label { font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+  .contact-detail-value { font-size:15px; font-weight:600; color:var(--ink); }
+  .contact-detail-note { font-size:13px; color:var(--muted); margin-top:2px; }
+  .audit-card { background:var(--dark); border-radius:var(--r-xl); padding:32px; margin-top:40px; }
+  .audit-card h3 { font-size:18px; font-weight:700; color:var(--on-dark); letter-spacing:-.02em; margin:0 0 12px; }
+  .audit-item { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid var(--dark-border); font-size:14px; color:var(--on-dark-2); }
+  .audit-item:last-child { border-bottom:none; }
+  .audit-item::before { content:''; width:18px; height:18px; background:var(--green); border-radius:50%; flex-shrink:0; background-image:url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L3.5 6.5L9 1' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:center; }
+  .trust-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; }
+  .trust-cell { background:var(--surface); padding:28px 24px; text-align:center; }
+  .trust-num { font-size:36px; font-weight:800; letter-spacing:-.04em; font-family:var(--ff-mono); }
+  @media(max-width:768px){ .contact-grid{grid-template-columns:1fr;gap:40px;} .form-row{grid-template-columns:1fr;} .trust-grid{grid-template-columns:repeat(2,1fr);} }
+</style>
 </head>
-<body data-page-name="Contact">
+<body>
 
-<div class="grid-overlay"></div>
-
-<!-- ══════════ NAV ══════════ -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="logo">N8iV<span class="dot">.</span></a>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">N</div>
+      <div>N8iV Intelligence<span class="nav-logo-sub">by N8iV Promotions</span></div>
+    </a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="work.html">Work</a></li>
-      <li><a href="services.html">Services</a></li>
+      <li><a href="index.html">Platform</a></li>
+      <li><a href="case-studies.html">Case Studies</a></li>
+      <li><a href="insights.html">Insights</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="contact.html" class="active">Contact</a></li>
     </ul>
-    <div class="nav-cta-wrap">
-      <span class="nav-status"><span class="dot"></span>Onboarding Q3</span>
-      <a href="contact.html" class="btn btn-primary">Book Audit <svg class="icon-arrow" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg></a>
+    <div class="nav-right">
+      <span class="nav-badge"><span class="dot"></span>Accepting Q3 Clients</span>
+      <a href="contact.html" class="btn btn-primary btn-sm">Book a Call</a>
     </div>
   </div>
 </nav>
 
-<!-- ══════════ HERO ══════════ -->
-<section class="hero">
-  <div class="wrap">
-    <div class="eyebrow reveal">Contact</div>
-    <h1 class="display xl hero-headline reveal">
-      Let's Talk<br><span class="accent">Revenue.</span>
-    </h1>
+<!-- HERO -->
+<section class="hero" style="padding-bottom:0;">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="wrap hero-content" style="padding-bottom:0;">
+    <div class="hero-badge reveal"><span class="badge-dot">&#9679;</span>Free for Qualified Businesses</div>
+    <h1 class="display-xl reveal stagger-1" style="max-width:640px;">Book Your Free<br><em>Revenue Attribution Audit.</em></h1>
+    <p class="hero-sub reveal stagger-2">A 30-minute call. We map your funnel, audit your tracking, and tell you exactly where attribution is broken — and what it's costing you. No pitch. No commitment.</p>
   </div>
 </section>
 
-<!-- ══════════ CONTACT TWO-COL ══════════ -->
-<section class="section" style="padding-top:0;">
+<!-- FORM + INFO -->
+<section class="bg-page" style="padding-top:0;">
   <div class="wrap">
-    <div class="two-col reveal">
+    <div class="contact-grid">
 
-      <!-- LEFT: Form -->
-      <div>
-        <form action="#" method="post" style="display:flex;flex-direction:column;gap:20px;">
-          <div style="display:flex;flex-direction:column;gap:6px;">
-            <label class="label-sm" for="contact-name">Name</label>
-            <input
-              id="contact-name"
-              type="text"
-              name="name"
-              placeholder="Your full name"
-              required
-              style="background:var(--surface);border:1px solid var(--rule);color:var(--off-white);padding:14px 16px;font-size:15px;font-family:inherit;outline:none;transition:border-color .2s;"
-              onfocus="this.style.borderColor='var(--accent)'"
-              onblur="this.style.borderColor='var(--rule)'"
-            />
+      <div class="contact-form-wrap reveal">
+        <h2 class="display-sm" style="margin:0 0 6px;">Request Your Audit</h2>
+        <p class="body-sm" style="margin:0 0 28px;">We'll review your submission and schedule a call within 1 business day.</p>
+        <form>
+          <div class="form-row">
+            <div class="form-field"><label>First Name</label><input type="text" placeholder="Jane" /></div>
+            <div class="form-field"><label>Last Name</label><input type="text" placeholder="Smith" /></div>
           </div>
-          <div style="display:flex;flex-direction:column;gap:6px;">
-            <label class="label-sm" for="contact-email">Email</label>
-            <input
-              id="contact-email"
-              type="email"
-              name="email"
-              placeholder="you@company.com"
-              required
-              style="background:var(--surface);border:1px solid var(--rule);color:var(--off-white);padding:14px 16px;font-size:15px;font-family:inherit;outline:none;transition:border-color .2s;"
-              onfocus="this.style.borderColor='var(--accent)'"
-              onblur="this.style.borderColor='var(--rule)'"
-            />
+          <div class="form-field"><label>Work Email</label><input type="email" placeholder="jane@company.com" /></div>
+          <div class="form-field"><label>Company Name</label><input type="text" placeholder="Acme Corp" /></div>
+          <div class="form-row">
+            <div class="form-field">
+              <label>Your Role</label>
+              <select><option value="">Select role</option><option>CMO / VP Marketing</option><option>RevOps Director</option><option>Founder / CEO</option><option>Marketing Manager</option><option>Agency Owner</option><option>Other</option></select>
+            </div>
+            <div class="form-field">
+              <label>Monthly Ad Spend</label>
+              <select><option value="">Select range</option><option>Under $10K</option><option>$10K – $50K</option><option>$50K – $200K</option><option>$200K – $500K</option><option>$500K+</option></select>
+            </div>
           </div>
-          <div style="display:flex;flex-direction:column;gap:6px;">
-            <label class="label-sm" for="contact-company">Company</label>
-            <input
-              id="contact-company"
-              type="text"
-              name="company"
-              placeholder="Company name"
-              style="background:var(--surface);border:1px solid var(--rule);color:var(--off-white);padding:14px 16px;font-size:15px;font-family:inherit;outline:none;transition:border-color .2s;"
-              onfocus="this.style.borderColor='var(--accent)'"
-              onblur="this.style.borderColor='var(--rule)'"
-            />
+          <div class="form-field">
+            <label>CRM Platform</label>
+            <select><option value="">Select CRM</option><option>HubSpot</option><option>Salesforce</option><option>Pipedrive</option><option>Close.com</option><option>None / Other</option></select>
           </div>
-          <div style="display:flex;flex-direction:column;gap:6px;">
-            <label class="label-sm" for="contact-message">Tell us about your funnel</label>
-            <textarea
-              id="contact-message"
-              name="message"
-              rows="6"
-              placeholder="What channels are you running? Where do deals get lost? What's your current attribution setup?"
-              style="background:var(--surface);border:1px solid var(--rule);color:var(--off-white);padding:14px 16px;font-size:15px;font-family:inherit;outline:none;resize:vertical;transition:border-color .2s;"
-              onfocus="this.style.borderColor='var(--accent)'"
-              onblur="this.style.borderColor='var(--rule)'"
-            ></textarea>
+          <div class="form-field">
+            <label>Biggest Attribution Challenge</label>
+            <textarea placeholder="e.g. We can't tell which channels drive closed revenue, our platform numbers don't match our CRM..."></textarea>
           </div>
-          <div>
-            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;">
-              Send Message
-              <svg class="icon-arrow" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
-            </button>
-          </div>
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;">
+            Request Free Audit
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <p class="body-sm" style="text-align:center;margin-top:12px;">We respond within 1 business day. No spam, ever.</p>
         </form>
       </div>
 
-      <!-- RIGHT: Contact info -->
-      <div style="display:flex;flex-direction:column;gap:48px;padding-top:8px;">
-        <div>
-          <div class="label-sm" style="margin-bottom:12px;">Email us directly</div>
-          <a href="mailto:hello@n8iv.co" class="display sm" style="color:var(--off-white);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--off-white)'">hello@n8iv.co</a>
-        </div>
-        <div>
-          <div class="label-sm" style="margin-bottom:12px;">Our offices</div>
-          <div class="body-lg" style="line-height:1.6;">
-            Brooklyn / Austin
+      <div class="reveal stagger-1" style="padding-top:8px;">
+        <div class="eyebrow">What to Expect</div>
+        <h2 class="display-md" style="margin:8px 0 0;">30 Minutes to Revenue Clarity.</h2>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📡</div>
+          <div>
+            <div class="contact-detail-label">Call 1 — Attribution Audit</div>
+            <div class="contact-detail-value">30-minute working session</div>
+            <div class="contact-detail-note">We review your tracking setup, ad platforms, and CRM — and identify attribution gaps live on the call.</div>
           </div>
         </div>
-        <div>
-          <span class="nav-status">
-            <span class="dot"></span>Onboarding Q3
-          </span>
-          <p class="body" style="margin-top:16px;color:#888;">
-            We're currently accepting new clients for Q3 onboarding. Spots are limited — book your audit to secure your place.
-          </p>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📊</div>
+          <div>
+            <div class="contact-detail-label">Within 48 hours</div>
+            <div class="contact-detail-value">Revenue Leakage Report</div>
+            <div class="contact-detail-note">A written summary of what's broken, estimated revenue impact, and our recommended fix.</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">✅</div>
+          <div>
+            <div class="contact-detail-label">Your decision</div>
+            <div class="contact-detail-value">No obligation to proceed</div>
+            <div class="contact-detail-note">The audit is genuinely free. If we're not a fit, you keep the report. If we are, we'll talk next steps.</div>
+          </div>
+        </div>
+
+        <div class="audit-card">
+          <h3>What we audit in 30 minutes:</h3>
+          <div class="audit-item">Ad platform conversion tracking setup</div>
+          <div class="audit-item">CRM pipeline and deal attribution</div>
+          <div class="audit-item">Cross-channel deduplication gaps</div>
+          <div class="audit-item">Revenue-to-spend match rate</div>
+          <div class="audit-item">Wasted spend identification</div>
+          <div class="audit-item">Quick-win reallocation opportunities</div>
+        </div>
+
+        <div style="margin-top:28px;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);">
+          <div class="body-sm" style="margin-bottom:6px;font-weight:600;color:var(--ink-2);">Or reach us directly</div>
+          <a href="mailto:hello@n8ivintelligence.com" style="font-size:15px;font-weight:600;color:var(--blue);">hello@n8ivintelligence.com</a>
+          <div class="body-sm" style="margin-top:4px;">Brooklyn, NY &amp; Austin, TX</div>
         </div>
       </div>
 
@@ -146,83 +158,38 @@
   </div>
 </section>
 
-<!-- ══════════ CTA ══════════ -->
-<section class="cta-section">
+<!-- TRUST STRIP -->
+<section class="section-sm bg-surface">
   <div class="wrap">
-    <div class="eyebrow reveal" style="color:#fff;">— Free Revenue Audit</div>
-    <div style="margin-top:24px;"></div>
-    <h2 class="display xl reveal">
-      Stop Guessing.<br>
-      Start <span class="accent-block">Measuring.</span>
-    </h2>
-    <div class="cta-bottom reveal">
-      <p class="body-lg" style="max-width:540px;color:#C5C0B6;">
-        A 30-minute call. We map your funnel, audit your tracking, and tell you (free) where your money is leaking. No pitch. No fluff.
-      </p>
-      <a href="contact.html" class="btn btn-primary btn-xl">Book Your Audit
-        <svg class="icon-arrow" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
-      </a>
+    <div class="trust-grid reveal">
+      <div class="trust-cell"><div class="trust-num" style="color:var(--blue);">240+</div><div class="body-sm" style="margin-top:4px;">Reports delivered</div></div>
+      <div class="trust-cell"><div class="trust-num" style="color:var(--blue);">$48M</div><div class="body-sm" style="margin-top:4px;">Revenue attributed</div></div>
+      <div class="trust-cell"><div class="trust-num" style="color:var(--green);">42%</div><div class="body-sm" style="margin-top:4px;">Avg CPA reduction</div></div>
+      <div class="trust-cell"><div class="trust-num" style="color:var(--green);">1 day</div><div class="body-sm" style="margin-top:4px;">Response time</div></div>
     </div>
   </div>
 </section>
 
-<!-- ══════════ FOOTER ══════════ -->
+<!-- FOOTER -->
 <footer class="footer">
   <div class="wrap">
-    <div class="footer-cols">
-      <div>
-        <div class="signoff">N8iV.</div>
-        <p style="color:#888;max-width:340px;margin-top:24px;font-size:14px;line-height:1.55;letter-spacing:0;text-transform:none;">
-          Precision marketing attribution for independent businesses and boutique agencies.
-        </p>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo-wrap"><div class="nav-logo-mark">N</div> N8iV Intelligence</div>
+        <p class="footer-tagline">Precision closed-loop attribution for B2B companies, SaaS, agencies, and high-ticket service businesses.</p>
+        <a href="contact.html" class="btn btn-primary btn-sm">Book a Call</a>
       </div>
-      <div>
-        <h4>Navigate</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="work.html">Work</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Services</h4>
-        <ul>
-          <li><a href="services.html">Attribution</a></li>
-          <li><a href="services.html">Channel Audits</a></li>
-          <li><a href="services.html">Pipeline Modeling</a></li>
-          <li><a href="services.html">Monthly Reporting</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Connect</h4>
-        <ul>
-          <li><a href="contact.html">hello@n8iv.co</a></li>
-          <li><a href="#">LinkedIn</a></li>
-          <li><a href="#">Twitter / X</a></li>
-          <li><a href="#">Substack</a></li>
-        </ul>
-      </div>
+      <div class="footer-col"><h4>Platform</h4><ul><li><a href="index.html#system">How It Works</a></li><li><a href="index.html#platform">Dashboard</a></li><li><a href="index.html#integrations">Integrations</a></li><li><a href="services.html">All Services</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="case-studies.html">Case Studies</a></li><li><a href="insights.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Connect</h4><ul><li><a href="mailto:hello@n8ivintelligence.com">hello@n8ivintelligence.com</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li></ul></div>
     </div>
-    <div class="footer-inner">
-      <span>© 2026 N8iV Promotions LLC</span>
-      <span>Brooklyn / Austin</span>
-      <div style="display:flex;gap:24px;">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Imprint</a>
-      </div>
+    <div class="footer-bottom">
+      <span>© 2026 N8iV Promotions LLC — N8iV Intelligence. All rights reserved.</span>
+      <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a></div>
     </div>
   </div>
 </footer>
 
-<div id="tweaks-root"></div>
 <script src="js/main.js" defer></script>
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel" src="js/tweaks-app.jsx"></script>
-
 </body>
 </html>
