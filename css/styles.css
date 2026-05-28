@@ -433,15 +433,6 @@ ul { list-style: none; margin: 0; padding: 0; }
   margin-top: 48px;
   display: flex;
   align-items: center;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-.hero-trust-label {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--on-dark-2);
 }
 .hero-trust-items {
   display: flex;
@@ -1272,8 +1263,85 @@ ul { list-style: none; margin: 0; padding: 0; }
   .integrations-grid { grid-template-columns: repeat(2,1fr); }
   .case-grid { grid-template-columns: 1fr; }
   .footer-main { grid-template-columns: 1fr 1fr; gap: 40px; }
-  .nav-links, .nav-badge { display: none; }
+  .nav-links, .nav-badge, .nav-right { display: none; }
+  .nav-mobile-toggle { display: flex; }
 }
+
+/* ================================================================
+   MOBILE NAV TOGGLE
+   ================================================================ */
+.nav-mobile-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-sm);
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.nav-mobile-toggle:hover { background: rgba(255,255,255,0.07); }
+.nav-mobile-toggle span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--on-dark-2);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.nav-mobile-toggle.open span:nth-child(1) {
+  transform: rotate(45deg) translate(4.5px, 4.5px);
+}
+.nav-mobile-toggle.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.nav-mobile-toggle.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(4.5px, -4.5px);
+}
+
+/* ================================================================
+   MOBILE MENU OVERLAY
+   ================================================================ */
+#mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 180;
+  background: var(--dark);
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--gutter);
+}
+#mobile-menu.open { display: flex; }
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.mobile-nav-link {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--on-dark-2);
+  padding: 10px 0;
+  transition: color 0.15s;
+  line-height: 1.2;
+}
+.mobile-nav-link:hover { color: var(--on-dark); }
+.mobile-nav-cta {
+  margin-top: 28px;
+  align-self: flex-start;
+}
+
+/* ================================================================
+   ICON STYLES
+   ================================================================ */
+.step-icon svg   { color: var(--blue); }
+.outcome-icon svg { color: var(--blue); }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { transition: none; opacity: 1; transform: none; }
