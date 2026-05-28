@@ -32,8 +32,22 @@
       <span class="nav-badge"><span class="dot"></span>Accepting Q3 Clients</span>
       <a href="contact.html" class="btn btn-primary btn-sm">Book a Call</a>
     </div>
+    <button class="nav-mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile nav overlay -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation">
+  <nav class="mobile-nav">
+    <a href="index.html" class="mobile-nav-link">Platform</a>
+    <a href="case-studies.html" class="mobile-nav-link">Case Studies</a>
+    <a href="insights.html" class="mobile-nav-link">Insights</a>
+    <a href="about.html" class="mobile-nav-link">About</a>
+    <a href="contact.html" class="btn btn-primary mobile-nav-cta">Book a Call</a>
+  </nav>
+</div>
 
 <!-- ════════════════════ HERO ════════════════════ -->
 <section class="hero">
@@ -65,7 +79,6 @@
     </div>
 
     <div class="hero-trust reveal stagger-4">
-      <span class="hero-trust-label">Trusted for</span>
       <div class="hero-trust-items">
         <span class="hero-trust-item">Closed-loop attribution</span>
         <span class="hero-trust-item">CRM + ad platform sync</span>
@@ -248,31 +261,41 @@
 
     <div class="system-flow">
       <div class="system-step reveal stagger-1">
-        <div class="step-icon active">📡</div>
+        <div class="step-icon active">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
         <div class="step-num">01</div>
         <div class="step-title">Connect Platforms</div>
         <div class="step-desc">Ad platforms, CRM, call tracking, and payment systems connected via native APIs.</div>
       </div>
       <div class="system-step reveal stagger-2">
-        <div class="step-icon">⚙️</div>
+        <div class="step-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        </div>
         <div class="step-num">02</div>
         <div class="step-title">Normalize Data</div>
         <div class="step-desc">First-party data normalized across sources. Duplicate conversions removed.</div>
       </div>
       <div class="system-step reveal stagger-3">
-        <div class="step-icon">🗺️</div>
+        <div class="step-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+        </div>
         <div class="step-num">03</div>
         <div class="step-title">Map Journeys</div>
         <div class="step-desc">Every customer touchpoint mapped from first ad impression to closed deal.</div>
       </div>
       <div class="system-step reveal stagger-4">
-        <div class="step-icon">📊</div>
+        <div class="step-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+        </div>
         <div class="step-num">04</div>
         <div class="step-title">Attribute Revenue</div>
         <div class="step-desc">Multi-touch attribution models weighted to your actual sales cycle.</div>
       </div>
       <div class="system-step reveal stagger-5">
-        <div class="step-icon">💡</div>
+        <div class="step-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
         <div class="step-num">05</div>
         <div class="step-title">Optimize Spend</div>
         <div class="step-desc">Monthly intelligence reports showing exactly where to reallocate budget.</div>
@@ -461,39 +484,51 @@
     <div class="section-label-inline reveal">
       <div>
         <div class="eyebrow">Business Outcomes</div>
-        <h2 class="display-lg">Clarity That Moves the Needle.</h2>
+        <h2 class="display-lg">Decisions You Can Act On.</h2>
       </div>
       <p class="lead" style="max-width:380px;">Technical attribution translated into decisions your CFO and CMO can act on immediately.</p>
     </div>
 
     <div class="outcomes-grid">
       <div class="outcome-card reveal stagger-1">
-        <div class="outcome-icon">🎯</div>
+        <div class="outcome-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        </div>
         <h3>Eliminate Wasted Spend</h3>
         <p>Identify the campaigns and channels driving zero closed revenue. Reallocate budget to what actually earns.</p>
       </div>
       <div class="outcome-card reveal stagger-2">
-        <div class="outcome-icon">📉</div>
+        <div class="outcome-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+        </div>
         <h3>Reduce True CAC</h3>
         <p>Replace platform-reported CAC with actual cost-per-acquired-customer calculated from closed deals.</p>
       </div>
       <div class="outcome-card reveal stagger-3">
-        <div class="outcome-icon">🔍</div>
+        <div class="outcome-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
         <h3>Surface Hidden Channels</h3>
         <p>Discover high-ROAS channels undervalued in last-click reporting. Invest before competitors notice.</p>
       </div>
       <div class="outcome-card reveal stagger-1">
-        <div class="outcome-icon">🤝</div>
+        <div class="outcome-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
         <h3>Align Sales and Marketing</h3>
         <p>A shared revenue model that both teams trust. No more attribution arguments across departments.</p>
       </div>
       <div class="outcome-card reveal stagger-2">
-        <div class="outcome-icon">📈</div>
+        <div class="outcome-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
         <h3>Improve Forecasting</h3>
         <p>Pipeline attribution by channel lets you model revenue outcomes from budget changes before making them.</p>
       </div>
       <div class="outcome-card reveal stagger-3">
-        <div class="outcome-icon">📋</div>
+        <div class="outcome-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
         <h3>Executive-Ready Reports</h3>
         <p>Monthly reports formatted for board decks. Revenue by channel. True ROAS. Budget recommendations.</p>
       </div>

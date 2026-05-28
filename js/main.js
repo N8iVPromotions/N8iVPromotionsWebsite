@@ -84,13 +84,28 @@
   bars.forEach(el => { el.style.width = '0'; io.observe(el); });
 })();
 
-// ── 5. ATTRIBUTION FLOW PARTICLES ─────────────────────────────
-(function initFlow() {
-  const canvas = document.getElementById('flow-canvas');
-  if (!canvas) return;
+// ── 5. MOBILE MENU ────────────────────────────────────────────
+(function initMobileMenu() {
+  const toggle = document.querySelector('.nav-mobile-toggle');
+  const menu   = document.getElementById('mobile-menu');
+  if (!toggle || !menu) return;
 
-  // We use CSS-animated particles injected per path
-  // Already handled via CSS + inline HTML
+  function setOpen(open) {
+    menu.classList.toggle('open', open);
+    toggle.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  toggle.addEventListener('click', () => setOpen(!menu.classList.contains('open')));
+
+  menu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => setOpen(false));
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') setOpen(false);
+  });
 })();
 
 // ── 6. ACTIVE NAV LINK ──────────────────────────────────────────
