@@ -1,143 +1,135 @@
-/* ============================================================
-   N8iV Promotions — main.js
-   1. Nav scroll effect
-   2. Fade-up on scroll  (IntersectionObserver)
-   3. Parallax backgrounds
-   4. Word-by-word text animation
-   5. Counter animation (stats)
-   ============================================================ */
+/* ================================================================
+   N8iV Intelligence — main.js
+   Scroll reveals, counter animation, bar chart animation,
+   nav scroll behavior, attribution flow
+   ================================================================ */
 
-/* ─── 1. NAV SCROLL EFFECT ────────────────────────────────── */
+// ── 1. NAV: switch to light style over light sections ──────────
 (function initNav() {
   const nav = document.querySelector('.nav');
   if (!nav) return;
-  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 60);
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-})();
+  const lightSections = document.querySelectorAll('.bg-surface, .bg-page');
 
-/* ─── 2. FADE-UP ON SCROLL ────────────────────────────────── */
-(function initFadeUp() {
-  const targets = document.querySelectorAll('[data-animate]');
-  if (!targets.length) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
+  function update() {
+    let overLight = false;
+    const navBottom = nav.getBoundingClientRect().bottom;
+    lightSections.forEach(sec => {
+      const r = sec.getBoundingClientRect();
+      if (r.top <= navBottom && r.bottom >= navBottom) overLight = true;
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-  targets.forEach(el => observer.observe(el));
-})();
-
-/* ─── 3. PARALLAX BACKGROUNDS ─────────────────────────────── */
-(function initParallax() {
-  const layers = Array.from(document.querySelectorAll('[data-parallax]'));
-  if (!layers.length) return;
-
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) return;
-
-  let ticking = false;
-
-  const update = () => {
-    const scrollY = window.scrollY;
-
-    layers.forEach(el => {
-      const speed  = parseFloat(el.dataset.parallax) || 0.3;
-      const rect   = el.closest('.parallax-section, .showcase, .cta-banner')?.getBoundingClientRect();
-      if (!rect) return;
-
-      // Only update when the section is visible in the viewport
-      if (rect.bottom < -200 || rect.top > window.innerHeight + 200) return;
-
-      const center = rect.top + rect.height / 2 - window.innerHeight / 2;
-      const shift  = center * speed;
-      el.style.transform = `translateY(${shift}px)`;
-    });
-
-    ticking = false;
-  };
-
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(update);
-      ticking = true;
-    }
-  }, { passive: true });
-
+    nav.classList.toggle('light', overLight);
+  }
+  window.addEventListener('scroll', update, { passive: true });
   update();
 })();
 
-/* ─── 4. WORD-BY-WORD TEXT ANIMATION ──────────────────────── */
-(function initWordAnimation() {
-  const elements = document.querySelectorAll('[data-word-animate]');
-  if (!elements.length) return;
+// ── 2. REVEAL ON SCROLL ────────────────────────────────────────
+(function initReveal() {
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(el => io.observe(el));
+})();
 
-  elements.forEach(el => {
-    const blurMode = el.dataset.wordAnimate === 'blur';
-    if (blurMode) el.classList.add('text-animate-blur');
-    else          el.classList.add('text-animate');
+// ── 3. COUNTER ANIMATION ───────────────────────────────────────
+(function initCounters() {
+  const els = document.querySelectorAll('[data-count]');
+  if (!els.length) return;
 
-    // Split text into word spans
-    const rawText = el.textContent.trim();
-    const words   = rawText.split(/\s+/);
+  const ease = t => 1 - Math.pow(1 - t, 3);
 
-    el.innerHTML = words
-      .map((word, i) =>
-        `<span class="word-wrap"><span class="word" style="--word-index:${i}" aria-hidden="false">${word}</span></span>`
-      )
-      .join(' ');
+  function run(el) {
+    const target   = parseFloat(el.dataset.count);
+    const prefix   = el.dataset.prefix   || '';
+    const suffix   = el.dataset.suffix   || '';
+    const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals) : 0;
+    const dur      = 1600;
+    const start    = performance.now();
 
-    // Trigger when visible
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
+    function step(now) {
+      const t   = Math.min((now - start) / dur, 1);
+      const val = target * ease(t);
+      el.textContent = prefix + val.toFixed(decimals) + suffix;
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
 
-    observer.observe(el);
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  els.forEach(el => io.observe(el));
+})();
+
+// ── 4. BAR CHART ANIMATION ─────────────────────────────────────
+(function initBars() {
+  const bars = document.querySelectorAll('[data-bar]');
+  if (!bars.length) return;
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const pct = e.target.dataset.bar;
+        e.target.style.width = pct + '%';
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  // Set initial width to 0
+  bars.forEach(el => { el.style.width = '0'; io.observe(el); });
+})();
+
+// ── 5. MOBILE MENU ────────────────────────────────────────────
+(function initMobileMenu() {
+  const toggle = document.querySelector('.nav-mobile-toggle');
+  const menu   = document.getElementById('mobile-menu');
+  if (!toggle || !menu) return;
+
+  function setOpen(open) {
+    menu.classList.toggle('open', open);
+    toggle.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  toggle.addEventListener('click', () => setOpen(!menu.classList.contains('open')));
+
+  menu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => setOpen(false));
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') setOpen(false);
   });
 })();
 
-/* ─── 5. COUNTER ANIMATION ────────────────────────────────── */
-(function initCounters() {
-  const counters = document.querySelectorAll('[data-count]');
-  if (!counters.length) return;
+// ── 6. ACTIVE NAV LINK ──────────────────────────────────────────
+(function initActiveNav() {
+  const path = location.pathname.split('/').pop().toLowerCase() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    const href = (a.getAttribute('href') || '').toLowerCase();
+    if (href === path || (path === '' && href === 'index.html')) {
+      a.classList.add('active');
+    }
+  });
+})();
 
-  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
-
-  const animateCounter = (el) => {
-    const target   = parseInt(el.dataset.count, 10);
-    const suffix   = el.dataset.suffix || '';
-    const duration = 1800;
-    const start    = performance.now();
-
-    const step = (now) => {
-      const elapsed  = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const value    = Math.round(easeOut(progress) * target);
-      el.textContent = value.toLocaleString() + suffix;
-      if (progress < 1) requestAnimationFrame(step);
-    };
-
-    requestAnimationFrame(step);
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        observer.unobserve(entry.target);
-      }
+// ── 7. PROBLEM CARD HOVER PARALLAX ────────────────────────────
+(function initCardTilt() {
+  document.querySelectorAll('.problem-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width  - 0.5) * 6;
+      const y = ((e.clientY - r.top)  / r.height - 0.5) * 6;
+      card.style.transform = `perspective(600px) rotateY(${x}deg) rotateX(${-y}deg) translateY(-4px)`;
     });
-  }, { threshold: 0.5 });
-
-  counters.forEach(el => observer.observe(el));
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
 })();
