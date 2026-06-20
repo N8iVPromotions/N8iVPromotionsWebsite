@@ -1257,7 +1257,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   .case-grid { grid-template-columns: 1fr; }
   .footer-main { grid-template-columns: 1fr 1fr; gap: 40px; }
   .nav-links, .nav-badge, .nav-right { display: none; }
-  .nav-mobile-toggle { display: flex; }
+  .nav .nav-mobile-toggle { display: flex; }
 }
 
 /* ================================================================
