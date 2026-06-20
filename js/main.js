@@ -73,15 +73,20 @@
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        const pct = e.target.dataset.bar;
-        e.target.style.width = pct + '%';
+        const pct = parseFloat(e.target.dataset.bar) || 0;
+        e.target.style.transform = 'scaleX(' + (pct / 100) + ')';
         io.unobserve(e.target);
       }
     });
   }, { threshold: 0.3 });
 
-  // Set initial width to 0
-  bars.forEach(el => { el.style.width = '0'; io.observe(el); });
+  // GPU-friendly fill: full width, animate horizontal scale from 0
+  bars.forEach(el => {
+    el.style.width = '100%';
+    el.style.transformOrigin = 'left';
+    el.style.transform = 'scaleX(0)';
+    io.observe(el);
+  });
 })();
 
 // ── 5. MOBILE MENU ────────────────────────────────────────────
