@@ -113,6 +113,60 @@
   });
 })();
 
+// ── 6. PARALLAX (scroll depth) ─────────────────────────────────
+(function initParallax() {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reduce.matches) return;
+
+  // Auto-assign depth to the decorative hero orbs (different rates +
+  // opposite directions reads as parallax). Anything with an explicit
+  // [data-parallax] speed is honoured too.
+  document.querySelectorAll('.hero-glow-1').forEach(el => { if (!el.dataset.parallax) el.dataset.parallax = '0.22'; });
+  document.querySelectorAll('.hero-glow-2').forEach(el => { if (!el.dataset.parallax) el.dataset.parallax = '-0.16'; });
+
+  const items = [...document.querySelectorAll('[data-parallax]')]
+    .map(el => ({ el, speed: parseFloat(el.dataset.parallax) || 0, base: 0, h: 0 }))
+    .filter(i => i.speed);
+  if (!items.length) return;
+
+  // Cache each element's document position WITHOUT any transform applied,
+  // so the scroll math never feeds back on itself.
+  function measure() {
+    const y = window.scrollY;
+    for (const it of items) {
+      it.el.style.transform = '';
+      const r = it.el.getBoundingClientRect();
+      it.base = r.top + y;
+      it.h = r.height;
+    }
+    update();
+  }
+
+  let ticking = false;
+  function update() {
+    const viewportCenter = window.scrollY + window.innerHeight / 2;
+    for (const it of items) {
+      const elementCenter = it.base + it.h / 2;
+      const offset = (elementCenter - viewportCenter) * it.speed;
+      it.el.style.transform = `translate3d(0, ${(-offset).toFixed(1)}px, 0)`;
+    }
+    ticking = false;
+  }
+  function onScroll() { if (!ticking) { requestAnimationFrame(update); ticking = true; } }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', measure, { passive: true });
+  measure();
+
+  // Honour a runtime switch to reduced motion: stop and reset transforms.
+  reduce.addEventListener?.('change', e => {
+    if (e.matches) {
+      window.removeEventListener('scroll', onScroll);
+      items.forEach(i => { i.el.style.transform = ''; });
+    }
+  });
+})();
+
 // ── 6. ACTIVE NAV LINK ──────────────────────────────────────────
 (function initActiveNav() {
   const path = location.pathname.split('/').pop().toLowerCase() || 'index.html';

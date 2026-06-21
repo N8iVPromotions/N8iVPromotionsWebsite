@@ -212,23 +212,23 @@ ul { list-style: none; margin: 0; padding: 0; }
   height: var(--nav-h);
   z-index: 200;
 }
-/* Frosted scrim that fades into the page (the "fade" lives in the bg) */
+/* Soft gradient scrim that fades into the page. No backdrop blur, so
+   content scrolling beneath the header (e.g. the hero pipeline) stays
+   sharp and readable — the fade is purely a background tint. */
 .nav::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: calc(100% + 48px);
+  height: calc(100% + 56px);
   background: linear-gradient(180deg,
-    rgba(245,244,255,0.82) 0%,
-    rgba(245,244,255,0.50) 42%,
-    rgba(245,244,255,0) 100%);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 38%, transparent 100%);
-          mask-image: linear-gradient(180deg, #000 0%, #000 38%, transparent 100%);
+    rgba(244,243,255,0.92) 0%,
+    rgba(244,243,255,0.70) 38%,
+    rgba(244,243,255,0.30) 70%,
+    rgba(244,243,255,0) 100%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 42%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 0%, #000 42%, transparent 100%);
   pointer-events: none;
   z-index: 0;
-  transition: opacity 0.3s;
 }
 .nav-inner { position: relative; z-index: 1; }
 .nav-inner {
@@ -405,6 +405,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   top: -220px; left: -120px;
   filter: blur(10px);
   pointer-events: none;
+  will-change: transform;
 }
 .hero-glow-2 {
   position: absolute;
@@ -414,6 +415,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   top: 60px; right: -40px;
   filter: blur(10px);
   pointer-events: none;
+  will-change: transform;
 }
 
 .hero-content {
@@ -504,9 +506,10 @@ ul { list-style: none; margin: 0; padding: 0; }
    ================================================================ */
 .flow-diagram {
   position: relative;
+  z-index: 2;
   width: 100%;
-  height: 300px;
-  margin-top: 80px;
+  height: 340px;
+  margin-top: 72px;
   border-top: 1px solid var(--dark-border);
   overflow: hidden;
 }
@@ -515,7 +518,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(241,240,253,0.85) 100%);
+  background: linear-gradient(180deg, transparent 0%, transparent 62%, rgba(241,240,253,0.55) 100%);
   z-index: 10;
   pointer-events: none;
 }
@@ -1170,12 +1173,19 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .process-step:last-child { border-bottom: none; }
 .process-step-num {
-  font-size: 56px;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--grad-primary);
+  color: #fff;
+  font-size: 24px;
   font-weight: 800;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   line-height: 1;
-  color: var(--surface-3);
   font-family: var(--ff-mono);
+  box-shadow: 0 10px 24px rgba(122,99,255,0.32);
 }
 .process-step h3 {
   font-size: 20px;
