@@ -1,5 +1,5 @@
 /* ================================================================
-   N8iV Intelligence — Design System
+   N8iV Promotions — Design System
    "Atelier" — editorial, authoritative, consulting-grade aesthetic
    Ink on warm ivory · serif display · hairline rules · deep indigo
    ================================================================ */
@@ -563,6 +563,16 @@ ul { list-style: none; margin: 0; padding: 0; }
   font-weight: 800;
   flex-shrink: 0;
 }
+.flow-node .node-icon.brand-logo {
+  background: #fff;
+  border: 1px solid rgba(17,24,39,0.08);
+}
+.flow-node .node-icon.brand-logo img {
+  width: 20px;
+  height: 20px;
+  display: block;
+  object-fit: contain;
+}
 .flow-node.meta    .node-icon { background: #1877F2; color: #fff; }
 .flow-node.google  .node-icon { background: #fff; color: #4285F4; }
 .flow-node.li      .node-icon { background: #0A66C2; color: #fff; }
@@ -570,6 +580,10 @@ ul { list-style: none; margin: 0; padding: 0; }
 .flow-node.crm     .node-icon { background: #FF7A59; color: #fff; }
 .flow-node.pipe    .node-icon { background: var(--blue); color: #fff; }
 .flow-node.rev     .node-icon { background: var(--green); color: #fff; }
+.flow-node .node-icon.brand-logo {
+  background: #fff;
+  color: transparent;
+}
 .flow-node.engine  {
   border-color: rgba(66,59,158,0.30);
   background: linear-gradient(135deg, rgba(66,59,158,0.07), rgba(66,59,158,0.03));
@@ -667,10 +681,24 @@ ul { list-style: none; margin: 0; padding: 0; }
   font-weight: 800;
   color: #fff;
 }
+.problem-card-logo .logo-dot.brand-logo {
+  background: #fff;
+  border: 1px solid var(--border);
+}
+.problem-card-logo .logo-dot.brand-logo img {
+  width: 14px;
+  height: 14px;
+  display: block;
+  object-fit: contain;
+}
 .problem-card.meta   .logo-dot { background: #1877F2; }
 .problem-card.google .logo-dot { background: #4285F4; }
 .problem-card.crm    .logo-dot { background: #FF7A59; }
 .problem-card.finance .logo-dot { background: var(--green); }
+.problem-card-logo .logo-dot.brand-logo {
+  background: #fff;
+  color: transparent;
+}
 
 .problem-metric {
   font-size: 42px;
@@ -1065,9 +1093,17 @@ ul { list-style: none; margin: 0; padding: 0; }
   border-radius: var(--r-md);
   display: grid;
   place-items: center;
+  background: #fff;
+  border: 1px solid var(--border);
   font-size: 14px;
   font-weight: 900;
   letter-spacing: -0.02em;
+}
+.integration-logo img {
+  width: 28px;
+  height: 28px;
+  display: block;
+  object-fit: contain;
 }
 .integration-name {
   font-size: 14px;
@@ -1343,6 +1379,11 @@ ul { list-style: none; margin: 0; padding: 0; }
   .integrations-grid { grid-template-columns: repeat(3,1fr); }
 }
 @media (max-width: 768px) {
+  .flow-diagram,
+  .hero-glow-1,
+  .hero-glow-2 {
+    display: none;
+  }
   .system-flow { grid-template-columns: 1fr; }
   .system-flow::before { display: none; }
   .dash-layout { grid-template-columns: 1fr; }
@@ -1355,6 +1396,13 @@ ul { list-style: none; margin: 0; padding: 0; }
   .footer-main { grid-template-columns: 1fr 1fr; gap: 40px; }
   .nav-links, .nav-badge, .nav-right { display: none; }
   .nav .nav-mobile-toggle { display: flex; }
+}
+@media (max-width: 520px) {
+  .footer-main { grid-template-columns: 1fr; }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 /* ================================================================
