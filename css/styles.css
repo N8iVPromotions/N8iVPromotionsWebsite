@@ -1,5 +1,5 @@
 /* ================================================================
-   N8iV Intelligence — Design System
+   N8iV Promotions — Design System
    "Atelier" — editorial, authoritative, consulting-grade aesthetic
    Ink on warm ivory · serif display · hairline rules · deep indigo
    ================================================================ */
@@ -1343,6 +1343,11 @@ ul { list-style: none; margin: 0; padding: 0; }
   .integrations-grid { grid-template-columns: repeat(3,1fr); }
 }
 @media (max-width: 768px) {
+  .flow-diagram,
+  .hero-glow-1,
+  .hero-glow-2 {
+    display: none;
+  }
   .system-flow { grid-template-columns: 1fr; }
   .system-flow::before { display: none; }
   .dash-layout { grid-template-columns: 1fr; }
@@ -1355,6 +1360,13 @@ ul { list-style: none; margin: 0; padding: 0; }
   .footer-main { grid-template-columns: 1fr 1fr; gap: 40px; }
   .nav-links, .nav-badge, .nav-right { display: none; }
   .nav .nav-mobile-toggle { display: flex; }
+}
+@media (max-width: 520px) {
+  .footer-main { grid-template-columns: 1fr; }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 /* ================================================================

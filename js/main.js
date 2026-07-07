@@ -1,5 +1,5 @@
 /* ================================================================
-   N8iV Intelligence — main.js
+   N8iV Promotions — main.js
    Scroll reveals, counter animation, bar chart animation,
    nav scroll behavior, attribution flow
    ================================================================ */
