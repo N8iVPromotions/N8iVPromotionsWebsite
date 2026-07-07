@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" role="img" aria-labelledby="title desc">
+  <title id="title">N8iV Promotions</title>
+  <desc id="desc">N8iV Promotions revenue intelligence agency logo</desc>
+  <rect width="640" height="160" rx="24" fill="#F8F6F0"/>
+  <g transform="translate(44 52)">
+    <rect x="0" y="12" width="14" height="56" rx="7" fill="#423B9E"/>
+    <rect x="24" y="0" width="14" height="80" rx="7" fill="#14161D"/>
+    <rect x="48" y="18" width="14" height="44" rx="7" fill="#423B9E"/>
+    <rect x="72" y="0" width="14" height="80" rx="7" fill="#14161D"/>
+    <rect x="96" y="12" width="14" height="56" rx="7" fill="#423B9E"/>
+  </g>
+  <text x="184" y="78" fill="#14161D" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="800" letter-spacing="-1">N8iV Promotions</text>
+  <text x="184" y="112" fill="#423B9E" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="2">REVENUE INTELLIGENCE AGENCY</text>
+</svg>
