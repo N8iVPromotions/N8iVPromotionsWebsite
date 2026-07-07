@@ -178,7 +178,79 @@
   });
 })();
 
-// ── 7. PROBLEM CARD HOVER PARALLAX ────────────────────────────
+// ── 7. AUDIT REQUEST FORM ─────────────────────────────────────
+(function initAuditRequestForm() {
+  const form = document.querySelector('[data-audit-request-form]');
+  if (!form) return;
+
+  const status = document.getElementById('audit-form-status');
+  const button = form.querySelector('button[type="submit"]');
+  const buttonHtml = button?.innerHTML || '';
+
+  function setStatus(message, type) {
+    if (!status) return;
+    status.textContent = message;
+    status.className = 'form-status' + (type ? ' ' + type : '');
+  }
+
+  function setPending(pending) {
+    if (!button) return;
+    button.disabled = pending;
+    button.style.opacity = pending ? '0.75' : '';
+    button.innerHTML = pending ? 'Sending...' : buttonHtml;
+  }
+
+  function buildFallbackMailto(data) {
+    const subject = encodeURIComponent('Revenue Intelligence Audit Request');
+    const body = encodeURIComponent([
+      `Name: ${data.firstName} ${data.lastName}`,
+      `Email: ${data.email}`,
+      `Company: ${data.company}`,
+      `Role: ${data.role}`,
+      `Monthly Marketing Investment: ${data.investment}`,
+      `CRM Platform: ${data.crm}`,
+      '',
+      'Biggest Marketing Visibility Challenge:',
+      data.challenge,
+    ].join('\n'));
+    return `mailto:zajen@n8ivpromotions.com?subject=${subject}&body=${body}`;
+  }
+
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+
+    if (!form.reportValidity()) return;
+
+    const data = Object.fromEntries(new FormData(form).entries());
+    setPending(true);
+    setStatus('Sending your audit request...', '');
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result.error || 'The request could not be sent.');
+      }
+
+      form.reset();
+      setStatus('Your audit request was sent to zajen@n8ivpromotions.com. We will follow up within 1 business day.', 'success');
+    } catch (error) {
+      console.error(error);
+      const fallback = buildFallbackMailto(data);
+      setStatus('Something blocked the automatic email. Please email the request directly to zajen@n8ivpromotions.com.', 'error');
+      window.location.href = fallback;
+    } finally {
+      setPending(false);
+    }
+  });
+})();
+
+// ── 8. PROBLEM CARD HOVER PARALLAX ────────────────────────────
 (function initCardTilt() {
   document.querySelectorAll('.problem-card').forEach(card => {
     card.addEventListener('mousemove', e => {

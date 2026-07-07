@@ -32,6 +32,10 @@
   .trust-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; }
   .trust-cell { background:var(--surface); padding:28px 24px; text-align:center; }
   .trust-num { font-size:36px; font-weight:800; letter-spacing:-.04em; font-family:var(--ff-mono); }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  .form-status { min-height:22px; margin-top:14px; font-size:14px; line-height:1.5; text-align:center; color:var(--muted); }
+  .form-status.success { color:var(--green); }
+  .form-status.error { color:var(--red); }
   @media(max-width:768px){ .contact-grid{grid-template-columns:1fr;gap:40px;} .form-row{grid-template-columns:1fr;} .trust-grid{grid-template-columns:repeat(2,1fr);} }
 </style>
 </head>
@@ -92,36 +96,42 @@
       <div class="contact-form-wrap reveal">
         <h2 class="display-sm" style="margin:0 0 6px;">Request a Pilot Audit</h2>
         <p class="body-sm" style="margin:0 0 28px;">We'll review your submission and schedule a call within 1 business day.</p>
-        <form>
+        <form action="/api/audit-request" method="post" data-audit-request-form>
           <div class="form-row">
-            <div class="form-field"><label>First Name</label><input type="text" placeholder="Jane" /></div>
-            <div class="form-field"><label>Last Name</label><input type="text" placeholder="Smith" /></div>
+            <div class="form-field"><label for="firstName">First Name</label><input id="firstName" name="firstName" type="text" placeholder="Jane" autocomplete="given-name" required /></div>
+            <div class="form-field"><label for="lastName">Last Name</label><input id="lastName" name="lastName" type="text" placeholder="Smith" autocomplete="family-name" required /></div>
           </div>
-          <div class="form-field"><label>Work Email</label><input type="email" placeholder="jane@company.com" /></div>
-          <div class="form-field"><label>Company Name</label><input type="text" placeholder="Acme Corp" /></div>
+          <div class="form-field"><label for="email">Work Email</label><input id="email" name="email" type="email" placeholder="jane@company.com" autocomplete="email" required /></div>
+          <div class="form-field"><label for="company">Company Name</label><input id="company" name="company" type="text" placeholder="Acme Corp" autocomplete="organization" required /></div>
           <div class="form-row">
             <div class="form-field">
-              <label>Your Role</label>
-              <select><option value="">Select role</option><option>CMO / VP Marketing</option><option>RevOps Director</option><option>Founder / CEO</option><option>Marketing Manager</option><option>Agency Owner</option><option>Other</option></select>
+              <label for="role">Your Role</label>
+              <select id="role" name="role" required><option value="">Select role</option><option>CMO / VP Marketing</option><option>RevOps Director</option><option>Founder / CEO</option><option>Marketing Manager</option><option>Agency Owner</option><option>Other</option></select>
             </div>
             <div class="form-field">
-              <label>Monthly Marketing Investment</label>
-              <select><option value="">Select range</option><option>Under $10K</option><option>$10K – $50K</option><option>$50K – $200K</option><option>$200K – $500K</option><option>$500K+</option></select>
+              <label for="investment">Monthly Marketing Investment</label>
+              <select id="investment" name="investment" required><option value="">Select range</option><option>Under $10K</option><option>$10K – $50K</option><option>$50K – $200K</option><option>$200K – $500K</option><option>$500K+</option></select>
             </div>
           </div>
           <div class="form-field">
-            <label>CRM Platform</label>
-            <select><option value="">Select CRM</option><option>HubSpot</option><option>Salesforce</option><option>Pipedrive</option><option>Close.com</option><option>None / Other</option></select>
+            <label for="crm">CRM Platform</label>
+            <select id="crm" name="crm" required><option value="">Select CRM</option><option>HubSpot</option><option>Salesforce</option><option>Pipedrive</option><option>Close.com</option><option>None / Other</option></select>
           </div>
           <div class="form-field">
-            <label>Biggest Marketing Visibility Challenge</label>
-            <textarea placeholder="e.g. We cannot tell which SEO topics, social content, ads, or sources influence qualified pipeline and closed revenue..."></textarea>
+            <label for="challenge">Biggest Marketing Visibility Challenge</label>
+            <textarea id="challenge" name="challenge" placeholder="e.g. We cannot tell which SEO topics, social content, ads, or sources influence qualified pipeline and closed revenue..." required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;">
+          <div class="form-field sr-only" aria-hidden="true">
+            <label for="website">Website</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <input type="hidden" name="sourcePage" value="N8iV Promotions contact page" />
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;" data-submit-label="Request Revenue Audit">
             Request Revenue Audit
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
-          <p class="body-sm" style="text-align:center;margin-top:12px;">We respond within 1 business day. No spam, ever.</p>
+          <p id="audit-form-status" class="form-status" role="status" aria-live="polite"></p>
+          <p class="body-sm" style="text-align:center;margin-top:12px;">Your request is sent directly to zajen@n8ivpromotions.com.</p>
         </form>
       </div>
 
