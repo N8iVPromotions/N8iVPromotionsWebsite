@@ -13,11 +13,14 @@ Use these details to align Google Business Profile, Google search snippets, and 
 
 ## Business Description
 
-N8iV Promotions is a revenue intelligence marketing agency helping B2B businesses and agencies connect SEO, social content, ad campaigns, CRM activity, and closed revenue. Powered by ARIE, the Automatic Revenue Intelligence Engine, N8iV provides attribution, SEO strategy, social content management, analytics reporting, and client-ready revenue intelligence reports so marketing decisions are backed by real data.
+N8iV Promotions is a revenue intelligence marketing agency and B2B marketing attribution agency helping businesses and agencies connect SEO, social content, ad campaigns, HubSpot, CRM activity, and closed revenue attribution. Powered by ARIE, the Automatic Revenue Intelligence Engine, N8iV provides attribution, SEO strategy, social content management, HubSpot attribution reporting, analytics reporting, and client-ready revenue intelligence reports so marketing decisions are backed by real data.
 
 ## Services
 
 - Revenue Intelligence & Attribution
+- Closed Revenue Attribution
+- HubSpot Attribution Reporting
+- CRM Revenue Attribution
 - SEO Strategy
 - Social Media Content Management
 - Marketing Analytics Reporting
@@ -25,11 +28,15 @@ N8iV Promotions is a revenue intelligence marketing agency helping B2B businesse
 - HubSpot Revenue Reporting
 - Paid Media Attribution
 - ARIE Revenue Intelligence Audit
+- Marketing Attribution Audit
 
 ## Suggested Search Phrases
 
 - revenue intelligence marketing agency
 - B2B marketing attribution agency
+- closed revenue attribution
+- HubSpot attribution reporting
+- revenue intelligence audit
 - marketing analytics agency Scottsdale
 - SEO and analytics agency Phoenix
 - social media content management and reporting
