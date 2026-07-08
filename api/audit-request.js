@@ -93,7 +93,12 @@ async function sendAuditRequestEmail(submission) {
     return;
   }
 
-  throw new Error('Email provider is not configured. Set RESEND_API_KEY or SENDGRID_API_KEY in Vercel.');
+  if (process.env.GMAIL_SENDER && process.env.GMAIL_APP_PASSWORD) {
+    await sendWithGmail({ subject, text, html, replyTo: submission.email });
+    return;
+  }
+
+  throw new Error('Email provider is not configured. Set RESEND_API_KEY, SENDGRID_API_KEY, or Gmail SMTP credentials in Vercel.');
 }
 
 async function sendWithResend({ subject, text, html, replyTo }) {
@@ -139,6 +144,27 @@ async function sendWithSendGrid({ subject, text, html, replyTo }) {
   if (!response.ok) {
     throw new Error(`SendGrid failed with status ${response.status}: ${await response.text()}`);
   }
+}
+
+async function sendWithGmail({ subject, text, html, replyTo }) {
+  const nodemailer = require('nodemailer');
+  const sender = process.env.GMAIL_SENDER;
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: sender,
+      pass: process.env.GMAIL_APP_PASSWORD,
+    },
+  });
+
+  await transporter.sendMail({
+    from: `N8iV Promotions <${sender}>`,
+    to: TO_EMAIL,
+    replyTo,
+    subject,
+    text,
+    html,
+  });
 }
 
 function parseEmailAddress(value) {

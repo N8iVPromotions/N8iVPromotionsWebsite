@@ -1,0 +1,11 @@
+{
+  "name": "n8iv-promotions-website",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "vercel-build": "echo \"No build step required\""
+  },
+  "dependencies": {
+    "nodemailer": "^9.0.3"
+  }
+}
