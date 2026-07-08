@@ -169,10 +169,20 @@
 
 // ── 6. ACTIVE NAV LINK ──────────────────────────────────────────
 (function initActiveNav() {
-  const path = location.pathname.split('/').pop().toLowerCase() || 'index.html';
+  const currentPath = normalizePath(location.pathname);
+
+  function normalizePath(value) {
+    const url = new URL(value, window.location.href);
+    const path = url.pathname
+      .replace(/\/index\.html$/, '/')
+      .replace(/\.html$/, '')
+      .replace(/\/+$/, '');
+    return path || '/';
+  }
+
   document.querySelectorAll('.nav-links a').forEach(a => {
-    const href = (a.getAttribute('href') || '').toLowerCase();
-    if (href === path || (path === '' && href === 'index.html')) {
+    const href = normalizePath(a.getAttribute('href') || '/');
+    if (href === currentPath) {
       a.classList.add('active');
     }
   });

@@ -48,6 +48,6 @@ N8iV Promotions is a revenue intelligence marketing agency helping B2B businesse
 - Public phone number
 - Physical address or service-area-only listing
 - Business hours
-- Appointment URL, if different from https://www.n8ivpromotions.com/contact.html
+- Appointment URL, if different from https://www.n8ivpromotions.com/contact
 - Google Business Profile short name or profile URL
 - Social profile URLs to include in future website schema
