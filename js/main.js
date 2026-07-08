@@ -182,7 +182,7 @@
 
   document.querySelectorAll('.nav-links a').forEach(a => {
     const href = normalizePath(a.getAttribute('href') || '/');
-    if (href === currentPath) {
+    if (href === currentPath || (href !== '/' && currentPath.startsWith(`${href}/`))) {
       a.classList.add('active');
     }
   });

@@ -32,6 +32,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/agencies-optimizing-40-percent-of-the-funnel.html",
+      "destination": "/insights/agencies-optimizing-40-percent-of-the-funnel",
+      "permanent": true
+    },
+    {
       "source": "/about.html",
       "destination": "/about",
       "permanent": true
@@ -54,6 +59,10 @@
     {
       "source": "/insights",
       "destination": "/insights.html"
+    },
+    {
+      "source": "/insights/agencies-optimizing-40-percent-of-the-funnel",
+      "destination": "/blog/agencies-optimizing-40-percent-of-the-funnel.html"
     },
     {
       "source": "/about",
