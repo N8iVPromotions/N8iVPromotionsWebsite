@@ -37,6 +37,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/performance-marketing-done-guessing-revenue-proof.html",
+      "destination": "/insights/performance-marketing-done-guessing-revenue-proof",
+      "permanent": true
+    },
+    {
       "source": "/about.html",
       "destination": "/about",
       "permanent": true
@@ -63,6 +68,10 @@
     {
       "source": "/insights/agencies-optimizing-40-percent-of-the-funnel",
       "destination": "/blog/agencies-optimizing-40-percent-of-the-funnel.html"
+    },
+    {
+      "source": "/insights/performance-marketing-done-guessing-revenue-proof",
+      "destination": "/blog/performance-marketing-done-guessing-revenue-proof.html"
     },
     {
       "source": "/about",
