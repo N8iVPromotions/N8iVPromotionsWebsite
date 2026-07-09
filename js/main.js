@@ -8,7 +8,7 @@
 (function initNav() {
   const nav = document.querySelector('.nav');
   if (!nav) return;
-  const lightSections = document.querySelectorAll('.bg-surface, .bg-page');
+  const lightSections = document.querySelectorAll('.bg-surface, .bg-page, .legal-hero');
 
   function update() {
     let overLight = false;
@@ -188,7 +188,68 @@
   });
 })();
 
-// ── 7. AUDIT REQUEST FORM ─────────────────────────────────────
+// 7. NEWSLETTER FORM
+(function initNewsletterForm() {
+  const form = document.querySelector('[data-newsletter-form]');
+  if (!form) return;
+
+  const status = document.getElementById('newsletter-status');
+  const button = form.querySelector('button[type="submit"]');
+  const buttonHtml = button?.innerHTML || '';
+
+  function setStatus(message, type) {
+    if (!status) return;
+    status.textContent = message;
+    status.className = 'newsletter-status' + (type ? ' ' + type : '');
+  }
+
+  function setPending(pending) {
+    if (!button) return;
+    button.disabled = pending;
+    button.style.opacity = pending ? '0.75' : '';
+    button.innerHTML = pending ? 'Subscribing...' : buttonHtml;
+  }
+
+  function buildFallbackMailto(email) {
+    const subject = encodeURIComponent('Newsletter subscription request');
+    const body = encodeURIComponent(`Please subscribe this email to N8iV Promotions updates:\n\n${email}`);
+    return `mailto:zajen@n8ivpromotions.com?subject=${subject}&body=${body}`;
+  }
+
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const data = Object.fromEntries(new FormData(form).entries());
+    setPending(true);
+    setStatus('Subscribing...', '');
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result.error || 'The subscription could not be saved.');
+      }
+
+      form.reset();
+      setStatus('You are subscribed. Watch your inbox for practical revenue intelligence notes.', 'success');
+    } catch (error) {
+      console.error(error);
+      const fallback = buildFallbackMailto(data.email || '');
+      setStatus('Something blocked the subscription. Please email zajen@n8ivpromotions.com to be added manually.', 'error');
+      window.location.href = fallback;
+    } finally {
+      setPending(false);
+    }
+  });
+})();
+
+// 8. AUDIT REQUEST FORM
 (function initAuditRequestForm() {
   const form = document.querySelector('[data-audit-request-form]');
   if (!form) return;
@@ -260,7 +321,7 @@
   });
 })();
 
-// ── 8. PROBLEM CARD HOVER PARALLAX ────────────────────────────
+// 9. PROBLEM CARD HOVER PARALLAX
 (function initCardTilt() {
   document.querySelectorAll('.problem-card').forEach(card => {
     card.addEventListener('mousemove', e => {

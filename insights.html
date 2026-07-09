@@ -121,7 +121,7 @@
   /* Article grid */
   .article-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
   }
   .article-card {
@@ -207,6 +207,26 @@
   }
   .newsletter-input::placeholder { color: var(--on-dark-2); }
   .newsletter-input:focus { border-color: var(--blue); }
+  .newsletter-status {
+    min-height: 22px;
+    margin: 14px auto 0;
+    color: var(--on-dark-2);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .newsletter-status.success { color: var(--green); }
+  .newsletter-status.error { color: var(--red); }
+  .newsletter-honeypot {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
 
   @media (max-width: 1024px) {
     .article-grid { grid-template-columns: repeat(2, 1fr); }
@@ -373,69 +393,6 @@
         </a>
       </div>
 
-      <!-- Article 3 -->
-      <div class="article-card reveal stagger-3">
-        <span class="article-cat">Social Content</span>
-        <h3>Building Content Pillars From Buyer Signals Instead of Guesswork</h3>
-        <div class="article-meta">
-          <span>March 31, 2026</span>
-          <span class="article-meta-sep">&middot;</span>
-          <span>9 min read</span>
-        </div>
-        <p class="article-excerpt">Social content should test the questions, objections, and proof points your buyers care about. Revenue intelligence gives the calendar a smarter starting point.</p>
-        <a href="#" class="article-link">
-          Read Article
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
-        </a>
-      </div>
-
-      <!-- Article 4 -->
-      <div class="article-card reveal stagger-1">
-        <span class="article-cat">Analytics</span>
-        <h3>The Monthly Marketing Report a Founder Actually Needs</h3>
-        <div class="article-meta">
-          <span>March 18, 2026</span>
-          <span class="article-meta-sep">&middot;</span>
-          <span>5 min read</span>
-        </div>
-        <p class="article-excerpt">A good report does more than recap activity. It explains what changed, what to fix, which bets to repeat, and where the data still cannot be trusted.</p>
-        <a href="#" class="article-link">
-          Read Article
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
-        </a>
-      </div>
-
-      <!-- Article 5 -->
-      <div class="article-card reveal stagger-2">
-        <span class="article-cat">Agency Ops</span>
-        <h3>How Agencies Can Productize Revenue Reporting Across Client Accounts</h3>
-        <div class="article-meta">
-          <span>March 5, 2026</span>
-          <span class="article-meta-sep">&middot;</span>
-          <span>6 min read</span>
-        </div>
-        <p class="article-excerpt">Agency reporting breaks when every client has a different CRM, source setup, and data gap. A repeatable command center turns that mess into a manageable service line.</p>
-        <a href="#" class="article-link">
-          Read Article
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
-        </a>
-      </div>
-
-      <!-- Article 6 -->
-      <div class="article-card reveal stagger-3">
-        <span class="article-cat">ARIE</span>
-        <h3>Building a Revenue Intelligence Stack From Scratch</h3>
-        <div class="article-meta">
-          <span>Feb 20, 2026</span>
-          <span class="article-meta-sep">&middot;</span>
-          <span>10 min read</span>
-        </div>
-        <p class="article-excerpt">The practical stack behind ARIE: ad source ingestion, SEO signals, CRM deal data, optional payment enrichment, validation, attribution models, and client-ready reports.</p>
-        <a href="#" class="article-link">
-          Read Article
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
-        </a>
-      </div>
     </div>
   </div>
 </section>
@@ -448,10 +405,16 @@
     <p class="lead reveal stagger-2" style="margin: 16px auto 0; max-width: 480px;">
       Practical notes on SEO, social content, attribution, analytics reporting, and revenue visibility from the N8iV Promotions operating desk.
     </p>
-    <form class="newsletter-form reveal stagger-3" onsubmit="return false;">
-      <input class="newsletter-input" type="email" placeholder="your@email.com" autocomplete="email" />
+    <form class="newsletter-form reveal stagger-3" action="/api/newsletter-subscribe" method="post" data-newsletter-form>
+      <input class="newsletter-input" id="newsletterEmail" name="email" type="email" placeholder="your@email.com" autocomplete="email" required />
+      <input type="hidden" name="sourcePage" value="N8iV Promotions insights page" />
+      <div class="newsletter-honeypot" aria-hidden="true">
+        <label for="newsletterWebsite">Website</label>
+        <input id="newsletterWebsite" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
       <button type="submit" class="btn btn-primary btn-lg">Subscribe</button>
     </form>
+    <p id="newsletter-status" class="newsletter-status" role="status" aria-live="polite"></p>
     <p class="body-sm reveal stagger-4" style="color: var(--on-dark-2); margin-top: 16px;">No spam. Unsubscribe any time. We don't sell your data.</p>
   </div>
 </section>
@@ -467,9 +430,12 @@
       </div>
       <div class="footer-col"><h4>Platform</h4><ul><li><a href="/#system">How It Works</a></li><li><a href="/#platform">Dashboard</a></li><li><a href="/#integrations">Integrations</a></li><li><a href="/services">All Services</a></li></ul></div>
       <div class="footer-col"><h4>Company</h4><ul><li><a href="/about">About</a></li><li><a href="/use-cases">Use Cases</a></li><li><a href="/insights">Insights</a></li><li><a href="/contact">Contact</a></li></ul></div>
-      <div class="footer-col"><h4>Connect</h4><ul><li><a href="mailto:zajen@n8ivpromotions.com">zajen@n8ivpromotions.com</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Google Business Profile</a></li></ul></div>
+      <div class="footer-col"><h4>Connect</h4><ul><li><a href="mailto:zajen@n8ivpromotions.com">zajen@n8ivpromotions.com</a></li><li><a href="/contact">Book a Revenue Audit</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><span>© 2026 N8iV Promotions LLC. ARIE is the Automatic Revenue Intelligence Engine.</span><div class="footer-bottom-links"><a href="#">Privacy</a><a href="/contact">Contact</a></div></div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 N8iV Promotions LLC. ARIE is the Automatic Revenue Intelligence Engine.</span>
+      <div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/imprint">Imprint</a><a href="/contact">Contact</a></div>
+    </div>
   </div>
 </footer>
 
