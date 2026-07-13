@@ -179,13 +179,13 @@
 })();
 
 // ── 7. AUDIT REQUEST FORM ─────────────────────────────────────
+// Opens the visitor's email app with the request pre-filled and
+// addressed to zajen@n8ivpromotions.com. No backend involved.
 (function initAuditRequestForm() {
   const form = document.querySelector('[data-audit-request-form]');
   if (!form) return;
 
   const status = document.getElementById('audit-form-status');
-  const button = form.querySelector('button[type="submit"]');
-  const buttonHtml = button?.innerHTML || '';
 
   function setStatus(message, type) {
     if (!status) return;
@@ -193,14 +193,7 @@
     status.className = 'form-status' + (type ? ' ' + type : '');
   }
 
-  function setPending(pending) {
-    if (!button) return;
-    button.disabled = pending;
-    button.style.opacity = pending ? '0.75' : '';
-    button.innerHTML = pending ? 'Sending...' : buttonHtml;
-  }
-
-  function buildFallbackMailto(data) {
+  function buildMailto(data) {
     const subject = encodeURIComponent('Revenue Intelligence Audit Request');
     const body = encodeURIComponent([
       `Name: ${data.firstName} ${data.lastName}`,
@@ -216,37 +209,16 @@
     return `mailto:zajen@n8ivpromotions.com?subject=${subject}&body=${body}`;
   }
 
-  form.addEventListener('submit', async event => {
+  form.addEventListener('submit', event => {
     event.preventDefault();
 
     if (!form.reportValidity()) return;
 
     const data = Object.fromEntries(new FormData(form).entries());
-    setPending(true);
-    setStatus('Sending your audit request...', '');
+    if (data.website) return; // honeypot
 
-    try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      const result = await response.json().catch(() => ({}));
-
-      if (!response.ok) {
-        throw new Error(result.error || 'The request could not be sent.');
-      }
-
-      form.reset();
-      setStatus('Your audit request was sent to zajen@n8ivpromotions.com. We will follow up within 1 business day.', 'success');
-    } catch (error) {
-      console.error(error);
-      const fallback = buildFallbackMailto(data);
-      setStatus('Something blocked the automatic email. Please email the request directly to zajen@n8ivpromotions.com.', 'error');
-      window.location.href = fallback;
-    } finally {
-      setPending(false);
-    }
+    window.location.href = buildMailto(data);
+    setStatus('Your email app should open with the request pre-filled — just press Send. If nothing opened, email zajen@n8ivpromotions.com directly.', 'success');
   });
 })();
 

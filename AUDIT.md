@@ -6,6 +6,8 @@ The site is a well-built static marketing site: clean semantic HTML, one `<h1>` 
 
 ---
 
+> **Resolved 2026-07-13 (findings 1 & 2):** Vercel runtime logs confirmed 6 failed submissions (Jul 7–8) caused by the missing email-provider key. Per owner's decision, the serverless email path was removed entirely — the form now opens the visitor's email app with the request pre-filled (mailto), with no backend dependency. `api/audit-request.js` and `env.example` were deleted; `js/main.js` no longer auto-redirects on error.
+
 ## 1. Critical — verify the audit request form can actually send email
 
 **Hosting confirmed (2026-07-13):** DNS for n8ivpromotions.com (A `216.198.79.1/.65`) and www (`64.29.17.1/.65`) matches Vercel's current infrastructure — production is served by **Vercel**, so the `/api/audit-request` function (`api/audit-request.js`) can run. Two follow-ups remain:
