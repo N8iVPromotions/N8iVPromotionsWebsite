@@ -6,14 +6,14 @@ The site is a well-built static marketing site: clean semantic HTML, one `<h1>` 
 
 ---
 
-## 1. Critical — the primary CTA (audit request form) likely does not work in production
+## 1. Critical — verify the audit request form can actually send email
 
-Every page funnels visitors to the contact form, which posts to `/api/audit-request` (`contact.html:100`). That endpoint is a **Vercel-style serverless function** (`api/audit-request.js`), but the repo's only deploy pipeline is **GitHub Pages** (`.github/workflows/deploy.yml`), which serves static files only. On GitHub Pages the POST returns 404, so **every submission fails**.
+**Hosting confirmed (2026-07-13):** DNS for n8ivpromotions.com (A `216.198.79.1/.65`) and www (`64.29.17.1/.65`) matches Vercel's current infrastructure — production is served by **Vercel**, so the `/api/audit-request` function (`api/audit-request.js`) can run. Two follow-ups remain:
 
-- If the production domain is actually served by Vercel (with `RESEND_API_KEY` or `SENDGRID_API_KEY` set), this is a non-issue — but then the GitHub Pages workflow is deploying a second, broken copy of the site.
-- If production is GitHub Pages, the form has never delivered a lead except via the mailto fallback.
+- The function throws unless `RESEND_API_KEY` or `SENDGRID_API_KEY` is set in the Vercel project (`api/audit-request.js:96`). If neither is configured, every submission returns 500 and the visitor is bounced to the mailto fallback. **Verify the env vars are set in the Vercel project and submit a live test.**
+- The Vercel account connected during this audit contained no projects, so the deployment could not be inspected directly; the project appears to live under a different Vercel login.
 
-**Action:** confirm which host serves n8ivpromotions.com; either move hosting to Vercel (and delete the Pages workflow) or point the form at a hosted endpoint (Vercel function URL, Formspree, etc.).
+**Action:** confirm the email provider key is set in Vercel and test a real submission end to end. See also finding 5 — the GitHub Pages workflow now deploys an unused duplicate of the site.
 
 ## 2. High — form failure UX hijacks the browser
 
@@ -41,13 +41,13 @@ Missing on every page:
 
 Titles and meta descriptions themselves are good.
 
-## 5. Medium — deploy workflow publishes the whole repository
+## 5. Medium — GitHub Pages workflow deploys an unused duplicate of the site
 
-`deploy.yml` uploads `path: '.'`, so the published artifact includes `.agents/` (~60 internal skill/tooling files), `api/`, `env.example`, and `skills-lock.json`. Nothing secret, but internal tooling and the serverless source become world-readable at predictable URLs.
+Production is served by Vercel (see finding 1), yet `.github/workflows/deploy.yml` still publishes the site to GitHub Pages on every push to `main` — a second, publicly reachable copy at n8ivpromotions.github.io that will drift, dilute SEO (no canonical URLs, finding 4), and confuse anyone who lands on it. The last Pages deploy succeeded on 2026-07-07.
 
-Also: the workflow still triggers on the stale branch `claude/add-animations-effects-Ogg5y` in addition to `main`.
+The artifact also uploads the whole repo (`path: '.'`): `.agents/` internal tooling (~60 files), `api/`, `env.example`, and `skills-lock.json` all become world-readable. And the workflow still triggers on the stale branch `claude/add-animations-effects-Ogg5y`.
 
-**Action:** build the artifact from an allowlist (HTML, css/, js/, assets/) or add exclusions; drop the stale branch trigger.
+**Action:** delete the Pages workflow and disable GitHub Pages for the repo (or, if it is intentionally kept as a fallback, restrict the artifact to site files only and drop the stale branch trigger).
 
 ## 6. Medium — ~2 MB of unused images shipped in the repo
 
@@ -75,7 +75,7 @@ Good baseline (aria-expanded on the menu toggle, `aria-live` form status, sr-onl
 
 ## Suggested priority order
 
-1. Verify/fix the form's production endpoint (finding 1) and the mailto redirect (2).
+1. Verify the Vercel email env vars with a live form test (finding 1) and fix the mailto redirect (2).
 2. Add favicon, OG tags, Privacy page; fix or remove dead links (3, 4).
-3. Restrict the Pages artifact and remove the stale branch trigger (5).
+3. Retire the duplicate GitHub Pages deployment (5).
 4. Delete unused images (6), then the accessibility and polish items (7, 8).
