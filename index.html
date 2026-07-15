@@ -1,580 +1,478 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>N8iV Promotions — Closed-loop attribution</title>
-<meta name="description" content="N8iV connects ads to CRM to closed/won revenue. Stop guessing which channels make money.">
-<link rel="canonical" href="https://n8ivpromotions.com/">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://n8ivpromotions.com/">
-<meta property="og:site_name" content="N8iV Promotions">
-<meta property="og:title" content="N8iV Promotions | Closed-loop attribution">
-<meta property="og:description" content="N8iV connects ads to CRM to closed/won revenue. Stop guessing which channels make money.">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="N8iV Promotions | Closed-loop attribution">
-<meta name="twitter:description" content="N8iV connects ads to CRM to closed/won revenue. Stop guessing which channels make money.">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "N8iV Promotions",
-  "url": "https://n8ivpromotions.com/",
-  "email": "zajen@n8ivpromotions.com",
-  "slogan": "Revenue deserves receipts.",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Scottsdale",
-    "addressRegion": "AZ",
-    "addressCountry": "US"
-  },
-  "sameAs": ["https://instagram.com/n8ivpromotions"]
-}
-</script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>N8iV Promotions | Revenue Intelligence Marketing Agency</title>
+<meta name="description" content="N8iV Promotions helps B2B businesses and agencies connect SEO, social content, ads, CRM activity, and closed revenue so marketing decisions are backed by real data." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
-<style>
-/* ============ TOKENS ============ */
-:root{
-  --ink:#111015;
-  --gray:#6E6B78;
-  --line:#E4E2EA;
-  --bg:#FFFFFF;
-  --bg-soft:#F6F5F9;
-  --accent:#7A63FF;
-  --accent-dim:#EDEAFF;
-  --dark:#141319;
-  --dark-line:#2A2833;
-  --font-sans:'Inter',-apple-system,sans-serif;
-  --font-mono:'JetBrains Mono',monospace;
-  --font-pixel:'Silkscreen',monospace;
-  --max:1200px;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--font-sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
-::selection{background:var(--accent);color:#fff}
-img,svg{display:block}
-a{color:inherit}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
-
-/* ============ TYPE ============ */
-.h-display{font-weight:600;letter-spacing:-0.03em;line-height:1.04;font-size:clamp(2.4rem,6vw,4.6rem)}
-.h-display .slash{color:#C9C6D4;font-weight:400;font-family:var(--font-mono);margin:0 .08em}
-.h-display .px{font-family:var(--font-pixel);font-weight:400;color:var(--accent);font-size:.82em;letter-spacing:0;white-space:nowrap}
-.marker{font-family:var(--font-mono);font-size:13px;letter-spacing:.06em;color:var(--ink);display:flex;align-items:center;gap:14px;margin-bottom:34px}
-.marker .idx b{color:var(--ink);font-weight:500}
-.marker .idx{color:#B9B6C4;font-weight:500}
-.marker .rule{flex:0 0 44px;height:1px;background:var(--line)}
-.marker .rule.grow{flex:1}
-.sub{color:var(--gray);font-size:clamp(1rem,1.3vw,1.12rem);max-width:52ch}
-.sub strong{color:var(--ink);font-weight:600}
-
-/* ============ BUTTONS ============ */
-.btn-solid{
-  display:inline-flex;align-items:center;gap:44px;justify-content:space-between;
-  background:var(--ink);color:#fff;text-decoration:none;border:none;cursor:pointer;
-  font-family:var(--font-mono);font-size:14px;font-weight:500;letter-spacing:.12em;
-  padding:20px 26px;transition:background .2s;
-}
-.btn-solid::before{content:"";width:9px;height:9px;background:#fff}
-.btn-solid:hover{background:var(--accent)}
-.btn-under{
-  display:inline-flex;align-items:center;gap:44px;justify-content:space-between;
-  text-decoration:none;font-family:var(--font-mono);font-size:14px;font-weight:500;letter-spacing:.12em;
-  padding:20px 2px;border-bottom:1.5px solid var(--ink);color:var(--ink);
-}
-.btn-under::before{content:"▷";font-size:12px}
-.btn-under:hover{color:var(--accent);border-color:var(--accent)}
-
-/* ============ NAV ============ */
-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.nav-in{max-width:var(--max);margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.logo .mark{display:flex;gap:2.5px;align-items:flex-end;height:18px}
-.logo .mark i{width:3.5px;background:var(--ink)}
-.logo .mark i:nth-child(1){height:8px}
-.logo .mark i:nth-child(2){height:13px}
-.logo .mark i:nth-child(3){height:18px;background:var(--accent)}
-.logo .mark i:nth-child(4){height:11px}
-.logo .mark i:nth-child(5){height:15px}
-.logo .word{font-weight:700;font-size:18px;letter-spacing:-.01em}
-.logo .tag{font-family:var(--font-mono);font-size:11px;color:var(--gray);background:var(--bg-soft);padding:4px 8px;letter-spacing:.06em}
-.nav-links{display:flex;gap:6px;align-items:center}
-.nav-links a{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.05em;text-decoration:none;color:var(--ink);padding:8px 12px;border:1px solid transparent}
-.nav-links a:hover{border-color:var(--line);background:var(--bg-soft)}
-.nav-links a.cta{background:var(--ink);color:#fff;display:inline-flex;align-items:center;gap:8px}
-.nav-links a.cta::after{content:"↗"}
-.nav-links a.cta:hover{background:var(--accent);border-color:var(--accent)}
-@media(max-width:920px){.nav-links a:not(.cta){display:none}}
-
-/* ============ GRID BANDS ============ */
-.gridband{background:var(--dark);position:relative;overflow:hidden}
-.gridband canvas{display:block;width:100%;height:clamp(240px,38vh,380px)}
-.gridband .scrollmore{position:absolute;left:24px;bottom:20px;font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;color:#8B87A0}
-.gridband .bandlabel{position:absolute;right:24px;top:20px;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;color:#8B87A0}
-
-.announce{background:var(--ink);border-bottom:1px solid var(--dark-line);overflow:hidden;padding:10px 0}
-.announce .track{display:flex;white-space:nowrap;width:max-content;animation:mq 30s linear infinite}
-.announce span{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.14em;color:#B9B6C4;display:inline-flex;align-items:center;gap:18px;padding-right:18px}
-.announce span i{color:var(--accent);font-style:normal}
-@keyframes mq{to{transform:translateX(-50%)}}
-
-/* ============ HERO ============ */
-.hero{padding:88px 0 96px;border-bottom:1px solid var(--line)}
-.hero-grid{display:grid;grid-template-columns:1.35fr .85fr;gap:64px;align-items:end}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:44px}}
-.hero-right .trust{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--gray);padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid var(--line)}
-.hero-right .trust b{color:var(--ink)}
-.hero-right .trust .chip{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--accent);background:var(--accent-dim);padding:5px 10px}
-.hero-right p{color:var(--gray);font-size:1.05rem;margin-bottom:34px}
-.hero-right p strong{color:var(--ink)}
-.hero-ctas{display:flex;flex-direction:column;gap:2px}
-.cursorblock{display:inline-block;width:.5em;height:.95em;background:var(--accent);vertical-align:-.08em;animation:blink 1s steps(1) infinite;margin-left:.06em}
-@keyframes blink{50%{opacity:0}}
-
-/* ============ DOT STRIP ============ */
-.dotstrip{
-  border-bottom:1px solid var(--line);background:var(--bg-soft);
-  background-image:radial-gradient(#D8D5E2 1px,transparent 1px);background-size:18px 18px;
-  padding:44px 0;overflow:hidden;
-}
-.dotstrip .line{
-  font-family:var(--font-mono);font-size:clamp(15px,2.2vw,22px);letter-spacing:.1em;
-  color:var(--accent);font-weight:500;text-align:center;white-space:nowrap;
-  display:flex;justify-content:center;gap:22px;align-items:center;
-}
-.dotstrip .line .dim{color:#B9B6C4}
-@media(max-width:700px){.dotstrip .line{flex-wrap:wrap;white-space:normal;gap:10px;padding:0 18px}}
-
-/* ============ SECTIONS ============ */
-section{padding:110px 0}
-.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-bottom:64px}
-.sec-head .h-display{max-width:16ch}
-
-/* ============ KEY VALUE ============ */
-.kv{border-bottom:1px solid var(--line);padding-top:0}
-.kv-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line)}
-@media(max-width:860px){.kv-grid{grid-template-columns:1fr}}
-.kv-card{padding:34px 30px 38px;border-right:1px solid var(--line);position:relative;transition:background .25s}
-.kv-card:last-child{border-right:none}
-@media(max-width:860px){.kv-card{border-right:none;border-bottom:1px solid var(--line)}.kv-card:last-child{border-bottom:none}}
-.kv-card:hover{background:var(--bg-soft)}
-.kv-card .num{position:absolute;top:26px;right:28px;font-family:var(--font-mono);font-size:13px;color:#B9B6C4}
-.kv-card .icon{height:88px;margin:26px 0 34px}
-.kv-card h3{font-size:1.3rem;font-weight:600;letter-spacing:-.01em;margin-bottom:10px}
-.kv-card p{color:var(--gray);font-size:.95rem;margin-bottom:22px}
-.kv-card .chip{display:inline-block;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;background:var(--bg-soft);color:var(--ink);padding:6px 10px;border:1px solid var(--line)}
-.kv-card:hover .chip{background:var(--accent-dim);color:var(--accent);border-color:var(--accent-dim)}
-
-/* ============ STATS ============ */
-.stats{border-bottom:1px solid var(--line)}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line)}
-@media(max-width:700px){.stat-grid{grid-template-columns:1fr}}
-.stat{padding:44px 38px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.stat:nth-child(2n){border-right:none}
-.stat:nth-child(n+3){border-bottom:none}
-@media(max-width:700px){.stat{border-right:none!important;border-bottom:1px solid var(--line)!important}.stat:last-child{border-bottom:none!important}}
-.stat .val{font-size:clamp(2.2rem,4.4vw,3.2rem);font-weight:600;letter-spacing:-.03em}
-.stat .val em{font-style:normal;color:var(--accent)}
-.stat .lbl{color:var(--gray);margin-top:6px;font-size:.98rem}
-
-/* ============ STEPPER ============ */
-.how{border-bottom:1px solid var(--line)}
-.stepper{border:1px solid var(--line)}
-.stepper-top{display:grid;grid-template-columns:1fr 1fr;min-height:320px}
-@media(max-width:820px){.stepper-top{grid-template-columns:1fr}}
-.step-list{padding:36px 34px;display:flex;flex-direction:column;gap:16px;justify-content:center}
-.step-list button{background:none;border:none;text-align:left;cursor:pointer;font-family:var(--font-mono);font-size:clamp(15px,1.6vw,18px);letter-spacing:.05em;color:#B9B6C4;padding:4px 0;transition:color .2s;font-weight:500}
-.step-list button.on{color:var(--accent)}
-.step-list button:hover{color:var(--ink)}
-.step-visual{display:flex;align-items:center;justify-content:center;padding:36px}
-.step-visual svg{width:clamp(150px,45%,210px);height:auto}
-.progress{
-  height:34px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  background-image:radial-gradient(#D8D5E2 1px,transparent 1px);background-size:14px 14px;
-  background-color:var(--bg-soft);display:flex;align-items:center;padding:0 12px;
-}
-.progress .bar{height:9px;background:var(--accent);width:0%;transition:width .5s cubic-bezier(.3,.7,.3,1)}
-.progress .nub{width:9px;height:9px;background:var(--accent);margin-left:5px;flex:none}
-.step-body{padding:40px 34px 46px}
-.step-body h3{color:var(--accent);font-size:clamp(1.5rem,2.6vw,2rem);font-weight:600;letter-spacing:-.02em;margin-bottom:12px}
-.step-body p{color:var(--gray);max-width:56ch;font-size:1.02rem}
-.step-body .meta{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;color:#B9B6C4;margin-bottom:14px}
-
-/* ============ DARK RECEIPT ============ */
-.dark-sec{background:var(--dark);color:#fff;border-bottom:1px solid var(--dark-line)}
-.dark-sec .marker{color:#fff}
-.dark-sec .marker .idx{color:#5B5870}
-.dark-sec .marker .idx b{color:#fff}
-.dark-sec .marker .rule{background:var(--dark-line)}
-.dark-sec .h-display .slash{color:#4A4760}
-.dark-sec .sub{color:#8B87A0}
-.dark-sec .sub strong{color:#fff}
-.dark-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
-@media(max-width:880px){.dark-grid{grid-template-columns:1fr;gap:50px}}
-.dark-left .h-display{margin-bottom:22px}
-.dark-left .btn-solid{background:#fff;color:var(--ink);margin-top:36px}
-.dark-left .btn-solid::before{background:var(--ink)}
-.dark-left .btn-solid:hover{background:var(--accent);color:#fff}
-.dark-left .btn-solid:hover::before{background:#fff}
-#printStatus{display:block;font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:#8B87A0;margin-top:16px;min-height:16px}
-#printStatus.done{color:var(--accent)}
-.receipt-frame{border:1px solid var(--dark-line);padding:20px;background-image:radial-gradient(#26232F 1px,transparent 1px);background-size:16px 16px}
-.receipt-clip{overflow:hidden}
-.receipt{background:#fff;color:var(--ink);font-family:var(--font-mono);font-size:12.5px;line-height:1.7;padding:26px 24px 20px;transform:translateY(-102%)}
-.receipt.printing{animation:printOut 4.2s cubic-bezier(.25,.6,.3,1) forwards}
-@keyframes printOut{
-  0%{transform:translateY(-102%)}
-  10%{transform:translateY(-88%)} 18%{transform:translateY(-88%)}
-  34%{transform:translateY(-62%)} 42%{transform:translateY(-62%)}
-  60%{transform:translateY(-32%)} 68%{transform:translateY(-32%)}
-  100%{transform:translateY(0)}
-}
-.receipt .r-h{text-align:center;font-weight:700;letter-spacing:.16em}
-.receipt .r-sub{text-align:center;font-size:10.5px;color:var(--gray);margin-bottom:10px}
-.receipt hr{border:none;border-top:1px dashed var(--line);margin:10px 0}
-.receipt .r-row{display:flex;justify-content:space-between;gap:12px}
-.receipt .r-row .k{color:var(--gray)}
-.receipt .r-row.total{font-weight:700;font-size:14px}
-.receipt .r-row.total .v{color:var(--accent)}
-.receipt .barcode{height:32px;margin-top:12px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 7px,transparent 7px 9px,var(--ink) 9px 10px,transparent 10px 14px)}
-.receipt .r-foot{text-align:center;font-size:10.5px;color:var(--gray);margin-top:8px}
-
-/* ============ ACCORDIONS (audience + faq) ============ */
-.acc{border-top:1px solid var(--line)}
-.acc-item{border-bottom:1px solid var(--line)}
-.acc-btn{width:100%;background:none;border:none;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:30px 4px;font-family:var(--font-sans)}
-.acc-btn h3{font-size:clamp(1.3rem,2.4vw,1.75rem);font-weight:600;letter-spacing:-.02em}
-.acc-btn .plus{flex:none;width:44px;height:44px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-pixel);font-size:15px;transition:background .2s,transform .3s}
-.acc-item.open .acc-btn .plus{background:var(--accent);transform:rotate(45deg)}
-.acc-panel{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.3,.7,.3,1)}
-.acc-panel .inner{padding:0 4px 34px;color:var(--gray);max-width:64ch;font-size:1.02rem}
-.acc-panel .inner .chip{display:inline-block;margin-top:16px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;color:var(--accent);background:var(--accent-dim);padding:6px 10px}
-.aud{border-bottom:1px solid var(--line)}
-
-/* ============ PRICING ============ */
-.pricing{border-bottom:1px solid var(--line)}
-.toggle{display:inline-flex;border:1px solid var(--line);margin-bottom:44px}
-.toggle span{font-size:15px;padding:14px 22px;color:var(--gray);font-weight:500}
-.toggle span.on{color:var(--accent);border:1px solid var(--accent);margin:-1px}
-.toggle span .save{font-family:var(--font-mono);font-size:11px;background:var(--accent);color:#fff;padding:3px 7px;margin-left:8px;letter-spacing:.06em}
-.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-@media(max-width:960px){.price-grid{grid-template-columns:1fr}}
-.price-card{border:1px solid var(--line);position:relative;display:flex;flex-direction:column}
-.price-card.pop{border-color:var(--accent);background:var(--bg-soft)}
-.price-card.pop::before,.price-card.pop::after,
-.price-card.pop .corner-b::before,.price-card.pop .corner-b::after{
-  content:"";position:absolute;width:11px;height:11px;background:var(--accent);
-}
-.price-card.pop::before{top:-6px;left:-6px}
-.price-card.pop::after{top:-6px;right:-6px}
-.price-card.pop .corner-b::before{bottom:-6px;left:-6px}
-.price-card.pop .corner-b::after{bottom:-6px;right:-6px}
-.price-top{padding:32px 30px 36px;border-bottom:1px solid var(--line)}
-.price-card.pop .price-top{border-color:#D8D2F5}
-.price-top .poplabel{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;background:#fff;border:1px solid var(--line);display:inline-block;padding:5px 10px;margin-bottom:22px}
-.price-top .name{display:flex;align-items:center;gap:10px;font-size:1.5rem;font-weight:600;letter-spacing:-.01em}
-.price-top .name svg{width:24px;height:24px}
-.price-top .for{color:var(--gray);margin:8px 0 30px;font-size:.98rem}
-.price-top .amount{font-size:clamp(2.6rem,4.5vw,3.4rem);font-weight:600;letter-spacing:-.03em}
-.price-top .amount .cents{color:#C9C6D4}
-.price-top .amount .per{font-size:1.05rem;color:var(--gray);font-weight:400;letter-spacing:0}
-.price-top .btn-solid{width:100%;margin-top:30px}
-.price-feats{padding:30px;flex:1}
-.price-feats .inc{font-weight:600;margin-bottom:18px}
-.price-feats ul{list-style:none;display:flex;flex-direction:column;gap:12px}
-.price-feats li{color:var(--gray);display:flex;gap:12px;align-items:baseline;font-size:.98rem}
-.price-feats li::before{content:"✓";color:var(--accent);font-family:var(--font-mono);font-size:13px}
-
-/* ============ BUILD LOG (timeline) ============ */
-.log{border-bottom:1px solid var(--line)}
-.timeline{position:relative;margin-top:10px;padding-left:26px}
-.timeline::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:1px;background:var(--line)}
-.tl-item{position:relative;padding:0 0 58px 44px}
-.tl-item:last-child{padding-bottom:0}
-.tl-item .node{
-  position:absolute;left:-26px;top:0;width:52px;height:52px;background:#fff;border:1px solid var(--line);
-  display:flex;align-items:center;justify-content:center;font-family:var(--font-pixel);font-size:13px;color:var(--accent);
-}
-.tl-item .date{display:inline-block;font-family:var(--font-mono);font-size:12.5px;letter-spacing:.1em;background:var(--bg-soft);padding:5px 9px;margin-bottom:12px}
-.tl-item h3{font-size:clamp(1.25rem,2.2vw,1.6rem);font-weight:600;letter-spacing:-.01em;padding-bottom:12px;margin-bottom:12px;border-bottom:1px dashed var(--line)}
-.tl-item p{color:var(--gray);max-width:60ch}
-
-/* ============ INSIGHTS ============ */
-.insights{border-bottom:1px solid var(--line)}
-.rail{display:grid;grid-auto-flow:column;grid-auto-columns:min(420px,82vw);gap:22px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory}
-.rail::-webkit-scrollbar{height:6px}
-.rail::-webkit-scrollbar-thumb{background:var(--line)}
-.post{border:1px solid var(--line);scroll-snap-align:start;text-decoration:none;display:flex;flex-direction:column;transition:border-color .2s}
-.post:hover{border-color:var(--accent)}
-.post .thumb{height:220px;background:var(--dark);position:relative;overflow:hidden}
-.post .thumb::before{content:"";position:absolute;inset:0;background-image:radial-gradient(#2A2735 1px,transparent 1px);background-size:14px 14px}
-.post .thumb .glyph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.post .thumb .glyph svg{width:96px;height:96px;opacity:.9}
-.post .body{padding:24px 24px 22px;flex:1;display:flex;flex-direction:column}
-.post .meta{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.08em;margin-bottom:14px}
-.post .meta .cat{background:var(--bg-soft);padding:4px 8px}
-.post .meta .date{color:#B9B6C4}
-.post h3{font-size:1.25rem;font-weight:600;letter-spacing:-.01em;margin-bottom:10px}
-.post p{color:var(--gray);font-size:.95rem;flex:1}
-.post .foot{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:12.5px;letter-spacing:.1em;margin-top:22px}
-.post .foot .v{font-weight:700}
-.post:hover .foot .v{color:var(--accent)}
-
-/* ============ FAQ ============ */
-.faq{border-bottom:1px solid var(--line)}
-.faq .acc-btn h3{font-size:clamp(1.15rem,2vw,1.45rem)}
-
-/* ============ FRAMED CTA ============ */
-.hashline{background:var(--bg);border-top:1px solid var(--line);overflow:hidden;padding:14px 0}
-.hashline .track{display:flex;white-space:nowrap;width:max-content;animation:mq 26s linear infinite}
-.hashline.rev .track{animation-direction:reverse}
-.hashline span{font-family:var(--font-mono);font-size:14px;letter-spacing:.14em;color:var(--accent);padding-right:34px;font-weight:500}
-.hashline span .amp{color:#B9B6C4}
-.cta-band{background:var(--dark);position:relative;padding:64px 24px;overflow:hidden}
-.cta-band canvas{position:absolute;inset:0;width:100%;height:100%}
-.cta-card{
-  position:relative;max-width:680px;margin:0 auto;background:#fff;text-align:center;
-  padding:74px 34px 66px;
-}
-.cta-card .corner{position:absolute;width:34px;height:34px;background:var(--ink)}
-.cta-card .corner.tl{top:22px;left:22px}
-.cta-card .corner.tr{top:22px;right:22px}
-.cta-card .corner.bl{bottom:22px;left:22px}
-.cta-card .corner.br{bottom:22px;right:22px}
-.cta-card .chip{display:inline-block;font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;background:var(--bg-soft);padding:6px 12px;margin-bottom:26px}
-.cta-card h2{font-weight:600;letter-spacing:-.03em;line-height:1.08;font-size:clamp(2rem,5vw,3.4rem)}
-.cta-card h2 .px{font-family:var(--font-pixel);font-weight:400;color:var(--accent);font-size:.82em}
-.cta-card .btn-solid{margin-top:40px}
-
-/* ============ FOOTER ============ */
-footer{background:var(--bg)}
-.foot-block{border:1px solid var(--line);border-left:none;border-right:none}
-.foot-cell{max-width:var(--max);margin:0 auto;padding:44px 24px;border-bottom:1px solid var(--line)}
-.foot-cell:last-child{border-bottom:none}
-.foot-news h3{font-size:1.5rem;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.foot-news h3 .at{color:var(--accent)}
-.foot-news p{color:var(--gray);max-width:52ch;margin-bottom:26px}
-.foot-form{display:flex;border:1px solid var(--line);background:var(--bg-soft);max-width:560px}
-.foot-form input{flex:1;border:none;background:none;padding:18px 18px;font-family:var(--font-sans);font-size:15px;color:var(--ink);min-width:0}
-.foot-form input:focus{outline:2px solid var(--accent);outline-offset:-2px}
-.foot-form button{border:none;background:var(--ink);color:#fff;font-family:var(--font-mono);font-size:13px;letter-spacing:.14em;padding:0 30px;cursor:pointer;margin:8px}
-.foot-form button:hover{background:var(--accent)}
-.bigmark{display:flex;align-items:center;gap:20px;padding:10px 0}
-.bigmark .bars{display:flex;gap:7px;align-items:flex-end;height:64px}
-.bigmark .bars i{width:12px;background:var(--ink)}
-.bigmark .bars i:nth-child(1){height:28px}
-.bigmark .bars i:nth-child(2){height:46px}
-.bigmark .bars i:nth-child(3){height:64px;background:var(--accent)}
-.bigmark .bars i:nth-child(4){height:38px}
-.bigmark .bars i:nth-child(5){height:54px}
-.bigmark .word{font-size:clamp(3rem,9vw,5.4rem);font-weight:700;letter-spacing:-.04em;line-height:1}
-.bigmark .reg{font-size:1.2rem;align-self:flex-start;color:var(--gray)}
-.foot-label{font-weight:700;font-size:1.05rem;letter-spacing:.02em;margin-bottom:20px}
-.foot-pages{display:flex;flex-wrap:wrap;gap:8px 26px}
-.foot-pages a{color:var(--gray);text-decoration:none;font-size:1.05rem}
-.foot-pages a:hover{color:var(--accent)}
-.follow-row{display:flex;align-items:center;gap:16px;padding:12px 0;text-decoration:none;font-size:1.05rem}
-.follow-row .ic{width:22px;font-family:var(--font-mono);color:var(--ink);font-weight:700}
-.follow-row .lead{flex:1;border-bottom:1px dashed var(--line);height:1px}
-.follow-row .nm{color:var(--gray)}
-.follow-row:hover .nm{color:var(--accent)}
-.follow-row .arr{font-family:var(--font-mono)}
-.touch p{color:var(--gray);font-size:1.05rem;padding:6px 0}
-.touch p a{text-decoration:none}
-.touch p a:hover{color:var(--accent)}
-.legal{max-width:var(--max);margin:0 auto;padding:28px 24px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.legal .l a{color:var(--gray);font-size:.92rem;text-decoration:underline;text-underline-offset:3px}
-.legal .l a:hover{color:var(--accent)}
-.legal .l{color:#B9B6C4;font-size:.92rem;display:flex;gap:10px;flex-wrap:wrap}
-.legal .r{color:var(--gray);font-size:.92rem}
-.legal .r b{color:var(--ink)}
-
-/* reveal */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
-.reveal.in{opacity:1;transform:none}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
-  .receipt.printing{transform:translateY(0)}
-  html{scroll-behavior:auto}
-}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-<nav>
-  <div class="nav-in">
-    <a class="logo" href="#top" aria-label="N8iV Promotions home">
-      <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-      <span class="word">N8iV</span>
-      <span class="tag">CLOSED-LOOP</span>
+<!-- ════════════════════ NAV ════════════════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark"><svg width="30" height="20" viewBox="0 0 30 20" fill="none" aria-hidden="true"><rect x="0" y="4" width="4" height="12" rx="2" fill="#7A63FF"/><rect x="6.5" y="0" width="4" height="20" rx="2" fill="currentColor"/><rect x="13" y="5" width="4" height="10" rx="2" fill="#7A63FF"/><rect x="19.5" y="0" width="4" height="20" rx="2" fill="currentColor"/><rect x="26" y="4" width="4" height="12" rx="2" fill="#7A63FF"/></svg></div>
+      <div>
+        N8iV Promotions
+        <span class="nav-logo-sub">Revenue Intelligence Agency</span>
+      </div>
     </a>
-    <div class="nav-links">
-      <a href="#value">VALUE</a>
-      <a href="#how">HOW IT WORKS</a>
-      <a href="#receipt">THE RECEIPT</a>
-      <a href="#pricing">PRICING</a>
-      <a href="#faq">FAQS</a>
-      <a class="cta" href="#contact">CONTACT US</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="case-studies.html">Use Cases</a></li>
+      <li><a href="insights.html">Insights</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="nav-badge"><span class="dot"></span>Pilot Clients Open</span>
+      <a href="contact.html" class="btn btn-primary btn-sm">Book a Revenue Audit</a>
     </div>
+    <button class="nav-mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
-<!-- pixel grid band -->
-<div class="gridband" id="top">
-  <canvas class="pxgrid" aria-hidden="true"></canvas>
-  <div class="bandlabel">ADS → CRM → CLOSED/WON</div>
-  <div class="scrollmore">SCROLL FOR MORE ↓</div>
+<!-- Mobile nav overlay -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation">
+  <nav class="mobile-nav">
+    <a href="index.html" class="mobile-nav-link">Home</a>
+    <a href="services.html" class="mobile-nav-link">Services</a>
+    <a href="case-studies.html" class="mobile-nav-link">Use Cases</a>
+    <a href="insights.html" class="mobile-nav-link">Insights</a>
+    <a href="about.html" class="mobile-nav-link">About</a>
+    <a href="contact.html" class="btn btn-primary mobile-nav-cta">Book a Revenue Audit</a>
+  </nav>
 </div>
 
-<div class="announce" aria-hidden="true">
-  <div class="track" data-dup>
-    <span><i>◆</i> REVENUE DESERVES RECEIPTS</span>
-    <span><i>◆</i> CONNECT ADS TO CRM TO CLOSED/WON</span>
-    <span><i>◆</i> TACT-SCORED ATTRIBUTION</span>
-  </div>
-</div>
+<!-- ════════════════════ HERO ════════════════════ -->
+<section class="hero">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
 
-<!-- ============ HERO ============ -->
-<header class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <h1 class="h-display">
-        Closed-loop<br>
-        <span class="px" id="pxword">[ attribution<span class="cursorblock"></span> ]</span><br>
-        for revenue you can prove.
-      </h1>
+  <div class="wrap hero-content">
+    <div class="hero-badge reveal">
+      <span class="badge-dot">&#9679;</span>
+      Powered by ARIE
     </div>
-    <div class="hero-right">
-      <div class="trust">
-        <span class="chip">FOUNDER-LED</span>
-        <span>Built by a <b>Fortune 500 BI analyst</b>, proven on our own pipeline first.</span>
-      </div>
-      <p>Your ad platforms all claim the same sale. N8iV connects ad spend to CRM stages to <strong>closed/won revenue, reconciled against your payment records</strong>, so you fund what closes and cut what doesn't.</p>
-      <div class="hero-ctas">
-        <a class="btn-solid" href="#contact">GET STARTED</a>
-        <a class="btn-under" href="#receipt">SEE A RECEIPT</a>
-      </div>
-    </div>
-  </div>
-</header>
 
-<div class="dotstrip" aria-hidden="true">
-  <div class="line"><span class="dim">···</span> <span class="dim">&gt;</span> ADS <span class="dim">→</span> CRM <span class="dim">→</span> CLOSED/WON <span class="dim">▪▪</span> REVENUE <span class="dim">&lt;</span> <span class="dim">···</span></div>
-</div>
+    <h1 class="display-xl reveal stagger-1" style="max-width:720px;">
+      Marketing Decisions<br>
+      Backed by<br>
+      <em>Revenue Data.</em>
+    </h1>
 
-<!-- ============ 01 KEY VALUE ============ -->
-<section class="kv" id="value">
-  <div class="wrap">
-    <div class="marker" style="margin-top:110px"><span class="idx">[N.<b>01</b>/09]</span><span class="rule"></span><span>&gt; KEY VALUE</span><span class="rule grow"></span></div>
-    <div class="sec-head reveal">
-      <h2 class="h-display"><span class="slash">/</span>Stop guessing.<br>Start proving.<span class="slash">/</span></h2>
-      <a class="btn-solid" href="#contact">GET STARTED</a>
+    <p class="hero-sub reveal stagger-2">
+      N8iV Promotions connects SEO, social content, ads, CRM activity, and closed revenue into one decision system. Stop guessing what marketing is working and start scaling what creates pipeline.
+    </p>
+
+    <div class="hero-cta reveal stagger-3">
+      <a href="contact.html" class="btn btn-primary btn-lg">
+        Book a Revenue Intelligence Audit
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="services.html" class="btn btn-ghost-dark btn-lg">Explore Services</a>
     </div>
-    <div class="kv-grid reveal">
-      <div class="kv-card">
-        <div class="num">// 001</div>
-        <div class="icon"><svg viewBox="0 0 22 22" width="88" height="88" aria-hidden="true"><g fill="#7A63FF"><rect x="2" y="9" width="3" height="3"/><rect x="5" y="9" width="3" height="3" opacity=".35"/><rect x="8" y="9" width="3" height="3"/><rect x="11" y="9" width="3" height="3" opacity=".35"/><rect x="14" y="9" width="3" height="3"/><rect x="17" y="9" width="3" height="3"/><rect x="2" y="6" width="3" height="3" opacity=".2"/><rect x="17" y="6" width="3" height="3" opacity=".2"/><rect x="2" y="12" width="3" height="3" opacity=".2"/><rect x="17" y="12" width="3" height="3" opacity=".2"/></g></svg></div>
-        <h3>Connect the stack</h3>
-        <p>Wire Meta Ads, your CRM, and Stripe into one governed pipeline. No pixel guesswork, no manual exports.</p>
-        <span class="chip">DONE-FOR-YOU SETUP</span>
-      </div>
-      <div class="kv-card">
-        <div class="num">// 002</div>
-        <div class="icon"><svg viewBox="0 0 22 22" width="88" height="88" aria-hidden="true"><g fill="#7A63FF"><rect x="3" y="15" width="3" height="4"/><rect x="7" y="11" width="3" height="8" opacity=".55"/><rect x="11" y="7" width="3" height="12"/><rect x="15" y="3" width="3" height="16" opacity=".55"/><rect x="15" y="3" width="3" height="3"/></g></svg></div>
-        <h3>Attribute with judgment</h3>
-        <p>Our TACT framework weighs Time, Action, Context, and Touchpoints, so credit lands where influence actually happened.</p>
-        <span class="chip">TACT-SCORED</span>
-      </div>
-      <div class="kv-card">
-        <div class="num">// 003</div>
-        <div class="icon"><svg viewBox="0 0 22 22" width="88" height="88" aria-hidden="true"><g fill="#7A63FF"><rect x="6" y="2" width="10" height="2"/><rect x="6" y="4" width="10" height="14" opacity=".18"/><rect x="8" y="6" width="6" height="2" opacity=".6"/><rect x="8" y="9" width="6" height="2" opacity=".6"/><rect x="8" y="12" width="4" height="2" opacity=".6"/><rect x="6" y="18" width="2" height="2"/><rect x="9" y="18" width="2" height="2"/><rect x="12" y="18" width="2" height="2"/><rect x="15" y="18" width="1" height="2"/></g></svg></div>
-        <h3>Reconcile to the dollar</h3>
-        <p>Every attribution claim is checked against your payment records before it counts. Reported revenue and collected revenue finally match.</p>
-        <span class="chip">PAYMENT-RECONCILED</span>
+
+    <div class="hero-trust reveal stagger-4">
+      <div class="hero-trust-items">
+        <span class="hero-trust-item">SEO and content intelligence</span>
+        <span class="hero-trust-item">Ad-to-revenue attribution</span>
+        <span class="hero-trust-item">Executive-ready reporting</span>
       </div>
     </div>
   </div>
-</section>
 
-<!-- ============ 02 THE PROBLEM ============ -->
-<section class="stats">
-  <div class="wrap">
-    <div class="marker"><span class="idx">[N.<b>02</b>/09]</span><span class="rule"></span><span>&gt; THE PROBLEM</span><span class="rule grow"></span></div>
-    <div class="sec-head reveal">
-      <h2 class="h-display"><span class="slash">/</span>Every platform takes credit. Your bank disagrees.<span class="slash">/</span></h2>
-    </div>
-    <div class="stat-grid reveal">
-      <div class="stat"><div class="val"><em>2x+</em></div><div class="lbl">the same closed deal can be claimed by two or more platforms at once, inflating every self-reported number</div></div>
-      <div class="stat"><div class="val">Weeks</div><div class="lbl">often pass between the first click and the closed deal, a window last-click reporting never sees</div></div>
-      <div class="stat"><div class="val">1 source</div><div class="lbl">of truth: your payment records. N8iV reconciles every claim against them</div></div>
-      <div class="stat"><div class="val"><em>0</em> guesswork</div><div class="lbl">in the budget meeting once every dollar of spend is traced to an outcome</div></div>
-    </div>
-  </div>
-</section>
+  <!-- Attribution Flow Diagram -->
+  <div class="flow-diagram reveal">
+    <div class="wrap" style="height:100%; display:flex; align-items:center; gap:0; padding:40px var(--gutter);">
 
-<!-- ============ 03 HOW IT WORKS ============ -->
-<section class="how" id="how">
-  <div class="wrap">
-    <div class="marker"><span class="idx">[N.<b>03</b>/09]</span><span class="rule"></span><span>&gt; HOW IT WORKS</span><span class="rule grow"></span></div>
-    <div class="sec-head reveal">
-      <h2 class="h-display"><span class="slash">/</span>Follow one dollar. See how it closes.<span class="slash">/</span></h2>
-      <a class="btn-solid" href="#contact">CONTACT US</a>
-    </div>
-    <div class="stepper reveal">
-      <div class="stepper-top">
-        <div class="step-list" role="tablist" aria-label="How it works steps">
-          <button class="on" data-step="0" role="tab" aria-selected="true">// 001 &nbsp;Capture the click</button>
-          <button data-step="1" role="tab" aria-selected="false">// 002 &nbsp;Stitch the identity</button>
-          <button data-step="2" role="tab" aria-selected="false">// 003 &nbsp;Score with TACT</button>
-          <button data-step="3" role="tab" aria-selected="false">// 004 &nbsp;Reconcile with payments</button>
+      <!-- Sources -->
+      <div class="flow-col" style="gap:10px; flex-shrink:0;">
+        <div class="flow-node meta">
+          <span class="node-icon brand-logo"><img src="assets/logos/meta.svg" alt="" aria-hidden="true"></span>Meta Ads
+          <span class="mono" style="color:var(--on-dark-2); font-size:11px; margin-left:auto;">847 conv</span>
         </div>
-        <div class="step-visual"><svg id="stepIcon" viewBox="0 0 22 22" aria-hidden="true"></svg></div>
+        <div class="flow-node google">
+          <span class="node-icon brand-logo"><img src="assets/logos/google-ads.svg" alt="" aria-hidden="true"></span>Google Ads
+          <span class="mono" style="color:var(--on-dark-2); font-size:11px; margin-left:auto;">623 conv</span>
+        </div>
+        <div class="flow-node li">
+          <span class="node-icon brand-logo"><img src="assets/logos/linkedin.svg" alt="" aria-hidden="true"></span>LinkedIn
+          <span class="mono" style="color:var(--on-dark-2); font-size:11px; margin-left:auto;">214 conv</span>
+        </div>
+        <div class="flow-node tiktok">
+          <span class="node-icon">SEO</span>Organic Search
+          <span class="mono" style="color:var(--on-dark-2); font-size:11px; margin-left:auto;">381 visits</span>
+        </div>
       </div>
-      <div class="progress"><div class="bar" id="stepBar"></div><div class="nub"></div></div>
-      <div class="step-body">
-        <div class="meta" id="stepMeta">SOURCE: META ADS API</div>
-        <h3 id="stepTitle">Capture the click</h3>
-        <p id="stepDesc">Every ad interaction is fingerprinted at the moment of contact: click ID, campaign, ad set, creative. Raw events, straight into the pipeline.</p>
+
+      <!-- Animated connector 1 -->
+      <div style="flex:1; position:relative; height:160px; overflow:hidden;">
+        <svg width="100%" height="100%" viewBox="0 0 200 160" preserveAspectRatio="none" style="position:absolute;inset:0;">
+          <path id="p1" d="M0,20 C80,20 120,80 200,80"  fill="none" stroke="rgba(122,99,255,0.2)" stroke-width="1.5"/>
+          <path id="p2" d="M0,55 C80,55 120,80 200,80"  fill="none" stroke="rgba(122,99,255,0.2)" stroke-width="1.5"/>
+          <path id="p3" d="M0,105 C80,105 120,80 200,80" fill="none" stroke="rgba(122,99,255,0.2)" stroke-width="1.5"/>
+          <path id="p4" d="M0,140 C80,140 120,80 200,80" fill="none" stroke="rgba(122,99,255,0.2)" stroke-width="1.5"/>
+
+          <circle r="3.5" fill="#7A63FF" opacity="0.9">
+            <animateMotion dur="2.0s" repeatCount="indefinite" begin="0s"><mpath href="#p1"/></animateMotion>
+          </circle>
+          <circle r="3.5" fill="#7A63FF" opacity="0.9">
+            <animateMotion dur="2.0s" repeatCount="indefinite" begin="0.5s"><mpath href="#p2"/></animateMotion>
+          </circle>
+          <circle r="3.5" fill="#7A63FF" opacity="0.7">
+            <animateMotion dur="2.0s" repeatCount="indefinite" begin="1.0s"><mpath href="#p3"/></animateMotion>
+          </circle>
+          <circle r="3.5" fill="#7A63FF" opacity="0.7">
+            <animateMotion dur="2.0s" repeatCount="indefinite" begin="1.5s"><mpath href="#p4"/></animateMotion>
+          </circle>
+        </svg>
+      </div>
+
+      <!-- CRM Node -->
+      <div class="flow-col" style="flex-shrink:0;">
+        <div class="flow-node crm" style="flex-direction:column; align-items:flex-start; padding:14px 16px; gap:4px;">
+          <span class="node-icon brand-logo" style="margin-bottom:4px;"><img src="assets/logos/hubspot.svg" alt="" aria-hidden="true"></span>
+          <span style="font-size:12px; color:var(--on-dark-2); font-weight:500;">CRM / HubSpot</span>
+          <span style="font-size:20px; font-weight:800; color:var(--on-dark); letter-spacing:-0.03em; font-family:var(--ff-mono);">312</span>
+          <span style="font-size:11px; color:var(--on-dark-2);">Deals Closed</span>
+        </div>
+      </div>
+
+      <!-- Animated connector 2 -->
+      <div style="flex:0.6; position:relative; height:120px; overflow:hidden;">
+        <svg width="100%" height="100%" viewBox="0 0 120 120" preserveAspectRatio="none" style="position:absolute;inset:0;">
+          <path id="p5" d="M0,60 L120,60" fill="none" stroke="rgba(122,99,255,0.25)" stroke-width="1.5" stroke-dasharray="6,4"/>
+          <circle r="3.5" fill="#10B981">
+            <animateMotion dur="1.4s" repeatCount="indefinite" begin="0s"><mpath href="#p5"/></animateMotion>
+          </circle>
+          <circle r="3.5" fill="#10B981">
+            <animateMotion dur="1.4s" repeatCount="indefinite" begin="0.7s"><mpath href="#p5"/></animateMotion>
+          </circle>
+        </svg>
+      </div>
+
+      <!-- Attribution Engine -->
+      <div class="flow-col" style="flex-shrink:0;">
+        <div class="flow-node engine" style="min-width:180px;">
+          <span class="engine-label">ARIE Engine</span>
+          <span style="font-size:15px; font-weight:700; color:var(--on-dark);">Automatic Revenue Intelligence</span>
+          <div style="margin-top:10px; display:flex; gap:6px; flex-wrap:wrap;">
+            <span style="font-size:10px; background:rgba(122,99,255,0.18); color:var(--blue-deep); padding:3px 8px; border-radius:0; font-weight:600;">Multi-touch</span>
+            <span style="font-size:10px; background:rgba(16,185,129,0.15); color:var(--green); padding:3px 8px; border-radius:0; font-weight:600;">First-party</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Animated connector 3 -->
+      <div style="flex:0.6; position:relative; height:120px; overflow:hidden;">
+        <svg width="100%" height="100%" viewBox="0 0 120 120" preserveAspectRatio="none" style="position:absolute;inset:0;">
+          <path id="p6" d="M0,60 L120,60" fill="none" stroke="rgba(16,185,129,0.3)" stroke-width="1.5"/>
+          <circle r="4" fill="#10B981">
+            <animateMotion dur="1.2s" repeatCount="indefinite" begin="0s"><mpath href="#p6"/></animateMotion>
+          </circle>
+          <circle r="4" fill="#10B981">
+            <animateMotion dur="1.2s" repeatCount="indefinite" begin="0.6s"><mpath href="#p6"/></animateMotion>
+          </circle>
+        </svg>
+      </div>
+
+      <!-- Revenue Output -->
+      <div class="flow-col" style="flex-shrink:0;">
+        <div class="flow-node rev" style="flex-direction:column; align-items:flex-start; padding:14px 16px; gap:4px; border-color:rgba(16,185,129,0.3);">
+          <span class="node-icon" style="background:var(--green); color:#fff; font-size:13px; margin-bottom:4px;">$</span>
+          <span style="font-size:12px; color:var(--on-dark-2); font-weight:500;">Revenue View</span>
+          <span style="font-size:20px; font-weight:800; color:var(--green); letter-spacing:-0.03em; font-family:var(--ff-mono);">Ready</span>
+          <span style="font-size:11px; color:var(--on-dark-2);">Model output</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ PROBLEM ════════════════════ -->
+<section class="section bg-surface" id="problem">
+  <div class="wrap">
+    <div class="section-label reveal">
+      <div class="eyebrow">The Growth Visibility Problem</div>
+      <h2 class="display-lg" style="max-width:640px;">Every Platform Tells a Different Story.</h2>
+      <p class="lead" style="margin-top:16px;">SEO reports show traffic. Social reports show engagement. Ad platforms claim conversions. Your CRM and revenue data tell a different story. We close that gap.</p>
+    </div>
+
+    <div class="problem-cards">
+      <div class="problem-card meta reveal stagger-1">
+        <div class="problem-card-logo"><span class="logo-dot brand-logo"><img src="assets/logos/meta.svg" alt="" aria-hidden="true"></span>Meta Ads</div>
+        <div class="problem-metric">847</div>
+        <div class="problem-label">Conversions reported</div>
+        <div class="problem-note">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v4M6 8.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/></svg>
+          Includes view-through &amp; modeled
+        </div>
+      </div>
+      <div class="problem-card google reveal stagger-2">
+        <div class="problem-card-logo"><span class="logo-dot brand-logo"><img src="assets/logos/google-ads.svg" alt="" aria-hidden="true"></span>Google Ads</div>
+        <div class="problem-metric">623</div>
+        <div class="problem-label">Conversions reported</div>
+        <div class="problem-note">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v4M6 8.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/></svg>
+          Double-counts cross-platform
+        </div>
+      </div>
+      <div class="problem-card crm reveal stagger-3">
+        <div class="problem-card-logo"><span class="logo-dot brand-logo"><img src="assets/logos/hubspot.svg" alt="" aria-hidden="true"></span>CRM</div>
+        <div class="problem-metric">312</div>
+        <div class="problem-label">Deals closed (CRM)</div>
+        <div class="problem-note">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v4M6 8.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/></svg>
+          No channel attribution data
+        </div>
+      </div>
+      <div class="problem-card finance reveal stagger-4">
+        <div class="problem-card-logo"><span class="logo-dot" style="background:var(--green);">$</span>Finance</div>
+        <div class="problem-metric" style="font-size:32px;">Closed</div>
+        <div class="problem-label">Revenue confirmed by finance</div>
+        <div class="problem-note" style="color:var(--ink-3); background:var(--surface-2);">
+          Source of truth — missing source link
+        </div>
+      </div>
+    </div>
+
+    <div class="problem-insight reveal">
+      Which number do you optimize for? <em>None of them explain the full journey.</em><br>
+      That's the attribution gap we close.
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CLOSED-LOOP SYSTEM ════════════════════ -->
+<section class="section bg-page" id="system">
+  <div class="wrap">
+    <div class="section-label reveal" style="text-align:center;">
+      <div class="eyebrow">Our Methodology</div>
+      <h2 class="display-lg">The N8iV Revenue System.</h2>
+      <p class="lead" style="margin:16px auto 0;">We trace content, campaigns, channels, and sales activity from first touch to closed revenue, then translate the data into next-step decisions.</p>
+    </div>
+
+    <div class="system-flow">
+      <div class="system-step reveal stagger-1">
+        <div class="step-icon active">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
+        <div class="step-num">01</div>
+        <div class="step-title">Connect Platforms</div>
+        <div class="step-desc">SEO, analytics, ad platforms, CRM, call tracking, and payment systems connected where available.</div>
+      </div>
+      <div class="system-step reveal stagger-2">
+        <div class="step-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        </div>
+        <div class="step-num">02</div>
+        <div class="step-title">Normalize Data</div>
+        <div class="step-desc">First-party data normalized across sources. Missing fields, UTM gaps, and duplicate conversions flagged.</div>
+      </div>
+      <div class="system-step reveal stagger-3">
+        <div class="step-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+        </div>
+        <div class="step-num">03</div>
+        <div class="step-title">Map Journeys</div>
+        <div class="step-desc">Every customer touchpoint mapped from first ad impression to closed deal.</div>
+      </div>
+      <div class="system-step reveal stagger-4">
+        <div class="step-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+        </div>
+        <div class="step-num">04</div>
+        <div class="step-title">Attribute Revenue</div>
+        <div class="step-desc">Multi-touch attribution models weighted to your actual sales cycle.</div>
+      </div>
+      <div class="system-step reveal stagger-5">
+        <div class="step-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <div class="step-num">05</div>
+        <div class="step-title">Decide What to Scale</div>
+        <div class="step-desc">Monthly guidance for SEO topics, social content, ad spend, and reporting priorities.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 04 THE RECEIPT ============ -->
-<section class="dark-sec" id="receipt">
-  <div class="wrap">
-    <div class="marker"><span class="idx">[N.<b>04</b>/09]</span><span class="rule"></span><span>&gt; THE RECEIPT</span><span class="rule grow"></span></div>
-    <div class="dark-grid">
-      <div class="dark-left reveal">
-        <h2 class="h-display"><span class="slash">/</span>One deal. One receipt. Zero doubt.<span class="slash">/</span></h2>
-        <p class="sub">This is the artifact your CFO has never seen from marketing: a line-item receipt tying one campaign to one closed deal, <strong>reconciled against the payment record</strong>. Sample data shown.</p>
-        <button class="btn-solid" id="printBtn">RUN ATTRIBUTION</button>
-        <span id="printStatus"></span>
+<!-- ════════════════════ DASHBOARD ════════════════════ -->
+<section class="section-lg bg-dark" id="platform">
+  <div class="wrap on-dark">
+    <div class="section-label-inline reveal">
+      <div>
+      <div class="eyebrow">N8iV Revenue Intelligence</div>
+      <h2 class="display-lg">See the Revenue Behind the Work.</h2>
       </div>
-      <div class="receipt-frame reveal">
-        <div class="receipt-clip">
-          <div class="receipt" id="receiptEl" role="figure" aria-label="Sample attribution receipt">
-            <div class="r-h">N8iV PROMOTIONS</div>
-            <div class="r-sub">CLOSED-LOOP ATTRIBUTION RECEIPT<br>SAMPLE · SCOTTSDALE, AZ</div>
-            <hr>
-            <div class="r-row"><span class="k">DEAL</span><span>#SW-2214</span></div>
-            <div class="r-row"><span class="k">CLOSED/WON</span><span id="rDate">—</span></div>
-            <div class="r-row"><span class="k">RECONCILED VIA</span><span>STRIPE ch_3Nq…8842</span></div>
-            <hr>
-            <div class="r-row"><span class="k">IG Reel "Receipts_v3"</span><span>42.0%</span></div>
-            <div class="r-row"><span class="k">Webinar: Attribution 101</span><span>28.5%</span></div>
-            <div class="r-row"><span class="k">Email: re-engage #2</span><span>18.0%</span></div>
-            <div class="r-row"><span class="k">Direct / pricing page</span><span>11.5%</span></div>
-            <hr>
-            <div class="r-row"><span class="k">AD SPEND</span><span>$1,240.00</span></div>
-            <div class="r-row total"><span>CLOSED REVENUE</span><span class="v">$18,500.00</span></div>
-            <div class="r-row"><span class="k">ROAS (RECONCILED)</span><span>14.9x</span></div>
-            <div class="barcode" aria-hidden="true"></div>
-            <div class="r-foot">SAMPLE DATA FOR ILLUSTRATION.<br>REVENUE DESERVES RECEIPTS.</div>
+      <p class="lead" style="max-width:380px;">One view for content, ads, CRM, and closed revenue, powered by ARIE and reviewed by N8iV.</p>
+    </div>
+
+    <div class="dashboard-wrap reveal">
+      <!-- Browser chrome -->
+      <div class="dash-chrome">
+        <span class="dash-dot red"></span>
+        <span class="dash-dot amber"></span>
+        <span class="dash-dot green"></span>
+        <div class="dash-url">n8ivpromotions.com/arie-command-center</div>
+      </div>
+
+      <!-- Dashboard layout -->
+      <div class="dash-layout">
+        <!-- Sidebar -->
+        <div class="dash-sidebar">
+        <div class="dash-logo-mini">N8iV<span>.</span></div>
+          <div class="dash-nav-item active">
+            <span class="dash-nav-dot"></span>Attribution
+          </div>
+          <div class="dash-nav-item">
+            <span class="dash-nav-dot"></span>Revenue
+          </div>
+          <div class="dash-nav-item">
+            <span class="dash-nav-dot"></span>Channels
+          </div>
+          <div class="dash-nav-item">
+            <span class="dash-nav-dot"></span>Pipeline
+          </div>
+          <div class="dash-nav-item">
+            <span class="dash-nav-dot"></span>Campaigns
+          </div>
+          <div class="dash-nav-item" style="margin-top:auto;">
+            <span class="dash-nav-dot"></span>Settings
+          </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="dash-main">
+          <div class="dash-header">
+            <span class="dash-title">Revenue Intelligence — Sample Run</span>
+            <span class="dash-period">Pilot preview</span>
+          </div>
+
+          <!-- KPIs -->
+          <div class="dash-kpis">
+            <div class="kpi-card">
+              <div class="kpi-label">Model Selected</div>
+              <div class="kpi-value">U-Shape</div>
+              <div class="kpi-delta up">Fits a multi-touch sales cycle</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Source Match Rate</div>
+              <div class="kpi-value" data-count="84" data-suffix="%">84%</div>
+              <div class="kpi-delta up">CRM fields validated</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Closed Deals</div>
+              <div class="kpi-value" data-count="312">312</div>
+              <div class="kpi-delta up">Matched to source journeys</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Data Warnings</div>
+              <div class="kpi-value" data-count="7">07</div>
+              <div class="kpi-delta down">Fix before scaling</div>
+            </div>
+          </div>
+
+          <!-- Charts -->
+          <div class="dash-charts">
+            <!-- Revenue by Channel -->
+            <div class="dash-chart">
+              <div class="dash-chart-title">Attributed Influence by Channel</div>
+              <div class="bar-chart">
+                <div class="bar-row">
+                  <span class="bar-name">Google Search</span>
+                  <div class="bar-track"><div class="bar-fill" style="background:#7A63FF;" data-bar="82"></div></div>
+                  <span class="bar-val">82%</span>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-name">LinkedIn</span>
+                  <div class="bar-track"><div class="bar-fill" style="background:#0A66C2;" data-bar="54"></div></div>
+                  <span class="bar-val">54%</span>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-name">Meta</span>
+                  <div class="bar-track"><div class="bar-fill" style="background:#1877F2;" data-bar="38"></div></div>
+                  <span class="bar-val">38%</span>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-name">Email</span>
+                  <div class="bar-track"><div class="bar-fill" style="background:#10B981;" data-bar="22"></div></div>
+                  <span class="bar-val">22%</span>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-name">Organic</span>
+                  <div class="bar-track"><div class="bar-fill" style="background:#6B7280;" data-bar="15"></div></div>
+                  <span class="bar-val">15%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Attribution Breakdown -->
+            <div class="dash-chart">
+              <div class="dash-chart-title">Attribution Model — Linear</div>
+              <div class="attr-rows">
+                <div class="attr-row">
+                  <span class="attr-dot" style="background:#7A63FF;"></span>
+                  <span class="attr-channel">Google Search</span>
+                  <div class="attr-bar"><div class="attr-bar-fill" style="background:#7A63FF; width:41%;" data-bar="41"></div></div>
+                  <span class="attr-pct">41%</span>
+                </div>
+                <div class="attr-row">
+                  <span class="attr-dot" style="background:#0A66C2;"></span>
+                  <span class="attr-channel">LinkedIn</span>
+                  <div class="attr-bar"><div class="attr-bar-fill" style="background:#0A66C2; width:27%;" data-bar="27"></div></div>
+                  <span class="attr-pct">27%</span>
+                </div>
+                <div class="attr-row">
+                  <span class="attr-dot" style="background:#1877F2;"></span>
+                  <span class="attr-channel">Meta</span>
+                  <div class="attr-bar"><div class="attr-bar-fill" style="background:#1877F2; width:19%;" data-bar="19"></div></div>
+                  <span class="attr-pct">19%</span>
+                </div>
+                <div class="attr-row">
+                  <span class="attr-dot" style="background:#10B981;"></span>
+                  <span class="attr-channel">Email / Organic</span>
+                  <div class="attr-bar"><div class="attr-bar-fill" style="background:#10B981; width:13%;" data-bar="13"></div></div>
+                  <span class="attr-pct">13%</span>
+                </div>
+              </div>
+
+              <!-- Campaign table mini -->
+              <div style="margin-top:16px; border-top:1px solid var(--dark-border); padding-top:14px;">
+                <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--on-dark-2); margin-bottom:10px;">Top Campaigns</div>
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                  <div style="display:grid; grid-template-columns:1fr auto auto; gap:12px; font-size:12px;">
+                    <span style="color:var(--on-dark-2);">Google Brand — Exact Match</span>
+                    <span style="color:var(--green); font-weight:700; font-family:var(--ff-mono);">6.8×</span>
+                    <span style="color:var(--on-dark-2); font-family:var(--ff-mono);">ROAS</span>
+                  </div>
+                  <div style="display:grid; grid-template-columns:1fr auto auto; gap:12px; font-size:12px;">
+                    <span style="color:var(--on-dark-2);">LinkedIn Decision-Maker ABM</span>
+                    <span style="color:var(--green); font-weight:700; font-family:var(--ff-mono);">4.2×</span>
+                    <span style="color:var(--on-dark-2); font-family:var(--ff-mono);">ROAS</span>
+                  </div>
+                  <div style="display:grid; grid-template-columns:1fr auto auto; gap:12px; font-size:12px;">
+                    <span style="color:var(--on-dark-2);">Meta Retargeting — Warm</span>
+                    <span style="color:var(--amber); font-weight:700; font-family:var(--ff-mono);">1.9×</span>
+                    <span style="color:var(--on-dark-2); font-family:var(--ff-mono);">ROAS</span>
+                  </div>
+                  <div style="display:grid; grid-template-columns:1fr auto auto; gap:12px; font-size:12px;">
+                    <span style="color:var(--on-dark-2);">TikTok Top-of-Funnel</span>
+                    <span style="color:var(--red); font-weight:700; font-family:var(--ff-mono);">0.4×</span>
+                    <span style="color:var(--on-dark-2); font-family:var(--ff-mono);">ROAS</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -582,404 +480,301 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   </div>
 </section>
 
-<!-- ============ 05 BUILT FOR ============ -->
-<section class="aud" id="who">
+<!-- ════════════════════ OUTCOMES ════════════════════ -->
+<section class="section bg-page" id="outcomes">
   <div class="wrap">
-    <div class="marker"><span class="idx">[N.<b>05</b>/09]</span><span class="rule"></span><span>&gt; BUILT FOR</span><span class="rule grow"></span></div>
-    <div class="sec-head reveal">
-      <h2 class="h-display"><span class="slash">/</span>Anyone who signs a marketing budget.<span class="slash">/</span></h2>
+    <div class="section-label-inline reveal">
+      <div>
+        <div class="eyebrow">Business Outcomes</div>
+        <h2 class="display-lg">Decisions You Can Act On.</h2>
+      </div>
+      <p class="lead" style="max-width:380px;">Technical attribution translated into decisions your CFO and CMO can act on immediately.</p>
     </div>
-    <div class="acc reveal" data-acc>
-      <div class="acc-item open">
-        <button class="acc-btn" aria-expanded="true"><h3>B2B companies</h3><span class="plus">+</span></button>
-        <div class="acc-panel"><div class="inner">Six-month deals with a dozen touches. N8iV keeps the full trail so the ad that started it and the email that revived it both get paid their share.<br><span class="chip">LONG-CYCLE ATTRIBUTION</span></div></div>
+
+    <div class="outcomes-grid">
+      <div class="outcome-card reveal stagger-1">
+        <div class="outcome-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        </div>
+        <h3>Eliminate Wasted Spend</h3>
+        <p>Identify the campaigns and channels driving zero closed revenue. Reallocate budget to what actually earns.</p>
       </div>
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false"><h3>Marketing agencies</h3><span class="plus">+</span></button>
-        <div class="acc-panel"><div class="inner">Stop defending your retainer with impressions. Hand clients a ledger of closed revenue your campaigns produced. Clients don't fire proof.<br><span class="chip">RETENTION THROUGH RECEIPTS</span></div></div>
+      <div class="outcome-card reveal stagger-2">
+        <div class="outcome-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+        </div>
+        <h3>Reduce True CAC</h3>
+        <p>Replace platform-reported CAC with actual cost-per-acquired-customer calculated from closed deals.</p>
       </div>
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false"><h3>High-ticket service businesses</h3><span class="plus">+</span></button>
-        <div class="acc-panel"><div class="inner">Booked calls, proposals, and invoices instead of add-to-carts. We connect the ad to the call to the payment so you know which campaigns book buyers, not browsers.<br><span class="chip">AD → CALL → PAYMENT</span></div></div>
+      <div class="outcome-card reveal stagger-3">
+        <div class="outcome-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h3>Prioritize SEO and Content</h3>
+        <p>Find the topics, pages, and content themes that influence qualified pipeline instead of chasing traffic alone.</p>
+      </div>
+      <div class="outcome-card reveal stagger-1">
+        <div class="outcome-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Align Sales and Marketing</h3>
+        <p>A shared revenue model that both teams trust. No more attribution arguments across departments.</p>
+      </div>
+      <div class="outcome-card reveal stagger-2">
+        <div class="outcome-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <h3>Improve the Content Calendar</h3>
+        <p>Use revenue patterns to decide what to publish, repurpose, boost, or retire across organic and social channels.</p>
+      </div>
+      <div class="outcome-card reveal stagger-3">
+        <div class="outcome-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3>Executive-Ready Reports</h3>
+        <p>Monthly reports formatted for board decks. Revenue by channel. True ROAS. Budget recommendations.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 06 PRICING ============ -->
-<section class="pricing" id="pricing">
+<!-- ════════════════════ INTEGRATIONS ════════════════════ -->
+<section class="section-sm bg-surface" id="integrations">
   <div class="wrap">
-    <div class="marker"><span class="idx">[N.<b>06</b>/09]</span><span class="rule"></span><span>&gt; PRICING</span><span class="rule grow"></span></div>
-    <div class="sec-head reveal">
-      <h2 class="h-display"><span class="slash">/</span>Simple pricing. Pay for proof.<span class="slash">/</span></h2>
+    <div class="section-label reveal" style="text-align:center;">
+      <div class="eyebrow">Operating Stack</div>
+      <h2 class="display-md">Built Around the Tools You Already Use.</h2>
+      <p class="lead" style="margin:12px auto 0;">ARIE connects first to the practical pilot stack: ad platforms, HubSpot, Stripe, search data, analytics, and Databricks.</p>
     </div>
-    <div class="price-grid reveal">
-      <div class="price-card">
-        <div class="price-top">
-          <div class="name">Audit</div>
-          <div class="for">Find where credit is leaking</div>
-          <div class="amount">$1,500<span class="per"> one-time</span></div>
-          <a class="btn-solid" href="#contact">GET STARTED</a>
-        </div>
-        <div class="price-feats">
-          <div class="inc">Includes:</div>
-          <ul>
-            <li>Platform claims vs Stripe reconciliation</li>
-            <li>Tracking gap report</li>
-            <li>Quick-win fixes, prioritized</li>
-            <li>90-minute readout with your team</li>
-          </ul>
-        </div>
+
+    <div class="integrations-grid">
+      <!-- CRM -->
+      <div class="integration-card reveal stagger-1">
+        <div class="integration-logo"><img src="assets/logos/hubspot.svg" alt="" aria-hidden="true"></div>
+        <div class="integration-name">HubSpot</div>
+        <div class="integration-tag">CRM</div>
       </div>
-      <div class="price-card pop">
-        <span class="corner-b" aria-hidden="true"></span>
-        <div class="price-top">
-          <div class="poplabel">MOST POPULAR</div>
-          <div class="name"><svg viewBox="0 0 22 22" aria-hidden="true"><g fill="#7A63FF"><rect x="9" y="2" width="4" height="4"/><rect x="9" y="7" width="4" height="7" opacity=".5"/><rect x="7" y="14" width="8" height="2" opacity=".5"/><rect x="9" y="16" width="4" height="4"/></g></svg>Pipeline</div>
-          <div class="for">Done-for-you closed-loop attribution</div>
-          <div class="amount">$2,500<span class="cents">.00</span><span class="per">/month</span></div>
-          <a class="btn-solid" href="#contact">GET STARTED</a>
-        </div>
-        <div class="price-feats">
-          <div class="inc">Includes everything in Audit, plus:</div>
-          <ul>
-            <li>Ads, CRM &amp; Stripe fully connected</li>
-            <li>TACT scoring on every touchpoint</li>
-            <li>Executive receipt dashboard</li>
-            <li>Monthly attribution readout</li>
-            <li>Direct line to the founder</li>
-          </ul>
-        </div>
+      <div class="integration-card reveal stagger-2">
+        <div class="integration-logo"><img src="assets/logos/google-search-console.svg" alt="" aria-hidden="true"></div>
+        <div class="integration-name">Search Console</div>
+        <div class="integration-tag">SEO Data</div>
       </div>
-      <div class="price-card">
-        <div class="price-top">
-          <div class="name">Partner</div>
-          <div class="for">For agencies &amp; multi-brand teams</div>
-          <div class="amount">Custom</div>
-          <a class="btn-solid" href="#contact">TALK TO US</a>
-        </div>
-        <div class="price-feats">
-          <div class="inc">Includes everything in Pipeline, plus:</div>
-          <ul>
-            <li>Multi-brand &amp; client rollups</li>
-            <li>White-label receipt reporting</li>
-            <li>Custom integrations</li>
-            <li>Priority support</li>
-          </ul>
-        </div>
+      <!-- Ad Platforms -->
+      <div class="integration-card reveal stagger-3">
+        <div class="integration-logo"><img src="assets/logos/meta.svg" alt="" aria-hidden="true"></div>
+        <div class="integration-name">Meta Ads</div>
+        <div class="integration-tag">Ad Platform</div>
+      </div>
+      <div class="integration-card reveal stagger-4">
+        <div class="integration-logo"><img src="assets/logos/google-ads.svg" alt="" aria-hidden="true"></div>
+        <div class="integration-name">Google Ads</div>
+        <div class="integration-tag">Ad Platform</div>
+      </div>
+      <div class="integration-card reveal stagger-1">
+        <div class="integration-logo"><img src="assets/logos/linkedin.svg" alt="" aria-hidden="true"></div>
+        <div class="integration-name">LinkedIn Ads</div>
+        <div class="integration-tag">Ad Platform</div>
+      </div>
+      <div class="integration-card reveal stagger-2">
+        <div class="integration-logo"><img src="assets/logos/google-analytics.svg" alt="" aria-hidden="true"></div>
+        <div class="integration-name">GA4</div>
+        <div class="integration-tag">Web Analytics</div>
+      </div>
+      <div class="integration-card reveal stagger-3">
+        <div class="integration-logo"><img src="assets/logos/stripe.svg" alt="" aria-hidden="true"></div>
+        <div class="integration-name">Stripe</div>
+        <div class="integration-tag">Payments</div>
+      </div>
+      <div class="integration-card reveal stagger-4">
+        <div class="integration-logo"><img src="assets/logos/databricks.svg" alt="" aria-hidden="true"></div>
+        <div class="integration-name">Databricks</div>
+        <div class="integration-tag">Data Platform</div>
       </div>
     </div>
+    <p class="body-sm reveal" style="text-align:center; margin-top:24px;">Salesforce, Power BI, and additional ad channels can be added for larger or lower-tier reporting packages.</p>
   </div>
 </section>
 
-<!-- ============ 07 BUILD LOG ============ -->
-<section class="log">
-  <div class="wrap">
-    <div class="marker"><span class="idx">[N.<b>07</b>/09]</span><span class="rule"></span><span>&gt; BUILD LOG</span><span class="rule grow"></span></div>
-    <div class="sec-head reveal">
-      <h2 class="h-display"><span class="slash">/</span>We ship fast. Always improving.<span class="slash">/</span></h2>
-      <a class="btn-solid" href="https://instagram.com/n8ivpromotions" target="_blank" rel="noopener">FOLLOW THE BUILD</a>
-    </div>
-    <div class="timeline reveal">
-      <div class="tl-item">
-        <div class="node">↗</div>
-        <span class="date">2026</span>
-        <h3>Opening early client engagements</h3>
-        <p>The pipeline is live and outreach is underway. We are onboarding a small number of founding clients who want receipts behind their ad spend.</p>
+<!-- ════════════════════ CASE STUDIES ════════════════════ -->
+<section class="section bg-dark" id="results">
+  <div class="wrap on-dark">
+    <div class="section-label-inline reveal">
+      <div>
+      <div class="eyebrow">Use Cases</div>
+      <h2 class="display-lg">Where N8iV Fits.</h2>
       </div>
-      <div class="tl-item">
-        <div class="node">✓</div>
-        <span class="date">2026</span>
-        <h3>First client: Inside Narrative Media</h3>
-        <p>A Phoenix sports videography studio. Full site rebuild, technical SEO, and a measurement foundation connecting inquiries to booked work.</p>
-      </div>
-      <div class="tl-item">
-        <div class="node">✓</div>
-        <span class="date">2025</span>
-        <h3>TACT framework and pipeline architecture</h3>
-        <p>The scoring model was defined and the stack went live: BigQuery, dbt, and Cloud Run connecting Meta Ads, HubSpot, and Stripe. Proven first on our own pipeline.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 08 INSIGHTS ============ -->
-<section class="insights">
-  <div class="wrap">
-    <div class="marker"><span class="idx">[N.<b>08</b>/09]</span><span class="rule"></span><span>&gt; INSIGHTS</span><span class="rule grow"></span></div>
-    <div class="sec-head reveal">
-      <h2 class="h-display"><span class="slash">/</span>Attribution, minus the jargon.<span class="slash">/</span></h2>
-      <a class="btn-solid" href="https://instagram.com/n8ivpromotions" target="_blank" rel="noopener">READ ALL</a>
-    </div>
-    <div class="rail reveal">
-      <a class="post" href="#contact">
-        <div class="thumb"><div class="glyph"><svg viewBox="0 0 22 22" aria-hidden="true"><g fill="#7A63FF"><rect x="3" y="3" width="7" height="7"/><rect x="12" y="3" width="7" height="7" opacity=".4"/><rect x="3" y="12" width="7" height="7" opacity=".4"/><rect x="12" y="12" width="7" height="7"/></g></svg></div></div>
-        <div class="body">
-          <div class="meta"><span class="cat">ATTRIBUTION</span><span class="date">// Jun 2026</span></div>
-          <h3>Attribution is broken. Here's the receipt.</h3>
-          <p>Why platform-reported conversions can add up to more than your actual revenue, and what to reconcile against instead.</p>
-          <div class="foot"><span>↗</span><span class="v">VIEW</span></div>
-        </div>
-      </a>
-      <a class="post" href="#contact">
-        <div class="thumb"><div class="glyph"><svg viewBox="0 0 22 22" aria-hidden="true"><g fill="#7A63FF"><rect x="3" y="16" width="3" height="3" opacity=".4"/><rect x="7" y="12" width="3" height="7" opacity=".6"/><rect x="11" y="8" width="3" height="11" opacity=".8"/><rect x="15" y="3" width="3" height="16"/></g></svg></div></div>
-        <div class="body">
-          <div class="meta"><span class="cat">MODELS</span><span class="date">// May 2026</span></div>
-          <h3>MTA + MMM: use both, trust neither alone</h3>
-          <p>Touch-level models and mix models answer different questions. The closed loop is what keeps them honest.</p>
-          <div class="foot"><span>↗</span><span class="v">VIEW</span></div>
-        </div>
-      </a>
-      <a class="post" href="#contact">
-        <div class="thumb"><div class="glyph"><svg viewBox="0 0 22 22" aria-hidden="true"><g fill="#7A63FF"><rect x="9" y="2" width="4" height="4"/><rect x="9" y="7" width="4" height="8" opacity=".5"/><rect x="9" y="16" width="4" height="4"/><rect x="4" y="9" width="4" height="4" opacity=".3"/><rect x="14" y="9" width="4" height="4" opacity=".3"/></g></svg></div></div>
-        <div class="body">
-          <div class="meta"><span class="cat">LAST-CLICK</span><span class="date">// Apr 2026</span></div>
-          <h3>Last touch is lying to you</h3>
-          <p>The 67-day journey your reporting collapses into one click, and who actually earned the credit along the way.</p>
-          <div class="foot"><span>↗</span><span class="v">VIEW</span></div>
-        </div>
+      <a href="case-studies.html" class="btn btn-ghost-dark">
+        All Use Cases
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
       </a>
     </div>
+
+    <div class="case-grid">
+      <div class="case-card reveal stagger-1">
+        <span class="case-tag">B2B Growth Team</span>
+        <h3 class="case-problem">"We need to know which marketing work actually creates pipeline."</h3>
+        <p class="case-body">N8iV connects content, ads, CRM stages, and closed revenue so leadership can decide which channels deserve more budget and which need repair.</p>
+        <div class="case-metrics">
+          <div>
+            <div class="case-metric-val">SEO</div>
+            <div class="case-metric-label">Topic Signals</div>
+          </div>
+          <div>
+            <div class="case-metric-val">Paid</div>
+            <div class="case-metric-label">Source Data</div>
+          </div>
+          <div>
+            <div class="case-metric-val">CRM</div>
+            <div class="case-metric-label">Closed Revenue</div>
+          </div>
+        </div>
+      </div>
+      <div class="case-card reveal stagger-2">
+        <span class="case-tag">Agency Partner</span>
+        <h3 class="case-problem">"Our clients want revenue proof, not another dashboard."</h3>
+        <p class="case-body">ARIE lets N8iV package attribution reporting for agency sub-accounts, making client performance easier to explain, defend, and improve.</p>
+        <div class="case-metrics">
+          <div>
+            <div class="case-metric-val">Multi</div>
+            <div class="case-metric-label">Sub Accounts</div>
+          </div>
+          <div>
+            <div class="case-metric-val">Email</div>
+            <div class="case-metric-label">Client Reports</div>
+          </div>
+          <div>
+            <div class="case-metric-val">Bench</div>
+            <div class="case-metric-label">Portfolio View</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ============ 09 FAQ ============ -->
-<section class="faq" id="faq">
+<!-- ════════════════════ PROCESS ════════════════════ -->
+<section class="section bg-page" id="process">
   <div class="wrap">
-    <div class="marker"><span class="idx">[N.<b>09</b>/09]</span><span class="rule"></span><span>&gt; FAQS</span><span class="rule grow"></span></div>
-    <div class="sec-head reveal">
-      <h2 class="h-display"><span class="slash">/</span>Have questions? We've got receipts.<span class="slash">/</span></h2>
+    <div class="section-label reveal" style="text-align:center;">
+      <div class="eyebrow">How It Works</div>
+      <h2 class="display-lg">From Chaos to Clarity<br>in 30 Days.</h2>
     </div>
-    <div class="acc reveal" data-acc>
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false"><h3>What exactly do you connect?</h3><span class="plus">+</span></button>
-        <div class="acc-panel"><div class="inner">Your ad platforms (Meta first), your CRM (HubSpot and others), and your payment processor (Stripe). Events land in a governed warehouse pipeline where identities are stitched and every touchpoint is kept.</div></div>
+
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="process-step-num">01</div>
+        <div>
+          <span class="step-tag">Week 1</span>
+          <h3>Connect Your Systems</h3>
+          <p>We connect the systems that matter for the pilot: SEO signals, analytics, ad platforms, CRM deals, and optional payment data.</p>
+        </div>
       </div>
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false"><h3>Do I need a data team?</h3><span class="plus">+</span></button>
-        <div class="acc-panel"><div class="inner">No. This is done-for-you. You get the receipts and the dashboard. We handle the pipes, the modeling, and the reconciliation.</div></div>
+      <div class="process-step reveal">
+        <div class="process-step-num">02</div>
+        <div>
+          <span class="step-tag">Week 1–2</span>
+          <h3>Normalize &amp; Validate</h3>
+          <p>Source data is normalized across channels and checked for missing spend, broken UTMs, missing CRM fields, and gaps that could distort the report.</p>
+        </div>
       </div>
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false"><h3>How is this different from GA4 or the pixel?</h3><span class="plus">+</span></button>
-        <div class="acc-panel"><div class="inner">Pixels stop at the form fill. We keep going: through every CRM stage change to the cleared invoice. Credit is scored with TACT and reconciled against actual payments, not modeled sessions.</div></div>
+      <div class="process-step reveal">
+        <div class="process-step-num">03</div>
+        <div>
+          <span class="step-tag">Week 2–3</span>
+          <h3>Map Customer Journeys</h3>
+          <p>Touchpoints are mapped from first search, social, or ad interaction through CRM stages and closed revenue. The model is chosen for your sales cycle and decision goal.</p>
+        </div>
       </div>
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false"><h3>How long until my first receipt?</h3><span class="plus">+</span></button>
-        <div class="acc-panel"><div class="inner">The audit takes about two weeks. A full pipeline typically produces its first reconciled receipts within 30 days, depending on your sales cycle.</div></div>
+      <div class="process-step reveal">
+        <div class="process-step-num">04</div>
+        <div>
+          <span class="step-tag">Week 3–4</span>
+          <h3>Attribute Revenue</h3>
+          <p>Closed revenue is attributed back to the channels, campaigns, topics, and sources that influenced the journey so the next decision is easier to defend.</p>
+        </div>
       </div>
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false"><h3>What access do you need to my data?</h3><span class="plus">+</span></button>
-        <div class="acc-panel"><div class="inner">Read-only API access to your ad accounts, CRM, and Stripe. We never touch card numbers, and we only use the contact fields required to stitch identities. Access is scoped, auditable, and revocable by you at any time.</div></div>
+      <div class="process-step reveal">
+        <div class="process-step-num">05</div>
+        <div>
+          <span class="step-tag">Month 1 → Ongoing</span>
+          <h3>Monthly Intelligence Reports</h3>
+          <p>A clear monthly report showing what changed, what it means, which SEO or content priorities matter, where ad spend needs attention, and which data gaps must be fixed.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ FRAMED CTA ============ -->
-<div class="hashline" aria-hidden="true"><div class="track" data-dup><span>[#ATTRIBUTION] <span class="amp">&amp;</span> [#RECEIPTS] <span class="amp">//</span> </span><span>[#CLOSEDLOOP] <span class="amp">&amp;</span> [#REVENUE] <span class="amp">//</span> </span></div></div>
-<div class="cta-band" id="contact">
-  <canvas class="pxgrid" aria-hidden="true"></canvas>
-  <div class="cta-card reveal">
-    <span class="corner tl" aria-hidden="true"></span><span class="corner tr" aria-hidden="true"></span>
-    <span class="corner bl" aria-hidden="true"></span><span class="corner br" aria-hidden="true"></span>
-    <span class="chip">NOW ONBOARDING FOUNDING CLIENTS</span>
-    <h2>Revenue deserves<br><span class="px">[ receipts ]</span><br>Let's trace yours.</h2>
-    <a class="btn-solid" href="mailto:zajen@n8ivpromotions.com">GET STARTED</a>
+<!-- ════════════════════ FINAL CTA ════════════════════ -->
+<section class="section-lg cta-section">
+  <div class="wrap on-dark">
+    <div class="eyebrow reveal">Revenue Intelligence Audit</div>
+    <h2 class="display-xl reveal stagger-1" style="max-width:700px; margin:0 auto;">
+      Ready to Make Marketing<br>More Accountable?
+    </h2>
+    <p class="lead reveal stagger-2" style="margin:20px auto 0;">A focused working session for B2B businesses and agencies that want SEO, content, ads, and reporting tied to real pipeline decisions.</p>
+    <div class="cta-actions reveal stagger-3">
+      <a href="contact.html" class="btn btn-green btn-xl">
+        Book Revenue Audit
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M10 5l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="contact.html" class="btn btn-ghost-dark btn-xl">Get Revenue Audit</a>
+    </div>
+    <p class="body-sm reveal stagger-4" style="color:var(--on-dark-2); margin-top:24px; text-align:center;">No pitch. No commitment. Just an honest assessment of your attribution gaps.</p>
   </div>
-</div>
-<div class="hashline rev" aria-hidden="true"><div class="track" data-dup><span>[#ADS→CRM→WON] <span class="amp">&amp;</span> [#TACT] <span class="amp">//</span> </span><span>[#RECONCILED] <span class="amp">&amp;</span> [#PROOF] <span class="amp">//</span> </span></div></div>
+</section>
 
-<!-- ============ FOOTER ============ -->
-<footer>
-  <div class="foot-block">
-    <div class="foot-cell foot-news">
-      <h3><span class="at">@</span> Stay in the loop.</h3>
-      <p>Attribution breakdowns, receipts from real pipelines, and build notes. Straight from the founder.</p>
-      <form class="foot-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='JOINED ✓';">
-        <input type="email" placeholder="Enter your email" aria-label="Email address" required>
-        <button type="submit">JOIN</button>
-      </form>
-    </div>
-    <div class="foot-cell">
-      <div class="bigmark">
-        <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-        <span class="word">N8iV</span>
-        <span class="reg">®</span>
+<!-- ════════════════════ FOOTER ════════════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo-wrap">
+          <div class="nav-logo-mark"><svg width="30" height="20" viewBox="0 0 30 20" fill="none" aria-hidden="true"><rect x="0" y="4" width="4" height="12" rx="2" fill="#7A63FF"/><rect x="6.5" y="0" width="4" height="20" rx="2" fill="currentColor"/><rect x="13" y="5" width="4" height="10" rx="2" fill="#7A63FF"/><rect x="19.5" y="0" width="4" height="20" rx="2" fill="currentColor"/><rect x="26" y="4" width="4" height="12" rx="2" fill="#7A63FF"/></svg></div>
+          N8iV Promotions
+        </div>
+        <p class="footer-tagline">Revenue intelligence, SEO strategy, social content, and analytics reporting for B2B businesses and agencies.</p>
+        <a href="contact.html" class="btn btn-primary btn-sm">Book a Revenue Audit</a>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="index.html#system">How It Works</a></li>
+          <li><a href="index.html#platform">Dashboard</a></li>
+          <li><a href="index.html#integrations">Integrations</a></li>
+          <li><a href="services.html">All Services</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="case-studies.html">Use Cases</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:zajen@n8ivpromotions.com">zajen@n8ivpromotions.com</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Google Business Profile</a></li>
+          <li><a href="#">Email</a></li>
+        </ul>
       </div>
     </div>
-    <div class="foot-cell">
-      <div class="foot-label">PAGES</div>
-      <div class="foot-pages">
-        <a href="#value">Value</a><a href="#how">How it works</a><a href="#receipt">The receipt</a>
-        <a href="#who">Built for</a><a href="#pricing">Pricing</a><a href="#faq">FAQs</a><a href="#contact">Contact</a>
+    <div class="footer-bottom">
+      <span>© 2026 N8iV Promotions LLC. ARIE is the Automatic Revenue Intelligence Engine.</span>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Imprint</a>
       </div>
     </div>
-    <div class="foot-cell">
-      <div class="foot-label">FOLLOW US</div>
-      <a class="follow-row" href="https://instagram.com/n8ivpromotions" target="_blank" rel="noopener"><span class="ic">IG</span><span class="lead"></span><span class="nm">@n8ivpromotions</span><span class="arr">↗</span></a>
-      <a class="follow-row" href="https://instagram.com/zajen_mcarton" target="_blank" rel="noopener"><span class="ic">IG</span><span class="lead"></span><span class="nm">@zajen_mcarton</span><span class="arr">↗</span></a>
-      <a class="follow-row" href="mailto:zajen@n8ivpromotions.com"><span class="ic">@</span><span class="lead"></span><span class="nm">Email</span><span class="arr">↗</span></a>
-    </div>
-    <div class="foot-cell touch">
-      <div class="foot-label">GET IN TOUCH</div>
-      <p><a href="mailto:zajen@n8ivpromotions.com">zajen@n8ivpromotions.com</a></p>
-      <p>Scottsdale, Arizona</p>
-    </div>
-  </div>
-  <div class="legal">
-    <div class="l"><a href="#top">Privacy Policy</a><span>/</span><a href="#top">Terms of Service</a></div>
-    <div class="r">© N8iV Promotions 2026 · <b>Revenue deserves receipts.</b></div>
   </div>
 </footer>
 
-<script>
-(function(){
-"use strict";
-const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ===== duplicate marquee tracks ===== */
-document.querySelectorAll('[data-dup]').forEach(t=>{t.innerHTML+=t.innerHTML+t.innerHTML+t.innerHTML;});
-
-/* ===== pixel grid canvases (hero band + cta band) ===== */
-function pixelGrid(cv){
-  const ctx=cv.getContext('2d');
-  let W,H,cols,rows,cells=[];
-  const CELL=56;
-  function size(){
-    const dpr=Math.min(devicePixelRatio||1,2);
-    W=cv.clientWidth;H=cv.clientHeight;
-    cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
-    cols=Math.ceil(W/CELL);rows=Math.ceil(H/CELL);
-    cells=[];
-    for(let r=0;r<rows;r++)for(let c=0;c<cols;c++)cells.push({c,r,a:0});
-    for(let i=0;i<cols*rows*0.06;i++)cells[Math.floor(Math.random()*cells.length)].a=Math.random();
-  }
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    ctx.strokeStyle='rgba(255,255,255,0.07)';ctx.lineWidth=1;
-    for(let x=0;x<=cols;x++){ctx.beginPath();ctx.moveTo(x*CELL+.5,0);ctx.lineTo(x*CELL+.5,H);ctx.stroke();}
-    for(let y=0;y<=rows;y++){ctx.beginPath();ctx.moveTo(0,y*CELL+.5);ctx.lineTo(W,y*CELL+.5);ctx.stroke();}
-    cells.forEach(cell=>{
-      if(cell.a>0.01){
-        ctx.fillStyle='rgba(122,99,255,'+(cell.a*0.85).toFixed(3)+')';
-        ctx.fillRect(cell.c*CELL+1,cell.r*CELL+1,CELL-1,CELL-1);
-        cell.a*=0.985;
-      }
-    });
-  }
-  function tick(){
-    if(Math.random()<0.16){cells[Math.floor(Math.random()*cells.length)].a=0.25+Math.random()*0.75;}
-    draw();
-    requestAnimationFrame(tick);
-  }
-  addEventListener('resize',size);
-  cv.addEventListener('pointermove',e=>{
-    const r=cv.getBoundingClientRect();
-    const c=Math.floor((e.clientX-r.left)/CELL),row=Math.floor((e.clientY-r.top)/CELL);
-    const cell=cells[row*cols+c];
-    if(cell)cell.a=1;
-  });
-  size();
-  if(!reduced)tick();else draw();
-}
-document.querySelectorAll('.pxgrid').forEach(pixelGrid);
-
-/* ===== pixel word cycle ===== */
-const words=['attribution','receipts','proof','ROAS'];
-const pxEl=document.getElementById('pxword');
-if(pxEl && !reduced){
-  let wi=0;
-  function typeWord(word,cb){
-    let i=0;
-    const iv=setInterval(()=>{
-      i++;
-      pxEl.innerHTML='[ '+word.slice(0,i)+'<span class="cursorblock"></span> ]';
-      if(i>=word.length){clearInterval(iv);setTimeout(cb,2600);}
-    },90);
-  }
-  function eraseWord(cb){
-    let cur=pxEl.textContent.replace(/[\[\]\s]/g,'');
-    const iv=setInterval(()=>{
-      cur=cur.slice(0,-1);
-      pxEl.innerHTML='[ '+cur+'<span class="cursorblock"></span> ]';
-      if(!cur.length){clearInterval(iv);cb();}
-    },45);
-  }
-  function cycle(){eraseWord(()=>{wi=(wi+1)%words.length;typeWord(words[wi],cycle);});}
-  setTimeout(cycle,3200);
-}
-
-/* ===== reveal ===== */
-const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-/* ===== stepper ===== */
-const steps=[
- {t:'Capture the click',m:'SOURCE: META ADS API',d:'Every ad interaction is fingerprinted at the moment of contact: click ID, campaign, ad set, creative. Raw events, straight into the pipeline.',
-  icon:'<g fill="#7A63FF"><rect x="9" y="2" width="4" height="4"/><rect x="9" y="7" width="4" height="7" opacity=".45"/><rect x="7" y="14" width="8" height="2" opacity=".45"/><rect x="9" y="16" width="4" height="4"/></g>'},
- {t:'Stitch the identity',m:'SOURCE: YOUR CRM',d:'The click becomes a contact. We thread every touchpoint that follows onto one person: calls booked, emails opened, pages visited. One lead, one thread.',
-  icon:'<g fill="#7A63FF"><rect x="3" y="3" width="6" height="6"/><rect x="13" y="13" width="6" height="6"/><rect x="9" y="9" width="4" height="4" opacity=".45"/><rect x="13" y="3" width="6" height="6" opacity=".25"/><rect x="3" y="13" width="6" height="6" opacity=".25"/></g>'},
- {t:'Score with TACT',m:'FRAMEWORK: TIME · ACTION · CONTEXT · TOUCHPOINTS',d:'Each touchpoint is weighed for when it happened, what the person did, the deal context, and the full trail. Credit lands where influence actually happened.',
-  icon:'<g fill="#7A63FF"><rect x="3" y="16" width="3" height="3" opacity=".35"/><rect x="7" y="12" width="3" height="7" opacity=".55"/><rect x="11" y="8" width="3" height="11" opacity=".8"/><rect x="15" y="3" width="3" height="16"/></g>'},
- {t:'Reconcile with payments',m:'SOURCE: PAYMENT PROCESSOR',d:'The invoice clears and revenue reconciles back through every touchpoint to the original ad. Not modeled. Matched to the payment record.',
-  icon:'<g fill="#7A63FF"><rect x="4" y="10" width="3" height="3" opacity=".5"/><rect x="7" y="13" width="3" height="3"/><rect x="10" y="10" width="3" height="3"/><rect x="13" y="7" width="3" height="3"/><rect x="16" y="4" width="3" height="3"/></g>'}
-];
-const sBtns=[...document.querySelectorAll('.step-list button')];
-const sBar=document.getElementById('stepBar');
-const sT=document.getElementById('stepTitle'),sM=document.getElementById('stepMeta'),sD=document.getElementById('stepDesc'),sI=document.getElementById('stepIcon');
-let cur=0,auto;
-function setStep(i){
-  cur=i;
-  sBtns.forEach((b,j)=>{b.classList.toggle('on',j===i);b.setAttribute('aria-selected',j===i);});
-  sBar.style.width=(((i+1)/steps.length)*92)+'%';
-  sT.textContent=steps[i].t;sM.textContent=steps[i].m;sD.textContent=steps[i].d;
-  sI.innerHTML=steps[i].icon;
-}
-sBtns.forEach(b=>b.addEventListener('click',()=>{setStep(+b.dataset.step);restartAuto();}));
-function restartAuto(){clearInterval(auto);if(!reduced)auto=setInterval(()=>setStep((cur+1)%steps.length),5000);}
-setStep(0);restartAuto();
-
-/* ===== receipt ===== */
-const printBtn=document.getElementById('printBtn'),receipt=document.getElementById('receiptEl'),
-      status=document.getElementById('printStatus'),rDate=document.getElementById('rDate');
-const phases=['CONNECTING ADS API…','STITCHING CRM IDENTITY…','SCORING TOUCHPOINTS…','RECONCILING WITH STRIPE…','PRINTING…'];
-let printing=false;
-printBtn.addEventListener('click',()=>{
-  if(printing)return;printing=true;
-  status.classList.remove('done');
-  rDate.textContent=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-  receipt.classList.remove('printing');void receipt.offsetWidth;
-  let i=0;status.textContent=phases[0];
-  const iv=setInterval(()=>{
-    i++;
-    if(i<phases.length)status.textContent=phases[i];
-    else{
-      clearInterval(iv);
-      receipt.classList.add('printing');
-      setTimeout(()=>{status.textContent='✓ SAMPLE RECEIPT COMPLETE';status.classList.add('done');printing=false;},reduced?100:4300);
-    }
-  },reduced?60:600);
-});
-
-/* ===== accordions (audience + faq) ===== */
-document.querySelectorAll('[data-acc]').forEach(group=>{
-  const items=[...group.querySelectorAll('.acc-item')];
-  items.forEach(item=>{
-    const btn=item.querySelector('.acc-btn'),panel=item.querySelector('.acc-panel');
-    function sync(){
-      const open=item.classList.contains('open');
-      btn.setAttribute('aria-expanded',open);
-      panel.style.maxHeight=open?panel.scrollHeight+'px':'0px';
-    }
-    btn.addEventListener('click',()=>{
-      items.forEach(o=>{if(o!==item){o.classList.remove('open');o.querySelector('.acc-panel').style.maxHeight='0px';o.querySelector('.acc-btn').setAttribute('aria-expanded','false');}});
-      item.classList.toggle('open');sync();
-    });
-    sync();
-  });
-});
-addEventListener('resize',()=>{document.querySelectorAll('.acc-item.open .acc-panel').forEach(p=>p.style.maxHeight=p.scrollHeight+'px');});
-})();
-</script>
+<script src="js/main.js" defer></script>
 </body>
 </html>
