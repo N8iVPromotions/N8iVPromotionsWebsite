@@ -1625,8 +1625,31 @@ ul { list-style: none; margin: 0; padding: 0; }
 .step-icon svg   { color: var(--blue); }
 .outcome-icon svg { color: var(--blue); }
 
+.founder-photo {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+.founder-photo::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 5px;
+  background: var(--blue);
+}
+.founder-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 38%;
+}
+
 @media (max-width: 768px) {
   .founder-grid { grid-template-columns: 1fr !important; gap: 42px !important; }
+  .founder-profile { max-width: 360px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
