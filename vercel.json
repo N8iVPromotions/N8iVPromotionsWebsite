@@ -12,12 +12,12 @@
   ],
   "rewrites": [
     { "source": "/services", "destination": "/services.html" },
-    { "source": "/use-cases", "destination": "/case-studies.html" },
+    { "source": "/use-cases", "destination": "/case-studies" },
     { "source": "/insights", "destination": "/insights.html" },
     { "source": "/about", "destination": "/about.html" },
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/revenue-self-audit", "destination": "/revenue-self-audit.html" },
-    { "source": "/insights/agencies-optimizing-40-percent-of-the-funnel", "destination": "/blog/agencies-optimizing-40-percent-of-the-funnel.html" },
-    { "source": "/insights/performance-marketing-done-guessing-revenue-proof", "destination": "/blog/performance-marketing-done-guessing-revenue-proof.html" }
+    { "source": "/insights/agencies-optimizing-40-percent-of-the-funnel", "destination": "/blog/agencies-optimizing-40-percent-of-the-funnel" },
+    { "source": "/insights/performance-marketing-done-guessing-revenue-proof", "destination": "/blog/performance-marketing-done-guessing-revenue-proof" }
   ]
 }
