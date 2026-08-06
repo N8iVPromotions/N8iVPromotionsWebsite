@@ -27,6 +27,7 @@
 (function initReveal() {
   const els = document.querySelectorAll('.reveal');
   if (!els.length) return;
+  document.documentElement.classList.add('reveal-ready');
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
