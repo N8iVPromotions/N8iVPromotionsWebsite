@@ -3,7 +3,9 @@
    Initializes Vercel Analytics for the site
    ================================================================ */
 
-import { inject } from '../node_modules/@vercel/analytics/dist/index.mjs';
-
-// Inject Vercel Analytics
-inject();
+// Static HTML sites cannot import the package from node_modules in the browser.
+// Load Vercel's production analytics endpoint instead.
+const script = document.createElement('script');
+script.defer = true;
+script.src = '/_vercel/insights/script.js';
+document.head.appendChild(script);
