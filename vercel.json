@@ -1,0 +1,23 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/services.html", "destination": "/services", "permanent": true },
+    { "source": "/case-studies", "destination": "/use-cases", "permanent": true },
+    { "source": "/insights.html", "destination": "/insights", "permanent": true },
+    { "source": "/about.html", "destination": "/about", "permanent": true },
+    { "source": "/contact.html", "destination": "/contact", "permanent": true },
+    { "source": "/revenue-self-audit.html", "destination": "/revenue-self-audit", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/services", "destination": "/services.html" },
+    { "source": "/use-cases", "destination": "/case-studies.html" },
+    { "source": "/insights", "destination": "/insights.html" },
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/revenue-self-audit", "destination": "/revenue-self-audit.html" },
+    { "source": "/insights/agencies-optimizing-40-percent-of-the-funnel", "destination": "/blog/agencies-optimizing-40-percent-of-the-funnel.html" },
+    { "source": "/insights/performance-marketing-done-guessing-revenue-proof", "destination": "/blog/performance-marketing-done-guessing-revenue-proof.html" }
+  ]
+}
