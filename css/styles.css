@@ -1625,6 +1625,10 @@ ul { list-style: none; margin: 0; padding: 0; }
 .step-icon svg   { color: var(--blue); }
 .outcome-icon svg { color: var(--blue); }
 
+@media (max-width: 768px) {
+  .founder-grid { grid-template-columns: 1fr !important; gap: 42px !important; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal { transition: none; opacity: 1; transform: none; }
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
