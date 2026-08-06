@@ -223,6 +223,7 @@
     if (!form.reportValidity()) return;
 
     const data = Object.fromEntries(new FormData(form).entries());
+    Object.assign(data, window.N8iVAttribution?.getPayload?.() || {});
     setPending(true);
     setStatus('Sending your audit request...', '');
 
@@ -239,6 +240,9 @@
       }
 
       form.reset();
+      window.N8iVAttribution?.track?.('audit_request_submitted', {
+        form: 'revenue_audit_request'
+      });
       setStatus('Your audit request was sent to zajen@n8ivpromotions.com. We will follow up within 1 business day.', 'success');
     } catch (error) {
       console.error(error);
