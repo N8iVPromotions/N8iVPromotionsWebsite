@@ -49,11 +49,26 @@ function normalize(body) {
   return {
     name: clean(body.name), email: clean(body.email).toLowerCase(), company: clean(body.company),
     followUpConsent: body.followUpConsent === true || body.followUpConsent === 'true' || body.followUpConsent === 'yes',
-    answers: Array.isArray(body.answers) ? body.answers.map(Number) : [], submittedAt: new Date().toISOString()
+    answers: Array.isArray(body.answers) ? body.answers.map(Number) : [],
+    conversionPage: clean(body.conversion_page, 1500), attribution: normalizeAttribution(body.attribution),
+    submittedAt: new Date().toISOString()
   };
 }
 
 function clean(value, max = 500) { return String(value || '').trim().slice(0, max); }
+
+function normalizeAttribution(value) {
+  const input = value && typeof value === 'object' ? value : {};
+  return { firstTouch: normalizeTouch(input.first_touch), latestTouch: normalizeTouch(input.latest_touch) };
+}
+
+function normalizeTouch(value) {
+  if (!value || typeof value !== 'object') return {};
+  const allowed = ['utm_source','utm_medium','utm_campaign','utm_id','utm_term','utm_content','utm_source_platform','gclid','gbraid','wbraid','fbclid','msclkid','li_fat_id','ttclid','twclid','sccid','landing_page','referrer','captured_at'];
+  return Object.fromEntries(allowed.map(key => [key, clean(value[key], 1500)]).filter(([, item]) => item));
+}
+
+function formatTouch(touch) { return Object.entries(touch || {}).map(([key, value]) => `${key}: ${value}`).join('\n') || 'Not captured'; }
 
 function scoreAudit(answers) {
   const categories = CATEGORY_NAMES.map((name, index) => ({ name, score: Math.round(answers.slice(index * 3, index * 3 + 3).reduce((sum, value) => sum + value, 0) / 9 * 100) }));
@@ -68,7 +83,7 @@ async function sendEmails(submission, result) {
   const consent = submission.followUpConsent ? 'YES, follow-up permitted' : 'NO, do not follow up';
   const categoryText = result.categories.map(item => `${item.name}: ${item.score}%`).join('\n');
   const answerText = submission.answers.map((answer, index) => `${index + 1}. ${QUESTION_LABELS[index]}: ${ANSWER_LABELS[answer]} (${answer}/3)`).join('\n');
-  const ownerText = `New Revenue Receipt Self-Audit\n\nName: ${submission.name}\nEmail: ${submission.email}\nCompany: ${submission.company}\nFollow-up consent: ${consent}\nSubmitted: ${submission.submittedAt}\n\nScore: ${result.score}/100 (${result.band})\n\nCategory results\n${categoryText}\n\nAll responses\n${answerText}`;
+  const ownerText = `New Revenue Receipt Self-Audit\n\nName: ${submission.name}\nEmail: ${submission.email}\nCompany: ${submission.company}\nFollow-up consent: ${consent}\nConversion page: ${submission.conversionPage || 'Not captured'}\nSubmitted: ${submission.submittedAt}\n\nFirst-touch attribution\n${formatTouch(submission.attribution.firstTouch)}\n\nLatest-touch attribution\n${formatTouch(submission.attribution.latestTouch)}\n\nScore: ${result.score}/100 (${result.band})\n\nCategory results\n${categoryText}\n\nAll responses\n${answerText}`;
   const visitorText = `Hi ${submission.name},\n\nYour N8iV Revenue Receipt score is ${result.score}/100: ${result.band}.\n\n${result.summary}\n\n${categoryText}\n\nYou ${submission.followUpConsent ? 'agreed' : 'did not agree'} to follow-up from N8iV Promotions.\n\nN8iV Promotions`;
   await sendEmail({ to: TO_EMAIL, replyTo: submission.email, subject: `[Self-Audit ${result.score}/100] ${submission.company} · ${consent}`, text: ownerText });
   try {

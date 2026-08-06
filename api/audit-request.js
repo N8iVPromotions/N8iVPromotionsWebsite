@@ -66,12 +66,37 @@ function normalizeSubmission(body) {
     crm: clean(body.crm),
     challenge: clean(body.challenge, 3000),
     sourcePage: clean(body.sourcePage || 'N8iV Promotions contact page'),
+    conversionPage: clean(body.conversion_page, 1500),
+    attribution: normalizeAttribution(body.attribution),
     submittedAt: new Date().toISOString(),
   };
 }
 
 function clean(value, maxLength = 500) {
   return String(value || '').trim().slice(0, maxLength);
+}
+
+function normalizeAttribution(value) {
+  const input = value && typeof value === 'object' ? value : {};
+  return {
+    firstTouch: normalizeTouch(input.first_touch),
+    latestTouch: normalizeTouch(input.latest_touch),
+  };
+}
+
+function normalizeTouch(value) {
+  if (!value || typeof value !== 'object') return {};
+  const allowed = [
+    'utm_source', 'utm_medium', 'utm_campaign', 'utm_id', 'utm_term',
+    'utm_content', 'utm_source_platform', 'gclid', 'gbraid', 'wbraid',
+    'fbclid', 'msclkid', 'li_fat_id', 'ttclid', 'twclid', 'sccid',
+    'landing_page', 'referrer', 'captured_at'
+  ];
+  return Object.fromEntries(allowed.map(key => [key, clean(value[key], 1500)]).filter(([, item]) => item));
+}
+
+function formatTouch(touch) {
+  return Object.entries(touch || {}).map(([key, value]) => `${key}: ${value}`).join('\n') || 'Not captured';
 }
 
 function isValidEmail(email) {
@@ -161,7 +186,14 @@ function buildTextEmail(submission) {
     `Monthly Marketing Investment: ${submission.investment}`,
     `CRM Platform: ${submission.crm}`,
     `Source Page: ${submission.sourcePage}`,
+    `Conversion Page: ${submission.conversionPage || 'Not captured'}`,
     `Submitted At: ${submission.submittedAt}`,
+    '',
+    'First-touch attribution:',
+    formatTouch(submission.attribution.firstTouch),
+    '',
+    'Latest-touch attribution:',
+    formatTouch(submission.attribution.latestTouch),
     '',
     'Biggest Marketing Visibility Challenge:',
     submission.challenge,
@@ -177,6 +209,9 @@ function buildHtmlEmail(submission) {
     ['Monthly Marketing Investment', submission.investment],
     ['CRM Platform', submission.crm],
     ['Source Page', submission.sourcePage],
+    ['Conversion Page', submission.conversionPage || 'Not captured'],
+    ['First-touch Attribution', formatTouch(submission.attribution.firstTouch).replace(/\n/g, '; ')],
+    ['Latest-touch Attribution', formatTouch(submission.attribution.latestTouch).replace(/\n/g, '; ')],
     ['Submitted At', submission.submittedAt],
   ];
 

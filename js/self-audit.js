@@ -69,11 +69,17 @@
     const data = Object.fromEntries(new FormData(form).entries());
     data.answers = Array.from({length:15},(_,i) => Number(data[`q${i}`]));
     data.followUpConsent = data.followUpConsent === 'yes';
+    Object.assign(data, window.N8iVAttribution?.getPayload?.() || {});
     try {
       const response = await fetch(form.action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
       const result = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(result.error || 'We could not submit your audit.');
-      renderResult(result, data.followUpConsent); showStep(sections.length + 1);
+      renderResult(result, data.followUpConsent);
+      window.N8iVAttribution?.track?.('self_audit_completed', {
+        score_band: result.band,
+        follow_up_consent: data.followUpConsent ? 'yes' : 'no'
+      });
+      showStep(sections.length + 1);
     } catch (err) { error.textContent = `${err.message} Please try again or email zajen@n8ivpromotions.com.`; }
     finally { submit.disabled = false; submit.textContent = 'Show my result'; }
   });
