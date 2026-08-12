@@ -217,20 +217,20 @@
 <!-- ════════════════════ NAV ════════════════════ -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
+    <a href="/" class="nav-logo">
       <div class="nav-logo-mark"><svg width="30" height="20" viewBox="0 0 30 20" fill="none" aria-hidden="true"><rect x="0" y="4" width="4" height="12" rx="2" fill="#7A63FF"/><rect x="6.5" y="0" width="4" height="20" rx="2" fill="currentColor"/><rect x="13" y="5" width="4" height="10" rx="2" fill="#7A63FF"/><rect x="19.5" y="0" width="4" height="20" rx="2" fill="currentColor"/><rect x="26" y="4" width="4" height="12" rx="2" fill="#7A63FF"/></svg></div>
       <div>N8iV Promotions<span class="nav-logo-sub">Revenue Intelligence Agency</span></div>
     </a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="services.html" class="active">Services</a></li>
-      <li><a href="case-studies.html">Use Cases</a></li>
-      <li><a href="insights.html">Insights</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/services" class="active">Services</a></li>
+      <li><a href="/case-studies">Use Cases</a></li>
+      <li><a href="/insights">Insights</a></li>
+      <li><a href="/about">About</a></li>
     </ul>
     <div class="nav-right">
       <span class="nav-badge"><span class="dot"></span>Pilot Clients Open</span>
-      <a href="contact.html" class="btn btn-primary btn-sm">Book a Revenue Audit</a>
+      <a href="/contact" class="btn btn-primary btn-sm">Request a Fit Review</a>
     </div>
     <button class="nav-mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
       <span></span><span></span><span></span>
@@ -242,12 +242,12 @@
 <!-- Mobile nav overlay -->
 <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation">
   <nav class="mobile-nav">
-    <a href="index.html" class="mobile-nav-link">Home</a>
-    <a href="services.html" class="mobile-nav-link active">Services</a>
-    <a href="case-studies.html" class="mobile-nav-link">Use Cases</a>
-    <a href="insights.html" class="mobile-nav-link">Insights</a>
-    <a href="about.html" class="mobile-nav-link">About</a>
-    <a href="contact.html" class="btn btn-primary mobile-nav-cta">Book a Revenue Audit</a>
+    <a href="/" class="mobile-nav-link">Home</a>
+    <a href="/services" class="mobile-nav-link active">Services</a>
+    <a href="/case-studies" class="mobile-nav-link">Use Cases</a>
+    <a href="/insights" class="mobile-nav-link">Insights</a>
+    <a href="/about" class="mobile-nav-link">About</a>
+    <a href="/contact" class="btn btn-primary mobile-nav-cta">Request a Fit Review</a>
   </nav>
 </div>
 
@@ -266,11 +266,11 @@
       N8iV Promotions combines SEO, social content, paid media analytics, and ARIE-powered attribution so every strategy conversation has a revenue signal behind it.
     </p>
     <div class="hero-cta reveal stagger-3">
-      <a href="contact.html" class="btn btn-primary btn-lg">
-        Request Revenue Audit
+      <a href="/contact" class="btn btn-primary btn-lg">
+        Request a Fit Review
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a href="case-studies.html" class="btn btn-ghost-dark btn-lg">See Use Cases</a>
+      <a href="/case-studies" class="btn btn-ghost-dark btn-lg">See Use Cases</a>
     </div>
   </div>
 </section>
@@ -329,7 +329,7 @@
         <div class="audit-step reveal stagger-1">
           <div class="audit-step-num">1</div>
           <div>
-            <h4>Audit Search Visibility</h4>
+            <h4>Review Search Visibility</h4>
             <p>Review current rankings, technical gaps, local visibility, and the terms most likely to attract qualified demand.</p>
           </div>
         </div>
@@ -478,21 +478,25 @@
 <!-- ════════════════════ FINAL CTA ════════════════════ -->
 <section class="section-lg cta-section">
   <div class="wrap on-dark">
-    <div class="eyebrow reveal">Get Started</div>
-    <h2 class="display-xl reveal stagger-1" style="max-width: 660px; margin: 8px auto 0;">
-      Ready to Package Your<br>Marketing Around Revenue?
-    </h2>
-    <p class="lead reveal stagger-2" style="margin: 20px auto 0;">
-      Request a working session with N8iV Promotions. We'll map your current marketing stack and show where revenue intelligence can improve your SEO, social, ads, and reporting.
-    </p>
-    <div class="cta-actions reveal stagger-3">
-      <a href="contact.html" class="btn btn-green btn-xl">
-        Request Revenue Audit
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M10 5l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <a href="case-studies.html" class="btn btn-ghost-dark btn-xl">See Use Cases</a>
+    <h2 class="display-xl reveal" style="max-width: 660px; margin: 8px auto 0;">Three Ways to Start.</h2>
+    <div class="reveal stagger-1" style="max-width:760px;margin:32px auto 0;display:grid;gap:20px;text-align:left;">
+      <div class="service-card">
+        <h3>1 — Score yourself (free, 2 minutes).</h3>
+        <p>The Revenue Receipt Self-Audit shows how much of your closed revenue you can currently trace back to a source.</p>
+        <a href="/revenue-self-audit" class="btn btn-green btn-lg">Get Your Revenue Receipt Score</a>
+      </div>
+      <div class="service-card">
+        <h3>2 — Fit Review (free, 30 minutes).</h3>
+        <p>A working session on your stack: ad platforms, CRM visibility, UTM quality, and where attribution breaks. You leave with a written Pilot Fit Summary within 48 hours — whether or not we work together.</p>
+        <a href="/contact" class="btn btn-green btn-lg">Request a Fit Review</a>
+      </div>
+      <div class="service-card">
+        <h3>3 — $750 B2B Attribution Pilot.</h3>
+        <p>One complete attribution report connecting a 30-day spend window to your CRM and revenue evidence.</p>
+        <a href="/b2b-attribution-pilot" class="btn btn-green btn-lg">See the $750 Pilot</a>
+      </div>
     </div>
-    <p class="body-sm reveal stagger-4" style="color: var(--on-dark-2); margin-top: 24px; text-align: center;">No pitch. No commitment. An honest assessment of your attribution gaps.</p>
+    <p class="body-sm reveal stagger-4" style="color: var(--on-dark-2); margin-top: 24px; text-align: center;">No pitch. No commitment until step 3 — and step 3 tells you exactly what it costs.</p>
   </div>
 </section>
 
@@ -503,13 +507,13 @@
       <div class="footer-brand">
         <div class="footer-logo-wrap"><div class="nav-logo-mark"><svg width="30" height="20" viewBox="0 0 30 20" fill="none" aria-hidden="true"><rect x="0" y="4" width="4" height="12" rx="2" fill="#7A63FF"/><rect x="6.5" y="0" width="4" height="20" rx="2" fill="currentColor"/><rect x="13" y="5" width="4" height="10" rx="2" fill="#7A63FF"/><rect x="19.5" y="0" width="4" height="20" rx="2" fill="currentColor"/><rect x="26" y="4" width="4" height="12" rx="2" fill="#7A63FF"/></svg></div> N8iV Promotions</div>
         <p class="footer-tagline">Revenue intelligence, SEO strategy, social content, and analytics reporting for B2B businesses and agencies.</p>
-        <a href="contact.html" class="btn btn-primary btn-sm">Book a Revenue Audit</a>
+        <a href="/contact" class="btn btn-primary btn-sm">Request a Fit Review</a>
       </div>
-      <div class="footer-col"><h4>Platform</h4><ul><li><a href="index.html#system">How It Works</a></li><li><a href="index.html#platform">Dashboard</a></li><li><a href="revenue-self-audit.html">Free Self-Audit</a></li><li><a href="services.html">All Services</a></li></ul></div>
-      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="case-studies.html">Use Cases</a></li><li><a href="insights.html">Insights</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-      <div class="footer-col"><h4>Connect</h4><ul><li><a href="mailto:zajen@n8ivpromotions.com">zajen@n8ivpromotions.com</a></li></ul></div>
+      <div class="footer-col"><h4>Platform</h4><ul><li><a href="/#system">How It Works</a></li><li><a href="/#platform">Dashboard</a></li><li><a href="/revenue-self-audit">Free Self-Audit</a></li><li><a href="/services">All Services</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="/about">About</a></li><li><a href="/case-studies">Use Cases</a></li><li><a href="/insights">Insights</a></li><li><a href="/contact">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Connect</h4><ul><li><a href="/contact">Contact</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><span>© 2026 N8iV Promotions LLC. ARIE is internal software operated by N8iV.</span><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/security">Security</a><a href="/contact">Contact</a></div></div>
+    <div class="footer-bottom"><span>© 2026 N8iV Promotions LLC. ARIE is internal software operated by N8iV Promotions.</span><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/security">Security</a><a href="/contact">Contact</a></div></div>
   </div>
 </footer>
 
