@@ -46,11 +46,16 @@
     gap: 0;
     border: 1px solid var(--border);
     border-radius: var(--r-xl);
-    overflow: hidden;
+    overflow: visible;
+    isolation: isolate;
   }
   .comparison-col {
     padding: 32px 28px;
     border-right: 1px solid var(--border);
+    position: relative;
+    z-index: 0;
+    background: var(--white);
+    transform-origin: center;
   }
   .comparison-col:last-child { border-right: none; }
   .comparison-col.highlighted {
@@ -68,7 +73,7 @@
     border-bottom: 1px solid var(--border);
   }
   .comparison-col.highlighted .comparison-col-header {
-    border-bottom-color: rgba(122,99,255,0.2);
+    border-bottom-color: var(--light-grey);
   }
   .comparison-col-title {
     font-size: 16px;
@@ -123,6 +128,35 @@
   .comparison-item-icon.lock {
     background: var(--surface-3);
     color: var(--muted);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .comparison-col {
+      transition:
+        transform 220ms cubic-bezier(.4, 0, .2, 1),
+        opacity 180ms ease,
+        box-shadow 220ms ease;
+    }
+    .comparison:has(.comparison-col:hover) .comparison-col:not(:hover) {
+      opacity: .58;
+    }
+    .comparison-col:hover {
+      z-index: 3;
+      transform: translateY(-8px) scale(1.035);
+      box-shadow:
+        0 0 0 2px var(--violet),
+        0 12px 0 var(--light-grey);
+      will-change: transform;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .comparison-col {
+      transition: none !important;
+    }
+    .comparison-col:hover {
+      transform: none;
+    }
   }
 
   /* Methodology 2×2 grid */
@@ -352,7 +386,7 @@
       <div class="comparison-col highlighted">
         <div class="comparison-col-header">
           <div class="comparison-col-title">N8iV Promotions</div>
-          <div class="comparison-col-sub" style="color: rgba(122,99,255,0.7);">What we do instead</div>
+          <div class="comparison-col-sub" style="color: var(--dark-grey);">What we do instead</div>
         </div>
         <div class="comparison-list">
           <div class="comparison-item">

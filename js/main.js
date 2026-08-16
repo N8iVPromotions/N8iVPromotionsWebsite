@@ -197,12 +197,14 @@
   function setPending(pending) {
     if (!button) return;
     button.disabled = pending;
+    button.setAttribute('aria-busy', String(pending));
+    form.setAttribute('aria-busy', String(pending));
     button.style.opacity = pending ? '0.75' : '';
-    button.innerHTML = pending ? 'Sending...' : buttonHtml;
+    button.innerHTML = pending ? 'Sending&hellip;' : buttonHtml;
   }
 
   function buildFallbackMailto(data) {
-    const subject = encodeURIComponent('Revenue Intelligence Audit Request');
+    const subject = encodeURIComponent('Fit Review Request');
     const body = encodeURIComponent([
       `Name: ${data.firstName} ${data.lastName}`,
       `Email: ${data.email}`,
@@ -225,7 +227,7 @@
     const data = Object.fromEntries(new FormData(form).entries());
     Object.assign(data, window.N8iVAttribution?.getPayload?.() || {});
     setPending(true);
-    setStatus('Sending your audit request...', '');
+    setStatus('Sending your Fit Review request...', '');
 
     try {
       const response = await fetch(form.action, {
@@ -240,10 +242,10 @@
       }
 
       form.reset();
-      window.N8iVAttribution?.track?.('audit_request_submitted', {
-        form: 'revenue_audit_request'
+      window.N8iVAttribution?.track?.('fit_review_requested', {
+        form: 'fit_review_request'
       });
-      setStatus('Your audit request was sent to zajen@n8ivpromotions.com. We will follow up within 1 business day.', 'success');
+      setStatus('Your Fit Review request was sent. Expect a reply within 1 business day.', 'success');
     } catch (error) {
       console.error(error);
       const fallback = buildFallbackMailto(data);
@@ -256,6 +258,42 @@
 })();
 
 // ── 8. PROBLEM CARD HOVER PARALLAX ────────────────────────────
+(function initCapabilityTabs() {
+  const tabs = [...document.querySelectorAll('[data-capability-tab]')];
+  if (!tabs.length) return;
+
+  function activate(tab, moveFocus = false) {
+    tabs.forEach(item => {
+      const selected = item === tab;
+      const panel = document.getElementById(item.dataset.capabilityTab);
+      item.classList.toggle('active', selected);
+      item.setAttribute('aria-selected', String(selected));
+      item.tabIndex = selected ? 0 : -1;
+      if (panel) {
+        panel.hidden = !selected;
+        panel.classList.toggle('active', selected);
+      }
+    });
+    if (moveFocus) tab.focus();
+  }
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => activate(tab));
+    tab.addEventListener('keydown', event => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      let next = index;
+      if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+      if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+      if (event.key === 'Home') next = 0;
+      if (event.key === 'End') next = tabs.length - 1;
+      activate(tabs[next], true);
+    });
+  });
+
+  activate(tabs.find(tab => tab.classList.contains('active')) || tabs[0]);
+})();
+
 (function initCardTilt() {
   document.querySelectorAll('.problem-card').forEach(card => {
     card.addEventListener('mousemove', e => {
