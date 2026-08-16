@@ -18,30 +18,35 @@
     align-items: center;
   }
 
-  /* Feature card 2×2 grid */
+  /* Evidence list — deliberately linear, not another card grid */
   .feature-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 1px solid var(--border);
   }
   .feature-card {
-    background: var(--page);
-    border: 1px solid var(--border);
-    border-radius: var(--r-lg);
-    padding: 24px;
-    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    padding: 18px 0;
+    display: grid;
+    grid-template-columns: minmax(150px, .72fr) minmax(0, 1.28fr);
+    gap: 22px;
+    transition: color 0.2s;
   }
   .feature-card:hover {
-    border-color: var(--blue);
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
+    border-color: var(--border);
+    transform: none;
+    box-shadow: none;
   }
   .feature-card h4 {
     font-size: 15px;
     font-weight: 700;
     letter-spacing: -0.015em;
     color: var(--ink);
-    margin: 0 0 8px;
+    margin: 0;
   }
   .feature-card p {
     font-size: 13px;
@@ -206,6 +211,7 @@
   @media (max-width: 900px) {
     .two-col { grid-template-columns: 1fr; gap: 48px; }
     .feature-grid { grid-template-columns: 1fr; }
+    .feature-card { grid-template-columns: 1fr; gap: 7px; }
     .stats-band { grid-template-columns: 1fr; }
     .stats-band-cell { border-right: none; border-bottom: 1px solid var(--border); }
     .stats-band-cell:last-child { border-bottom: none; }
@@ -384,7 +390,7 @@
             <div class="finding-dot green"></div>
             <span>Priority briefs should target buyer objections, not generic volume</span>
           </div>
-          <div style="margin-top: 20px; padding: 16px; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); border-radius: var(--r-md);">
+          <div style="margin-top: 20px; padding: 16px; background: var(--white); border: 1px solid var(--light-grey); border-radius: var(--r-md);">
             <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 6px;">Next action</div>
             <div style="font-size: 30px; font-weight: 800; letter-spacing: -0.04em; color: var(--on-dark); font-family: var(--ff-mono);">90-day<span style="font-size: 15px; font-weight: 500; color: var(--on-dark-2);"> SEO sprint</span></div>
           </div>

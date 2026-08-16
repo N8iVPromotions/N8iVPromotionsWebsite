@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">N8iV Promotions</title>
+  <desc id="desc">Five vertical bars forming the N8iV Promotions mark.</desc>
+  <rect width="512" height="512" rx="96" fill="#F7F7FA"/>
+  <rect x="76" y="160" width="52" height="192" rx="26" fill="#7A63FF"/>
+  <rect x="153" y="96" width="52" height="320" rx="26" fill="#17171C"/>
+  <rect x="230" y="176" width="52" height="160" rx="26" fill="#7A63FF"/>
+  <rect x="307" y="96" width="52" height="320" rx="26" fill="#17171C"/>
+  <rect x="384" y="160" width="52" height="192" rx="26" fill="#7A63FF"/>
+</svg>

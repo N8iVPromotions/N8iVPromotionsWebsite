@@ -18,6 +18,11 @@
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/revenue-self-audit", "destination": "/revenue-self-audit.html" },
     { "source": "/insights/agencies-optimizing-40-percent-of-the-funnel", "destination": "/blog/agencies-optimizing-40-percent-of-the-funnel" },
-    { "source": "/insights/performance-marketing-done-guessing-revenue-proof", "destination": "/blog/performance-marketing-done-guessing-revenue-proof" }
+    { "source": "/insights/performance-marketing-done-guessing-revenue-proof", "destination": "/blog/performance-marketing-done-guessing-revenue-proof" },
+    { "source": "/insights/search-console-revenue-led-seo-roadmap", "destination": "/blog/search-console-revenue-led-seo-roadmap" },
+    { "source": "/insights/buyer-signals-content-pillars", "destination": "/blog/buyer-signals-content-pillars" },
+    { "source": "/insights/monthly-marketing-report-founders-need", "destination": "/blog/monthly-marketing-report-founders-need" },
+    { "source": "/insights/productize-revenue-reporting-across-client-accounts", "destination": "/blog/productize-revenue-reporting-across-client-accounts" },
+    { "source": "/insights/revenue-intelligence-stack-from-scratch", "destination": "/blog/revenue-intelligence-stack-from-scratch" }
   ]
 }
