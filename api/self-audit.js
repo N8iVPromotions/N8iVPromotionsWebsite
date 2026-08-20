@@ -1,3 +1,5 @@
+const { rejectDisallowedOrigin } = require('./_lib/origin-check');
+
 const TO_EMAIL = process.env.AUDIT_REQUEST_TO || 'zajen@n8ivpromotions.com';
 const FROM_EMAIL = process.env.AUDIT_REQUEST_FROM || process.env.EMAIL_FROM || 'N8iV Promotions <no-reply@n8ivpromotions.com>';
 const CATEGORY_NAMES = ['Source capture', 'CRM connection', 'Attribution confidence', 'Revenue reconciliation', 'Decision readiness'];
@@ -23,6 +25,7 @@ const ANSWER_LABELS = ['Not in place', 'Partly', 'Mostly', 'Consistently'];
 module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') { res.setHeader('Allow', 'POST, OPTIONS'); return res.status(405).json({ error: 'Method not allowed' }); }
+  if (rejectDisallowedOrigin(req, res)) return;
   try {
     const body = parseBody(req.body);
     if (body.website) return res.status(200).json({ ok: true });
