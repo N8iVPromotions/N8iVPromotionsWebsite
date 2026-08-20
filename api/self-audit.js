@@ -1,4 +1,7 @@
 const { rejectDisallowedOrigin } = require('./_lib/origin-check');
+const { rejectIfRateLimited } = require('./_lib/rate-limit');
+const { verifyTurnstile } = require('./_lib/turnstile');
+const { getClientIp } = require('./_lib/request-ip');
 
 const TO_EMAIL = process.env.AUDIT_REQUEST_TO || 'zajen@n8ivpromotions.com';
 const FROM_EMAIL = process.env.AUDIT_REQUEST_FROM || process.env.EMAIL_FROM || 'N8iV Promotions <no-reply@n8ivpromotions.com>';
@@ -26,6 +29,7 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') { res.setHeader('Allow', 'POST, OPTIONS'); return res.status(405).json({ error: 'Method not allowed' }); }
   if (rejectDisallowedOrigin(req, res)) return;
+  if (rejectIfRateLimited(req, res, 'self-audit')) return;
   try {
     const body = parseBody(req.body);
     if (body.website) return res.status(200).json({ ok: true });
@@ -33,6 +37,8 @@ module.exports = async function handler(req, res) {
     if (!submission.name || !submission.email || !submission.company) return res.status(400).json({ error: 'Name, work email, and company are required.' });
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(submission.email)) return res.status(400).json({ error: 'Please enter a valid work email.' });
     if (submission.answers.length !== 15 || submission.answers.some(value => !Number.isInteger(value) || value < 0 || value > 3)) return res.status(400).json({ error: 'Please answer all 15 audit questions.' });
+    const verified = await verifyTurnstile(body['cf-turnstile-response'], getClientIp(req));
+    if (!verified) return res.status(400).json({ error: 'We could not verify you are human. Please retry the form.' });
     const result = scoreAudit(submission.answers);
     const emailDelivered = await sendEmails(submission, result);
     return res.status(200).json({ ok: true, emailDelivered, ...result });

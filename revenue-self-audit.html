@@ -73,6 +73,7 @@
         <div class="lead-fields"><div class="lead-field"><label for="auditName">Your name</label><input id="auditName" name="name" autocomplete="name" required></div><div class="lead-field"><label for="auditEmail">Work email</label><input id="auditEmail" name="email" type="email" autocomplete="email" required></div><div class="lead-field full"><label for="auditCompany">Company</label><input id="auditCompany" name="company" autocomplete="organization" required></div></div>
         <label class="consent-row"><input type="checkbox" name="followUpConsent" value="yes"><span><strong>Yes, N8iV Promotions may follow up about my Self-Audit.</strong> This is optional. Your details and responses are used to deliver your result; N8iV will only contact you about services when this box is checked.</span></label>
         <input name="website" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true">
+        <div class="cf-turnstile" data-sitekey="TURNSTILE_SITE_KEY" style="margin:12px 0;"></div>
         <div class="audit-error" data-audit-error role="alert"></div><div class="audit-actions"><button class="audit-back" type="button" data-back>Back</button><button class="btn btn-primary audit-btn" type="submit">Show my result</button></div>
       </section>
       <section class="audit-panel" data-result-panel aria-live="polite">
@@ -82,6 +83,7 @@
   </div>
 </main>
 <script src="js/self-audit.js" defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script type="module" src="js/analytics.js"></script>
 </body>
 </html>
