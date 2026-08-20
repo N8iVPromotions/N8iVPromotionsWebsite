@@ -76,3 +76,12 @@ const script = document.createElement('script');
 script.defer = true;
 script.src = '/_vercel/insights/script.js';
 document.head.appendChild(script);
+
+// Vercel Speed Insights queue and production script for a static site.
+window.si = window.si || function () {
+  (window.siq = window.siq || []).push(arguments);
+};
+const speedInsightsScript = document.createElement('script');
+speedInsightsScript.defer = true;
+speedInsightsScript.src = '/_vercel/speed-insights/script.js';
+document.head.appendChild(speedInsightsScript);
