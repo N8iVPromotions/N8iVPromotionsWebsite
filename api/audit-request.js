@@ -1,3 +1,8 @@
+const { rejectDisallowedOrigin } = require('./_lib/origin-check');
+const { rejectIfRateLimited } = require('./_lib/rate-limit');
+const { verifyTurnstile } = require('./_lib/turnstile');
+const { getClientIp } = require('./_lib/request-ip');
+
 const TO_EMAIL = process.env.AUDIT_REQUEST_TO || 'zajen@n8ivpromotions.com';
 const FROM_EMAIL =
   process.env.AUDIT_REQUEST_FROM ||
@@ -16,6 +21,9 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  if (rejectDisallowedOrigin(req, res)) return;
+  if (rejectIfRateLimited(req, res, 'audit-request')) return;
+
   try {
     const body = parseBody(req.body);
 
@@ -31,6 +39,11 @@ module.exports = async function handler(req, res) {
 
     if (!isValidEmail(submission.email)) {
       return res.status(400).json({ error: 'Please enter a valid work email.' });
+    }
+
+    const verified = await verifyTurnstile(body['cf-turnstile-response'], getClientIp(req));
+    if (!verified) {
+      return res.status(400).json({ error: 'We could not verify you are human. Please retry the form.' });
     }
 
     await sendAuditRequestEmail(submission);
