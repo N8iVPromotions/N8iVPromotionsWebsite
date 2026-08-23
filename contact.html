@@ -60,6 +60,7 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
 <nav class="nav">
   <div class="nav-inner">
@@ -109,13 +110,17 @@
 </section>
 
 <!-- FORM + INFO -->
-<section class="bg-page" style="padding-top:0;">
+<section class="bg-page" id="main-content" tabindex="-1" style="padding-top:0;">
   <div class="wrap">
     <div class="contact-grid">
 
       <div class="contact-form-wrap reveal">
+        <div class="contact-context" data-contact-context hidden>
+          <strong>You’re checking fit for the $750 B2B Attribution Pilot.</strong>
+          <span>Complete the short form below. We’ll confirm whether your current data can support the pilot before you spend anything.</span>
+        </div>
         <h2 class="display-sm" style="margin:0 0 6px;">Request a Fit Review</h2>
-        <p class="body-sm" style="margin:0 0 28px;">We'll review your submission and schedule a call within 1 business day.</p>
+        <p class="body-sm" style="margin:0 0 28px;">Four required fields. Personally reviewed, with a reply within 1 business day.</p>
         <form action="/api/audit-request" method="post" data-audit-request-form>
           <div class="form-row">
             <div class="form-field"><label for="firstName">First Name</label><input id="firstName" name="firstName" type="text" placeholder="Jane" autocomplete="given-name" required /></div>
@@ -125,21 +130,21 @@
           <div class="form-field"><label for="company">Company Name</label><input id="company" name="company" type="text" placeholder="Acme Corp" autocomplete="organization" required /></div>
           <div class="form-row">
             <div class="form-field">
-              <label for="role">Your Role</label>
-              <select id="role" name="role" required><option value="">Select role</option><option>CMO / VP Marketing</option><option>RevOps Director</option><option>Founder / CEO</option><option>Marketing Manager</option><option>Agency Owner</option><option>Other</option></select>
+              <label for="role">Your Role <span class="optional-label">Optional</span></label>
+              <select id="role" name="role"><option value="">Select role</option><option>CMO / VP Marketing</option><option>RevOps Director</option><option>Founder / CEO</option><option>Marketing Manager</option><option>Agency Owner</option><option>Other</option></select>
             </div>
             <div class="form-field">
-              <label for="investment">Monthly Marketing Investment</label>
-              <select id="investment" name="investment" required><option value="">Select range</option><option>Under $10K</option><option>$10K – $50K</option><option>$50K – $200K</option><option>$200K – $500K</option><option>$500K+</option></select>
+              <label for="investment">Monthly Marketing Investment <span class="optional-label">Optional</span></label>
+              <select id="investment" name="investment"><option value="">Select range</option><option>Under $10K</option><option>$10K – $50K</option><option>$50K – $200K</option><option>$200K – $500K</option><option>$500K+</option></select>
             </div>
           </div>
           <div class="form-field">
-            <label for="crm">CRM Platform</label>
-            <select id="crm" name="crm" required><option value="">Select CRM</option><option>HubSpot</option><option>Salesforce</option><option>Pipedrive</option><option>Close.com</option><option>None / Other</option></select>
+            <label for="crm">CRM Platform <span class="optional-label">Optional</span></label>
+            <select id="crm" name="crm"><option value="">Select CRM</option><option>HubSpot</option><option>Salesforce</option><option>Pipedrive</option><option>Close.com</option><option>None / Other</option></select>
           </div>
           <div class="form-field">
-            <label for="challenge">Biggest Marketing Visibility Challenge</label>
-            <textarea id="challenge" name="challenge" placeholder="e.g. We cannot tell which SEO topics, social content, ads, or sources influence qualified pipeline and closed revenue..." required></textarea>
+            <label for="challenge">Biggest Marketing Visibility Challenge <span class="optional-label">Optional</span></label>
+            <textarea id="challenge" name="challenge" placeholder="e.g. We cannot tell which sources influence qualified pipeline and closed revenue..."></textarea>
           </div>
           <div class="form-field sr-only" aria-hidden="true">
             <label for="website">Website</label>

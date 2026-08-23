@@ -101,6 +101,8 @@
     toggle.classList.toggle('open', open);
     toggle.setAttribute('aria-expanded', open);
     document.body.style.overflow = open ? 'hidden' : '';
+    if (open) menu.querySelector('a')?.focus();
+    else if (document.activeElement && menu.contains(document.activeElement)) toggle.focus();
   }
 
   toggle.addEventListener('click', () => setOpen(!menu.classList.contains('open')));
@@ -111,6 +113,13 @@
 
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') setOpen(false);
+    if (e.key === 'Tab' && menu.classList.contains('open')) {
+      const focusable = [...menu.querySelectorAll('a, button')];
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
   });
 })();
 
@@ -254,6 +263,31 @@
     } finally {
       setPending(false);
     }
+  });
+})();
+
+// Preserve offer context from CTA through the contact form.
+(function initContactContext() {
+  const context = document.querySelector('[data-contact-context]');
+  const form = document.querySelector('[data-audit-request-form]');
+  if (!context || !form) return;
+  const pilot = new URLSearchParams(location.search).get('pilot');
+  if (pilot !== 'b2b-attribution') return;
+  context.hidden = false;
+  const source = form.querySelector('[name="sourcePage"]');
+  if (source) source.value = 'N8iV Promotions $750 B2B Attribution Pilot';
+})();
+
+// Track meaningful conversion clicks consistently across pages.
+(function initConversionTracking() {
+  document.querySelectorAll('a[href*="/contact"], a[href*="b2b-attribution-pilot"], a[href*="revenue-self-audit"]').forEach(link => {
+    link.addEventListener('click', () => {
+      window.N8iVAttribution?.track?.('conversion_cta_clicked', {
+        label: (link.textContent || '').trim().slice(0, 80),
+        destination: link.getAttribute('href') || '',
+        page: location.pathname
+      });
+    });
   });
 })();
 
