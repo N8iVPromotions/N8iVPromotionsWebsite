@@ -56,3 +56,12 @@
 .pilot-cta {
   background: var(--white);
 }
+
+/* Pilot terms at a glance, inside the price card */
+.pilot-terms { margin: 0 0 26px; padding: 18px 0 0; border-top: 1px solid var(--light-grey); }
+.pilot-terms-title { font: 600 12px/1 var(--ff-sub); letter-spacing: .08em; text-transform: uppercase; color: var(--violet); margin-bottom: 14px; }
+.pilot-terms dl { margin: 0; display: grid; gap: 12px; }
+.pilot-terms dl > div { display: grid; grid-template-columns: 96px 1fr; gap: 12px; align-items: baseline; }
+.pilot-terms dt { font: 400 13px/1.4 var(--ff-sub); color: var(--dark-grey); }
+.pilot-terms dd { margin: 0; font: 600 14px/1.4 var(--ff-sub); color: var(--black); }
+.pilot-ticket ul { margin-bottom: 22px; }
