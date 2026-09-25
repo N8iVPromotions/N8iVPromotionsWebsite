@@ -1,17 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 /* ================================================================
-   N8iV Promotions — Design System
-   "Receipts" — white-dominant, large grotesque headlines, monospace
-   markers, pixel accents, hairline borders, one dark band.
-   Black #000000 · Dark grey #2F2F2F · Light grey #BBBCBC · Violet #7A63FF · White #FFFFFF
+   N8iV Promotions — Design System (brand v1.0)
+   Paper ground, white cards, hairline borders, Helvetica display over
+   Inter body, one purple for actions and one for the mark.
+   Ink #1C1C1C · Muted #5F5E5A · Hairline #E4E4E4 · Paper #F7F6F3
+   Signal Purple #7860FC (mark) · Action Purple #5F42FB (buttons, links)
    ================================================================ */
 
 :root {
-  --black:      #000000;
-  --dark-grey:  #2F2F2F;
-  --light-grey: #BBBCBC;
-  --violet:     #7A63FF;
+  --black:      #1C1C1C; /* Ink */
+  --dark-grey:  #5F5E5A; /* Muted text */
+  --light-grey: #E4E4E4; /* Hairline */
+  --violet:     #5F42FB; /* Action Purple — passes AA with white text */
+  --signal:     #7860FC; /* Signal Purple — the mark and decorative accents */
+  --paper:      #F7F6F3; /* Page ground */
+  --stone:      #B4B2AC; /* Secondary text on Ink */
   --white:      #FFFFFF;
 
   /* ── Dark band tokens (defaults tuned for light context; .bg-dark
@@ -23,8 +27,8 @@
   --dark-border: var(--light-grey);
   --dark-border-2: var(--white);
 
-  /* ── Light surface tokens (pure white) ───────────────────── */
-  --page:       var(--white);
+  /* ── Light surface tokens (Paper ground, white cards) ────── */
+  --page:       var(--paper);
   --surface:    var(--white);
   --surface-2:  var(--white);
   --surface-3:  var(--light-grey);
@@ -66,7 +70,7 @@
   --glass-blur:   none;
 
   /* ── Typography ──────────────────────────────────────────── */
-  --ff: 'Montserrat', Arial, sans-serif;
+  --ff: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --ff-display: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --ff-sub: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --ff-serif: var(--ff-display);
@@ -109,7 +113,7 @@ body {
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
   line-height: 1.55;
-  font-weight: 300;
+  font-weight: 400;
   font-optical-sizing: auto;
 }
 img, svg { display: block; max-width: 100%; }
@@ -437,9 +441,9 @@ textarea:focus-visible {
   animation: pulse-green 2s ease-out infinite;
 }
 @keyframes pulse-green {
-  0%   { box-shadow: 0 0 0 0 rgba(122,99,255,0.45); }
-  70%  { box-shadow: 0 0 0 8px rgba(122,99,255,0); }
-  100% { box-shadow: 0 0 0 0 rgba(122,99,255,0); }
+  0%   { box-shadow: 0 0 0 0 rgba(95,66,251,0.45); }
+  70%  { box-shadow: 0 0 0 8px rgba(95,66,251,0); }
+  100% { box-shadow: 0 0 0 0 rgba(95,66,251,0); }
 }
 
 /* ================================================================
@@ -697,8 +701,8 @@ textarea:focus-visible {
   color: transparent;
 }
 .flow-node.engine  {
-  border-color: rgba(122,99,255,0.35);
-  background: rgba(122,99,255,0.05);
+  border-color: rgba(95,66,251,0.35);
+  background: rgba(95,66,251,0.05);
   flex-direction: column;
   align-items: flex-start;
   border-radius: 0;
@@ -1022,11 +1026,11 @@ textarea:focus-visible {
   cursor: pointer;
 }
 .dash-nav-item:hover {
-  background: rgba(122,99,255,0.08);
+  background: rgba(95,66,251,0.08);
   color: var(--on-dark);
 }
 .dash-nav-item.active {
-  background: rgba(122,99,255,0.14);
+  background: rgba(95,66,251,0.14);
   color: var(--on-dark);
   font-weight: 500;
 }
@@ -1584,14 +1588,14 @@ textarea:focus-visible {
   color: var(--black);
   border: 1px solid var(--light-grey);
   padding: clamp(26px, 4vw, 46px);
-  box-shadow: 18px 18px 0 rgba(122,99,255,0.16);
+  box-shadow: 18px 18px 0 rgba(95,66,251,0.16);
 }
 .receipt-sheet::before {
   content: 'SAMPLE';
   position: absolute;
   top: 25px;
   right: 24px;
-  border: 1px solid rgba(122,99,255,0.45);
+  border: 1px solid rgba(95,66,251,0.45);
   color: var(--dark-grey);
   padding: 5px 9px;
   font-family: var(--ff-mono);
@@ -1688,7 +1692,7 @@ body {
   border-color: rgba(255,255,255,0.08);
 }
 .nav-badge {
-  border: 1px solid rgba(122,99,255,0.22);
+  border: 1px solid rgba(95,66,251,0.22);
   border-radius: var(--r-pill);
 }
 
@@ -1708,7 +1712,7 @@ body {
 .cta-section .btn-green {
   background: var(--blue);
   color: #fff;
-  box-shadow: 0 10px 30px rgba(122,99,255,0.18);
+  box-shadow: 0 10px 30px rgba(95,66,251,0.18);
 }
 .btn-primary:hover,
 .btn-dark:hover,
@@ -1793,8 +1797,8 @@ body {
   to { opacity: 1; transform: translateY(0) rotate(0); }
 }
 .hero-badge {
-  background: rgba(122,99,255,0.08);
-  border-color: rgba(122,99,255,0.24);
+  background: rgba(95,66,251,0.08);
+  border-color: rgba(95,66,251,0.24);
   color: var(--dark-grey);
   border-radius: var(--r-pill);
 }
@@ -1812,7 +1816,7 @@ body {
   height: 48%;
   right: -14%;
   top: -12%;
-  background: rgba(122,99,255,.18);
+  background: rgba(95,66,251,.18);
   filter: blur(70px);
   border-radius: 50%;
   pointer-events: none;
@@ -1916,8 +1920,8 @@ body {
   text-transform: uppercase;
   letter-spacing: .08em;
   color: var(--dark-grey);
-  background: rgba(122,99,255,.10);
-  border: 1px solid rgba(122,99,255,.18);
+  background: rgba(95,66,251,.10);
+  border: 1px solid rgba(95,66,251,.18);
   border-radius: var(--r-pill);
   padding: 6px 8px;
 }
@@ -2015,7 +2019,7 @@ body {
 .capability-tab:hover { color: var(--ink); background: rgba(255,255,255,.025); }
 .capability-tab.active {
   color: #fff;
-  background: rgba(122,99,255,.12);
+  background: rgba(95,66,251,.12);
   box-shadow: inset 0 -2px 0 var(--blue);
 }
 .capability-panels {
@@ -2209,7 +2213,7 @@ body {
 }
 .receipt-sheet {
   border-radius: var(--r-sm);
-  box-shadow: 22px 22px 0 rgba(122,99,255,.12), var(--shadow-lg);
+  box-shadow: 22px 22px 0 rgba(95,66,251,.12), var(--shadow-lg);
 }
 .receipt-decision { border-radius: var(--r-sm); }
 .cta-section {
@@ -2275,8 +2279,8 @@ form[aria-busy="true"] .form-field { opacity: .72; }
 }
 .form-status.success {
   color: var(--dark-grey);
-  border-color: rgba(122,99,255,.3);
-  background: rgba(122,99,255,.09);
+  border-color: rgba(95,66,251,.3);
+  background: rgba(95,66,251,.09);
 }
 .form-status.error {
   border-color: rgba(169,59,54,.35);
@@ -2378,7 +2382,7 @@ form[aria-busy="true"] .form-field { opacity: .72; }
   .founder-proof-grid,
   .receipt-preview { grid-template-columns: 1fr; }
   .founder-proof-photo { max-width: 320px; }
-  .receipt-sheet { box-shadow: 10px 10px 0 rgba(122,99,255,0.16); }
+  .receipt-sheet { box-shadow: 10px 10px 0 rgba(95,66,251,0.16); }
   .nav-links, .nav-badge, .nav-right { display: none; }
   .nav .nav-mobile-toggle { display: flex; }
 }
@@ -2551,13 +2555,13 @@ form[aria-busy="true"] .form-field { opacity: .72; }
 }
 
 /* ================================================================
-   STRICT N8iV BRAND SYSTEM
-   Flat white canvas, exact five-color palette, violet actions.
+   STRICT N8iV BRAND SYSTEM (v1.0)
+   Flat Paper canvas, white cards, exact palette, purple actions.
    ================================================================ */
 html,
 body {
   color: var(--black);
-  background: var(--white);
+  background: var(--paper);
 }
 
 body,
@@ -2566,7 +2570,7 @@ input,
 select,
 textarea {
   font-family: var(--ff);
-  font-weight: 300;
+  font-weight: 400;
 }
 
 h1,
@@ -2593,7 +2597,7 @@ h1,
 .article-deck,
 .cta-section .lead {
   font-family: var(--ff-sub);
-  font-weight: 200;
+  font-weight: 400;
   color: var(--dark-grey);
 }
 
@@ -2631,7 +2635,7 @@ section,
 .pilot-cta,
 .trust-hero,
 .audit-page {
-  background: var(--white) !important;
+  background: var(--paper) !important;
   color: var(--black);
   border-color: var(--light-grey);
 }
@@ -2697,7 +2701,7 @@ section,
 .nav::before,
 .nav.light::before,
 .trust-nav {
-  background: var(--white);
+  background: var(--paper);
   border-bottom-color: var(--light-grey);
   -webkit-backdrop-filter: none;
           backdrop-filter: none;
@@ -2960,7 +2964,7 @@ section,
 }
 
 #mobile-menu {
-  background: var(--white);
+  background: var(--paper);
 }
 
 .mobile-nav-link {
@@ -2992,7 +2996,7 @@ section,
 .featured-card,
 .article-card {
   border-radius: 0 !important;
-  background: var(--light-grey) !important;
+  background: var(--white) !important;
   clip-path: polygon(
     0 10px,
     2.5% 0,
@@ -3173,3 +3177,69 @@ section,
   .mobile-conversion-bar span { font-size: 9px; color: var(--muted); }
   .mobile-conversion-bar .btn { min-height: 44px; white-space: nowrap; padding-inline: 16px; }
 }
+
+/* ================================================================
+   BRAND v1.0 — LOGO, WORDMARK, NAV AND BUTTONS
+   Matches the v1.0 mark sheet and website hero: five-bar mark,
+   "N8iV" at 500 in Ink + "Promotions" at 400 in Muted, pill CTAs
+   in Action Purple, sentence-case Inter UI text.
+   ================================================================ */
+.nav-logo,
+.footer-logo-wrap,
+.trust-brand,
+.audit-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--ff-display);
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1;
+  color: var(--black);
+}
+.nav-logo-mark { color: var(--black); }
+.brand-mark { width: 38px; height: auto; }
+.brand-word { white-space: nowrap; color: var(--dark-grey); font-weight: 400; }
+.brand-word-name { color: var(--black); font-weight: 500; }
+.nav-logo-sub { margin-top: 5px; letter-spacing: 0.06em; }
+
+.nav-links a,
+.nav.light .nav-links a {
+  font-family: var(--ff-sub);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  border-radius: var(--r-pill);
+}
+.nav-links a.active,
+.nav.light .nav-links a.active { color: var(--violet); font-weight: 500; }
+
+.btn,
+.pilot-btn,
+.audit-btn {
+  font-family: var(--ff-sub);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  border-radius: var(--r-pill);
+}
+.btn { font-size: 15px; }
+.btn-sm { font-size: 14px; }
+.btn-lg { font-size: 16px; }
+.btn-xl { font-size: 17px; }
+.btn:focus-visible,
+.pilot-btn:focus-visible,
+.audit-btn:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 3px;
+}
+
+.eyebrow {
+  font-family: var(--ff-sub);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--violet);
+}
+.trust-kicker { color: var(--violet); }
