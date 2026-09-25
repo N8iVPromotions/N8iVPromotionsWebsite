@@ -3243,3 +3243,71 @@ section,
   color: var(--violet);
 }
 .trust-kicker { color: var(--violet); }
+
+/* ================================================================
+   CALMER LAYOUT — one primary action per area, less motion,
+   fewer competing labels. Styling only; every link and form stays.
+   ================================================================ */
+
+/* Header: a plain text link to the pilot instead of a status badge */
+.nav-pilot-link {
+  font-family: var(--ff-sub);
+  font-size: 15px;
+  color: var(--black);
+  padding: 8px 12px;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+.nav-pilot-link:hover { color: var(--violet); }
+@media (max-width: 1100px) { .nav-pilot-link { display: none; } }
+
+/* Secondary actions read as quiet text links so the primary button leads */
+.btn-ghost,
+.btn-ghost-dark,
+.cta-section .btn-ghost-dark,
+.cta-section .btn-ghost-dark:visited {
+  background: transparent;
+  border-color: transparent;
+  color: var(--black);
+  padding-left: 8px;
+  padding-right: 8px;
+  min-height: 44px;
+  text-decoration: underline;
+  text-decoration-color: var(--light-grey);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+  box-shadow: none;
+}
+.btn-ghost:hover,
+.btn-ghost-dark:hover,
+.cta-section .btn-ghost-dark:hover,
+.cta-section .btn-ghost-dark:focus-visible,
+.cta-section .btn-ghost-dark:active {
+  background: transparent;
+  border-color: transparent;
+  color: var(--violet);
+  text-decoration-color: currentColor;
+  transform: none;
+}
+
+/* Motion: content is visible sooner and nothing slides in */
+.reveal-ready .reveal {
+  transform: none;
+  transition: opacity .35s ease;
+}
+.reveal-ready .hero .reveal,
+.reveal-ready .home-hero h1.reveal,
+.reveal-ready .hero-line > span {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+.problem-card { transform: none !important; }
+
+@media (max-width: 640px) {
+  .hero-cta { gap: 4px; }
+  .hero-cta .btn,
+  .cta-actions .btn { font-size: 16px; }
+  .hero-cta .btn-ghost-dark,
+  .cta-actions .btn-ghost-dark { justify-content: center; font-size: 15px; }
+}
