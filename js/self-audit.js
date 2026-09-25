@@ -50,7 +50,44 @@
     form.querySelector('[data-progress-bar]').style.transform = `scaleX(${progress / 100})`;
     window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }
-  document.querySelector('[data-start-audit]').addEventListener('click', () => { intro.hidden = true; form.hidden = false; showStep(0); });
+  // Keep answers in this tab so a refresh or back swipe doesn't wipe them.
+  const DRAFT_KEY = 'n8iv_self_audit_draft';
+  const DRAFT_SKIP = new Set(['website', 'cf-turnstile-response']);
+  function saveDraft() {
+    try {
+      const draft = {};
+      for (const [name, value] of new FormData(form).entries()) {
+        if (!DRAFT_SKIP.has(name) && typeof value === 'string') draft[name] = value;
+      }
+      sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+    } catch (e) {}
+  }
+  function clearDraft() {
+    try { sessionStorage.removeItem(DRAFT_KEY); } catch (e) {}
+  }
+  let resumeStep = 0;
+  try {
+    const draft = JSON.parse(sessionStorage.getItem(DRAFT_KEY) || 'null');
+    if (draft) {
+      Object.entries(draft).forEach(([name, value]) => {
+        if (/^q\d+$/.test(name)) {
+          const radio = form.querySelector(`input[name="${name}"][value="${value}"]`);
+          if (radio) radio.checked = true;
+        } else {
+          const field = form.elements.namedItem(name);
+          if (field?.type === 'checkbox') field.checked = true;
+          else if (field && 'value' in field && !field.value) field.value = value;
+        }
+      });
+      // Resume at the first section that still has an unanswered question.
+      const firstOpen = questionPanels.findIndex(panel => [...panel.querySelectorAll('fieldset')].some(fieldset => !fieldset.querySelector('input:checked')));
+      resumeStep = firstOpen === -1 ? sections.length : firstOpen;
+    }
+  } catch (e) {}
+  form.addEventListener('change', saveDraft);
+  form.addEventListener('input', saveDraft);
+
+  document.querySelector('[data-start-audit]').addEventListener('click', () => { intro.hidden = true; form.hidden = false; showStep(resumeStep); });
   form.addEventListener('click', event => {
     if (event.target.closest('[data-next]')) {
       const panel = questionPanels[step];
@@ -75,6 +112,7 @@
       const result = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(result.error || 'We could not submit your audit.');
       renderResult(result, data.followUpConsent);
+      clearDraft();
       window.N8iVAttribution?.track?.('self_audit_completed', {
         score_band: result.band,
         follow_up_consent: data.followUpConsent ? 'yes' : 'no'

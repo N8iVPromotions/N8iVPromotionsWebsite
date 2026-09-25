@@ -1,6 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 48 48" role="img" aria-labelledby="title desc">
-  <title id="title">N8iV Promotions</title>
-  <desc id="desc">The N8iV Promotions v1.0 mark: five rounded bars in Signal Purple and Paper on Ink.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
   <rect width="48" height="48" rx="10" fill="#1C1C1C"/>
   <rect x="7" y="18.15" width="4.42" height="11.7" rx="2.21" fill="#7860FC"/>
   <rect x="14.37" y="14.05" width="4.42" height="19.9" rx="2.21" fill="#F7F6F3"/>
