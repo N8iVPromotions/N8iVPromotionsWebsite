@@ -228,6 +228,44 @@
     return `mailto:zajen@n8ivpromotions.com?subject=${subject}&body=${body}`;
   }
 
+  // Keep a draft in this tab so a refresh or back swipe doesn't wipe it.
+  const DRAFT_KEY = 'n8iv_fit_review_draft';
+  const DRAFT_SKIP = new Set(['website', 'sourcePage', 'cf-turnstile-response']);
+  function saveDraft() {
+    try {
+      const draft = {};
+      for (const [name, value] of new FormData(form).entries()) {
+        if (!DRAFT_SKIP.has(name) && typeof value === 'string') draft[name] = value;
+      }
+      sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+    } catch (e) {}
+  }
+  function clearDraft() {
+    try { sessionStorage.removeItem(DRAFT_KEY); } catch (e) {}
+  }
+  try {
+    const draft = JSON.parse(sessionStorage.getItem(DRAFT_KEY) || 'null');
+    if (draft) {
+      Object.entries(draft).forEach(([name, value]) => {
+        const field = form.elements.namedItem(name);
+        if (field && 'value' in field && !field.value) field.value = value;
+      });
+    }
+  } catch (e) {}
+  form.addEventListener('input', saveDraft);
+  form.addEventListener('change', saveDraft);
+
+  function showFallback(href) {
+    if (!status) return;
+    status.className = 'form-status error';
+    status.textContent = 'Something blocked the automatic send. Your details are still here. ';
+    const link = document.createElement('a');
+    link.href = href;
+    link.className = 'form-status-link';
+    link.textContent = 'Email this request instead';
+    status.append(link);
+  }
+
   form.addEventListener('submit', async event => {
     event.preventDefault();
 
@@ -251,15 +289,15 @@
       }
 
       form.reset();
+      clearDraft();
       window.N8iVAttribution?.track?.('fit_review_requested', {
         form: 'fit_review_request'
       });
       setStatus('Your Fit Review request was sent. Expect a reply within 1 business day.', 'success');
     } catch (error) {
       console.error(error);
-      const fallback = buildFallbackMailto(data);
-      setStatus('Something blocked the automatic email. Please email the request directly to zajen@n8ivpromotions.com.', 'error');
-      window.location.href = fallback;
+      // Same pre-filled email fallback, opened by the visitor instead of automatically.
+      showFallback(buildFallbackMailto(data));
     } finally {
       setPending(false);
     }

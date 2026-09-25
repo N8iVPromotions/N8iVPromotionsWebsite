@@ -26,7 +26,7 @@
 <meta name="description" content="Request a free 30-minute Fit Review with N8iV Promotions — a working session on your ad, CRM, and revenue tracking, with a written Pilot Fit Summary in 48 hours." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="/assets/n8iv-promotions-app-icon.png" />
 <meta name="theme-color" content="#F7F6F3" />
@@ -35,7 +35,7 @@
   .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start; padding:80px 0; }
   .contact-form-wrap { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-xl); padding:40px; }
   .form-field { display:grid; gap:6px; margin-bottom:20px; }
-  .form-field label { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .form-field label { font-size:14px; font-weight:600; letter-spacing:0; text-transform:none; color:var(--ink); }
   .form-field input,.form-field select,.form-field textarea { font:inherit; font-size:15px; color:var(--ink); background:var(--page); border:1px solid var(--border-2); border-radius:var(--r-md); padding:12px 14px; outline:none; transition:border-color .2s,box-shadow .2s; width:100%; }
   .form-field input:focus,.form-field select:focus,.form-field textarea:focus { border-color:var(--blue); box-shadow:none; }
   .form-field textarea { min-height:120px; resize:vertical; }
@@ -59,7 +59,7 @@
   .form-status { min-height:22px; margin-top:14px; font-size:14px; line-height:1.5; text-align:center; color:var(--muted); }
   .form-status.success { color:var(--green); }
   .form-status.error { color:var(--red); }
-  @media(max-width:768px){ .contact-grid{grid-template-columns:1fr;gap:40px;} .form-row{grid-template-columns:1fr;} .trust-grid{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:768px){ .contact-grid{grid-template-columns:1fr;gap:40px;} .form-row:not(.form-row-names){grid-template-columns:1fr;} .trust-grid{grid-template-columns:repeat(2,1fr);} }
 </style>
 </head>
 <body>
@@ -123,13 +123,13 @@
           <span>Complete the short form below. We’ll confirm whether your current data can support the pilot before you spend anything.</span>
         </div>
         <h2 class="display-sm" style="margin:0 0 6px;">Request a Fit Review</h2>
-        <p class="body-sm" style="margin:0 0 28px;">Four required fields. Personally reviewed, with a reply within 1 business day.</p>
+        <p class="body-sm" style="margin:0 0 28px;">Four required fields. Personally reviewed: a reply within 1 business day, and a written fit summary within 48 hours of your call.</p>
         <form action="/api/audit-request" method="post" data-audit-request-form>
-          <div class="form-row">
-            <div class="form-field"><label for="firstName">First Name</label><input id="firstName" name="firstName" type="text" placeholder="Jane" autocomplete="given-name" required /></div>
-            <div class="form-field"><label for="lastName">Last Name</label><input id="lastName" name="lastName" type="text" placeholder="Smith" autocomplete="family-name" required /></div>
+          <div class="form-row form-row-names">
+            <div class="form-field"><label for="firstName">First Name</label><input id="firstName" name="firstName" type="text" autocomplete="given-name" required /></div>
+            <div class="form-field"><label for="lastName">Last Name</label><input id="lastName" name="lastName" type="text" autocomplete="family-name" required /></div>
           </div>
-          <div class="form-field"><label for="email">Work Email</label><input id="email" name="email" type="email" placeholder="jane@company.com" autocomplete="email" required /></div>
+          <div class="form-field"><label for="email">Work Email</label><input id="email" name="email" type="email" placeholder="name@company.com" autocomplete="email" required /></div>
           <div class="form-field"><label for="company">Company Name</label><input id="company" name="company" type="text" placeholder="Acme Corp" autocomplete="organization" required /></div>
           <div class="form-row">
             <div class="form-field">
@@ -164,7 +164,7 @@
         </form>
         <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);text-align:center;">
           <p class="body-sm" style="margin:0 0 12px;">Not ready to book? Get your Revenue Receipt score first.</p>
-          <a href="/revenue-self-audit" class="btn btn-secondary btn-sm">Get Your Revenue Receipt Score</a>
+          <a href="/revenue-self-audit" class="btn btn-secondary btn-sm">Take the free Self-Audit</a>
         </div>
       </div>
 

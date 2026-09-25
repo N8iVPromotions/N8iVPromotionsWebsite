@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 /* ================================================================
    N8iV Promotions — Design System (brand v1.0)
@@ -3311,3 +3310,30 @@ section,
   .hero-cta .btn-ghost-dark,
   .cta-actions .btn-ghost-dark { justify-content: center; font-size: 15px; }
 }
+
+/* ── Low-friction fixes ─────────────────────────────────────── */
+/* Pilot page: keep the hero clear of the fixed header */
+.pilot-hero { padding-top: calc(var(--nav-h) + 56px) !important; }
+@media (max-width: 800px) { .pilot-hero { padding-top: calc(var(--nav-h) + 32px) !important; } }
+
+/* Example text in fields should never read as a filled-in value */
+.form-field input::placeholder,
+.form-field textarea::placeholder,
+.lead-field input::placeholder { color: #8A8883; }
+.optional-label { font-size: 12px; margin-left: 4px; }
+@media (max-width: 359px) { .form-row-names { grid-template-columns: 1fr !important; } }
+
+/* Footer links: 44px tap targets without changing the look */
+.footer-col ul { gap: 0; }
+.footer-col ul a,
+.footer-bottom-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* Sticky mobile bar: the full Fit Review label fits */
+.mobile-conversion-bar .btn { font-size: 14px; padding: 12px 16px; white-space: nowrap; }
+
+/* Headshot <picture> wrapper fills the same frame the <img> did */
+picture { display: block; width: 100%; height: 100%; }
