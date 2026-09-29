@@ -65,3 +65,16 @@
 .pilot-terms dt { font: 400 13px/1.4 var(--ff-sub); color: var(--dark-grey); }
 .pilot-terms dd { margin: 0; font: 600 14px/1.4 var(--ff-sub); color: var(--black); }
 .pilot-ticket ul { margin-bottom: 22px; }
+
+/* Pilot "How it works": 4 steps (the problem section keeps 3) */
+@media (min-width: 801px) {
+  .pilot-cards-4 { grid-template-columns: repeat(2, 1fr); }
+  .pilot-cards-4 .pilot-card:nth-child(2n) { border-right: 0; }
+  .pilot-cards-4 .pilot-card:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+}
+@media (min-width: 1101px) {
+  .pilot-cards-4 { grid-template-columns: repeat(4, 1fr); }
+  .pilot-cards-4 .pilot-card:nth-child(2n) { border-right: 1px solid var(--border); }
+  .pilot-cards-4 .pilot-card:last-child { border-right: 0; }
+  .pilot-cards-4 .pilot-card:nth-child(-n+2) { border-bottom: 0; }
+}
