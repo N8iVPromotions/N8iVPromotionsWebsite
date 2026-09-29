@@ -143,6 +143,125 @@
     return { setMode(m) { target = m; kick(); } };
   })();
 
+  // ── Cinematic dark chapter ─────────────────────────────────────
+  // Receipt fragments drifting through a diagonal beam of light, with
+  // one Signal Purple slip and a faint purple horizon line.
+  (function initCinema() {
+    document.querySelectorAll('[data-cinema]').forEach(canvas => {
+      const ctx = canvas.getContext && canvas.getContext('2d');
+      if (!ctx) return;
+      let w = 0, h = 0, dpr = 1, raf = 0, visible = false, last = 0, narrow = false;
+      let seed = 7;
+      const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+      const slips = Array.from({ length: 34 }, (_, i) => ({
+        x: 0.35 + rand() * 0.7, y: rand(), z: 0.35 + rand() * 0.65,
+        w: 26 + rand() * 70, h: 8 + rand() * 26, rot: rand() * Math.PI * 2,
+        spin: (rand() - 0.5) * 0.5, flip: rand() * Math.PI * 2, flipSpeed: 0.2 + rand() * 0.6,
+        fall: 0.006 + rand() * 0.012, drift: (rand() - 0.5) * 0.01, lines: 1 + Math.floor(rand() * 4),
+        accent: i === 5
+      }));
+
+      function resize() {
+        const r = canvas.getBoundingClientRect();
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = Math.max(1, r.width); h = Math.max(1, r.height); narrow = w < 700;
+        canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        draw();
+      }
+      // Beam: a band from the top-right toward the lower-middle
+      const beamAt = (x, y) => {
+        const d = Math.abs((x / w - 0.62) + (y / h - 0.30) * 0.9);
+        return Math.max(0, 1 - d / 0.22);
+      };
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        // Light slab and beam
+        ctx.save();
+        const g = ctx.createLinearGradient(w * 0.95, 0, w * 0.35, h * 0.75);
+        g.addColorStop(0, 'rgba(247,246,243,0.34)');
+        g.addColorStop(0.45, 'rgba(247,246,243,0.10)');
+        g.addColorStop(1, 'rgba(247,246,243,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.moveTo(w * 0.78, 0); ctx.lineTo(w * 1.02, 0); ctx.lineTo(w * 1.02, h * 0.08);
+        ctx.lineTo(w * 0.52, h * 0.72); ctx.lineTo(w * 0.36, h * 0.66);
+        ctx.closePath(); ctx.fill();
+        ctx.restore();
+        // Horizon glint
+        const hy = h * 0.9;
+        const hg = ctx.createLinearGradient(w * 0.55, 0, w, 0);
+        hg.addColorStop(0, 'rgba(120,96,252,0)'); hg.addColorStop(0.55, 'rgba(120,96,252,0.5)'); hg.addColorStop(1, 'rgba(120,96,252,0)');
+        ctx.fillStyle = hg; ctx.fillRect(w * 0.55, hy, w * 0.45, 1.5);
+        // Fragments, far to near
+        slips.slice().sort((a, b) => a.z - b.z).forEach(s => {
+          const x = s.x * w, y = s.y * h;
+          const lit = beamAt(x, y);
+          const scale = 0.5 + s.z * 0.9;
+          const face = Math.cos(s.flip);
+          ctx.save();
+          ctx.translate(x, y); ctx.rotate(s.rot); ctx.scale(scale, scale * Math.max(0.08, Math.abs(face)));
+          const base = s.accent ? [120, 96, 252] : [217, 215, 209];
+          const textZone = narrow ? 0.55 : (x < w * 0.55 ? 0.5 : 1);
+          const a = (0.14 + 0.6 * lit) * (0.45 + 0.55 * s.z) * textZone;
+          const paper = ctx.createLinearGradient(-s.w / 2, -s.h / 2, s.w / 2, s.h / 2);
+          const c = base.join(',');
+          const top = s.accent ? Math.max(a, 0.75) * textZone * textZone : a;
+          paper.addColorStop(0, `rgba(${c},${top})`);
+          paper.addColorStop(1, `rgba(${c},${top * (face > 0 ? 0.55 : 0.35)})`);
+          ctx.fillStyle = paper;
+          ctx.fillRect(-s.w / 2, -s.h / 2, s.w, s.h);
+          if (!s.accent && face > 0) {
+            ctx.fillStyle = `rgba(28,28,28,${0.35 * a})`;
+            for (let k = 0; k < s.lines; k++) ctx.fillRect(-s.w / 2 + 5, -s.h / 2 + 4 + k * 4.5, s.w * (0.4 + 0.12 * k), 1.2);
+          }
+          ctx.restore();
+        });
+        // Scrims keep the chapter text legible over the scene
+        const left = ctx.createLinearGradient(0, 0, w * (narrow ? 1 : 0.7), 0);
+        left.addColorStop(0, `rgba(18,18,17,${narrow ? 0.55 : 0.6})`); left.addColorStop(1, 'rgba(18,18,17,0)');
+        ctx.fillStyle = left; ctx.fillRect(0, 0, w, h);
+        const bottom = ctx.createLinearGradient(0, h * 0.45, 0, h);
+        bottom.addColorStop(0, 'rgba(18,18,17,0)'); bottom.addColorStop(1, 'rgba(18,18,17,0.72)');
+        ctx.fillStyle = bottom; ctx.fillRect(0, h * 0.45, w, h * 0.55);
+      }
+      function frame(now) {
+        raf = 0;
+        const dt = last ? Math.min(0.05, (now - last) / 1000) : 0; last = now;
+        slips.forEach(s => {
+          s.y += s.fall * dt * 6; s.x += s.drift * dt * 6;
+          s.rot += s.spin * dt; s.flip += s.flipSpeed * dt;
+          if (s.y > 1.08) { s.y = -0.08; s.x = 0.35 + rand() * 0.7; }
+        });
+        draw();
+        if (visible && motionOn) raf = requestAnimationFrame(frame);
+      }
+      function kick() { last = 0; if (!raf && visible && motionOn) raf = requestAnimationFrame(frame); else draw(); }
+      new IntersectionObserver(entries => { visible = entries[0].isIntersecting; if (visible) kick(); }).observe(canvas);
+      window.addEventListener('resize', resize, { passive: true });
+      motionListeners.push(kick);
+      resize();
+    });
+  })();
+
+  // ── Header and chapter bar follow the dark chapter ─────────────
+  (function initDarkChrome() {
+    const nav = document.querySelector('.nav');
+    const bar = document.querySelector('[data-chapter-bar]');
+    const darks = [...document.querySelectorAll('.ed-dark')];
+    if (!darks.length) return;
+    const over = y => darks.some(sec => { const r = sec.getBoundingClientRect(); return r.top <= y && r.bottom > y; });
+    let ticking = false;
+    function update() {
+      ticking = false;
+      if (nav) nav.classList.toggle('ed-nav-dark', over(nav.getBoundingClientRect().bottom - 1));
+      if (bar) bar.classList.toggle('ed-bar-dark', over(window.innerHeight - bar.offsetHeight + 1));
+    }
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  })();
+
   // ── Scale / Test / Repair slider ───────────────────────────────
   (function initDecide() {
     const wrap = document.querySelector('[data-decide]');
