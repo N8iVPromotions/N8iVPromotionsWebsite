@@ -118,7 +118,7 @@
 .ed-display-hero { max-width: 14ch; }
 .ed-hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  grid-template-columns: minmax(0, 760px);
   align-items: start;
   gap: clamp(40px, 5vw, 72px);
   margin-top: clamp(28px, 3.5vw, 44px);
@@ -163,91 +163,6 @@
 }
 .ed-text-link:hover { color: var(--violet); text-decoration-color: currentColor; }
 .editorial .ed-reassurance { margin: 20px 0 0; text-align: left; line-height: 1.6; }
-
-/* Example decision brief: the evidence surface lives here, never in the H1 */
-.ed-decide-card {
-  padding: clamp(20px, 2.4vw, 28px);
-  border: 1px solid var(--light-grey);
-  border-radius: var(--r-lg);
-  background: var(--white);
-}
-.ed-card-label {
-  margin: 0;
-  font: 600 var(--t-eyebrow)/1.4 var(--ff-sub);
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--violet);
-}
-.ed-surface {
-  display: none;
-  position: relative;
-  height: clamp(150px, 16vw, 210px);
-  margin: 8px -8px 0;
-  pointer-events: none;
-}
-.ed-js .ed-surface { display: block; }
-.ed-surface canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-.ed-decide-stops { display: flex; justify-content: space-between; gap: 8px; margin-top: 8px; }
-.ed-decide-stops button {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
-  min-height: 44px;
-  padding: 6px 0;
-  font: 400 clamp(17px, 1.6vw, 20px)/1.2 var(--ff-sub);
-  color: var(--dark-grey);
-  transition: color .2s ease;
-}
-.ed-decide-stops button span { font-size: 13px; font-variant-numeric: tabular-nums; }
-.ed-decide-stops button:hover { color: var(--black); }
-.ed-decide-stops button[aria-pressed="true"] { color: var(--violet); }
-.ed-range {
-  --fill: 0%;
-  -webkit-appearance: none;
-  appearance: none;
-  display: none;
-  width: 100%;
-  height: 44px;
-  margin: 0;
-  background: transparent;
-  cursor: pointer;
-}
-.ed-js .ed-range { display: block; }
-.ed-range::-webkit-slider-runnable-track {
-  height: 2px;
-  background: linear-gradient(to right, var(--violet) var(--fill), var(--light-grey) var(--fill));
-}
-.ed-range::-moz-range-track { height: 2px; background: var(--light-grey); }
-.ed-range::-moz-range-progress { height: 2px; background: var(--violet); }
-.ed-range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 28px;
-  height: 28px;
-  margin-top: -13px;
-  border: 0;
-  border-radius: 50%;
-  background: var(--violet);
-  box-shadow: 0 6px 18px rgba(95,66,251,.3);
-}
-.ed-range::-moz-range-thumb {
-  width: 28px;
-  height: 28px;
-  border: 0;
-  border-radius: 50%;
-  background: var(--violet);
-  box-shadow: 0 6px 18px rgba(95,66,251,.3);
-}
-.ed-range:focus-visible { outline: 2px solid var(--violet); outline-offset: 4px; }
-.ed-decide-caption {
-  min-height: 2.8em;
-  margin: 8px 0 0;
-  padding: 16px 0 0;
-  border-top: 1px solid var(--light-grey);
-  font: 500 var(--t-h3)/1.3 var(--ff-display);
-  letter-spacing: -0.015em;
-  color: var(--black);
-}
-.ed-card-note { margin: 14px 0 0; font: 400 var(--t-small)/1.55 var(--ff-sub); color: var(--dark-grey); }
 
 /* ── How starting works ─────────────────────────────────────────── */
 .ed-start {
@@ -599,7 +514,6 @@ body.editorial .ed-cinema-section { padding-top: 0 !important; }
   margin-bottom: clamp(48px, 6vw, 88px);
   background: radial-gradient(120% 90% at 78% 18%, #2A2A28 0%, #1C1C1C 45%, #121211 100%);
 }
-.ed-cinema-canvas { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; }
 .ed-cinema-inner {
   display: flex;
   flex-direction: column;
@@ -635,7 +549,6 @@ body.editorial .ed-cinema-section { padding-top: 0 !important; }
   margin-top: clamp(40px, 6vw, 80px);
 }
 .ed-cinema-pair { display: grid; gap: 10px; margin: 0; font: 400 clamp(16px, 1.5vw, 19px)/1.45 var(--ff-sub); color: #F7F6F3; }
-.ed-cinema-caption { margin: 0; font: 400 var(--t-small)/1.45 var(--ff-sub); color: #B4B2AC; text-align: right; }
 .ed-cinema-section .chapter-meta { margin-bottom: 0; color: #F7F6F3; }
 
 /* Header turns dark over a dark chapter */
@@ -684,7 +597,6 @@ body.editorial .ed-cinema-section { padding-top: 0 !important; }
   .ed-cinema-question { align-self: flex-start; }
   .ed-stagger-big { font-size: 13.5vw; }
   .ed-cinema-foot { flex-direction: column; align-items: flex-start; }
-  .ed-cinema-caption { text-align: left; }
 }
 @media (max-width: 560px) {
   .ed-facts-strip { grid-template-columns: 1fr; }
