@@ -1,4 +1,26 @@
 
+/* ── Font pairing: Helvetica Now Display (display) + Inter (text) ───
+   Helvetica Now Display is a licensed Monotype face. It renders from the
+   visitor's installed copy via local(); to serve it to everyone, add the
+   licensed .woff2 files to /assets/fonts and a url() source below.
+   "Inter Fallback" is Arial scaled to Inter's metrics so text does not
+   shift when Inter finishes loading. */
+@font-face {
+  font-family: 'Helvetica Now Display';
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: local('Helvetica Now Display Medium'), local('HelveticaNowDisplay-Medium'), local('Helvetica Now Display');
+}
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial');
+  size-adjust: 107.12%;
+  ascent-override: 90.44%;
+  descent-override: 22.52%;
+  line-gap-override: 0%;
+}
+
 /* ================================================================
    N8iV Promotions — Design System (brand v1.0)
    Paper ground, white cards, hairline borders, Helvetica display over
@@ -69,12 +91,12 @@
   --glass-blur:   none;
 
   /* ── Typography ──────────────────────────────────────────── */
-  --ff: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --ff: 'Inter', 'Inter Fallback', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --ff-display: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --ff-sub: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --ff-sub: 'Inter', 'Inter Fallback', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --ff-serif: var(--ff-display);
-  --ff-mono: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --ff-pixel: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --ff-mono: 'Inter', 'Inter Fallback', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --ff-pixel: 'Inter', 'Inter Fallback', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   /* ── Layout ──────────────────────────────────────────────── */
   --maxw:    1200px;
@@ -3337,3 +3359,7 @@ section,
 
 /* Headshot <picture> wrapper fills the same frame the <img> did */
 picture { display: block; width: 100%; height: 100%; }
+
+/* Tap targets: header logo and menu button reach 44px on every page */
+.nav-logo { min-height: 44px; }
+.nav-mobile-toggle { min-width: 44px; min-height: 44px; }

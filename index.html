@@ -62,7 +62,7 @@
     </ul>
     <div class="nav-right">
       <a href="/b2b-attribution-pilot" class="nav-pilot-link">$750 Pilot</a>
-      <a href="/contact" class="btn btn-primary btn-sm">Request a Fit Review</a>
+      <a href="/revenue-self-audit" class="btn btn-primary btn-sm">Start the free self-audit</a>
     </div>
     <button class="nav-mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
       <span></span><span></span><span></span>
@@ -78,58 +78,63 @@
     <a href="/case-studies" class="mobile-nav-link">Use Cases</a>
     <a href="/insights" class="mobile-nav-link">Insights</a>
     <a href="/about" class="mobile-nav-link">About</a>
-    <a href="/contact" class="btn btn-primary mobile-nav-cta">Request a Fit Review</a>
+    <a href="/revenue-self-audit" class="btn btn-primary mobile-nav-cta">Start the free self-audit</a>
   </nav>
 </div>
 
 <!-- ════════════════════ HERO ════════════════════ -->
 <section class="ed-hero" id="main-content" tabindex="-1">
   <div class="wrap">
-    <div class="ed-meta">
-      <p>Decision-first attribution<br>for B2B marketing teams.</p>
-      <p class="ed-meta-right">$750 pilot<br>One decision brief.</p>
-    </div>
+    <h1 class="ed-display ed-display-hero">Know where your next marketing <span class="ed-accent">dollar should go.</span></h1>
 
-    <h1 class="ed-display">
-      <span class="ed-line">Know where your</span>
-      <span class="ed-surface" aria-hidden="true"><canvas data-surface></canvas></span>
-      <span class="ed-line">next marketing</span>
-      <span class="ed-line ed-accent">dollar should go.</span>
-    </h1>
+    <div class="ed-hero-grid">
+      <div class="ed-hero-copy">
+        <p class="ed-sub">N8iV connects your ad spend, CRM deals, and closed revenue, then tells you what to scale, what to test, and what to repair, with a confidence range on every number.</p>
 
-    <div class="ed-hero-foot">
-      <p class="ed-intro">N8iV connects your ad spend, CRM deals, and closed revenue, <span class="ed-muted">then tells you what to scale, what to test, and what to repair, with a confidence range on every number.</span></p>
-      <div class="ed-hero-actions">
-        <a href="/b2b-attribution-pilot" class="ed-circle-cta"><span class="ed-circle"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 6l10 10M16 7v9H7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>See the $750 pilot</span></a>
-        <a href="/revenue-self-audit" class="ed-text-link">Take the free self-audit</a>
+
+        <div class="ed-hero-cta">
+          <a href="/revenue-self-audit" class="btn btn-primary btn-lg">Start the free self-audit</a>
+        </div>
+        <p class="hero-reassurance ed-reassurance"><span aria-hidden="true">✓</span> Founder-reviewed <span aria-hidden="true">·</span> Written Fit Summary within 48 hours of your self-audit <span aria-hidden="true">·</span> If your data can’t support a decision, you’ll hear it before you pay</p>
+        <dl class="ed-facts-strip" aria-label="Pilot facts">
+          <div><dt>$750</dt><dd>One-time pilot price. Not a subscription. Ongoing monthly intelligence is quoted separately, only if you want it.</dd></div>
+          <div><dt>48 hours</dt><dd>Written Fit Summary, delivered within 48 hours of your self-audit.</dd></div>
+          <div><dt>1 decision brief</dt><dd>What to scale, test, and repair.</dd></div>
+        </dl>
       </div>
-    </div>
-    <p class="hero-reassurance ed-reassurance"><span aria-hidden="true">✓</span> Founder-reviewed <span aria-hidden="true">·</span> Written fit summary within 48 hours of your call <span aria-hidden="true">·</span> If your data can't support a decision, you'll hear it before you pay</p>
 
-    <div class="ed-decide" data-decide>
-      <div class="ed-decide-head"><span id="decide-label">Change the decision</span><span aria-hidden="true">&harr;</span></div>
-      <div class="ed-decide-stops">
-        <button type="button" data-stop="0" aria-pressed="true"><span>01</span>Scale</button>
-        <button type="button" data-stop="1" aria-pressed="false"><span>02</span>Test</button>
-        <button type="button" data-stop="2" aria-pressed="false"><span>03</span>Repair</button>
-      </div>
-      <input class="ed-range" type="range" min="0" max="2" step="0.01" value="0" aria-labelledby="decide-label" aria-valuetext="Scale" data-decide-range>
-      <p class="ed-decide-caption" aria-live="polite" data-decide-caption>The evidence holds across models and the range is narrow. Move budget here.</p>
+      <aside class="ed-decide-card" data-decide aria-labelledby="decide-title">
+        <p class="ed-card-label" id="decide-title">Example decision brief</p>
+        <div class="ed-surface" aria-hidden="true"><canvas data-surface></canvas></div>
+        <div class="ed-decide-stops" role="group" aria-label="Decision">
+          <button type="button" data-stop="0" aria-pressed="true"><span>01</span>Scale</button>
+          <button type="button" data-stop="1" aria-pressed="false"><span>02</span>Test</button>
+          <button type="button" data-stop="2" aria-pressed="false"><span>03</span>Repair</button>
+        </div>
+        <input class="ed-range" type="range" min="0" max="2" step="0.01" value="0" aria-label="Change the decision" aria-valuetext="Scale" data-decide-range>
+        <blockquote class="ed-decide-caption" aria-live="polite" data-decide-caption>The evidence holds across models and the range is narrow. Move budget here.</blockquote>
+        <p class="ed-card-note">Every brief ends in a plain-English decision — scale it, test it, or repair it — with the confidence range attached, so you know exactly how much to trust it. (Illustrative example.)</p>
+      </aside>
     </div>
+  </div>
+</section>
 
-    <div class="offer-facts ed-facts" aria-label="Pilot facts">
-      <div><strong>Sized to you</strong><span>Window sized to how long your deals take</span></div>
-      <div><strong>1 decision brief</strong><span>What to scale, test, and repair</span></div>
-      <div><strong>$750</strong><span>Fixed pilot price</span></div>
-      <div><strong>48 hours</strong><span>Written Fit Summary</span></div>
-    </div>
+<!-- ════════════════════ HOW STARTING WORKS ════════════════════ -->
+<section class="ed-start" aria-labelledby="start-title">
+  <div class="wrap">
+    <h2 class="ed-start-title" id="start-title">How starting works</h2>
+    <ol class="ed-steps">
+      <li><span class="ed-step-num" aria-hidden="true">1</span><div><h3>Take the free Revenue Self-Audit</h3><p>Four minutes. Instant score. No sales call required.</p></div></li>
+      <li><span class="ed-step-num" aria-hidden="true">2</span><div><h3>Get your written Fit Summary within 48 hours</h3><p>Founder-reviewed. If your data can’t support a real decision, you’ll hear that before you pay anything.</p></div></li>
+      <li><span class="ed-step-num" aria-hidden="true">3</span><div><h3>Run the $750 pilot</h3><p>One 30-day spend window. One founder-reviewed Revenue Receipt. One-time. No obligation to continue.</p></div></li>
+    </ol>
   </div>
 </section>
 
 <!-- ════════════════════ 01 THE QUESTION (evidence desk) ════════════════════ -->
 <section class="section ed-chapter" id="question" data-chapter="The question">
   <div class="wrap">
-    <div class="chapter-meta reveal"><span class="chapter-num">01 / 08</span><span class="chapter-name">The question</span><span class="chapter-aside">4 evidence steps</span></div>
+    <div class="chapter-meta reveal"><span class="chapter-num">01 / 08</span><span class="chapter-name">The question</span><span class="chapter-aside">Act 1 · Problem</span></div>
     <div class="ed-question reveal" aria-label="Illustrative attribution evidence workspace">
       <p class="ed-kicker"><span>N8iV / Evidence desk</span><span>Decision question</span></p>
       <h2 class="ed-statement">Where should next month's budget go?</h2>
@@ -141,6 +146,7 @@
           <li><span>03</span><strong>CRM lifecycle</strong><small>Lead, opportunity, and closed-won evidence</small></li>
           <li><span>04</span><strong>Revenue record</strong><small>Available finance or payment evidence</small></li>
         </ol>
+        <p class="ed-example">For example: $40,000 of Google Ads spend traced through six months of HubSpot deals to $212,000 in closed revenue — with every gap in the chain labeled, so you know exactly what the numbers prove and what they don’t. (Illustrative.)</p>
       </div>
       <div class="ed-output"><span>Output</span><strong>Scale / Test / Repair, each with a confidence range</strong></div>
       <p class="product-caption">Illustrative workflow &mdash; not client performance data.</p>
@@ -153,7 +159,7 @@
   <div class="ed-cinema">
     <canvas class="ed-cinema-canvas" data-cinema aria-hidden="true"></canvas>
     <div class="wrap ed-cinema-inner">
-      <div class="chapter-meta"><span class="chapter-num">02 / 08</span><span class="chapter-name">The growth visibility problem</span><span class="chapter-aside">4 systems</span></div>
+      <div class="chapter-meta"><span class="chapter-num">02 / 08</span><span class="chapter-name">The growth visibility problem</span><span class="chapter-aside">Act 1 · Problem</span></div>
       <h2 class="ed-stagger"><span class="ed-stagger-small">Every platform tells</span><span class="ed-stagger-big">a different story.</span></h2>
       <p class="ed-cinema-question">SEO reports show traffic. Social reports show engagement. Ad platforms claim conversions. Your CRM and revenue data tell a different story. We close that gap.</p>
       <div class="ed-cinema-foot">
@@ -208,7 +214,7 @@
 <!-- ════════════════════ FOUNDER PROOF ════════════════════ -->
 <section class="section capability-section ed-chapter" id="capabilities" data-chapter="The evidence">
   <div class="wrap">
-    <div class="chapter-meta reveal"><span class="chapter-num">03 / 08</span><span class="chapter-name">One evidence system, four decisions</span><span class="chapter-aside">4 views</span></div>
+    <div class="chapter-meta reveal"><span class="chapter-num">03 / 08</span><span class="chapter-name">One evidence system, four decisions</span><span class="chapter-aside">Act 2 · Proof</span></div>
     <div class="capability-intro">
       <div>
         <h2 class="display-lg ed-h2">See where revenue proof holds <span class="ed-accent">and where it breaks.</span></h2>
@@ -303,11 +309,11 @@
 
 <section class="section founder-proof ed-chapter" id="founder" data-chapter="The founder">
   <div class="wrap">
-    <div class="chapter-meta reveal"><span class="chapter-num">04 / 08</span><span class="chapter-name">Founder-reviewed work</span><span class="chapter-aside">1 accountable name</span></div>
+    <div class="chapter-meta reveal"><span class="chapter-num">04 / 08</span><span class="chapter-name">Founder-reviewed work</span><span class="chapter-aside">Act 2 · Proof</span></div>
   </div>
   <div class="wrap founder-proof-grid">
     <figure class="founder-proof-photo">
-      <picture><source srcset="/assets/zajen-mcarton-headshot.webp" type="image/webp"><img src="/assets/zajen-mcarton-headshot.jpg" alt="Zajen McArton, owner and founder of N8iV Promotions" width="800" height="677" loading="lazy" decoding="async"></picture>
+      <picture><source srcset="/assets/zajen-mcarton-headshot.webp" type="image/webp"><img src="/assets/zajen-mcarton-headshot.jpg" alt="Zajen McArton, owner and founder of N8iV Promotions" width="800" height="677" loading="eager" decoding="async"></picture>
       <figcaption><span>Zajen McArton</span><span>Owner &amp; Founder</span></figcaption>
     </figure>
     <div class="founder-proof-copy">
@@ -315,7 +321,7 @@
       <p class="lead">N8iV Promotions is founder-led. The person who scopes your revenue question is also accountable for the evidence, the model choice, and the final recommendation.</p>
       <p class="founder-proof-statement">If the available data cannot support a responsible attribution report, N8iV will say so before the pilot begins.</p>
       <div class="founder-proof-actions">
-        <a href="/contact" class="btn btn-primary btn-lg">Request a Fit Review</a>
+        <a href="/revenue-self-audit" class="btn btn-primary btn-lg">Start the free self-audit</a>
         <a href="https://www.linkedin.com/in/zajen-mcarton" class="founder-proof-link" target="_blank" rel="noopener noreferrer">View LinkedIn Profile ↗</a>
       </div>
     </div>
@@ -325,7 +331,7 @@
 <!-- ════════════════════ DASHBOARD ════════════════════ -->
 <section class="section-lg bg-dark ed-chapter" id="platform" data-chapter="The deliverable">
   <div class="wrap">
-    <div class="chapter-meta reveal"><span class="chapter-num">05 / 08</span><span class="chapter-name">The deliverable</span><span class="chapter-aside">4 checks</span></div>
+    <div class="chapter-meta reveal"><span class="chapter-num">05 / 08</span><span class="chapter-name">The deliverable</span><span class="chapter-aside">Act 2 · Proof</span></div>
   </div>
   <div class="wrap on-dark receipt-preview">
     <div class="receipt-preview-copy">
@@ -369,7 +375,7 @@
 <!-- ════════════════════ OUTCOMES ════════════════════ -->
 <section class="section bg-page ed-chapter" id="outcomes" data-chapter="Business outcomes">
   <div class="wrap">
-    <div class="chapter-meta reveal"><span class="chapter-num">06 / 08</span><span class="chapter-name">Business outcomes</span><span class="chapter-aside">3 decisions</span></div>
+    <div class="chapter-meta reveal"><span class="chapter-num">06 / 08</span><span class="chapter-name">Business outcomes</span><span class="chapter-aside">Act 2 · Proof</span></div>
     <div class="section-label-inline reveal">
       <div>
         <h2 class="display-lg ed-h2">Decisions you <span class="ed-accent">can act on.</span></h2>
@@ -541,7 +547,7 @@
 <!-- ════════════════════ PROCESS ════════════════════ -->
 <section class="section bg-page ed-chapter" id="system" data-chapter="How it works">
   <div class="wrap">
-    <div class="chapter-meta reveal"><span class="chapter-num">07 / 08</span><span class="chapter-name">How it works</span><span class="chapter-aside">4 steps</span></div>
+    <div class="chapter-meta reveal"><span class="chapter-num">07 / 08</span><span class="chapter-name">How it works</span><span class="chapter-aside">Act 3 · Path</span></div>
     <div class="section-label reveal">
       <h2 class="display-lg ed-h2">From chaos to clarity <span class="ed-accent">in 30 days.</span></h2>
     </div>
@@ -574,9 +580,9 @@
       <div class="process-step reveal">
         <div class="process-step-num">04</div>
         <div>
-          <span class="step-tag">Month 1 → Ongoing</span>
-          <h3>Monthly Intelligence Reports</h3>
-          <p>A clear monthly report showing what changed, what it means, which SEO or content priorities matter, where ad spend needs attention, and which data gaps must be fixed.</p>
+          <span class="step-tag">After the pilot</span>
+          <h3>Optional: Monthly Intelligence</h3>
+          <p>After the pilot, you can add a monthly intelligence report showing what changed and what it means. Quoted separately. Cancel anytime.</p>
         </div>
       </div>
     </div>
@@ -586,7 +592,7 @@
 <!-- ════════════════════ BUYER QUESTIONS ════════════════════ -->
 <section class="section conversion-faq ed-chapter" id="before-you-commit" aria-labelledby="faq-heading" data-chapter="Before you commit">
   <div class="wrap">
-    <div class="chapter-meta reveal"><span class="chapter-num">08 / 08</span><span class="chapter-name">Before you commit</span><span class="chapter-aside">5 questions</span></div>
+    <div class="chapter-meta reveal"><span class="chapter-num">08 / 08</span><span class="chapter-name">Before you commit</span><span class="chapter-aside">Act 3 · Path</span></div>
   </div>
   <div class="wrap conversion-faq-grid">
     <div>
@@ -595,45 +601,38 @@
     </div>
     <div class="faq-list">
       <details open><summary>What do we need before the pilot?</summary><p>Active B2B marketing spend, a CRM or reliable opportunity record, and permission to review agreed exports or scoped access.</p></details>
+      <div class="faq-block" role="group" aria-labelledby="data-heading">
+        <h3 id="data-heading">Your data stays yours.</h3>
+        <ul>
+          <li><strong>Read-only.</strong> We can look at your data. We can’t change it, move it, or spend a dollar of it.</li>
+          <li><strong>We never touch your money.</strong> We never touch your ad campaigns, your bank accounts, or your money. Ever.</li>
+          <li><strong>Prefer exports?</strong> If you’d rather send agreed data exports than grant access, that works exactly the same.</li>
+          <li><strong>Nothing is shared, sold, or reused.</strong> Your data is never used for anyone else’s marketing.</li>
+          <li><strong>Delete on request.</strong> Ask us to delete everything we hold and we’ll confirm it in writing.</li>
+        </ul>
+      </div>
       <details><summary>What if our tracking is incomplete?</summary><p>That is often the most valuable finding. Missing, inferred, and confirmed evidence are separated so you know what can be trusted and what must be repaired.</p></details>
       <details><summary>Will you tell us if we are not ready?</summary><p>Yes. If the available data cannot support a responsible attribution report, N8iV will say so before you spend a dollar.</p></details>
-      <details><summary>When do we pay, and how fast is the report?</summary><p>Payment is due once you sign the pilot proposal. The report is completed within 24 hours of receiving your data access or exports.</p></details>
-      <details><summary>What happens after the report?</summary><p>You can act on the recommendations internally or discuss ongoing intelligence support. There is no obligation to continue.</p></details>
+      <details><summary>When do we pay?</summary><p>Payment is due once you sign the pilot proposal.</p></details>
+      <details><summary>How fast is the pilot report?</summary><p>Once we receive your data access or exports, your Revenue Receipt is completed within 24 hours.</p></details>
+      <details><summary>What happens after the report?</summary><p>You can act on the recommendations internally or discuss ongoing intelligence support. There is no obligation to continue.</p><p>The $750 covers the complete pilot. If you want ongoing monthly intelligence reports afterward, we’ll quote that separately — no obligation, no auto-renewal.</p></details>
     </div>
   </div>
 </section>
 
 <!-- ════════════════════ FINAL CTA ════════════════════ -->
-<section class="section-lg cta-section ed-cta">
-  <div class="wrap on-dark">
-    <div class="ed-meta reveal"><p>$750 B2B Attribution Pilot</p><p class="ed-meta-right">One decision brief</p></div>
-    <h2 class="ed-display ed-display-sm reveal stagger-1">
-      <span class="ed-line">Ready to make marketing</span>
-      <span class="ed-line ed-accent">more accountable?</span>
-    </h2>
-    <p class="lead reveal stagger-2">A complete attribution report connecting a 30-day marketing-spend window to the CRM and revenue evidence available.</p>
-    <div class="ed-hero-actions ed-cta-actions reveal stagger-3">
-      <a href="/b2b-attribution-pilot" class="ed-circle-cta"><span class="ed-circle"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6 6l10 10M16 7v9H7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>See the $750 Pilot</span></a>
-      <a href="/revenue-self-audit" class="ed-text-link">Take the free Self-Audit</a>
+<section class="section-lg cta-section ed-cta" aria-labelledby="cta-heading">
+  <div class="wrap">
+    <h2 class="ed-h2" id="cta-heading">Ready to make marketing more accountable? <span class="ed-accent">Start free.</span></h2>
+    <p class="lead">Take the 4-minute Revenue Self-Audit — you’ll get an instant score, no sales call required. If your data can support a real budget decision, you’ll receive a written Fit Summary within 48 hours, and you can run the $750 one-time pilot whenever you’re ready. If it can’t, we’ll tell you that instead — before you spend a dollar.</p>
+    <div class="ed-cta-actions">
+      <a href="/revenue-self-audit" class="btn btn-primary btn-lg">Start the free self-audit</a>
     </div>
-    <p class="body-sm ed-cta-note reveal stagger-4">Not sure the pilot fits yet? <a href="/contact">Request a free 30-minute Fit Review</a> — if your data can't support a responsible attribution report, we'll tell you before you spend a dollar.</p>
+    <p class="ed-data-line">Read-only access. We never touch your campaigns or your money, nothing is shared or sold, and everything is deleted on request.</p>
   </div>
 </section>
 
-<nav class="ed-bar" aria-label="Page chapters" data-chapter-bar>
-  <div class="ed-bar-inner">
-    <button class="ed-bar-toggle" type="button" aria-expanded="false" aria-controls="ed-chapter-list">
-      <span class="ed-ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-      <span class="ed-bar-label">Chapters</span>
-      <span class="ed-bar-count"><span data-chapter-current>01</span> / 08</span>
-    </button>
-    <div class="ed-bar-right">
-      <button class="ed-motion" type="button" aria-pressed="true" data-motion-toggle>Motion on</button>
-      <a href="/contact?pilot=b2b-attribution" class="ed-bar-cta">Request a Fit Review <svg class="ed-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3.5 10.5l7-7M4.5 3.5h6v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </div>
-  </div>
-  <ol class="ed-chapter-list" id="ed-chapter-list" hidden><li><a href="#question"><span>01</span>The question</a></li><li><a href="#problem"><span>02</span>The problem</a></li><li><a href="#capabilities"><span>03</span>The evidence</a></li><li><a href="#founder"><span>04</span>The founder</a></li><li><a href="#platform"><span>05</span>The deliverable</a></li><li><a href="#outcomes"><span>06</span>Business outcomes</a></li><li><a href="#system"><span>07</span>How it works</a></li><li><a href="#before-you-commit"><span>08</span>Before you commit</a></li></ol>
-</nav>
+<nav class="ed-rail" aria-label="Page chapters" data-chapter-rail><div class="ed-rail-inner"><div class="ed-rail-act"><span class="ed-rail-label">Problem</span><ol><li><a href="#question" title="The question"><span class="ed-rail-num">01</span><span class="ed-rail-name">The question</span></a></li><li><a href="#problem" title="The problem"><span class="ed-rail-num">02</span><span class="ed-rail-name">The problem</span></a></li></ol></div><div class="ed-rail-act"><span class="ed-rail-label">Proof</span><ol><li><a href="#capabilities" title="The evidence"><span class="ed-rail-num">03</span><span class="ed-rail-name">The evidence</span></a></li><li><a href="#founder" title="The founder"><span class="ed-rail-num">04</span><span class="ed-rail-name">The founder</span></a></li><li><a href="#platform" title="The deliverable"><span class="ed-rail-num">05</span><span class="ed-rail-name">The deliverable</span></a></li><li><a href="#outcomes" title="Business outcomes"><span class="ed-rail-num">06</span><span class="ed-rail-name">Business outcomes</span></a></li></ol></div><div class="ed-rail-act"><span class="ed-rail-label">Path</span><ol><li><a href="#system" title="How it works"><span class="ed-rail-num">07</span><span class="ed-rail-name">How it works</span></a></li><li><a href="#before-you-commit" title="Before you commit"><span class="ed-rail-num">08</span><span class="ed-rail-name">Before you commit</span></a></li></ol></div></div></nav>
 
 <!-- ════════════════════ FOOTER ════════════════════ -->
 <footer class="footer">
@@ -642,8 +641,8 @@
       <div class="footer-brand">
         <div class="footer-logo-wrap">
           <div class="nav-logo-mark"><svg class="brand-mark" width="38" height="22" viewBox="0 0 68.2 40" fill="none" aria-hidden="true"><rect x="0" y="8.25" width="8.9" height="23.5" rx="4.45" fill="#7860FC"/><rect x="14.8" y="0" width="8.9" height="40" rx="4.45" fill="currentColor"/><rect x="29.7" y="5.65" width="8.9" height="28.7" rx="4.45" fill="#7860FC"/><rect x="44.5" y="1.05" width="8.9" height="37.9" rx="4.45" fill="currentColor"/><rect x="59.3" y="8.65" width="8.9" height="22.7" rx="4.45" fill="#7860FC"/></svg></div><span class="brand-word"><span class="brand-word-name">N8iV</span> Promotions</span></div>
-        <p class="footer-tagline">Revenue intelligence, SEO strategy, social content, and analytics reporting for B2B businesses and agencies.</p>
-        <a href="/contact" class="btn btn-primary btn-sm">Request a Fit Review</a>
+        <p class="footer-tagline">Closed-loop revenue attribution for B2B marketing teams.</p>
+        <a href="/revenue-self-audit" class="btn btn-primary btn-sm">Start the free self-audit</a>
       </div>
       <div class="footer-col">
         <h4>Platform</h4>
@@ -673,7 +672,7 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 N8iV Promotions LLC.</span>
-      <div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/security">Security</a><a href="/contact">Contact</a></div>
+      <div class="footer-bottom-links"><button class="ed-motion" type="button" aria-pressed="true" data-motion-toggle>Motion on</button><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/security">Security</a><a href="/contact">Contact</a></div>
     </div>
   </div>
 </footer>

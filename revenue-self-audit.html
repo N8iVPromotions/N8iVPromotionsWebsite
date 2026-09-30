@@ -47,6 +47,7 @@
   .lead-field input:focus { outline:2px solid var(--violet); outline-offset:2px; }
   .audit-option label:hover { border-color:#7A63FF; color:var(--black); }
   .audit-option input:checked+label { background:#7A63FF; border-color:#7A63FF; color:var(--white); }
+  .result-handoff-note { margin: 14px 0 0; font-size: 14px; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -81,7 +82,7 @@
         <div class="audit-error" data-audit-error role="alert"></div><div class="audit-actions"><button class="audit-back" type="button" data-back>Back</button><button class="btn btn-primary audit-btn" type="submit">Show my result</button></div>
       </section>
       <section class="audit-panel" data-result-panel aria-live="polite">
-        <div class="audit-step-label">Your Revenue Receipt score</div><div class="result-score"><span data-score>0</span><small>/ 100</small></div><div class="result-band" data-score-band></div><p class="result-copy" data-score-copy></p><div class="result-grid" data-category-results></div><div class="result-followup" data-followup-message></div><a class="btn btn-primary" href="/contact">Request a Fit Review</a>
+        <div class="audit-step-label">Your Revenue Receipt score</div><div class="result-score"><span data-score>0</span><small>/ 100</small></div><div class="result-band" data-score-band></div><p class="result-copy" data-score-copy></p><div class="result-grid" data-category-results></div><div class="result-followup" data-followup-message></div><a class="btn btn-primary" href="/contact?from=self-audit">Get my Fit Summary</a><p class="result-handoff-note">Your details and score are carried over. Send the request and your written Fit Summary arrives within 48 hours.</p>
       </section>
     </form>
   </div>

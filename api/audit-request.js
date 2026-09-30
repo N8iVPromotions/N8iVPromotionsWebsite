@@ -9,7 +9,7 @@ const FROM_EMAIL =
   process.env.EMAIL_FROM ||
   'N8iV Promotions <no-reply@n8ivpromotions.com>';
 
-const REQUIRED_FIELDS = ['firstName', 'lastName', 'email', 'company', 'role', 'investment', 'crm', 'challenge'];
+const REQUIRED_FIELDS = ['firstName', 'lastName', 'email', 'company'];
 
 module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') {
@@ -195,9 +195,9 @@ function buildTextEmail(submission) {
     `Name: ${submission.firstName} ${submission.lastName}`,
     `Email: ${submission.email}`,
     `Company: ${submission.company}`,
-    `Role: ${submission.role}`,
-    `Monthly Marketing Investment: ${submission.investment}`,
-    `CRM Platform: ${submission.crm}`,
+    `Role: ${submission.role || 'Not provided'}`,
+    `Monthly Marketing Investment: ${submission.investment || 'Not provided'}`,
+    `CRM Platform: ${submission.crm || 'Not provided'}`,
     `Source Page: ${submission.sourcePage}`,
     `Conversion Page: ${submission.conversionPage || 'Not captured'}`,
     `Submitted At: ${submission.submittedAt}`,
@@ -209,7 +209,7 @@ function buildTextEmail(submission) {
     formatTouch(submission.attribution.latestTouch),
     '',
     'Biggest Marketing Visibility Challenge:',
-    submission.challenge,
+    submission.challenge || 'Not provided',
   ].join('\n');
 }
 
@@ -218,9 +218,9 @@ function buildHtmlEmail(submission) {
     ['Name', `${submission.firstName} ${submission.lastName}`],
     ['Email', submission.email],
     ['Company', submission.company],
-    ['Role', submission.role],
-    ['Monthly Marketing Investment', submission.investment],
-    ['CRM Platform', submission.crm],
+    ['Role', submission.role || 'Not provided'],
+    ['Monthly Marketing Investment', submission.investment || 'Not provided'],
+    ['CRM Platform', submission.crm || 'Not provided'],
     ['Source Page', submission.sourcePage],
     ['Conversion Page', submission.conversionPage || 'Not captured'],
     ['First-touch Attribution', formatTouch(submission.attribution.firstTouch).replace(/\n/g, '; ')],
@@ -240,7 +240,7 @@ function buildHtmlEmail(submission) {
       <h1 style="font-size:22px;margin:0 0 16px;">New Revenue Intelligence Audit Request</h1>
       <table style="border-collapse:collapse;width:100%;max-width:680px;border:1px solid #e5e7eb;">${rowsHtml}</table>
       <h2 style="font-size:16px;margin:24px 0 8px;">Biggest Marketing Visibility Challenge</h2>
-      <p style="white-space:pre-wrap;background:#f9fafb;border:1px solid #e5e7eb;padding:14px 16px;border-radius:8px;">${escapeHtml(submission.challenge)}</p>
+      <p style="white-space:pre-wrap;background:#f9fafb;border:1px solid #e5e7eb;padding:14px 16px;border-radius:8px;">${escapeHtml(submission.challenge || 'Not provided')}</p>
     </div>
   `;
 }
