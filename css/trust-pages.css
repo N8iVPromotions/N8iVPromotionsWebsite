@@ -78,3 +78,8 @@
   .pilot-cards-4 .pilot-card:last-child { border-right: 0; }
   .pilot-cards-4 .pilot-card:nth-child(-n+2) { border-bottom: 0; }
 }
+
+/* Footer links: 44px tap targets */
+.trust-footer-links { align-items: center; }
+.trust-footer-links a,
+.trust-footer-links .ed-motion { display: inline-flex; align-items: center; min-height: 44px; }

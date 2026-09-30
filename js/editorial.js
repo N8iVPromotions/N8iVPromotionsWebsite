@@ -244,10 +244,10 @@
     });
   })();
 
-  // ── Header and chapter bar follow the dark chapter ─────────────
+  // ── Header and chapter rail follow the dark chapter ─────────────
   (function initDarkChrome() {
     const nav = document.querySelector('.nav');
-    const bar = document.querySelector('[data-chapter-bar]');
+    const bar = document.querySelector('[data-chapter-rail]');
     const darks = [...document.querySelectorAll('.ed-dark')];
     if (!darks.length) return;
     const over = y => darks.some(sec => { const r = sec.getBoundingClientRect(); return r.top <= y && r.bottom > y; });
@@ -255,7 +255,7 @@
     function update() {
       ticking = false;
       if (nav) nav.classList.toggle('ed-nav-dark', over(nav.getBoundingClientRect().bottom - 1));
-      if (bar) bar.classList.toggle('ed-bar-dark', over(window.innerHeight - bar.offsetHeight + 1));
+      if (bar && bar.offsetHeight) bar.classList.toggle('ed-rail-dark', over(window.innerHeight - bar.offsetHeight + 1));
     }
     window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
     window.addEventListener('resize', update, { passive: true });
@@ -298,34 +298,19 @@
     update(parseFloat(range.value) || 0, false);
   })();
 
-  // ── Chapter bar ────────────────────────────────────────────────
-  (function initChapters() {
-    const bar = document.querySelector('[data-chapter-bar]');
+  // ── Chapter rail: highlight the chapter in view ────────────────
+  (function initRail() {
+    const rail = document.querySelector('[data-chapter-rail]');
     const chapters = [...document.querySelectorAll('[data-chapter]')];
-    if (!bar || !chapters.length) return;
-    const ticks = bar.querySelector('.ed-ticks');
-    const current = bar.querySelector('[data-chapter-current]');
-    const toggle = bar.querySelector('.ed-bar-toggle');
-    const list = bar.querySelector('.ed-chapter-list');
-    const links = [...list.querySelectorAll('a')];
-    const pad = n => String(n).padStart(2, '0');
-
-    ticks.innerHTML = chapters.map(() => '<i></i>').join('');
-    const tickEls = [...ticks.children];
-
-    function setCurrent(index) {
-      current.textContent = pad(Math.max(index, 0) + 1);
-      tickEls.forEach((el, i) => {
-        el.classList.toggle('is-current', i === index);
-        el.classList.toggle('is-past', i < index);
-      });
-      links.forEach((a, i) => a.setAttribute('aria-current', String(i === index)));
-    }
+    if (!rail || !chapters.length) return;
+    const links = [...rail.querySelectorAll('a')];
     function pick() {
       const line = window.innerHeight * 0.45;
       let index = -1;
       chapters.forEach((sec, i) => { if (sec.getBoundingClientRect().top <= line) index = i; });
-      setCurrent(index);
+      links.forEach((a, i) => {
+        if (i === index) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+      });
     }
     let ticking = false;
     window.addEventListener('scroll', () => {
@@ -333,14 +318,5 @@
     }, { passive: true });
     window.addEventListener('resize', pick, { passive: true });
     pick();
-
-    function setOpen(open) {
-      toggle.setAttribute('aria-expanded', String(open));
-      list.hidden = !open;
-    }
-    toggle.addEventListener('click', () => setOpen(list.hidden));
-    links.forEach(a => a.addEventListener('click', () => setOpen(false)));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !list.hidden) { setOpen(false); toggle.focus(); } });
-    document.addEventListener('click', e => { if (!list.hidden && !bar.contains(e.target)) setOpen(false); });
   })();
 })();

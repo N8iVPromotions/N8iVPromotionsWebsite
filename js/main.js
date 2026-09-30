@@ -309,10 +309,21 @@
   const context = document.querySelector('[data-contact-context]');
   const form = document.querySelector('[data-audit-request-form]');
   if (!context || !form) return;
-  const pilot = new URLSearchParams(location.search).get('pilot');
-  if (pilot !== 'b2b-attribution') return;
-  context.hidden = false;
+  const params = new URLSearchParams(location.search);
   const source = form.querySelector('[name="sourcePage"]');
+  if (params.get('from') === 'self-audit') {
+    let result = null;
+    try { result = JSON.parse(sessionStorage.getItem('n8iv_self_audit_result') || 'null'); } catch (e) {}
+    const title = context.querySelector('strong');
+    const note = context.querySelector('span');
+    if (title) title.textContent = result ? `Your Revenue Self-Audit score: ${result.score}/100 (${result.band}).` : 'You came from the Revenue Self-Audit.';
+    if (note) note.textContent = 'Your details are filled in. Send this to get your written Fit Summary within 48 hours of your self-audit.';
+    context.hidden = false;
+    if (source) source.value = result ? `N8iV Revenue Self-Audit → Fit Summary (score ${result.score}/100)` : 'N8iV Revenue Self-Audit → Fit Summary';
+    return;
+  }
+  if (params.get('pilot') !== 'b2b-attribution') return;
+  context.hidden = false;
   if (source) source.value = 'N8iV Promotions $750 B2B Attribution Pilot';
 })();
 

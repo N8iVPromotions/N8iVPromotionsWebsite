@@ -113,6 +113,7 @@
       if (!response.ok) throw new Error(result.error || 'We could not submit your audit.');
       renderResult(result, data.followUpConsent);
       clearDraft();
+      saveFitSummaryHandoff(data, result);
       window.N8iVAttribution?.track?.('self_audit_completed', {
         score_band: result.band,
         follow_up_consent: data.followUpConsent ? 'yes' : 'no'
@@ -121,6 +122,22 @@
     } catch (err) { error.textContent = `${err.message} Please try again or email zajen@n8ivpromotions.com.`; }
     finally { submit.disabled = false; submit.textContent = 'Show my result'; }
   });
+  // Carry the visitor's details and score to the Fit Summary request in one
+  // click. Stored in this tab only (sessionStorage), never in the URL.
+  function saveFitSummaryHandoff(data, result) {
+    try {
+      const parts = String(data.name || '').trim().split(/\s+/);
+      const draft = {
+        firstName: parts.shift() || '',
+        lastName: parts.join(' '),
+        email: data.email || '',
+        company: data.company || '',
+        challenge: `Revenue Self-Audit score: ${result.score}/100 (${result.band}).`
+      };
+      sessionStorage.setItem('n8iv_fit_review_draft', JSON.stringify(draft));
+      sessionStorage.setItem('n8iv_self_audit_result', JSON.stringify({ score: result.score, band: result.band }));
+    } catch (e) {}
+  }
   function renderResult(result, consent) {
     resultPanel.querySelector('[data-score]').textContent = result.score;
     resultPanel.querySelector('[data-score-band]').textContent = result.band;
