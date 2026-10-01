@@ -8,7 +8,8 @@
     { "source": "/insights.html", "destination": "/insights", "permanent": true },
     { "source": "/about.html", "destination": "/about", "permanent": true },
     { "source": "/contact.html", "destination": "/contact", "permanent": true },
-    { "source": "/revenue-self-audit.html", "destination": "/revenue-self-audit", "permanent": true }
+    { "source": "/revenue-self-audit.html", "destination": "/revenue-self-audit", "permanent": true },
+    { "source": "/start.html", "destination": "/start", "permanent": true }
   ],
   "rewrites": [
     { "source": "/services", "destination": "/services.html" },
@@ -17,6 +18,7 @@
     { "source": "/about", "destination": "/about.html" },
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/revenue-self-audit", "destination": "/revenue-self-audit.html" },
+    { "source": "/start", "destination": "/start.html" },
     { "source": "/insights/agencies-optimizing-40-percent-of-the-funnel", "destination": "/blog/agencies-optimizing-40-percent-of-the-funnel" },
     { "source": "/insights/performance-marketing-done-guessing-revenue-proof", "destination": "/blog/performance-marketing-done-guessing-revenue-proof" },
     { "source": "/insights/search-console-revenue-led-seo-roadmap", "destination": "/blog/search-console-revenue-led-seo-roadmap" },
