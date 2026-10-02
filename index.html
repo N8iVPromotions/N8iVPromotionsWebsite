@@ -12,10 +12,11 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
+try { if (localStorage.getItem('n8iv_ga_opt_out') === '1') { fbq('consent', 'revoke'); } } catch (e) {}
 fbq('init', '1752381592484843');
 fbq('track', 'PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none"
+<noscript><img height="1" width="1" style="display:none" alt=""
 src="https://www.facebook.com/tr?id=1752381592484843&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
@@ -41,6 +42,7 @@ src="https://www.facebook.com/tr?id=1752381592484843&ev=PageView&noscript=1"
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>N8iV Promotions | Revenue Intelligence Marketing Agency</title>
 <meta name="description" content="N8iV Promotions connects ad spend, CRM deals, and closed revenue to recommend where your marketing budget should go, with a confidence range on every number." />
+<link rel="canonical" href="https://www.n8ivpromotions.com/" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Find the Marketing That Earns | N8iV Promotions" />
 <meta property="og:description" content="Budget decisions backed by revenue receipts." />
@@ -49,6 +51,7 @@ src="https://www.facebook.com/tr?id=1752381592484843&ev=PageView&noscript=1"
 <meta name="twitter:title" content="Find the Marketing That Earns | N8iV Promotions" />
 <meta name="twitter:description" content="Budget decisions backed by revenue receipts." />
 <meta name="twitter:image" content="https://www.n8ivpromotions.com/assets/n8iv-revenue-intelligence-social.png" />
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.n8ivpromotions.com/#org","name":"N8iV Promotions","url":"https://www.n8ivpromotions.com/","logo":"https://www.n8ivpromotions.com/assets/n8iv-promotions-app-icon.png","email":"zajen@n8ivpromotions.com","address":{"@type":"PostalAddress","streetAddress":"3015 N Scottsdale Rd. 3132","addressLocality":"Scottsdale","addressRegion":"AZ","addressCountry":"US"},"founder":{"@type":"Person","name":"Zajen McArton","sameAs":"https://www.linkedin.com/in/zajen-mcarton"}},{"@type":"WebSite","@id":"https://www.n8ivpromotions.com/#website","url":"https://www.n8ivpromotions.com/","name":"N8iV Promotions","publisher":{"@id":"https://www.n8ivpromotions.com/#org"}}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -98,9 +101,10 @@ src="https://www.facebook.com/tr?id=1752381592484843&ev=PageView&noscript=1"
     <a href="/revenue-self-audit" class="btn btn-primary mobile-nav-cta">Start the free self-audit</a>
   </nav>
 </div>
+<main id="main-content" tabindex="-1">
 
 <!-- ════════════════════ HERO ════════════════════ -->
-<section class="ed-hero" id="main-content" tabindex="-1">
+<section class="ed-hero">
   <div class="wrap">
     <h1 class="ed-display ed-display-hero">Know where your next marketing <span class="ed-accent">dollar should go.</span></h1>
 
@@ -636,6 +640,8 @@ src="https://www.facebook.com/tr?id=1752381592484843&ev=PageView&noscript=1"
 <nav class="ed-rail" aria-label="Page chapters" data-chapter-rail><div class="ed-rail-inner"><div class="ed-rail-act"><span class="ed-rail-label">Problem</span><ol><li><a href="#question" title="The question"><span class="ed-rail-num">01</span><span class="ed-rail-name">The question</span></a></li><li><a href="#problem" title="The problem"><span class="ed-rail-num">02</span><span class="ed-rail-name">The problem</span></a></li></ol></div><div class="ed-rail-act"><span class="ed-rail-label">Proof</span><ol><li><a href="#capabilities" title="The evidence"><span class="ed-rail-num">03</span><span class="ed-rail-name">The evidence</span></a></li><li><a href="#founder" title="The founder"><span class="ed-rail-num">04</span><span class="ed-rail-name">The founder</span></a></li><li><a href="#platform" title="The deliverable"><span class="ed-rail-num">05</span><span class="ed-rail-name">The deliverable</span></a></li><li><a href="#outcomes" title="Business outcomes"><span class="ed-rail-num">06</span><span class="ed-rail-name">Business outcomes</span></a></li></ol></div><div class="ed-rail-act"><span class="ed-rail-label">Path</span><ol><li><a href="#system" title="How it works"><span class="ed-rail-num">07</span><span class="ed-rail-name">How it works</span></a></li><li><a href="#before-you-commit" title="Before you commit"><span class="ed-rail-num">08</span><span class="ed-rail-name">Before you commit</span></a></li></ol></div></div></nav>
 
 <!-- ════════════════════ FOOTER ════════════════════ -->
+</main>
+
 <footer class="footer">
   <div class="wrap">
     <div class="footer-main">
