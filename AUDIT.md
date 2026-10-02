@@ -8,10 +8,10 @@
 - Stronger titles (`services`, `case-studies`, `insights`) and descriptions (`terms`, `privacy`, `security`, `revenue-self-audit`).
 - `Organization` + `WebSite` JSON-LD on the home page; `404.html` added.
 - `<main id="main-content">` landmark and skip link on every page; empty `alt` on noscript pixel images.
+- Deleted the GitHub Pages workflow and five unused images (~1.6 MB). Disable Pages in the repo settings if it is still enabled.
 
 ## Still open
-1. **Delete the GitHub Pages workflow** (`.github/workflows/deploy.yml`) and disable Pages: it publishes the whole repo (including `api/`, `.agents/`, `env.example`) as a public duplicate site.
-2. **Delete unused images:** `assets/audit-hero.png`, `case-study-1.png`, `case-study-2.png`, `office-hero.png`, `platform-hero.png` (~1.6 MB, unreferenced). Convert `dashboard-hero.png` to WebP and compress the 704 KB social image.
+2. Convert `assets/dashboard-hero.png` to WebP and compress the 704 KB social image.
 3. **Consent banner** for EU/California traffic (GA and the Meta Pixel load without consent; opt-out is manual).
 4. **Verify production env vars** (`RESEND_API_KEY`/`SENDGRID_API_KEY`, `TURNSTILE_SECRET_KEY`) with a live submission of both forms.
 5. `getClientIp` trusts the first `x-forwarded-for` hop (spoofable); prefer `x-real-ip` on Vercel. The in-memory rate limiter is per instance only.
