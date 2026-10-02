@@ -3,40 +3,13 @@
 <head>
 <!-- Google tag (gtag.js) -->
 <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-try { if (localStorage.getItem('n8iv_ga_opt_out') === '1') { fbq('consent', 'revoke'); } } catch (e) {}
-fbq('init', '1752381592484843');
-fbq('track', 'PageView');
-</script>
+<script src="/js/meta-pixel.js"></script>
 <noscript><img height="1" width="1" style="display:none" alt=""
 src="https://www.facebook.com/tr?id=1752381592484843&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-<script>
-  (function () {
-    try {
-      var params = new URLSearchParams(location.search);
-      if (params.get('ga_optout') === '1') { localStorage.setItem('n8iv_ga_opt_out', '1'); }
-      else if (params.get('ga_optout') === '0') { localStorage.removeItem('n8iv_ga_opt_out'); }
-      if (localStorage.getItem('n8iv_ga_opt_out') === '1') { window['ga-disable-G-HXEBK6Y9LJ'] = true; }
-    } catch (e) {}
-  })();
-</script>
+<script src="/js/ga-init.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HXEBK6Y9LJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-HXEBK6Y9LJ');
-</script>
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -60,7 +33,7 @@ src="https://www.facebook.com/tr?id=1752381592484843&ev=PageView&noscript=1"
 <meta name="theme-color" content="#F7F6F3" />
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/editorial.css">
-<script>(function(){var d=document.documentElement;d.classList.add('ed-js');try{var m=localStorage.getItem('n8iv_motion');if(m==='off'||(m!=='on'&&matchMedia('(prefers-reduced-motion: reduce)').matches))d.classList.add('motion-off');}catch(e){}})();</script>
+<script src="/js/motion-init.js"></script>
 </head>
 <body class="editorial">
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -177,7 +150,7 @@ src="https://www.facebook.com/tr?id=1752381592484843&ev=PageView&noscript=1"
 
     <div class="problem-cards">
       <div class="problem-card meta reveal stagger-1">
-        <div class="problem-card-logo"><span class="logo-dot brand-logo"><img src="assets/logos/meta.svg" alt="" aria-hidden="true"></span>Meta Ads</div>
+        <div class="problem-card-logo"><span class="logo-dot brand-logo"><img src="assets/logos/meta.svg" width="14" height="14" alt="" aria-hidden="true"></span>Meta Ads</div>
         <div class="problem-metric">Modeled</div>
         <div class="problem-label">Platform conversion claim</div>
         <div class="problem-note">
@@ -186,7 +159,7 @@ src="https://www.facebook.com/tr?id=1752381592484843&ev=PageView&noscript=1"
         </div>
       </div>
       <div class="problem-card google reveal stagger-2">
-        <div class="problem-card-logo"><span class="logo-dot brand-logo"><img src="assets/logos/google-ads.svg" alt="" aria-hidden="true"></span>Google Ads</div>
+        <div class="problem-card-logo"><span class="logo-dot brand-logo"><img src="assets/logos/google-ads.svg" width="14" height="14" alt="" aria-hidden="true"></span>Google Ads</div>
         <div class="problem-metric">Attributed</div>
         <div class="problem-label">Platform conversion claim</div>
         <div class="problem-note">
@@ -195,7 +168,7 @@ src="https://www.facebook.com/tr?id=1752381592484843&ev=PageView&noscript=1"
         </div>
       </div>
       <div class="problem-card crm reveal stagger-3">
-        <div class="problem-card-logo"><span class="logo-dot brand-logo"><img src="assets/logos/hubspot.svg" alt="" aria-hidden="true"></span>CRM</div>
+        <div class="problem-card-logo"><span class="logo-dot brand-logo"><img src="assets/logos/hubspot.svg" width="14" height="14" alt="" aria-hidden="true"></span>CRM</div>
         <div class="problem-metric">Closed won</div>
         <div class="problem-label">Pipeline and customer record</div>
         <div class="problem-note">
@@ -447,43 +420,43 @@ src="https://www.facebook.com/tr?id=1752381592484843&ev=PageView&noscript=1"
     <div class="integrations-grid">
       <!-- CRM -->
       <div class="integration-card reveal stagger-1">
-        <div class="integration-logo"><img src="assets/logos/hubspot.svg" alt="" aria-hidden="true"></div>
+        <div class="integration-logo"><img src="assets/logos/hubspot.svg" width="28" height="28" alt="" aria-hidden="true"></div>
         <div class="integration-name">HubSpot</div>
         <div class="integration-tag">CRM</div>
       </div>
       <div class="integration-card reveal stagger-2">
-        <div class="integration-logo"><img src="assets/logos/google-search-console.svg" alt="" aria-hidden="true"></div>
+        <div class="integration-logo"><img src="assets/logos/google-search-console.svg" width="28" height="28" alt="" aria-hidden="true"></div>
         <div class="integration-name">Search Console</div>
         <div class="integration-tag">SEO Data</div>
       </div>
       <!-- Ad Platforms -->
       <div class="integration-card reveal stagger-3">
-        <div class="integration-logo"><img src="assets/logos/meta.svg" alt="" aria-hidden="true"></div>
+        <div class="integration-logo"><img src="assets/logos/meta.svg" width="28" height="28" alt="" aria-hidden="true"></div>
         <div class="integration-name">Meta Ads</div>
         <div class="integration-tag">Ad Platform</div>
       </div>
       <div class="integration-card reveal stagger-4">
-        <div class="integration-logo"><img src="assets/logos/google-ads.svg" alt="" aria-hidden="true"></div>
+        <div class="integration-logo"><img src="assets/logos/google-ads.svg" width="28" height="28" alt="" aria-hidden="true"></div>
         <div class="integration-name">Google Ads</div>
         <div class="integration-tag">Ad Platform</div>
       </div>
       <div class="integration-card reveal stagger-1">
-        <div class="integration-logo"><img src="assets/logos/linkedin.svg" alt="" aria-hidden="true"></div>
+        <div class="integration-logo"><img src="assets/logos/linkedin.svg" width="28" height="28" alt="" aria-hidden="true"></div>
         <div class="integration-name">LinkedIn Ads</div>
         <div class="integration-tag">Ad Platform</div>
       </div>
       <div class="integration-card reveal stagger-2">
-        <div class="integration-logo"><img src="assets/logos/google-analytics.svg" alt="" aria-hidden="true"></div>
+        <div class="integration-logo"><img src="assets/logos/google-analytics.svg" width="28" height="28" alt="" aria-hidden="true"></div>
         <div class="integration-name">GA4</div>
         <div class="integration-tag">Web Analytics</div>
       </div>
       <div class="integration-card reveal stagger-3">
-        <div class="integration-logo"><img src="assets/logos/stripe.svg" alt="" aria-hidden="true"></div>
+        <div class="integration-logo"><img src="assets/logos/stripe.svg" width="28" height="28" alt="" aria-hidden="true"></div>
         <div class="integration-name">Stripe</div>
         <div class="integration-tag">Payments</div>
       </div>
       <div class="integration-card reveal stagger-4">
-        <div class="integration-logo"><img src="assets/logos/databricks.svg" alt="" aria-hidden="true"></div>
+        <div class="integration-logo"><img src="assets/logos/databricks.svg" width="28" height="28" alt="" aria-hidden="true"></div>
         <div class="integration-name">Databricks</div>
         <div class="integration-tag">Data Platform</div>
       </div>

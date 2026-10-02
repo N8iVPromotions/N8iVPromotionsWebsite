@@ -304,6 +304,63 @@
   });
 })();
 
+// ── NEWSLETTER SIGNUP ─────────────────────────────────────────
+(function initNewsletterForm() {
+  const form = document.querySelector('[data-newsletter-form]');
+  if (!form) return;
+
+  const status = document.getElementById('newsletter-status');
+  const button = form.querySelector('button[type="submit"]');
+  const GENERIC_ERROR = 'We could not add you to the list. Please try again in a moment.';
+
+  function setStatus(message, type) {
+    if (!status) return;
+    status.textContent = message;
+    status.className = 'form-status newsletter-status' + (type ? ' ' + type : '');
+  }
+
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const data = Object.fromEntries(new FormData(form).entries());
+    if (!data['cf-turnstile-response']) {
+      setStatus('Still checking that you are human. Try again in a moment.', 'error');
+      return;
+    }
+
+    button.disabled = true;
+    form.setAttribute('aria-busy', 'true');
+    setStatus('Subscribing...', '');
+    let message = GENERIC_ERROR;
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        if (result.error) message = result.error;
+        throw new Error(message);
+      }
+
+      form.reset();
+      window.N8iVAttribution?.track?.('newsletter_signup', { form: 'insights_newsletter' });
+      setStatus("You're subscribed. Watch your inbox for the next issue.", 'success');
+    } catch (error) {
+      console.error(error);
+      setStatus(message, 'error');
+    } finally {
+      // Turnstile tokens are single-use; fetch a fresh one for the next submit.
+      window.turnstile?.reset?.();
+      button.disabled = false;
+      form.setAttribute('aria-busy', 'false');
+    }
+  });
+})();
+
 // Preserve offer context from CTA through the contact form.
 (function initContactContext() {
   const context = document.querySelector('[data-contact-context]');
