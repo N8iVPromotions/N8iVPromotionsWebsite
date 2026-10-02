@@ -87,7 +87,11 @@
   form.addEventListener('change', saveDraft);
   form.addEventListener('input', saveDraft);
 
-  document.querySelector('[data-start-audit]').addEventListener('click', () => { intro.hidden = true; form.hidden = false; showStep(resumeStep); });
+  function startAudit() { intro.hidden = true; form.hidden = false; showStep(resumeStep); }
+  document.querySelector('[data-start-audit]').addEventListener('click', startAudit);
+  // Landing pages link here with ?start=1 after the visitor has already
+  // answered a question, so skip the intro and go straight to the form.
+  if (new URLSearchParams(location.search).get('start') === '1') startAudit();
   form.addEventListener('click', event => {
     if (event.target.closest('[data-next]')) {
       const panel = questionPanels[step];
@@ -118,6 +122,8 @@
         score_band: result.band,
         follow_up_consent: data.followUpConsent ? 'yes' : 'no'
       });
+      // Meta Pixel conversion for ad optimization (pages without the pixel skip this).
+      window.fbq?.('track', 'Lead', { content_name: 'Revenue Self-Audit', score_band: result.band });
       showStep(sections.length + 1);
     } catch (err) { error.textContent = `${err.message} Please try again or email zajen@n8ivpromotions.com.`; }
     finally { submit.disabled = false; submit.textContent = 'Show my result'; }

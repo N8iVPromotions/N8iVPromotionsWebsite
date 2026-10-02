@@ -8,7 +8,8 @@
     { "source": "/insights.html", "destination": "/insights", "permanent": true },
     { "source": "/about.html", "destination": "/about", "permanent": true },
     { "source": "/contact.html", "destination": "/contact", "permanent": true },
-    { "source": "/revenue-self-audit.html", "destination": "/revenue-self-audit", "permanent": true }
+    { "source": "/revenue-self-audit.html", "destination": "/revenue-self-audit", "permanent": true },
+    { "source": "/start.html", "destination": "/start", "permanent": true }
   ],
   "rewrites": [
     { "source": "/services", "destination": "/services.html" },
@@ -17,6 +18,7 @@
     { "source": "/about", "destination": "/about.html" },
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/revenue-self-audit", "destination": "/revenue-self-audit.html" },
+    { "source": "/start", "destination": "/start.html" },
     { "source": "/insights/agencies-optimizing-40-percent-of-the-funnel", "destination": "/blog/agencies-optimizing-40-percent-of-the-funnel" },
     { "source": "/insights/performance-marketing-done-guessing-revenue-proof", "destination": "/blog/performance-marketing-done-guessing-revenue-proof" },
     { "source": "/insights/search-console-revenue-led-seo-roadmap", "destination": "/blog/search-console-revenue-led-seo-roadmap" },
@@ -31,7 +33,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://challenges.cloudflare.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.facebook.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://challenges.cloudflare.com https://www.facebook.com https://connect.facebook.net; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
         },
         { "key": "X-Frame-Options", "value": "DENY" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
