@@ -53,15 +53,37 @@ async function addContact(email) {
   const segmentId = process.env.RESEND_NEWSLETTER_SEGMENT_ID;
   if (segmentId) payload.segments = [{ id: segmentId }];
 
-  const response = await fetch('https://api.resend.com/contacts', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
+  const created = await resendRequest(apiKey, 'POST', '/contacts', payload);
+  if (created.ok) return;
+  if (!created.alreadyExists) throw new Error(`Resend contact create failed: ${created.detail}`);
+
+  // The address is already a contact. Signing up again is an explicit request for the
+  // newsletter, so clear any earlier unsubscribe and make sure it is in the segment;
+  // only then does the visitor get told they are subscribed.
+  const contact = encodeURIComponent(email);
+  const updated = await resendRequest(apiKey, 'PATCH', `/contacts/${contact}`, { unsubscribed: false });
+  if (!updated.ok) throw new Error(`Resend contact re-subscribe failed: ${updated.detail}`);
+
+  if (segmentId) {
+    const added = await resendRequest(apiKey, 'POST', `/contacts/${contact}/segments/${encodeURIComponent(segmentId)}`);
+    if (!added.ok && !added.alreadyExists) throw new Error(`Resend add to segment failed: ${added.detail}`);
+  }
+}
+
+async function resendRequest(apiKey, method, path, body) {
+  const headers = { Authorization: `Bearer ${apiKey}` };
+  if (body) headers['Content-Type'] = 'application/json';
+  const response = await fetch(`https://api.resend.com${path}`, {
+    method,
+    headers,
+    body: body ? JSON.stringify(body) : undefined,
   });
-  if (response.ok) return;
+  if (response.ok) return { ok: true };
 
   const text = await response.text();
-  // Signing up again with an address that is already a contact is not an error for the visitor.
-  if (response.status === 409 || (response.status === 422 && /already exist/i.test(text))) return;
-  throw new Error(`Resend contact create failed with status ${response.status}: ${text}`);
+  return {
+    ok: false,
+    alreadyExists: response.status === 409 || (response.status === 422 && /already exist/i.test(text)),
+    detail: `${method} ${path} returned ${response.status}: ${text}`,
+  };
 }
