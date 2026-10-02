@@ -10,9 +10,14 @@
 - `<main id="main-content">` landmark and skip link on every page; empty `alt` on noscript pixel images.
 - Deleted the GitHub Pages workflow and five unused images (~1.6 MB). Disable Pages in the repo settings if it is still enabled.
 
+## Hardening pass (2026-10-02)
+- All inline scripts moved to `js/ga-init.js`, `js/meta-pixel.js`, and `js/motion-init.js`; the insights newsletter form's inline `onsubmit` moved to `js/main.js`. The CSP `script-src` no longer allows `'unsafe-inline'`. GA4 CSP hosts follow Google's guidance (`*.googletagmanager.com`, `*.google-analytics.com` for images).
+- `getClientIp` now prefers `x-real-ip`. Note: Vercel overwrites `x-forwarded-for`, so the earlier "spoofable" finding did not apply in production.
+- Logo `<img>` tags on the home page have explicit width/height.
+
 ## Still open
-2. Convert `assets/dashboard-hero.png` to WebP and compress the 704 KB social image.
-3. **Consent banner** for EU/California traffic (GA and the Meta Pixel load without consent; opt-out is manual).
-4. **Verify production env vars** (`RESEND_API_KEY`/`SENDGRID_API_KEY`, `TURNSTILE_SECRET_KEY`) with a live submission of both forms.
-5. `getClientIp` trusts the first `x-forwarded-for` hop (spoofable); prefer `x-real-ip` on Vercel. The in-memory rate limiter is per instance only.
-6. Inline GA/Pixel scripts force `'unsafe-inline'` in the CSP; `styles.css` is one 3,365-line file with many inline styles; logo `<img>` tags lack width/height.
+1. Convert `assets/dashboard-hero.png` to WebP and compress the 704 KB social image.
+2. **Consent banner** for EU/California traffic (GA and the Meta Pixel load without consent; opt-out is manual).
+3. **Verify production env vars** (`RESEND_API_KEY`/`SENDGRID_API_KEY`, `TURNSTILE_SECRET_KEY`) with a live submission of both forms.
+4. **The insights newsletter form has no backend.** It accepts an email and silently does nothing. Wire it to an email provider or remove it.
+5. The in-memory rate limiter is per instance only (Upstash Redis if spam appears). `style-src` still needs `'unsafe-inline'` because of the many inline `style=""` attributes; `styles.css` is one 3,365-line file.

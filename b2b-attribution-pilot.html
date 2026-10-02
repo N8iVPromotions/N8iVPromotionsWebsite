@@ -1,22 +1,7 @@
 <!doctype html><html lang="en"><head>
 <!-- Google tag (gtag.js) -->
-<script>
-  (function () {
-    try {
-      var params = new URLSearchParams(location.search);
-      if (params.get('ga_optout') === '1') { localStorage.setItem('n8iv_ga_opt_out', '1'); }
-      else if (params.get('ga_optout') === '0') { localStorage.removeItem('n8iv_ga_opt_out'); }
-      if (localStorage.getItem('n8iv_ga_opt_out') === '1') { window['ga-disable-G-HXEBK6Y9LJ'] = true; }
-    } catch (e) {}
-  })();
-</script>
+<script src="/js/ga-init.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HXEBK6Y9LJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-HXEBK6Y9LJ');
-</script>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>$750 Attribution Pilot: Your First Budget Decision | N8iV Promotions</title><meta name="description" content="Connect your ad spend to CRM and revenue evidence. Get attributed revenue per channel, a confidence range on each number, and a recommended budget split. $750, one decision brief.">
 <link rel="canonical" href="https://www.n8ivpromotions.com/b2b-attribution-pilot" />
 <meta property="og:type" content="website" />
@@ -33,7 +18,8 @@
 <meta name="theme-color" content="#F7F6F3" />
 <link rel="stylesheet" href="/css/styles.css"><link rel="stylesheet" href="/css/trust-pages.css">
 <link rel="stylesheet" href="/css/editorial.css">
-<script>(function(){var d=document.documentElement;d.classList.add('ed-js');try{var m=localStorage.getItem('n8iv_motion');if(m==='off'||(m!=='on'&&matchMedia('(prefers-reduced-motion: reduce)').matches))d.classList.add('motion-off');}catch(e){}})();</script></head><body class="editorial">
+<script src="/js/motion-init.js"></script>
+</head><body class="editorial">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
 <nav class="nav">

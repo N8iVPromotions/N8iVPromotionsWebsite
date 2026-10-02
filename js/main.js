@@ -390,3 +390,8 @@
     });
   });
 })();
+
+// Newsletter signup has no backend yet; keep the form from reloading the page.
+document.querySelectorAll('.newsletter-form').forEach(form => {
+  form.addEventListener('submit', e => e.preventDefault());
+});
