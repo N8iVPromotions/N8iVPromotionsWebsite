@@ -19,5 +19,5 @@
 1. Convert `assets/dashboard-hero.png` to WebP and compress the 704 KB social image.
 2. **Consent banner** for EU/California traffic (GA and the Meta Pixel load without consent; opt-out is manual).
 3. **Verify production email setup.** Both forms send through Resend (`RESEND_API_KEY`; SendGrid is only a fallback). Confirm the `n8ivpromotions.com` sending domain is verified in Resend (the `no-reply@` sender is rejected otherwise, and the self-audit also emails visitors), confirm `TURNSTILE_SECRET_KEY` is set (without it every submission is rejected), then submit both forms live.
-4. **The insights newsletter form has no backend.** It accepts an email and silently does nothing. Wire it to an email provider or remove it.
+4. **Newsletter signup (`/api/newsletter`) is wired to Resend Contacts** but needs setup: the Contacts API requires a full-access Resend key (set `RESEND_CONTACTS_API_KEY` if `RESEND_API_KEY` is sending-only), and set `RESEND_NEWSLETTER_SEGMENT_ID` to put signups in the segment you Broadcast to. Then subscribe once live and confirm the contact appears in Resend.
 5. The in-memory rate limiter is per instance only (Upstash Redis if spam appears). `style-src` still needs `'unsafe-inline'` because of the many inline `style=""` attributes; `styles.css` is one 3,365-line file.
