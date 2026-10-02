@@ -1,0 +1,907 @@
+/* ================================================================
+   N8iV Promotions — Executive SaaS layer (design system v2)
+   Loaded last on every page. Keeps the brand (mark, wordmark, Action
+   and Signal Purple, Helvetica Now Display over Inter, pill buttons,
+   all copy) and restyles it for clarity, focus and low cognitive load.
+   The multi-tone AI gradient is reserved for primary actions,
+   interactive state and AI anchors. See DESIGN.md.
+   Older layers still load underneath, so some rules here repeat their
+   selectors (and their !important) to win the cascade.
+   ================================================================ */
+
+:root {
+  /* Brand primitives, retuned: neutrals lean toward the brand violet */
+  --black:      #191920;
+  --dark-grey:  #5A5A66;
+  --light-grey: #E6E6EE;
+  --paper:      #FAFAFD;
+  --white:      #FFFFFF;
+  --stone:      #BCBCCA;
+  --violet:     #5F42FB;
+  --signal:     #7860FC;
+
+  --ink-2: #3D3D49;
+  --hairline-strong: #D4D4DE;
+  --surface-tint: #F4F3FB;
+  --band: #0E0D1C;
+  --band-2: #17162A;
+  --band-line: #2A2942;
+
+  --success: #0E7A55;
+  --success-bg: #ECF8F2;
+  --success-line: #BFE6D3;
+  --error: #B42318;
+  --error-bg: #FEF1F1;
+  --error-line: #F5C2C0;
+
+  /* AI gradient: every stop keeps white text at WCAG AA (5.1 to 6.3:1) */
+  --ai-1: #2867E4;
+  --ai-2: #5F42FB;
+  --ai-3: #862BE2;
+  --ai-4: #BB29A6;
+  --ai-gradient: linear-gradient(115deg, var(--ai-1) 0%, var(--ai-2) 36%, var(--ai-3) 68%, var(--ai-4) 100%);
+  --ai-gradient-loop: linear-gradient(115deg, var(--ai-1), var(--ai-2), var(--ai-3), var(--ai-4), var(--ai-3), var(--ai-2), var(--ai-1));
+  --ai-tint: linear-gradient(115deg, rgba(40,103,228,.07), rgba(95,66,251,.07) 40%, rgba(187,41,166,.07));
+  --ai-glow: 0 6px 20px -6px rgba(95,66,251,.55), 0 2px 8px -2px rgba(40,103,228,.35), 0 10px 28px -12px rgba(187,41,166,.45);
+  --ai-glow-strong: 0 10px 30px -6px rgba(95,66,251,.65), 0 4px 14px -2px rgba(40,103,228,.45), 0 14px 38px -10px rgba(187,41,166,.55);
+  --ai-glow-soft: 0 1px 2px rgba(25,25,32,.04), 0 18px 44px -24px rgba(95,66,251,.45), 0 8px 24px -18px rgba(40,103,228,.35);
+
+  --grad-primary: var(--ai-gradient);
+  --grad-primary-soft: var(--ai-tint);
+  --grad-field: var(--white);
+
+  /* Elevation: quiet, ink-tinted */
+  --shadow-sm: 0 1px 2px rgba(25,25,32,.04), 0 1px 1px rgba(25,25,32,.02);
+  --shadow-md: 0 1px 2px rgba(25,25,32,.04), 0 10px 28px -14px rgba(25,25,32,.16);
+  --shadow-lg: 0 2px 6px rgba(25,25,32,.04), 0 28px 56px -28px rgba(25,25,32,.22);
+  --shadow-blue: var(--ai-glow);
+
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+}
+
+/* ── Base ─────────────────────────────────────────────────────── */
+body { background: var(--paper); color: var(--black); }
+::selection { background: rgba(95,66,251,.18); color: var(--black); }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(95,66,251,.14);
+}
+
+@keyframes ai-drift {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+/* ── Type: confident, never viewport-filling ─────────────────── */
+.display-xl { font-size: clamp(40px, 5vw, 64px); letter-spacing: -0.035em; line-height: 1.04; }
+.display-lg { font-size: clamp(32px, 4vw, 48px); letter-spacing: -0.03em; line-height: 1.06; }
+.display-md { font-size: clamp(26px, 3vw, 36px); letter-spacing: -0.025em; line-height: 1.12; }
+.display-sm { font-size: clamp(20px, 2vw, 26px); letter-spacing: -0.015em; }
+
+.editorial {
+  --t-display: clamp(40px, 5.4vw, 76px);
+  --t-h2: clamp(30px, 3.4vw, 48px);
+  --t-h3: clamp(18px, 1.5vw, 22px);
+  --t-lead: clamp(17px, 1.4vw, 19px);
+  --t-body: 16px;
+  --t-small: 14px;
+  --t-eyebrow: 13px;
+}
+.ed-display { line-height: 1.02; letter-spacing: -0.035em; }
+.editorial .ed-h2,
+.editorial .pilot-heading { line-height: 1.06; letter-spacing: -0.03em; max-width: 20ch; }
+.editorial .receipt-preview-copy .ed-h2,
+.editorial .founder-proof-copy .ed-h2,
+.editorial .conversion-faq-grid .ed-h2,
+.editorial .conversion-faq-grid .pilot-heading,
+.editorial .pilot-two .pilot-heading { font-size: clamp(28px, 3vw, 42px); }
+.trust-title,
+.pilot-title { font-size: clamp(38px, 5vw, 62px); line-height: 1.02; letter-spacing: -0.035em; }
+.editorial .ed-pilot-hero .pilot-title { font-size: var(--t-display); }
+.audit-title { font-size: clamp(36px, 4.6vw, 60px) !important; letter-spacing: -0.035em !important; line-height: 1.04 !important; }
+.audit-panel h1,
+.audit-panel h2 { letter-spacing: -0.03em; }
+
+.lead, .hero-sub, .pilot-lead, .trust-lead, .audit-intro { color: var(--ink-2); }
+
+/* Headline accents stay one solid brand color (never gradient text) */
+.editorial .ed-accent,
+.display-xl em, .display-lg em, .display-md em, .display-sm em { color: var(--violet) !important; }
+
+/* ── Labels: one quiet voice, sentence case, readable sizes ──── */
+/* Every rule that set uppercase micro labels anywhere on the site (found by
+   scanning all stylesheets and per-page <style> blocks): sentence case, no
+   tracking, and a 12px floor for the ones that were smaller. */
+.article-aside h3,
+.article-cat,
+.article-kicker,
+.audit-kicker,
+.audit-step-label,
+.ba-label,
+.board-header,
+.btn,
+.capability-tab,
+.case-metric-label,
+.case-tag,
+.chapter-meta,
+.chapter-name,
+.contact-detail-label,
+.content-map small,
+.content-map span,
+.cs-tag,
+.dark-stat-label,
+.dash-chart-title,
+.decision-stack small,
+.decision-stack span,
+.ed-chain-head,
+.ed-eyebrow,
+.ed-kicker,
+.ed-output span,
+.ed-start-title,
+.evidence-chain-head,
+.evidence-node em,
+.eyebrow,
+.featured-tag,
+.featured-visual-label,
+.flow-node.engine .engine-label,
+.footer-col h4,
+.founder-proof-link,
+.founder-proof-photo figcaption,
+.hero-badge,
+.hero-trust-item,
+.insight-box-label,
+.integration-tag,
+.journey-line i,
+.journey-line small,
+.kpi-label,
+.lead-field label,
+.lp-eyebrow,
+.method-num,
+.nav-badge,
+.nav-links a,
+.nav-logo-sub,
+.pilot-terms-title,
+.problem-card-logo,
+.process-step .step-tag,
+.product-decision span,
+.product-question span,
+.product-toolbar,
+.quality-rows strong,
+.receipt-decision-label,
+.receipt-footer,
+.receipt-mark,
+.receipt-row-label,
+.receipt-sheet small,
+.receipt-sheet::before,
+.report-card-header,
+.section-tag,
+.stats-band-label,
+.stats-bar-label,
+.step-num,
+.trust-kicker,
+.trust-toc strong {
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+.article-cat,
+.ba-label,
+.board-header,
+.capability-tab,
+.case-metric-label,
+.case-tag,
+.contact-detail-label,
+.content-map small,
+.content-map span,
+.cs-tag,
+.dash-chart-title,
+.decision-stack small,
+.decision-stack span,
+.evidence-chain-head,
+.evidence-node em,
+.eyebrow,
+.featured-tag,
+.featured-visual-label,
+.flow-node.engine .engine-label,
+.footer-col h4,
+.founder-proof-link,
+.founder-proof-photo figcaption,
+.hero-badge,
+.insight-box-label,
+.integration-tag,
+.journey-line i,
+.journey-line small,
+.kpi-label,
+.nav-badge,
+.nav-logo-sub,
+.problem-card-logo,
+.process-step .step-tag,
+.product-decision span,
+.product-question span,
+.product-toolbar,
+.quality-rows strong,
+.receipt-decision-label,
+.receipt-footer,
+.receipt-mark,
+.receipt-row-label,
+.receipt-sheet small,
+.receipt-sheet::before,
+.report-card-header,
+.stats-bar-label,
+.trust-toc strong {
+  font-size: 12px !important;
+}
+.eyebrow,
+.trust-kicker,
+.lp-eyebrow,
+.audit-kicker,
+.audit-step-label,
+.chapter-meta {
+  font-family: var(--ff-sub) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--dark-grey) !important;
+}
+.chapter-meta { margin-bottom: clamp(20px, 3vw, 32px); }
+.chapter-name { color: var(--dark-grey); }
+.ed-cinema-section .chapter-meta,
+.ed-dark .chapter-meta,
+.ed-dark .chapter-name { color: var(--stone) !important; }
+
+/* Redundant scaffolding: counters, act labels, rail, tab numbers */
+.chapter-num,
+.chapter-aside,
+.tab-num,
+.capability-number,
+.ed-rail { display: none !important; }
+body.editorial { padding-bottom: 0 !important; }
+
+/* ── Sections and rhythm ─────────────────────────────────────── */
+section,
+.section,
+.bg-page,
+.bg-dark,
+.bg-dark-2,
+.hero,
+.capability-section,
+.founder-proof,
+.cta-section,
+.article-hero,
+.pilot-cta,
+.audit-page { background: var(--paper) !important; }
+.bg-surface,
+.footer { background: var(--white) !important; }
+.footer { border-top: 1px solid var(--light-grey); }
+
+/* Hero fields: one soft ambient glow of the AI gradient, top right */
+.hero,
+.ed-hero,
+.trust-hero,
+.pilot-hero,
+.article-hero,
+body.lp .lp-hero {
+  background:
+    radial-gradient(42% 60% at 92% 0%, rgba(95,66,251,.10), transparent 70%),
+    radial-gradient(30% 45% at 70% 12%, rgba(40,103,228,.07), transparent 70%),
+    radial-gradient(26% 40% at 100% 38%, rgba(187,41,166,.06), transparent 70%),
+    var(--paper) !important;
+}
+.pilot-hero { background-color: var(--paper) !important; }
+
+/* ── Navigation ──────────────────────────────────────────────── */
+.nav::before,
+.nav.light::before,
+.trust-nav {
+  background: rgba(250,250,253,.92) !important;
+  border-bottom: 1px solid var(--light-grey) !important;
+}
+.nav-links a,
+.nav.light .nav-links a {
+  font-size: 14.5px;
+  color: var(--ink-2);
+  border: 0 !important;
+  background-color: transparent;
+}
+.nav-links a:hover,
+.nav.light .nav-links a:hover {
+  color: var(--black);
+  background-color: rgba(95,66,251,.06) !important;
+  border-color: transparent !important;
+}
+.nav-links a.active,
+.nav.light .nav-links a.active {
+  color: var(--black);
+  font-weight: 500;
+  background-image: var(--ai-gradient);
+  background-repeat: no-repeat;
+  background-size: calc(100% - 28px) 2px;
+  background-position: 50% calc(100% - 2px);
+}
+.nav-pilot-link { font-size: 14.5px; color: var(--ink-2); }
+.nav-pilot-link:hover { color: var(--black); background: rgba(95,66,251,.06); }
+
+/* Header over the dark chapter */
+.nav.ed-nav-dark::before {
+  background: rgba(14,13,28,.94) !important;
+  border-bottom-color: rgba(244,244,248,.10) !important;
+}
+.nav.ed-nav-dark .nav-links a.active {
+  text-decoration: none;
+  background-image: var(--ai-gradient);
+}
+.nav.ed-nav-dark .nav-links a:hover { background-color: rgba(244,244,248,.08) !important; }
+
+/* Mobile menu */
+#mobile-menu { background: var(--paper); }
+.mobile-nav-link { font-size: clamp(24px, 6vw, 30px); letter-spacing: -0.02em; }
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.btn,
+.pilot-btn,
+.audit-btn {
+  border-radius: var(--r-pill);
+  transition: box-shadow .25s var(--ease-out), transform .25s var(--ease-out), background-color .2s, color .2s, border-color .2s;
+}
+
+/* Primary: the AI gradient, drifting slowly, with its own light */
+.btn-primary,
+.btn-dark,
+.btn-green,
+.pilot-btn,
+.audit-btn,
+.bg-dark .btn-primary,
+.bg-dark .btn-dark,
+.bg-dark .btn-green,
+.cta-section .btn-primary,
+.cta-section .btn-dark,
+.cta-section .btn-green,
+body.lp .btn-primary {
+  color: #fff;
+  border: 1px solid transparent;
+  background-color: var(--ai-2);
+  background-image: var(--ai-gradient-loop);
+  background-size: 300% 100%;
+  background-position: 0% 50%;
+  box-shadow: var(--ai-glow);
+  animation: ai-drift 14s ease-in-out infinite alternate;
+}
+.btn-primary:hover,
+.btn-dark:hover,
+.btn-green:hover,
+.pilot-btn:hover,
+.audit-btn:hover,
+.bg-dark .btn-primary:hover,
+.bg-dark .btn-dark:hover,
+.bg-dark .btn-green:hover,
+.cta-section .btn-primary:hover,
+.cta-section .btn-dark:hover,
+.cta-section .btn-green:hover,
+body.lp .btn-primary:hover {
+  color: #fff;
+  border-color: transparent;
+  background-color: var(--ai-2);
+  background-image: var(--ai-gradient-loop);
+  box-shadow: var(--ai-glow-strong);
+  transform: translateY(-1px);
+}
+.btn-primary:active,
+.btn-green:active,
+.pilot-btn:active,
+.audit-btn:active { transform: translateY(0); box-shadow: var(--ai-glow); }
+.btn-primary:focus-visible,
+.btn-green:focus-visible,
+.pilot-btn:focus-visible,
+.audit-btn:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 3px;
+  box-shadow: var(--ai-glow-strong);
+}
+.btn:disabled,
+.btn[aria-busy="true"],
+.audit-btn:disabled,
+.pilot-btn[aria-disabled="true"] {
+  opacity: .6 !important;
+  cursor: progress;
+  transform: none;
+  box-shadow: none;
+  animation-play-state: paused;
+}
+
+/* Secondary: a quiet white pill; hover draws the gradient ring */
+.btn-secondary,
+.btn-ghost,
+.btn-ghost-dark,
+.cta-section .btn-ghost-dark,
+.cta-section .btn-ghost-dark:visited,
+.footer .btn-primary,
+.founder-proof .btn-primary,
+.footer-brand .btn {
+  color: var(--black);
+  background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
+  border: 1px solid transparent;
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  padding-left: 22px;
+  padding-right: 22px;
+  animation: none;
+}
+.btn-secondary:hover,
+.btn-ghost:hover,
+.btn-ghost-dark:hover,
+.cta-section .btn-ghost-dark:hover,
+.cta-section .btn-ghost-dark:focus-visible,
+.cta-section .btn-ghost-dark:active,
+.footer .btn-primary:hover,
+.founder-proof .btn-primary:hover,
+.footer-brand .btn:hover {
+  color: var(--black);
+  background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
+  border-color: transparent;
+  box-shadow: var(--ai-glow-soft);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+.btn-sm { padding: 10px 18px; }
+
+/* ── Cards and panels ────────────────────────────────────────── */
+.insight-box,
+.report-card,
+.ba-card,
+.featured-card,
+.featured-visual,
+.audit-card,
+.pilot-card,
+.contact-form-wrap,
+.article-card,
+.article-aside,
+.article-callout,
+.trust-callout,
+.problem-insight,
+.capability-board,
+.product-window,
+.evidence-chain,
+.offer-facts,
+.outcome-card,
+.method-card,
+.case-card,
+.comparison-col,
+.lp-q-card,
+.lp-get,
+.audit-aside {
+  border-radius: var(--r-lg) !important;
+  box-shadow: var(--shadow-sm);
+}
+.insight-box,
+.report-card,
+.ba-card,
+.featured-card,
+.featured-visual,
+.audit-card,
+.contact-form-wrap,
+.article-card,
+.article-aside,
+.article-callout,
+.trust-callout,
+.capability-board,
+.outcome-card,
+.method-card,
+.case-card {
+  border: 1px solid var(--light-grey) !important;
+}
+
+/* Retire the zig-zag receipt edges and the side-stripe callout */
+.article-callout,
+.article-aside,
+.featured-card,
+.article-card {
+  clip-path: none !important;
+}
+.article-callout {
+  background: var(--ai-tint), var(--white) !important;
+  border-left-width: 1px !important;
+  border-left-color: var(--light-grey) !important;
+}
+
+/* Inner rows inside product visuals: lighter, rounded */
+.journey-line > div,
+.quality-rows > div,
+.content-map > div,
+.decision-stack > div,
+.result-row {
+  border-radius: var(--r-md) !important;
+}
+
+/* Hover only where the whole card is a link */
+a.article-card:hover,
+a.featured-card:hover,
+a.case-card:hover,
+.article-card:has(a):hover,
+.featured-card:has(a):hover {
+  border-color: var(--hairline-strong) !important;
+  box-shadow: var(--shadow-md);
+}
+.method-card:hover { transform: none !important; box-shadow: var(--shadow-sm); }
+
+/* ── AI anchors: a 1px gradient ring and a soft glow ─────────── */
+.ed-output,
+.receipt-sheet,
+.pilot-ticket,
+.capability-panel.active .capability-board,
+.editorial .capability-panel.active .capability-board,
+.lp-q-card,
+.report-card,
+.comparison-col.highlighted,
+.contact-context,
+.audit-panel[data-result-panel],
+.featured-visual {
+  border: 1px solid transparent !important;
+  background:
+    linear-gradient(var(--anchor-bg, var(--white)), var(--anchor-bg, var(--white))) padding-box,
+    var(--ai-gradient) border-box !important;
+  box-shadow: var(--ai-glow-soft) !important;
+}
+.receipt-sheet { border-radius: var(--r-lg) !important; }
+.receipt-sheet::before {
+  content: 'Sample' !important;
+  transform: none !important;
+  border-radius: var(--r-pill) !important;
+  font-size: 12px !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* The evidence-desk output: a dark instrument with a glowing ring */
+.ed-output {
+  --anchor-bg: var(--band);
+  color: #F4F4F8;
+  border-radius: var(--r-lg) !important;
+  padding: 20px 24px;
+}
+.ed-output span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 13px/1 var(--ff-sub) !important;
+  color: var(--stone) !important;
+}
+.ed-output span::before,
+.board-header em::before,
+.hero-badge .badge-dot {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ai-gradient);
+  box-shadow: 0 0 0 3px rgba(95,66,251,.16), 0 0 10px rgba(95,66,251,.55);
+}
+.board-header em {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-style: normal;
+  color: var(--ink-2) !important;
+}
+
+/* The decision memo inside the Revenue Receipt */
+.receipt-decision {
+  border-radius: var(--r-md) !important;
+  background: var(--band) !important;
+  color: #F4F4F8 !important;
+  box-shadow: 0 0 0 1px rgba(134,43,226,.45), 0 12px 32px -14px rgba(95,66,251,.65) !important;
+}
+.receipt-decision-label { color: var(--stone) !important; font-size: 12px !important; }
+
+/* The finance card resolves the conflicting numbers: gradient bar */
+.problem-card::before { background: transparent !important; }
+.problem-card.finance::before { background: var(--ai-gradient) !important; height: 3px; }
+
+/* ── Capability tabs: neutral, with a gradient underline when active */
+.capability-tabs,
+.editorial .capability-tabs {
+  border-radius: var(--r-pill) !important;
+  padding: 4px;
+  gap: 4px !important;
+  background: var(--surface-tint) !important;
+  border: 1px solid var(--light-grey) !important;
+}
+.capability-tab,
+.editorial .capability-tab {
+  min-height: 44px !important;
+  border: 0 !important;
+  border-radius: var(--r-pill) !important;
+  font-size: 14.5px !important;
+  font-weight: 500 !important;
+  color: var(--ink-2) !important;
+  background: transparent !important;
+  justify-content: center;
+  text-align: center;
+}
+.capability-tab:hover,
+.editorial .capability-tab:hover { color: var(--black) !important; background: rgba(255,255,255,.7) !important; }
+.capability-tab.active,
+.editorial .capability-tab.active,
+body.editorial .capability-tab.active {
+  color: var(--black) !important;
+  background:
+    linear-gradient(var(--white), var(--white)) padding-box,
+    var(--ai-gradient) border-box !important;
+  border: 1px solid transparent !important;
+  box-shadow: var(--ai-glow-soft) !important;
+}
+
+/* ── Forms ───────────────────────────────────────────────────── */
+.form-field input,
+.form-field select,
+.form-field textarea,
+.lead-field input,
+.newsletter-input {
+  border-radius: 12px !important;
+  border: 1px solid var(--hairline-strong) !important;
+  background: var(--white) !important;
+  color: var(--black) !important;
+  transition: border-color .2s, box-shadow .2s;
+}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus,
+.lead-field input:focus,
+.newsletter-input:focus {
+  outline: none !important;
+  border-color: var(--violet) !important;
+  box-shadow: 0 0 0 4px rgba(95,66,251,.14) !important;
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder,
+.lead-field input::placeholder,
+.newsletter-input::placeholder { color: #6E6E7A; }
+.form-field input:user-invalid,
+.form-field select:user-invalid,
+.form-field textarea:user-invalid { border-color: var(--error) !important; }
+
+.form-status:not(:empty) {
+  border-radius: 12px;
+  border: 1px solid var(--light-grey);
+  background: var(--white);
+  color: var(--ink-2);
+}
+.form-status.success {
+  color: var(--success) !important;
+  background: var(--success-bg) !important;
+  border-color: var(--success-line) !important;
+}
+.form-status.error {
+  color: var(--error) !important;
+  background: var(--error-bg) !important;
+  border-color: var(--error-line) !important;
+}
+.form-status-link { color: inherit; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── FAQ ─────────────────────────────────────────────────────── */
+.faq-list summary::after { color: var(--violet); }
+
+/* ── Steps: small numbered markers instead of large numerals ─── */
+.editorial .process-step-num,
+.process-step-num,
+.ed-step-num,
+.audit-step-num,
+.step-num {
+  display: inline-grid !important;
+  place-items: center;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  font: 600 14px/1 var(--ff-sub) !important;
+  color: var(--violet) !important;
+  background: var(--white) !important;
+  border: 1px solid var(--light-grey) !important;
+  letter-spacing: 0 !important;
+}
+
+/* ── The dark chapter (home and pilot) ───────────────────────── */
+body.editorial .ed-dark {
+  --black: #F4F4F8;
+  --white: var(--band);
+  --paper: var(--band);
+  --dark-grey: var(--stone);
+  --light-grey: var(--band-line);
+  --ink: #F4F4F8;
+  --ink-2: #D9D9E3;
+  --ink-3: var(--stone);
+  --muted: var(--stone);
+  --border: var(--band-line);
+  --border-2: #4A4964;
+  --surface: var(--band);
+  --surface-2: var(--band-2);
+  --violet: #9A86FF;
+  background: var(--band) !important;
+  border-color: var(--band) !important;
+}
+.ed-cinema {
+  min-height: 0 !important;
+  background:
+    radial-gradient(48% 70% at 88% 8%, rgba(95,66,251,.34), transparent 70%),
+    radial-gradient(34% 50% at 62% 18%, rgba(40,103,228,.20), transparent 70%),
+    radial-gradient(30% 50% at 100% 60%, rgba(187,41,166,.16), transparent 70%),
+    var(--band) !important;
+}
+.ed-stagger { padding-top: clamp(32px, 5vw, 72px); }
+.ed-stagger-big { font-size: clamp(40px, 6vw, 84px); }
+.ed-stagger-small { font-size: clamp(26px, 3vw, 40px); }
+.ed-cinema-question,
+.ed-cinema-pair { color: #D9D9E3; }
+body.editorial .ed-dark .problem-card:hover { background: var(--band-2) !important; }
+body.editorial .ed-dark .problem-note { background: var(--band-2) !important; color: #D9D9E3 !important; border-radius: var(--r-sm); }
+body.editorial .ed-dark .problem-card.finance .problem-note {
+  background: linear-gradient(var(--band-2), var(--band-2)) padding-box, var(--ai-gradient) border-box !important;
+  border: 1px solid transparent;
+  color: #F4F4F8 !important;
+}
+body.editorial .ed-dark .problem-card-logo .logo-dot.brand-logo { background: #F4F4F8; }
+
+/* Landing page dark band */
+body.lp .lp-dark {
+  background:
+    radial-gradient(50% 70% at 90% 0%, rgba(95,66,251,.30), transparent 70%),
+    radial-gradient(36% 60% at 0% 100%, rgba(40,103,228,.18), transparent 70%),
+    var(--band) !important;
+}
+body.lp .lp-dark .lp-get { --anchor-bg: var(--band-2); }
+
+/* About page stat band: facts, not vanity metrics */
+.dark-stat-val { font-size: clamp(32px, 3.4vw, 44px) !important; font-weight: 500 !important; letter-spacing: -0.03em; }
+
+/* ── Interactive state on the self-audit and landing tools ───── */
+.audit-progress { height: 4px !important; border-radius: var(--r-pill); background: var(--light-grey) !important; overflow: hidden; }
+.audit-progress-bar {
+  width: 100% !important;
+  border-radius: var(--r-pill);
+  background: var(--ai-gradient) !important;
+  box-shadow: 0 0 12px rgba(95,66,251,.5);
+}
+.audit-option label {
+  border-radius: 12px !important;
+  border: 1px solid var(--hairline-strong) !important;
+  background: var(--white) !important;
+  color: var(--ink-2) !important;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.audit-option label:hover { border-color: var(--violet) !important; color: var(--black) !important; }
+.audit-option input:checked + label {
+  color: var(--black) !important;
+  border-color: transparent !important;
+  background:
+    linear-gradient(var(--surface-tint), var(--surface-tint)) padding-box,
+    var(--ai-gradient) border-box !important;
+  box-shadow: var(--ai-glow-soft) !important;
+  font-weight: 600;
+}
+.lp-q-options button {
+  border-radius: 12px !important;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.lp-q-options button:hover,
+.lp-q-options button:focus-visible,
+.lp-q-options button[aria-pressed="true"] {
+  color: var(--black) !important;
+  border-color: transparent !important;
+  background:
+    linear-gradient(var(--surface-tint), var(--surface-tint)) padding-box,
+    var(--ai-gradient) border-box !important;
+  box-shadow: var(--ai-glow-soft) !important;
+}
+
+/* Self-audit result: the scored output reads as an AI anchor */
+.audit-panel[data-result-panel] { border-radius: var(--r-lg) !important; padding: clamp(24px, 4vw, 40px); }
+.result-score { color: var(--black) !important; letter-spacing: -0.04em; }
+.result-row { border: 1px solid var(--light-grey) !important; }
+
+/* Carried-over self-audit context on the contact form */
+.contact-context {
+  border-left-width: 1px !important;
+  border-radius: var(--r-md) !important;
+  --anchor-bg: var(--surface-tint);
+}
+
+/* Trust pages */
+.trust-toc { border-top: 0 !important; padding-top: 0; }
+.trust-toc a:hover { color: var(--black); }
+.trust-hero { border-bottom: 1px solid var(--light-grey); }
+
+/* Badges: quiet chips */
+.nav-badge,
+.hero-badge,
+.featured-tag,
+.article-cat {
+  border-radius: var(--r-pill) !important;
+  color: var(--ink-2) !important;
+  background: var(--white) !important;
+  border: 1px solid var(--light-grey) !important;
+}
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; }
+
+/* ── Mobile conversion bar: one compact action ───────────────── */
+.mobile-conversion-bar {
+  background: rgba(250,250,253,.96) !important;
+  border-top: 1px solid var(--light-grey) !important;
+  box-shadow: none !important;
+}
+.mobile-conversion-bar span { display: none; }
+
+/* ── Hairlines replace heavy ink rules ───────────────────────── */
+.ed-facts-strip,
+.ed-chain ol,
+.editorial .process-steps,
+.process-steps,
+.faq-list,
+.editorial .faq-block,
+.trust-toc,
+.pilot-cards,
+.editorial .pilot-card { border-top-color: var(--light-grey) !important; }
+.founder-proof-photo { border-top: 0 !important; }
+.founder-proof-photo img { border-radius: var(--r-lg); }
+.founder-proof-link { color: var(--ink-2); text-decoration-color: var(--hairline-strong); }
+.founder-proof-link:hover { color: var(--black); }
+
+/* Evidence desk: one workspace label with a live dot; the second
+   kicker repeats the chapter name */
+.ed-question .ed-kicker span:last-child { display: none; }
+.ed-question .ed-kicker span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-2);
+}
+.ed-question .ed-kicker span:first-child::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ai-gradient);
+  box-shadow: 0 0 0 3px rgba(95,66,251,.16), 0 0 10px rgba(95,66,251,.55);
+}
+
+.hero-reassurance { font-size: 13px; color: var(--dark-grey); }
+.hero-reassurance span { color: var(--hairline-strong); }
+.process-step .step-tag { color: var(--dark-grey); font-size: 13px; }
+.ed-start-title { color: var(--dark-grey); }
+
+/* Self-audit sidebar, about founder card, use-case chips and results */
+.audit-aside {
+  border: 1px solid var(--light-grey) !important;
+  background: var(--white);
+  padding: 24px !important;
+}
+.founder-profile { border-top: 1px solid var(--light-grey) !important; }
+.cs-tag {
+  border-radius: var(--r-pill) !important;
+  border: 1px solid var(--light-grey) !important;
+  background: var(--white) !important;
+  color: var(--ink-2) !important;
+  font-weight: 500 !important;
+}
+.ba-card .ba-half:last-child { background: var(--ai-tint), var(--white); }
+
+/* ── Motion preferences ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .pilot-btn,
+  .audit-btn { animation: none !important; transform: none !important; }
+}
+html.motion-off .btn,
+html.motion-off .pilot-btn,
+html.motion-off .audit-btn { animation: none !important; }
+
+/* ── Small screens ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .capability-tabs,
+  .editorial .capability-tabs { border-radius: 16px !important; }
+  .receipt-sheet { box-shadow: var(--ai-glow-soft) !important; }
+}
