@@ -122,6 +122,8 @@
         score_band: result.band,
         follow_up_consent: data.followUpConsent ? 'yes' : 'no'
       });
+      // Meta Pixel conversion for ad optimization (pages without the pixel skip this).
+      window.fbq?.('track', 'Lead', { content_name: 'Revenue Self-Audit', score_band: result.band });
       showStep(sections.length + 1);
     } catch (err) { error.textContent = `${err.message} Please try again or email zajen@n8ivpromotions.com.`; }
     finally { submit.disabled = false; submit.textContent = 'Show my result'; }
