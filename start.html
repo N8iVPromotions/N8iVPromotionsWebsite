@@ -11,10 +11,11 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
+try { if (localStorage.getItem('n8iv_ga_opt_out') === '1') { fbq('consent', 'revoke'); } } catch (e) {}
 fbq('init', '1752381592484843');
 fbq('track', 'PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none"
+<noscript><img height="1" width="1" style="display:none" alt=""
 src="https://www.facebook.com/tr?id=1752381592484843&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
@@ -41,6 +42,7 @@ src="https://www.facebook.com/tr?id=1752381592484843&ev=PageView&noscript=1"
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Can You Prove What Created Your Revenue? | Free Self-Audit | N8iV Promotions</title>
 <meta name="description" content="Take the free Revenue Receipt Self-Audit. 15 questions, about 4 minutes, and an instant score that shows where your marketing-to-revenue tracking breaks." />
+<link rel="canonical" href="https://www.n8ivpromotions.com/start" />
 <!-- Paid and outbound traffic landing page: kept out of search results. -->
 <meta name="robots" content="noindex, follow" />
 <meta property="og:type" content="website" />
