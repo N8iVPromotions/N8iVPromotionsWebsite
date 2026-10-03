@@ -214,18 +214,13 @@
 
   function buildFallbackMailto(data) {
     const subject = encodeURIComponent('Fit Review Request');
-    const body = encodeURIComponent([
-      `Name: ${data.firstName} ${data.lastName}`,
+    const lines = [
+      `Name: ${[data.firstName, data.lastName].filter(Boolean).join(' ')}`,
       `Email: ${data.email}`,
       `Company: ${data.company}`,
-      `Role: ${data.role}`,
-      `Monthly Marketing Investment: ${data.investment}`,
-      `CRM Platform: ${data.crm}`,
-      '',
-      'Biggest Marketing Visibility Challenge:',
-      data.challenge,
-    ].join('\n'));
-    return `mailto:zajen@n8ivpromotions.com?subject=${subject}&body=${body}`;
+    ];
+    if (data.challenge) lines.push('', data.challenge);
+    return `mailto:zajen@n8ivpromotions.com?subject=${subject}&body=${encodeURIComponent(lines.join('\n'))}`;
   }
 
   // Keep a draft in this tab so a refresh or back swipe doesn't wipe it.
@@ -266,12 +261,28 @@
     status.append(link);
   }
 
+  // After a successful send the form gives way to the confirmation step.
+  const done = document.querySelector('[data-request-done]');
+  function showDone() {
+    if (!done) return false;
+    form.hidden = true;
+    done.hidden = false;
+    done.querySelector('[tabindex="-1"]')?.focus();
+    return true;
+  }
+
   form.addEventListener('submit', async event => {
     event.preventDefault();
 
     if (!form.reportValidity()) return;
 
     const data = Object.fromEntries(new FormData(form).entries());
+    // The Turnstile widget only shows itself when it needs the visitor; until
+    // its token arrives the server would reject the request.
+    if (form.querySelector('.cf-turnstile') && !data['cf-turnstile-response']) {
+      setStatus('Still checking that you are human. Try again in a moment.', 'error');
+      return;
+    }
     Object.assign(data, window.N8iVAttribution?.getPayload?.() || {});
     setPending(true);
     setStatus('Sending your Fit Review request...', '');
@@ -285,6 +296,11 @@
       const result = await response.json().catch(() => ({}));
 
       if (!response.ok) {
+        // Validation, verification and rate-limit answers are for the visitor to act on.
+        if (response.status >= 400 && response.status < 500 && result.error) {
+          setStatus(result.error, 'error');
+          return;
+        }
         throw new Error(result.error || 'The request could not be sent.');
       }
 
@@ -294,12 +310,15 @@
         form: 'fit_review_request'
       });
       setStatus('Your Fit Review request was sent. Expect a reply within 1 business day.', 'success');
+      showDone();
     } catch (error) {
       console.error(error);
       // Same pre-filled email fallback, opened by the visitor instead of automatically.
       showFallback(buildFallbackMailto(data));
     } finally {
       setPending(false);
+      // Turnstile tokens are single-use; fetch a fresh one for the next submit.
+      window.turnstile?.reset?.();
     }
   });
 })();

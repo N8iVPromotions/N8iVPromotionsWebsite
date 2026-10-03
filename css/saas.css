@@ -1350,6 +1350,164 @@ a.case-card:hover,
 .article-card:has(a:hover),
 .featured-card:has(a:hover) { transform: translateY(-2px); }
 
+/* ================================================================
+   LAYOUT: FLOATING HEADER, LABEL PILLS, FAQ ROWS
+   Site-wide pieces of the product-led layout. Page compositions live
+   in their own layers (home.css, request.css).
+   ================================================================ */
+
+/* Header: a floating rounded bar. The wordmark, a divider, the links
+   beside it, and one ink action on the right. */
+.nav::before,
+.nav.light::before,
+.trust-nav { border-radius: 18px !important; }
+@media (min-width: 769px) {
+  .nav-inner { justify-content: flex-start; gap: 0; }
+  .nav-logo { position: relative; flex: none; padding-right: 20px; margin-right: 12px; }
+  .nav-logo::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 1px;
+    height: 22px;
+    transform: translateY(-50%);
+    background: var(--light-grey);
+  }
+  .nav.ed-nav-dark .nav-logo::after { background: rgba(244,244,248,.16); }
+  .nav-links { gap: 2px; }
+  .nav-right { margin-left: auto; }
+}
+.nav-right .btn-primary,
+.nav-right .btn-primary:hover {
+  color: #FFFFFF;
+  background: var(--black);
+  border: 1px solid var(--black);
+  box-shadow: var(--elev-1);
+  animation: none;
+}
+.nav-right .btn-primary:hover {
+  background: #2B2B36;
+  border-color: #2B2B36;
+  box-shadow: var(--ai-glow);
+}
+.nav-right .btn-primary::after {
+  content: "";
+  flex: none;
+  width: 12px;
+  height: 12px;
+  margin-left: 2px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4.5 2.5 8 6l-3.5 3.5' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4.5 2.5 8 6l-3.5 3.5' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: transform .2s var(--ease-out);
+}
+.nav-right .btn-primary:hover::after { transform: translateX(2px); }
+.nav.ed-nav-dark .nav-right .btn-primary,
+.nav.ed-nav-dark .nav-right .btn-primary:hover {
+  color: var(--band);
+  background: #F4F4F8;
+  border-color: #F4F4F8;
+}
+
+/* Labels: a small hairline pill above a heading */
+.eyebrow,
+.chapter-name,
+.trust-kicker,
+.ed-eyebrow {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  padding: 4px 12px !important;
+  border: 1px solid var(--light-grey);
+  border-radius: var(--r-pill);
+  background: var(--white);
+  line-height: 1.2 !important;
+  color: var(--ink-2) !important;
+}
+.eyebrow::before,
+.eyebrow::after { display: none !important; }
+.chapter-meta { align-items: center; }
+.ed-dark .chapter-name,
+.ed-dark .eyebrow,
+.ed-cinema-section .chapter-name {
+  border-color: rgba(244,244,248,.16);
+  background: rgba(244,244,248,.04);
+  color: #D9D9E3 !important;
+}
+/* Centered labels draw a hairline out to each side */
+.pill-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  max-width: 560px;
+  margin: 0 auto 20px;
+}
+.pill-rule::before,
+.pill-rule::after {
+  content: "";
+  flex: 1 1 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--hairline-strong));
+}
+.pill-rule::after { background: linear-gradient(90deg, var(--hairline-strong), transparent); }
+.pill-rule > * { flex: none; margin: 0 !important; }
+
+/* FAQ: rounded rows, each with a round plus button */
+.faq-list {
+  display: grid;
+  gap: 10px;
+  border-top: 0 !important;
+}
+.faq-list details,
+.editorial .faq-block {
+  padding: 0 20px;
+  border: 1px solid var(--light-grey) !important;
+  border-radius: 18px;
+  background: var(--white);
+  transition: border-color .2s;
+}
+.faq-list details:hover,
+.faq-list details[open] { border-color: var(--hairline-strong) !important; }
+.editorial .faq-block { padding: 22px 20px 24px; }
+.faq-list summary {
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  padding: 16px 56px 16px 0 !important;
+  border-radius: 18px;
+  font: 500 16px/1.4 var(--ff-sub) !important;
+  color: var(--black);
+}
+.faq-list summary::after,
+.faq-list details[open] summary::after {
+  content: "" !important;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 34px;
+  height: 34px;
+  margin-top: -17px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 50%;
+  color: var(--black) !important;
+  background:
+    linear-gradient(currentColor, currentColor) center / 12px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 1.5px 12px no-repeat;
+  transition: transform .25s var(--ease-out), border-color .2s, background-color .2s;
+}
+.faq-list summary:hover::after { border-color: var(--black); }
+.faq-list details[open] summary::after {
+  transform: rotate(180deg);
+  background:
+    linear-gradient(currentColor, currentColor) center / 12px 1.5px no-repeat;
+}
+.faq-list details p { margin: 0 56px 0 0 !important; padding-bottom: 20px; }
+.faq-list details p + p { margin-top: -8px !important; }
+.faq-list summary:focus-visible { outline-offset: 2px; }
+
 /* ── Motion preferences ──────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .btn,
@@ -1364,6 +1522,11 @@ a.case-card:hover,
 html.motion-off .btn,
 html.motion-off .pilot-btn,
 html.motion-off .audit-btn { animation: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-right .btn-primary::after,
+  .faq-list summary::after { transition: none; }
+  .nav-right .btn-primary:hover::after { transform: none; }
+}
 
 /* ── Small screens ───────────────────────────────────────────── */
 @media (max-width: 768px) {
