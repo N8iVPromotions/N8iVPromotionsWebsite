@@ -241,6 +241,7 @@ summary:focus-visible,
 .eyebrow,
 .trust-kicker,
 .lp-eyebrow,
+.ed-eyebrow,
 .audit-kicker,
 .audit-step-label,
 .chapter-meta {
@@ -389,13 +390,22 @@ body.lp .btn-primary:hover {
   background-color: var(--ai-2);
   background-image: var(--ai-gradient-loop);
   background-size: 300% 100%;
+  background-position: 0% 50%;
   box-shadow: var(--ai-glow-strong);
   transform: translateY(-1px);
 }
 .btn-primary:active,
+.btn-dark:active,
 .btn-green:active,
 .pilot-btn:active,
-.audit-btn:active { transform: translateY(0); box-shadow: var(--ai-glow); }
+.audit-btn:active,
+.bg-dark .btn-primary:active,
+.bg-dark .btn-dark:active,
+.bg-dark .btn-green:active,
+.cta-section .btn-primary:active,
+.cta-section .btn-dark:active,
+.cta-section .btn-green:active,
+body.lp .btn-primary:active { transform: translateY(0); box-shadow: var(--ai-glow); }
 .btn-primary:focus-visible,
 .btn-green:focus-visible,
 .pilot-btn:focus-visible,
@@ -407,13 +417,18 @@ body.lp .btn-primary:hover {
 .btn:disabled,
 .btn[aria-busy="true"],
 .audit-btn:disabled,
-.pilot-btn[aria-disabled="true"] {
+.pilot-btn[aria-disabled="true"],
+.btn:disabled:hover,
+.btn[aria-busy="true"]:hover {
   opacity: .6 !important;
   cursor: progress;
-  transform: none;
-  box-shadow: none;
+  transform: none !important;
+  box-shadow: none !important;
   animation-play-state: paused;
 }
+/* Busy submit buttons keep a readable label ("Calculating...", "Sending...") */
+.audit-btn[type="submit"]:disabled,
+.btn[aria-busy="true"] { opacity: 1 !important; }
 
 /* Secondary: a quiet white pill; hover draws the gradient ring */
 .btn-secondary,
@@ -449,6 +464,13 @@ body.lp .btn-primary:hover {
   text-decoration: none;
   transform: translateY(-1px);
 }
+.btn-secondary:active,
+.btn-ghost:active,
+.btn-ghost-dark:active,
+.cta-section .btn-ghost-dark:active,
+.footer .btn-primary:active,
+.founder-proof .btn-primary:active,
+.footer-brand .btn:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
 .btn-sm { padding: 10px 18px; }
 
 /* ── Cards and panels ────────────────────────────────────────── */
@@ -505,7 +527,7 @@ body.lp .btn-primary:hover {
   clip-path: none !important;
 }
 .article-callout {
-  background: var(--ai-tint), var(--white) !important;
+  background: var(--surface-tint) !important;
   border-left-width: 1px !important;
   border-left-color: var(--light-grey) !important;
 }
@@ -520,11 +542,12 @@ body.lp .btn-primary:hover {
 }
 
 /* Hover only where the whole card is a link */
+.article-card:hover { box-shadow: var(--shadow-sm); }
 a.article-card:hover,
 a.featured-card:hover,
 a.case-card:hover,
-.article-card:has(a):hover,
-.featured-card:has(a):hover {
+.article-card:has(a:hover),
+.featured-card:has(a:hover) {
   border-color: var(--hairline-strong) !important;
   box-shadow: var(--shadow-md);
 }
@@ -646,7 +669,7 @@ body.editorial .capability-tab.active {
 .lead-field input,
 .newsletter-input {
   border-radius: 12px !important;
-  border: 1px solid var(--hairline-strong) !important;
+  border: 1px solid #868694 !important; /* 3.6:1 on white: form controls need a 3:1 boundary */
   background: var(--white) !important;
   color: var(--black) !important;
   transition: border-color .2s, box-shadow .2s;
@@ -666,7 +689,8 @@ body.editorial .capability-tab.active {
 .newsletter-input::placeholder { color: #6E6E7A; }
 .form-field input:user-invalid,
 .form-field select:user-invalid,
-.form-field textarea:user-invalid { border-color: var(--error) !important; }
+.form-field textarea:user-invalid,
+.newsletter-input:user-invalid { border-color: var(--error) !important; }
 
 .form-status:not(:empty) {
   border-radius: 12px;
@@ -734,8 +758,10 @@ body.editorial .ed-dark {
     radial-gradient(30% 50% at 100% 60%, rgba(187,41,166,.16), transparent 70%),
     var(--band) !important;
 }
-.ed-stagger { padding-top: clamp(32px, 5vw, 72px); }
-.ed-stagger-big { font-size: clamp(40px, 6vw, 84px); }
+.ed-stagger { padding-top: 0; }
+.editorial .ed-cinema-section .chapter-meta { margin-bottom: clamp(24px, 3vw, 32px); }
+.ed-stagger-big { font-size: clamp(36px, 5vw, 72px); }
+body.lp { --lp-display: clamp(40px, 5.4vw, 76px); }
 .ed-stagger-small { font-size: clamp(26px, 3vw, 40px); }
 .ed-cinema-question,
 .ed-cinema-pair { color: #D9D9E3; }
@@ -891,7 +917,7 @@ body.lp .lp-dark .lp-get { --anchor-bg: var(--band-2); }
   color: var(--ink-2) !important;
   font-weight: 500 !important;
 }
-.ba-card .ba-half:last-child { background: var(--ai-tint), var(--white); }
+.ba-card .ba-half:last-child { background: var(--surface-tint); }
 
 /* ── Review fixes ────────────────────────────────────────────── */
 /* Utility used by honeypot fields; not every page defined it */
@@ -903,6 +929,7 @@ body.lp .lp-dark .lp-get { --anchor-bg: var(--band-2); }
   margin: -1px !important;
   overflow: hidden !important;
   clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
   white-space: nowrap !important;
   border: 0 !important;
 }
@@ -1000,6 +1027,10 @@ body.lp .lp-dark .lp-eyebrow { color: var(--stone) !important; }
 .hero .hero-content > .hero-cta:last-child { padding-bottom: 48px; }
 
 /* Headings use the brand display face everywhere */
+.featured-headline,
+.audit-panel h1,
+.audit-panel h2 { font-weight: 500 !important; }
+.article-kicker { font-weight: 500; }
 .cs-headline {
   font-family: var(--ff-display) !important;
   font-weight: 500 !important;
@@ -1007,6 +1038,112 @@ body.lp .lp-dark .lp-eyebrow { color: var(--stone) !important; }
   letter-spacing: -0.025em;
   line-height: 1.12;
 }
+
+/* ── Review fixes, round 2 ────────────────────────────────────── */
+/* Trust pages: anchors and the sticky contents land below the 76px header */
+.trust-toc { top: 100px; }
+.trust-copy section { scroll-margin-top: 100px; }
+.trust-copy a { color: var(--violet); text-decoration: underline; text-decoration-color: rgba(95,66,251,.4); text-underline-offset: 3px; }
+.trust-copy a:hover { text-decoration-color: currentColor; }
+.trust-copy ul { list-style: disc; }
+.trust-copy li::marker { color: var(--violet); }
+.trust-nav-inner,
+.trust-shell,
+.trust-footer-inner { width: min(1120px, calc(100% - 48px)); }
+.trust-footer-inner,
+.lp-footer-inner { align-items: center; }
+
+/* 404: centered column, spaced buttons */
+main.trust-shell[style*="text-align:center"] .trust-title,
+main.trust-shell[style*="text-align:center"] .trust-lead { margin-left: auto; margin-right: auto; }
+main.trust-shell[style*="text-align:center"] > p:has(> .btn) { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+/* Closing CTAs sit clear of their lead paragraph */
+.cta-actions { margin-top: 32px; }
+
+/* Mobile menu marks the current page; sticky bar label is readable */
+#mobile-menu .mobile-nav-link.active {
+  align-self: flex-start;
+  color: var(--black);
+  background-image: var(--ai-gradient);
+  background-repeat: no-repeat;
+  background-size: 100% 2px;
+  background-position: 0 calc(100% - 6px);
+}
+.mobile-conversion-bar strong { font-size: 13px; line-height: 1.25; }
+
+/* Mobile: the sticky bar is the one gradient action; repeated in-page
+   self-audit CTAs become the secondary pill (not on editorial pages,
+   which hide the bar) */
+@media (max-width: 768px) {
+  body:not(.editorial):has(.mobile-conversion-bar) main a[href="/revenue-self-audit"]:is(.btn-primary, .btn-green):not(.mobile-conversion-bar *) {
+    color: var(--black);
+    background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
+    border: 1px solid transparent;
+    box-shadow: var(--shadow-sm);
+    animation: none;
+  }
+}
+
+/* Use cases: headline before the card on mobile */
+@media (max-width: 900px) { .cs-layout.reversed > :first-child { order: 2; } }
+.feature-card p { font-size: 14px; line-height: 1.6; }
+
+/* About: comparison columns are separate cards, not a frame of cards */
+.comparison { border: 0 !important; gap: 16px; }
+.comparison-col { border: 1px solid var(--light-grey) !important; }
+.comparison-col.highlighted { margin: 0; padding: 32px 28px; }
+
+/* Contact form controls share one height and rhythm */
+.form-row .form-field { align-content: end; }
+.form-field select { min-height: 49px; }
+@media (max-width: 768px) { .form-row:not(.form-row-names) { row-gap: 0; } }
+
+/* Article aside meters */
+.meter-fill { border-radius: inherit; }
+.meter-fill.green { background: var(--ink-2); }
+
+/* Self-audit */
+.result-grid { background: transparent !important; border: 0 !important; gap: 12px; }
+.audit-option label { font-size: 15px; font-weight: 500; color: var(--black) !important; min-height: 56px; }
+.audit-option label:hover { border-color: var(--stone) !important; }
+.audit-option input:checked + label {
+  color: var(--violet) !important;
+  background:
+    linear-gradient(rgba(95,66,251,.10), rgba(95,66,251,.10)) padding-box,
+    linear-gradient(var(--white), var(--white)) padding-box,
+    var(--ai-gradient) border-box !important;
+  box-shadow: inset 0 0 0 1px rgba(95,66,251,.55), var(--ai-glow-soft) !important;
+}
+.lead-field label { font-size: 14px !important; font-weight: 600 !important; color: var(--black) !important; }
+.audit-question { padding: 24px 0 28px; }
+.audit-question legend { float: left; width: 100%; margin: 0 0 14px; }
+.audit-question .audit-options { clear: both; }
+.audit-panel:not([data-result-panel]) .audit-step-label { display: none; }
+.audit-panel:not([data-result-panel]) h2 { margin-top: 0; }
+.audit-error { color: var(--error) !important; font-weight: 500; }
+.audit-error:not(:empty) { padding: 10px 14px; border: 1px solid var(--error-line); background: var(--error-bg); border-radius: 12px; }
+.audit-panel:has([data-step-error]:not(:empty)) .audit-question:not(:has(input:checked)) legend { color: var(--error); }
+.audit-aside li { align-items: center; }
+.audit-aside li span {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font: 600 12px/1 var(--ff-sub) !important;
+  color: var(--violet) !important;
+  background: var(--white);
+  border: 1px solid var(--light-grey) !important;
+}
+.result-followup { border-color: var(--light-grey) !important; background: var(--surface-tint); }
+
+/* /start sticky bar: hidden from keyboard and screen readers until shown */
+@media (max-width: 640px) {
+  .lp-sticky { visibility: hidden; transition: transform .25s ease, visibility 0s linear .25s; }
+  .lp-sticky.is-visible { visibility: visible; transition-delay: 0s; }
+}
+@media (prefers-reduced-motion: reduce) { .lp-sticky { transition: none; } }
 
 /* ── Motion preferences ──────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {

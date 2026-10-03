@@ -50,6 +50,10 @@ Four stops, each keeping white text at WCAG AA (5.1:1 to 6.3:1):
 
 1. **Primary actions**: `.btn-primary`, `.btn-green`, `.pilot-btn`, `.audit-btn`,
    submit buttons. Gradient fill, white text, glow that strengthens on hover.
+   One gradient fill leads each view: the header CTA is the secondary pill
+   (its hover draws the gradient ring), so the hero or section CTA carries the
+   fill. On mobile pages with the sticky conversion bar, the bar is the one
+   gradient action and repeated in-page self-audit CTAs become secondary.
 2. **Interactive state**: focus rings, the active nav link (2px gradient
    underline), the active capability tab, selected self-audit and landing
    answers, the self-audit progress bar, form focus.
@@ -59,11 +63,18 @@ Four stops, each keeping white text at WCAG AA (5.1:1 to 6.3:1):
    the visible capability board, the pilot ticket, the self-audit result, the
    landing question card and "What you get" panel, the services report card, the
    N8iV comparison column, the carried-over self-audit context on the contact
-   form, and small "live" status dots on board headers.
+   form, the insights signal-chain visual ("One report, one decision path"),
+   and small "live" status dots on board headers. The finance problem card
+   (the one source that resolves the conflicting numbers) gets a 3px gradient
+   bar. The "After N8iV" result columns get a flat violet tint, not the
+   gradient.
+4. **Ambient light**: the hero fields and the dark band carry a soft radial
+   glow built from the same stops (10% opacity or less on light, up to 35% on
+   the dark band). It is the only decorative use, and it never sits behind
+   body text at a strength that changes contrast.
 
-Rules: never gradient text, never a gradient on decorative surfaces, at most
-one gradient-filled button per view where possible (repeated in-body CTAs
-render as the secondary button).
+Rules: never gradient text, no gradient on decorative surfaces beyond the
+ambient light above, at most one gradient-filled button per view.
 
 ## Type
 
@@ -80,10 +91,15 @@ render as the secondary button).
   side-stripe borders.
 - Secondary button: white pill, strong hairline, ink text; hover draws a
   gradient ring.
-- Inputs: 12px radius, strong hairline, violet border and soft ring on focus.
+- Inputs: 12px radius, `#868694` border (3:1 against white, as form controls
+  require), violet border and soft ring on focus, error border when invalid.
 - Status: success and error each have their own color, tint and border.
 
 ## Reduced cognitive load
+
+Headers are opaque (no see-through text behind the wordmark). The site's
+Motion toggle and `prefers-reduced-motion` stop the gradient drift on every
+page.
 
 Hidden as redundant: chapter counters ("02 / 08") and act labels
 ("Act 1 · Problem"), the fixed chapter rail, tab and panel numbers, the rotated
