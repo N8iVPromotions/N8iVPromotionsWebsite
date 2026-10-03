@@ -37,17 +37,24 @@ module.exports = async function handler(req, res) {
     const submission = normalizeSubmission(body);
     const missing = REQUIRED_FIELDS.filter((field) => !submission[field]);
     if (missing.length) {
-      // Shown to the visitor as written, so name the fields the way the form does.
-      return res.status(400).json({ error: `Please add your ${missing.map((field) => FIELD_LABELS[field]).join(', ')}.` });
+      // Shown to the visitor as written, so name the fields the way the form does;
+      // `field` lets the form move focus to the first one.
+      return res.status(400).json({
+        error: `Please add your ${missing.map((field) => FIELD_LABELS[field]).join(', ')}.`,
+        field: missing[0],
+      });
     }
 
     if (!isValidEmail(submission.email)) {
-      return res.status(400).json({ error: 'Please enter a valid work email.' });
+      return res.status(400).json({ error: 'Please enter a valid work email.', field: 'email' });
     }
 
-    if (hasLink(submission.firstName) || hasLink(submission.lastName)) {
-      return res.status(400).json({ error: 'Please enter your name without links.' });
+    if (hasLink(submission.firstName)) {
+      return res.status(400).json({ error: 'Please enter your name without links.', field: 'firstName' });
     }
+    // The last name arrives in a hidden field from the self-audit handoff, so the
+    // visitor cannot correct it; drop it rather than block the request.
+    if (hasLink(submission.lastName)) submission.lastName = '';
 
     const verified = await verifyTurnstile(body['cf-turnstile-response'], getClientIp(req));
     if (!verified) {

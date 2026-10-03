@@ -113,7 +113,7 @@
   border-color: transparent;
   background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
 }
-.scene-main { min-width: 0; padding: 14px 16px 10px; }
+.scene-main { min-width: 0; padding: 14px 16px 18px; }
 .scene-ask {
   display: flex;
   align-items: center;
@@ -145,7 +145,7 @@
   font: 500 13px/1.2 var(--ff-sub);
   color: var(--black);
 }
-.scene-ch { display: inline-flex; align-items: center; gap: 8px; min-width: 0; white-space: nowrap; }
+.scene-ch { display: inline-flex; align-items: center; gap: 8px; min-width: 0; overflow: hidden; white-space: nowrap; }
 .scene-ch img { flex: none; }
 .scene-range { position: relative; height: 6px; border-radius: 999px; background: var(--light-grey); }
 .scene-range i { position: absolute; top: 0; bottom: 0; border-radius: inherit; background: var(--violet); }
@@ -167,7 +167,7 @@
   position: relative;
   z-index: 2;
   width: 46%;
-  margin: -18px 0 0 auto;
+  margin: -14px 0 0 auto; /* rests just over the window's bottom padding, clear of the last row */
   padding: 16px 18px 18px;
   border: 1px solid transparent;
   border-radius: 18px;
@@ -381,6 +381,9 @@ html.motion-off .scene-tile { animation: none !important; }
   background:
     linear-gradient(currentColor, currentColor) left / 3px 100% no-repeat,
     linear-gradient(currentColor, currentColor) right / 3px 100% no-repeat;
+}
+@media (forced-colors: active) {
+  .stack-toggle-icon { forced-color-adjust: none; color: ButtonText; }
 }
 .stack-toggle[data-paused="true"] .stack-toggle-icon {
   background: currentColor;
@@ -604,10 +607,10 @@ html.motion-off .scene-tile { animation: none !important; }
   .scene-window { width: 100%; }
   .scene-body { grid-template-columns: minmax(0, 1fr); }
   .scene-rail { display: none; }
-  .scene-main { padding: 12px 12px 8px; }
+  .scene-main { padding: 12px 12px 18px; }
   .scene-ask span { display: none; }
   .scene-head,
-  .scene-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 58px; gap: 8px; }
+  .scene-row { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) 58px; gap: 8px; }
   .scene-brief { width: 74%; padding: 14px 14px 16px; }
   .scene-brief-note { display: none; }
   .scene-chip,

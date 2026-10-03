@@ -1378,6 +1378,15 @@ a.case-card:hover,
   .nav-links { gap: 2px; }
   .nav-right { margin-left: auto; }
 }
+/* Tablets: the divider spacing and the chevron give way so the action stays
+   inside the bar */
+@media (min-width: 769px) and (max-width: 900px) {
+  .nav-logo { padding-right: 10px; margin-right: 4px; }
+  .nav-links { gap: 0; }
+  .nav-links a,
+  .nav.light .nav-links a { padding-inline: 6px !important; }
+  .nav-right .btn-primary::after { display: none; }
+}
 .nav-right .btn-primary,
 .nav-right .btn-primary:hover {
   color: #FFFFFF;
@@ -1507,6 +1516,17 @@ a.case-card:hover,
 .faq-list details p { margin: 0 56px 0 0 !important; padding-bottom: 20px; }
 .faq-list details p + p { margin-top: -8px !important; }
 .faq-list summary:focus-visible { outline-offset: 2px; }
+/* Forced colors drop gradient images: keep the drawn plus and minus */
+@media (forced-colors: active) {
+  .faq-list summary::after,
+  .faq-list details[open] summary::after {
+    forced-color-adjust: none;
+    color: CanvasText !important;
+    border-color: CanvasText !important;
+    background-color: Canvas;
+  }
+  .nav-right .btn-primary::after { forced-color-adjust: none; background: ButtonText; }
+}
 
 /* ── Motion preferences ──────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
@@ -1527,6 +1547,9 @@ html.motion-off .audit-btn { animation: none !important; }
   .faq-list summary::after { transition: none; }
   .nav-right .btn-primary:hover::after { transform: none; }
 }
+html.motion-off .nav-right .btn-primary::after,
+html.motion-off .faq-list summary::after { transition: none; }
+html.motion-off .nav-right .btn-primary:hover::after { transform: none; }
 
 /* ── Small screens ───────────────────────────────────────────── */
 @media (max-width: 768px) {

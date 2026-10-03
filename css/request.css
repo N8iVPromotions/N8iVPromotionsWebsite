@@ -237,10 +237,17 @@ section.request-screen::before {
   .request-screen .cf-turnstile,
   .request-screen .form-status { margin-left: 0; }
   .request-title { gap: 12px; }
-  .request-actions .btn { width: 100%; justify-content: center; }
+  .request-actions .btn,
+  .request-done-actions .btn { width: 100%; justify-content: center; white-space: normal; text-align: center; }
   .request-hint { display: none; }
 }
 .request-screen .contact-context { --anchor-bg: var(--band-2); }
 @media (prefers-reduced-motion: reduce) {
   .request-field input { transition: none; }
+}
+html.motion-off .request-field input { transition: none; }
+/* Forced colors drop the gradient underline: show focus as a system-colour line */
+@media (forced-colors: active) {
+  .request-field input:focus,
+  .request-field input:focus-visible { border-bottom: 2px solid Highlight; }
 }
