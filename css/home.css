@@ -326,9 +326,12 @@ html.motion-off .scene-tile { animation: none !important; }
   from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(-50%, 0, 0); }
 }
-@media (prefers-reduced-motion: no-preference) {
+@media screen and (prefers-reduced-motion: no-preference) {
   html.ed-js:not(.motion-off) .stack-marquee {
     overflow: hidden;
+    /* clip, not a scroll container: find in page or a text link to a chip in
+       a loop copy must not scroll the strip and leave it blank */
+    overflow: clip;
     /* run out to the edges of the container; room for the chips' shadows;
        the edges fade into the ground */
     margin: -14px calc(-1 * var(--gutter));
@@ -371,7 +374,7 @@ html.motion-off .scene-tile { animation: none !important; }
   transition: border-color .2s, color .2s;
 }
 .stack-toggle:hover { border-color: var(--hairline-strong); color: var(--black); }
-@media (prefers-reduced-motion: no-preference) {
+@media screen and (prefers-reduced-motion: no-preference) {
   html.ed-js:not(.motion-off) .stack-toggle:not([hidden]) { display: inline-flex; }
 }
 .stack-toggle-icon {
@@ -610,7 +613,7 @@ html.motion-off .scene-tile { animation: none !important; }
   .scene-main { padding: 12px 12px 18px; }
   .scene-ask span { display: none; }
   .scene-head,
-  .scene-row { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) 58px; gap: 8px; }
+  .scene-row { grid-template-columns: minmax(0, 2.4fr) minmax(0, 1fr) 58px; gap: 8px; }
   .scene-brief { width: 74%; padding: 14px 14px 16px; }
   .scene-brief-note { display: none; }
   .scene-chip,
