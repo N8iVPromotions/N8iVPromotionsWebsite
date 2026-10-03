@@ -95,6 +95,19 @@ ambient light above, at most one gradient-filled button per view.
   require), violet border and soft ring on focus, error border when invalid.
 - Status: success and error each have their own color, tint and border.
 
+## Depth: three planes
+
+The page is built on three planes so the eye reads distance, not just layout.
+
+| Plane | What lives there | Treatment |
+|---|---|---|
+| 0, ground | The page canvas | `--paper` with a fixed field of ambient AI light (the gradient stops at 6 to 11% opacity) and a faint 24px dot grid that fades out down the page. It stays still while content scrolls over it. Sections are transparent so the ground shows through. |
+| 1, surface | Content sheets and cards | White, 1px hairline, `--elev-1` (soft, ink-tinted). Sections that used to carry a white field (`.bg-surface`, the home capability and receipt sections) become rounded sheets inset from the viewport (`--sheet-inset`, `--sheet-radius`); the dark chapters are dark sheets. Cards inside a sheet sit on the same plane: hairline, no shadow. |
+| 2, float | What the visitor acts on, or what the product produces | `--elev-2`. The header is a floating pill (the trust pages too), AI anchors add the gradient glow on top of `--elev-2`, primary buttons glow, the mobile conversion bar floats as a rounded bar, the article aside floats, and link cards rise from plane 1 to plane 2 on hover (2px lift, off under reduced motion). |
+
+Full-bleed section rules are removed; separation between sections comes from
+the strip of ground between sheets.
+
 ## Reduced cognitive load
 
 Headers are opaque (no see-through text behind the wordmark). The site's
