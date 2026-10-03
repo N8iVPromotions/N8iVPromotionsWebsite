@@ -301,6 +301,7 @@
       setStatus('Still checking that you are human. Try again in a moment.', 'error');
       return;
     }
+    tokenWaits = 0; // a token is here: the next wait (after reset) starts with the grace again
     Object.assign(data, window.N8iVAttribution?.getPayload?.() || {});
     setPending(true);
     setStatus('Sending your Fit Review request...', '');
