@@ -214,18 +214,13 @@
 
   function buildFallbackMailto(data) {
     const subject = encodeURIComponent('Fit Review Request');
-    const body = encodeURIComponent([
-      `Name: ${data.firstName} ${data.lastName}`,
+    const lines = [
+      `Name: ${[data.firstName, data.lastName].filter(Boolean).join(' ')}`,
       `Email: ${data.email}`,
       `Company: ${data.company}`,
-      `Role: ${data.role}`,
-      `Monthly Marketing Investment: ${data.investment}`,
-      `CRM Platform: ${data.crm}`,
-      '',
-      'Biggest Marketing Visibility Challenge:',
-      data.challenge,
-    ].join('\n'));
-    return `mailto:zajen@n8ivpromotions.com?subject=${subject}&body=${body}`;
+    ];
+    if (data.challenge) lines.push('', data.challenge);
+    return `mailto:zajen@n8ivpromotions.com?subject=${subject}&body=${encodeURIComponent(lines.join('\n'))}`;
   }
 
   // Keep a draft in this tab so a refresh or back swipe doesn't wipe it.
@@ -255,15 +250,38 @@
   form.addEventListener('input', saveDraft);
   form.addEventListener('change', saveDraft);
 
-  function showFallback(href) {
+  // The self-audit handoff fills a hidden last name. Once the visitor retypes
+  // the first name, that name may not be theirs, so it is dropped.
+  const firstName = form.elements.namedItem('firstName');
+  const lastName = form.elements.namedItem('lastName');
+  if (firstName && lastName && lastName.type === 'hidden') {
+    firstName.addEventListener('input', () => { lastName.value = ''; }, { once: true });
+  }
+  form.addEventListener('input', event => event.target.removeAttribute?.('aria-invalid'));
+
+  function showFallback(href, reason) {
     if (!status) return;
     status.className = 'form-status error';
-    status.textContent = 'Something blocked the automatic send. Your details are still here. ';
+    status.textContent = `${reason || 'Something blocked the automatic send.'} Your details are still here. `;
     const link = document.createElement('a');
     link.href = href;
     link.className = 'form-status-link';
     link.textContent = 'Email this request instead';
     status.append(link);
+  }
+
+  let tokenWaits = 0;
+
+  // After a successful send the form gives way to the confirmation step.
+  const done = document.querySelector('[data-request-done]');
+  function showDone() {
+    if (!done) return false;
+    form.hidden = true;
+    // the arrival banner asks the visitor to complete the form; it is done now
+    document.querySelector('[data-contact-context]')?.setAttribute('hidden', '');
+    done.hidden = false;
+    done.querySelector('[tabindex="-1"]')?.focus();
+    return true;
   }
 
   form.addEventListener('submit', async event => {
@@ -272,6 +290,17 @@
     if (!form.reportValidity()) return;
 
     const data = Object.fromEntries(new FormData(form).entries());
+    // The Turnstile widget only shows itself when it needs the visitor; until
+    // its token arrives the server would reject the request. If it still has
+    // no token on the next try (blocked script, widget error), offer the email.
+    if (form.querySelector('.cf-turnstile') && !data['cf-turnstile-response']) {
+      if (tokenWaits++ > 0) {
+        showFallback(buildFallbackMailto(data), 'The human check did not load.');
+        return;
+      }
+      setStatus('Still checking that you are human. Try again in a moment.', 'error');
+      return;
+    }
     Object.assign(data, window.N8iVAttribution?.getPayload?.() || {});
     setPending(true);
     setStatus('Sending your Fit Review request...', '');
@@ -285,6 +314,22 @@
       const result = await response.json().catch(() => ({}));
 
       if (!response.ok) {
+        // A field the visitor can fix: say what is wrong and take them there.
+        if (response.status === 400 && result.field && result.error) {
+          setStatus(result.error, 'error');
+          const field = form.elements.namedItem(result.field);
+          if (field && field.type !== 'hidden') {
+            field.setAttribute('aria-invalid', 'true');
+            field.focus();
+          }
+          return;
+        }
+        // Anything else (the human check, the origin check, the rate limit) may
+        // not clear on a retry: show the reason and keep the email route open.
+        if (response.status >= 400 && response.status < 500 && result.error) {
+          showFallback(buildFallbackMailto(data), result.error);
+          return;
+        }
         throw new Error(result.error || 'The request could not be sent.');
       }
 
@@ -294,12 +339,15 @@
         form: 'fit_review_request'
       });
       setStatus('Your Fit Review request was sent. Expect a reply within 1 business day.', 'success');
+      showDone();
     } catch (error) {
       console.error(error);
       // Same pre-filled email fallback, opened by the visitor instead of automatically.
       showFallback(buildFallbackMailto(data));
     } finally {
       setPending(false);
+      // Turnstile tokens are single-use; fetch a fresh one for the next submit.
+      window.turnstile?.reset?.();
     }
   });
 })();
@@ -432,6 +480,22 @@
   });
 
   activate(tabs.find(tab => tab.classList.contains('active')) || tabs[0]);
+})();
+
+// Integrations scroll: a visible pause / play control (hover also pauses).
+(function initStackMarquee() {
+  const marquee = document.querySelector('[data-stack-marquee]');
+  const toggle = document.querySelector('[data-stack-toggle]');
+  if (!marquee || !toggle) return;
+  const text = toggle.querySelector('.stack-toggle-text');
+  toggle.hidden = false;
+  toggle.addEventListener('click', () => {
+    const paused = !marquee.classList.contains('is-paused');
+    marquee.classList.toggle('is-paused', paused);
+    toggle.dataset.paused = String(paused);
+    if (text) text.textContent = paused ? 'Play' : 'Pause';
+    toggle.setAttribute('aria-label', paused ? 'Play the integrations scroll' : 'Pause the integrations scroll');
+  });
 })();
 
 (function initCardTilt() {

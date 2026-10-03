@@ -1,0 +1,1559 @@
+/* ================================================================
+   N8iV Promotions — Executive SaaS layer (design system v2)
+   Loaded last on every page. Keeps the brand (mark, wordmark, Action
+   and Signal Purple, Helvetica Now Display over Inter, pill buttons,
+   all copy) and restyles it for clarity, focus and low cognitive load.
+   The multi-tone AI gradient is reserved for primary actions,
+   interactive state and AI anchors. See DESIGN.md.
+   Older layers still load underneath, so some rules here repeat their
+   selectors (and their !important) to win the cascade.
+   ================================================================ */
+
+:root {
+  /* Brand primitives, retuned: neutrals lean toward the brand violet */
+  --black:      #191920;
+  --dark-grey:  #5A5A66;
+  --light-grey: #E6E6EE;
+  --paper:      #FAFAFD;
+  --white:      #FFFFFF;
+  --stone:      #BCBCCA;
+  --violet:     #5F42FB;
+  --signal:     #7860FC;
+
+  --ink-2: #3D3D49;
+  --hairline-strong: #D4D4DE;
+  --surface-tint: #F4F3FB;
+  --band: #0E0D1C;
+  --band-2: #17162A;
+  --band-line: #2A2942;
+
+  --success: #0E7A55;
+  --success-bg: #ECF8F2;
+  --success-line: #BFE6D3;
+  --error: #B42318;
+  --error-bg: #FEF1F1;
+  --error-line: #F5C2C0;
+
+  /* AI gradient: every stop keeps white text at WCAG AA (5.1 to 6.3:1) */
+  --ai-1: #2867E4;
+  --ai-2: #5F42FB;
+  --ai-3: #862BE2;
+  --ai-4: #BB29A6;
+  --ai-gradient: linear-gradient(115deg, var(--ai-1) 0%, var(--ai-2) 36%, var(--ai-3) 68%, var(--ai-4) 100%);
+  --ai-gradient-loop: linear-gradient(115deg, var(--ai-1), var(--ai-2), var(--ai-3), var(--ai-4), var(--ai-3), var(--ai-2), var(--ai-1));
+  --ai-tint: linear-gradient(115deg, rgba(40,103,228,.07), rgba(95,66,251,.07) 40%, rgba(187,41,166,.07));
+  --ai-glow: 0 6px 20px -6px rgba(95,66,251,.55), 0 2px 8px -2px rgba(40,103,228,.35), 0 10px 28px -12px rgba(187,41,166,.45);
+  --ai-glow-strong: 0 10px 30px -6px rgba(95,66,251,.65), 0 4px 14px -2px rgba(40,103,228,.45), 0 14px 38px -10px rgba(187,41,166,.55);
+  --ai-glow-soft: 0 1px 2px rgba(25,25,32,.04), 0 18px 44px -24px rgba(95,66,251,.45), 0 8px 24px -18px rgba(40,103,228,.35);
+
+  --grad-primary: var(--ai-gradient);
+  --grad-primary-soft: var(--ai-tint);
+  --grad-field: var(--white);
+
+  /* Elevation: quiet, ink-tinted */
+  --shadow-sm: 0 1px 2px rgba(25,25,32,.04), 0 1px 1px rgba(25,25,32,.02);
+  --shadow-md: 0 1px 2px rgba(25,25,32,.04), 0 10px 28px -14px rgba(25,25,32,.16);
+  --shadow-lg: 0 2px 6px rgba(25,25,32,.04), 0 28px 56px -28px rgba(25,25,32,.22);
+  --shadow-blue: var(--ai-glow);
+
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+}
+
+/* ── Base ─────────────────────────────────────────────────────── */
+body { background: var(--paper); color: var(--black); }
+::selection { background: rgba(95,66,251,.18); color: var(--black); }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(95,66,251,.14);
+}
+
+@keyframes ai-drift {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+/* ── Type: confident, never viewport-filling ─────────────────── */
+.display-xl { font-size: clamp(40px, 5vw, 64px); letter-spacing: -0.035em; line-height: 1.04; }
+.display-lg { font-size: clamp(32px, 4vw, 48px); letter-spacing: -0.03em; line-height: 1.06; }
+.display-md { font-size: clamp(26px, 3vw, 36px); letter-spacing: -0.025em; line-height: 1.12; }
+.display-sm { font-size: clamp(20px, 2vw, 26px); letter-spacing: -0.015em; }
+
+.editorial {
+  --t-display: clamp(40px, 5.4vw, 76px);
+  --t-h2: clamp(30px, 3.4vw, 48px);
+  --t-h3: clamp(18px, 1.5vw, 22px);
+  --t-lead: clamp(17px, 1.4vw, 19px);
+  --t-body: 16px;
+  --t-small: 14px;
+  --t-eyebrow: 13px;
+}
+.ed-display { line-height: 1.02; letter-spacing: -0.035em; }
+.editorial .ed-h2,
+.editorial .pilot-heading { line-height: 1.06; letter-spacing: -0.03em; max-width: 20ch; }
+.editorial .receipt-preview-copy .ed-h2,
+.editorial .founder-proof-copy .ed-h2,
+.editorial .conversion-faq-grid .ed-h2,
+.editorial .conversion-faq-grid .pilot-heading,
+.editorial .pilot-two .pilot-heading { font-size: clamp(28px, 3vw, 42px); }
+.trust-title,
+.pilot-title { font-size: clamp(38px, 5vw, 62px); line-height: 1.02; letter-spacing: -0.035em; }
+.editorial .ed-pilot-hero .pilot-title { font-size: var(--t-display); }
+.audit-title { font-size: clamp(36px, 4.6vw, 60px) !important; letter-spacing: -0.035em !important; line-height: 1.04 !important; }
+.audit-panel h1,
+.audit-panel h2 { letter-spacing: -0.03em; }
+
+.lead, .hero-sub, .pilot-lead, .trust-lead, .audit-intro { color: var(--ink-2); }
+
+/* Headline accents stay one solid brand color (never gradient text) */
+.editorial .ed-accent,
+.display-xl em, .display-lg em, .display-md em, .display-sm em { color: var(--violet) !important; }
+
+/* ── Labels: one quiet voice, sentence case, readable sizes ──── */
+/* Every rule that set uppercase micro labels anywhere on the site (found by
+   scanning all stylesheets and per-page <style> blocks): sentence case, no
+   tracking, and a 12px floor for the ones that were smaller. */
+.article-aside h3,
+.article-cat,
+.article-kicker,
+.audit-kicker,
+.audit-step-label,
+.ba-label,
+.board-header,
+.btn,
+.capability-tab,
+.case-metric-label,
+.case-tag,
+.chapter-meta,
+.chapter-name,
+.contact-detail-label,
+.content-map small,
+.content-map span,
+.cs-tag,
+.dark-stat-label,
+.dash-chart-title,
+.decision-stack small,
+.decision-stack span,
+.ed-chain-head,
+.ed-eyebrow,
+.ed-kicker,
+.ed-output span,
+.ed-start-title,
+.evidence-chain-head,
+.evidence-node em,
+.eyebrow,
+.featured-tag,
+.featured-visual-label,
+.flow-node.engine .engine-label,
+.footer-col h4,
+.founder-proof-link,
+.founder-proof-photo figcaption,
+.hero-badge,
+.hero-trust-item,
+.insight-box-label,
+.integration-tag,
+.journey-line i,
+.journey-line small,
+.kpi-label,
+.lead-field label,
+.lp-eyebrow,
+.method-num,
+.nav-badge,
+.nav-links a,
+.nav-logo-sub,
+.pilot-terms-title,
+.problem-card-logo,
+.process-step .step-tag,
+.product-decision span,
+.product-question span,
+.product-toolbar,
+.quality-rows strong,
+.receipt-decision-label,
+.receipt-footer,
+.receipt-mark,
+.receipt-row-label,
+.receipt-sheet small,
+.receipt-sheet::before,
+.report-card-header,
+.section-tag,
+.stats-band-label,
+.stats-bar-label,
+.step-num,
+.trust-kicker,
+.trust-toc strong {
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+.article-cat,
+.ba-label,
+.board-header,
+.capability-tab,
+.case-metric-label,
+.case-tag,
+.contact-detail-label,
+.content-map small,
+.content-map span,
+.cs-tag,
+.dash-chart-title,
+.decision-stack small,
+.decision-stack span,
+.evidence-chain-head,
+.evidence-node em,
+.eyebrow,
+.featured-tag,
+.featured-visual-label,
+.flow-node.engine .engine-label,
+.footer-col h4,
+.founder-proof-link,
+.founder-proof-photo figcaption,
+.hero-badge,
+.insight-box-label,
+.integration-tag,
+.journey-line i,
+.journey-line small,
+.kpi-label,
+.nav-badge,
+.nav-logo-sub,
+.problem-card-logo,
+.process-step .step-tag,
+.product-decision span,
+.product-question span,
+.product-toolbar,
+.quality-rows strong,
+.receipt-decision-label,
+.receipt-footer,
+.receipt-mark,
+.receipt-row-label,
+.receipt-sheet small,
+.receipt-sheet::before,
+.report-card-header,
+.stats-bar-label,
+.trust-toc strong {
+  font-size: 12px !important;
+}
+.eyebrow,
+.trust-kicker,
+.lp-eyebrow,
+.ed-eyebrow,
+.audit-kicker,
+.audit-step-label,
+.chapter-meta {
+  font-family: var(--ff-sub) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--dark-grey) !important;
+}
+.chapter-meta { margin-bottom: clamp(20px, 3vw, 32px); }
+.chapter-name { color: var(--dark-grey); }
+.ed-cinema-section .chapter-meta,
+.ed-dark .chapter-meta,
+.ed-dark .chapter-name { color: var(--stone) !important; }
+
+/* Redundant scaffolding: counters, act labels, rail, tab numbers */
+.chapter-num,
+.chapter-aside,
+.tab-num,
+.capability-number,
+.ed-rail { display: none !important; }
+body.editorial { padding-bottom: 0 !important; }
+
+/* ── Sections and rhythm ─────────────────────────────────────── */
+section,
+.section,
+.bg-page,
+.bg-dark,
+.bg-dark-2,
+.hero,
+.capability-section,
+.founder-proof,
+.cta-section,
+.article-hero,
+.pilot-cta,
+.audit-page { background: var(--paper) !important; }
+.bg-surface,
+.footer { background: var(--white) !important; }
+.footer { border-top: 1px solid var(--light-grey); }
+
+/* Hero fields: one soft ambient glow of the AI gradient, top right */
+.hero,
+.ed-hero,
+.trust-hero,
+.pilot-hero,
+.article-hero,
+body.lp .lp-hero {
+  background:
+    radial-gradient(42% 60% at 92% 0%, rgba(95,66,251,.10), transparent 70%),
+    radial-gradient(30% 45% at 70% 12%, rgba(40,103,228,.07), transparent 70%),
+    radial-gradient(26% 40% at 100% 38%, rgba(187,41,166,.06), transparent 70%),
+    var(--paper) !important;
+}
+.pilot-hero { background-color: var(--paper) !important; }
+
+/* ── Navigation ──────────────────────────────────────────────── */
+.nav::before,
+.nav.light::before,
+.trust-nav {
+  background: var(--paper) !important;
+  border-bottom: 1px solid var(--light-grey) !important;
+}
+.nav-links a,
+.nav.light .nav-links a {
+  font-size: 14.5px;
+  color: var(--ink-2);
+  border: 0 !important;
+  background-color: transparent;
+}
+.nav-links a:hover,
+.nav.light .nav-links a:hover {
+  color: var(--black);
+  background-color: rgba(95,66,251,.06) !important;
+  border-color: transparent !important;
+}
+.nav-links a.active,
+.nav.light .nav-links a.active {
+  color: var(--black);
+  font-weight: 500;
+  background-image: var(--ai-gradient);
+  background-repeat: no-repeat;
+  background-size: calc(100% - 28px) 2px;
+  background-position: 50% calc(100% - 2px);
+}
+.nav-pilot-link { font-size: 14.5px; color: var(--ink-2); }
+.nav-pilot-link:hover { color: var(--black); background: rgba(95,66,251,.06); }
+
+/* Header over the dark chapter */
+.nav.ed-nav-dark::before {
+  background: var(--band) !important;
+  border-bottom-color: rgba(244,244,248,.10) !important;
+}
+.nav.ed-nav-dark .nav-links a.active {
+  text-decoration: none;
+  background-image: var(--ai-gradient);
+}
+.nav.ed-nav-dark .nav-links a:hover { background-color: rgba(244,244,248,.08) !important; }
+
+/* Mobile menu */
+#mobile-menu { background: var(--paper); }
+.mobile-nav-link { font-size: clamp(24px, 6vw, 30px); letter-spacing: -0.02em; }
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.btn,
+.pilot-btn,
+.audit-btn {
+  border-radius: var(--r-pill);
+  transition: box-shadow .25s var(--ease-out), transform .25s var(--ease-out), background-color .2s, color .2s, border-color .2s;
+}
+
+/* Primary: the AI gradient, drifting slowly, with its own light */
+.btn-primary,
+.btn-dark,
+.btn-green,
+.pilot-btn,
+.audit-btn,
+.bg-dark .btn-primary,
+.bg-dark .btn-dark,
+.bg-dark .btn-green,
+.cta-section .btn-primary,
+.cta-section .btn-dark,
+.cta-section .btn-green,
+body.lp .btn-primary {
+  color: #fff;
+  border: 1px solid transparent;
+  background-color: var(--ai-2);
+  background-image: var(--ai-gradient-loop);
+  background-size: 300% 100%;
+  background-position: 0% 50%;
+  box-shadow: var(--ai-glow);
+  animation: ai-drift 14s ease-in-out infinite alternate;
+}
+.btn-primary:hover,
+.btn-dark:hover,
+.btn-green:hover,
+.pilot-btn:hover,
+.audit-btn:hover,
+.bg-dark .btn-primary:hover,
+.bg-dark .btn-dark:hover,
+.bg-dark .btn-green:hover,
+.cta-section .btn-primary:hover,
+.cta-section .btn-dark:hover,
+.cta-section .btn-green:hover,
+body.lp .btn-primary:hover {
+  color: #fff;
+  border-color: transparent;
+  background-color: var(--ai-2);
+  background-image: var(--ai-gradient-loop);
+  background-size: 300% 100%;
+  background-position: 0% 50%;
+  box-shadow: var(--ai-glow-strong);
+  transform: translateY(-1px);
+}
+.btn-primary:active,
+.btn-dark:active,
+.btn-green:active,
+.pilot-btn:active,
+.audit-btn:active,
+.bg-dark .btn-primary:active,
+.bg-dark .btn-dark:active,
+.bg-dark .btn-green:active,
+.cta-section .btn-primary:active,
+.cta-section .btn-dark:active,
+.cta-section .btn-green:active,
+body.lp .btn-primary:active { transform: translateY(0); box-shadow: var(--ai-glow); }
+.btn-primary:focus-visible,
+.btn-green:focus-visible,
+.pilot-btn:focus-visible,
+.audit-btn:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 3px;
+  box-shadow: var(--ai-glow-strong);
+}
+.btn:disabled,
+.btn[aria-busy="true"],
+.audit-btn:disabled,
+.pilot-btn[aria-disabled="true"],
+.btn:disabled:hover,
+.btn[aria-busy="true"]:hover {
+  opacity: .6 !important;
+  cursor: progress;
+  transform: none !important;
+  box-shadow: none !important;
+  animation-play-state: paused;
+}
+/* Busy submit buttons keep a readable label ("Calculating...", "Sending...") */
+.audit-btn[type="submit"]:disabled,
+.btn[aria-busy="true"],
+.btn[aria-busy="true"]:hover { opacity: 1 !important; }
+
+/* Secondary: a quiet white pill; hover draws the gradient ring */
+.btn-secondary,
+.btn-ghost,
+.btn-ghost-dark,
+.cta-section .btn-ghost-dark,
+.cta-section .btn-ghost-dark:visited,
+.footer .btn-primary,
+.founder-proof .btn-primary,
+.footer-brand .btn {
+  color: var(--black);
+  background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
+  border: 1px solid transparent;
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  padding-left: 22px;
+  padding-right: 22px;
+  animation: none;
+}
+.btn-secondary:hover,
+.btn-ghost:hover,
+.btn-ghost-dark:hover,
+.cta-section .btn-ghost-dark:hover,
+.cta-section .btn-ghost-dark:focus-visible,
+.cta-section .btn-ghost-dark:active,
+.footer .btn-primary:hover,
+.founder-proof .btn-primary:hover,
+.footer-brand .btn:hover {
+  color: var(--black);
+  background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
+  border-color: transparent;
+  box-shadow: var(--ai-glow-soft);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+.btn-secondary:active,
+.btn-ghost:active,
+.btn-ghost-dark:active,
+.cta-section .btn-ghost-dark:active,
+.footer .btn-primary:active,
+.founder-proof .btn-primary:active,
+.footer-brand .btn:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
+.btn-sm { padding: 10px 18px; }
+
+/* ── Cards and panels ────────────────────────────────────────── */
+.insight-box,
+.report-card,
+.ba-card,
+.featured-card,
+.featured-visual,
+.audit-card,
+.pilot-card,
+.contact-form-wrap,
+.article-card,
+.article-aside,
+.article-callout,
+.trust-callout,
+.problem-insight,
+.capability-board,
+.product-window,
+.evidence-chain,
+.offer-facts,
+.outcome-card,
+.method-card,
+.case-card,
+.comparison-col,
+.lp-q-card,
+.lp-get,
+.audit-aside {
+  border-radius: var(--r-lg) !important;
+  box-shadow: var(--shadow-sm);
+}
+.insight-box,
+.report-card,
+.ba-card,
+.featured-card,
+.featured-visual,
+.audit-card,
+.contact-form-wrap,
+.article-card,
+.article-aside,
+.article-callout,
+.trust-callout,
+.capability-board,
+.outcome-card,
+.method-card,
+.case-card {
+  border: 1px solid var(--light-grey) !important;
+}
+
+/* Retire the zig-zag receipt edges and the side-stripe callout */
+.article-callout,
+.article-aside,
+.featured-card,
+.article-card {
+  clip-path: none !important;
+}
+.article-callout {
+  background: var(--surface-tint) !important;
+  border-left-width: 1px !important;
+  border-left-color: var(--light-grey) !important;
+}
+
+/* Inner rows inside product visuals: lighter, rounded */
+.journey-line > div,
+.quality-rows > div,
+.content-map > div,
+.decision-stack > div,
+.result-row {
+  border-radius: var(--r-md) !important;
+}
+
+/* Hover only where the whole card is a link */
+.article-card:hover { box-shadow: var(--shadow-sm); }
+a.article-card:hover,
+a.featured-card:hover,
+a.case-card:hover,
+.article-card:has(a:hover),
+.featured-card:has(a:hover) {
+  border-color: var(--hairline-strong) !important;
+  box-shadow: var(--shadow-md);
+}
+.method-card:hover { transform: none !important; box-shadow: var(--shadow-sm); }
+
+/* ── AI anchors: a 1px gradient ring and a soft glow ─────────── */
+.ed-output,
+.receipt-sheet,
+.pilot-ticket,
+.capability-panel.active .capability-board,
+.editorial .capability-panel.active .capability-board,
+.lp-q-card,
+.lp-get,
+.report-card,
+.comparison-col.highlighted,
+.contact-context,
+.audit-panel[data-result-panel],
+.featured-visual {
+  border: 1px solid transparent !important;
+  background:
+    linear-gradient(var(--anchor-bg, var(--white)), var(--anchor-bg, var(--white))) padding-box,
+    var(--ai-gradient) border-box !important;
+  box-shadow: var(--ai-glow-soft) !important;
+}
+.receipt-sheet { border-radius: var(--r-lg) !important; }
+.receipt-sheet::before {
+  content: 'Sample' !important;
+  transform: none !important;
+  border-radius: var(--r-pill) !important;
+  font-size: 12px !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* The evidence-desk output: a dark instrument with a glowing ring */
+.ed-output {
+  --anchor-bg: var(--band);
+  color: #F4F4F8;
+  border-radius: var(--r-lg) !important;
+  padding: 20px 24px;
+}
+.ed-output span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 13px/1 var(--ff-sub) !important;
+  color: var(--stone) !important;
+}
+.ed-output span::before,
+.board-header em::before,
+.hero-badge .badge-dot {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ai-gradient);
+  box-shadow: 0 0 0 3px rgba(95,66,251,.16), 0 0 10px rgba(95,66,251,.55);
+}
+.board-header em {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-style: normal;
+  color: var(--ink-2) !important;
+}
+
+/* The decision memo inside the Revenue Receipt */
+.receipt-decision {
+  border-radius: var(--r-md) !important;
+  background: var(--band) !important;
+  color: #F4F4F8 !important;
+  box-shadow: 0 0 0 1px rgba(134,43,226,.45), 0 12px 32px -14px rgba(95,66,251,.65) !important;
+}
+.receipt-decision-label { color: var(--stone) !important; font-size: 12px !important; }
+
+/* The finance card resolves the conflicting numbers: gradient bar */
+.problem-card::before { background: transparent !important; }
+.problem-card.finance::before { background: var(--ai-gradient) !important; height: 3px; }
+
+/* ── Capability tabs: neutral, with a gradient underline when active */
+.capability-tabs,
+.editorial .capability-tabs {
+  border-radius: var(--r-pill) !important;
+  padding: 4px;
+  gap: 4px !important;
+  background: var(--surface-tint) !important;
+  border: 1px solid var(--light-grey) !important;
+}
+.capability-tab,
+.editorial .capability-tab {
+  min-height: 44px !important;
+  border: 0 !important;
+  border-radius: var(--r-pill) !important;
+  font-size: 14.5px !important;
+  font-weight: 500 !important;
+  color: var(--ink-2) !important;
+  background: transparent !important;
+  justify-content: center;
+  text-align: center;
+}
+.capability-tab:hover,
+.editorial .capability-tab:hover { color: var(--black) !important; background: rgba(255,255,255,.7) !important; }
+.capability-tab.active,
+.editorial .capability-tab.active,
+body.editorial .capability-tab.active {
+  color: var(--black) !important;
+  background:
+    linear-gradient(var(--white), var(--white)) padding-box,
+    var(--ai-gradient) border-box !important;
+  border: 1px solid transparent !important;
+  box-shadow: var(--ai-glow-soft) !important;
+}
+
+/* ── Forms ───────────────────────────────────────────────────── */
+.form-field input,
+.form-field select,
+.form-field textarea,
+.lead-field input,
+.newsletter-input {
+  border-radius: 12px !important;
+  border: 1px solid #868694 !important; /* 3.6:1 on white: form controls need a 3:1 boundary */
+  background: var(--white) !important;
+  color: var(--black) !important;
+  transition: border-color .2s, box-shadow .2s;
+}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus,
+.lead-field input:focus,
+.newsletter-input:focus {
+  outline: none !important;
+  border-color: var(--violet) !important;
+  box-shadow: 0 0 0 4px rgba(95,66,251,.14) !important;
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder,
+.lead-field input::placeholder,
+.newsletter-input::placeholder { color: #6E6E7A; }
+.form-field input:user-invalid,
+.form-field select:user-invalid,
+.form-field textarea:user-invalid,
+.newsletter-input:user-invalid { border-color: var(--error) !important; }
+
+.form-status:not(:empty) {
+  border-radius: 12px;
+  border: 1px solid var(--light-grey);
+  background: var(--white);
+  color: var(--ink-2);
+}
+.form-status.success {
+  color: var(--success) !important;
+  background: var(--success-bg) !important;
+  border-color: var(--success-line) !important;
+}
+.form-status.error {
+  color: var(--error) !important;
+  background: var(--error-bg) !important;
+  border-color: var(--error-line) !important;
+}
+.form-status-link { color: inherit; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── FAQ ─────────────────────────────────────────────────────── */
+.faq-list summary::after { color: var(--violet); }
+
+/* ── Steps: small numbered markers instead of large numerals ─── */
+.editorial .process-step-num,
+.process-step-num,
+.ed-step-num,
+.audit-step-num,
+.step-num {
+  display: inline-grid !important;
+  place-items: center;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  font: 600 14px/1 var(--ff-sub) !important;
+  color: var(--violet) !important;
+  background: var(--white) !important;
+  border: 1px solid var(--light-grey) !important;
+  letter-spacing: 0 !important;
+}
+
+/* ── The dark chapter (home and pilot) ───────────────────────── */
+body.editorial .ed-dark {
+  --black: #F4F4F8;
+  --white: var(--band);
+  --paper: var(--band);
+  --dark-grey: var(--stone);
+  --light-grey: var(--band-line);
+  --ink: #F4F4F8;
+  --ink-2: #D9D9E3;
+  --ink-3: var(--stone);
+  --muted: var(--stone);
+  --border: var(--band-line);
+  --border-2: #4A4964;
+  --surface: var(--band);
+  --surface-2: var(--band-2);
+  --violet: #9A86FF;
+  background: var(--band) !important;
+  border-color: var(--band) !important;
+}
+.ed-cinema {
+  min-height: 0 !important;
+  background:
+    radial-gradient(48% 70% at 88% 8%, rgba(95,66,251,.34), transparent 70%),
+    radial-gradient(34% 50% at 62% 18%, rgba(40,103,228,.20), transparent 70%),
+    radial-gradient(30% 50% at 100% 60%, rgba(187,41,166,.16), transparent 70%),
+    var(--band) !important;
+}
+.ed-stagger { padding-top: 0; }
+.editorial .ed-cinema-section .chapter-meta { margin-bottom: clamp(24px, 3vw, 32px); }
+.ed-stagger-big { font-size: clamp(36px, 5vw, 72px); }
+body.lp { --lp-display: clamp(40px, 5.4vw, 76px); }
+.ed-stagger-small { font-size: clamp(26px, 3vw, 40px); }
+.ed-cinema-question,
+.ed-cinema-pair { color: #D9D9E3; }
+body.editorial .ed-dark .problem-card:hover { background: var(--band-2) !important; }
+body.editorial .ed-dark .problem-note { background: var(--band-2) !important; color: #D9D9E3 !important; border-radius: var(--r-sm); }
+body.editorial .ed-dark .problem-card.finance .problem-note {
+  background: var(--band-2) !important;
+  border: 1px solid rgba(154,134,255,.45);
+  color: #F4F4F8 !important;
+}
+body.editorial .ed-dark .problem-card-logo .logo-dot.brand-logo { background: #F4F4F8; }
+
+/* Landing page dark band */
+body.lp .lp-dark {
+  background:
+    radial-gradient(50% 70% at 90% 0%, rgba(95,66,251,.30), transparent 70%),
+    radial-gradient(36% 60% at 0% 100%, rgba(40,103,228,.18), transparent 70%),
+    var(--band) !important;
+}
+body.lp .lp-dark .lp-get { --anchor-bg: var(--band-2); }
+
+/* About page stat band: facts, not vanity metrics */
+.dark-stat-val { font-size: clamp(32px, 3.4vw, 44px) !important; font-weight: 500 !important; letter-spacing: -0.03em; }
+
+/* ── Interactive state on the self-audit and landing tools ───── */
+.audit-progress { height: 4px !important; border-radius: var(--r-pill); background: var(--light-grey) !important; overflow: hidden; }
+.audit-progress-bar {
+  width: 100% !important;
+  border-radius: var(--r-pill);
+  background: var(--ai-gradient) !important;
+  box-shadow: 0 0 12px rgba(95,66,251,.5);
+}
+.audit-option label {
+  border-radius: 12px !important;
+  border: 1px solid var(--hairline-strong) !important;
+  background: var(--white) !important;
+  color: var(--ink-2) !important;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.audit-option label:hover { border-color: var(--violet) !important; color: var(--black) !important; }
+.audit-option input:checked + label {
+  color: var(--black) !important;
+  border-color: transparent !important;
+  background:
+    linear-gradient(var(--surface-tint), var(--surface-tint)) padding-box,
+    var(--ai-gradient) border-box !important;
+  box-shadow: var(--ai-glow-soft) !important;
+  font-weight: 600;
+}
+.lp-q-options button {
+  border-radius: 12px !important;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.lp-q-options button:hover,
+.lp-q-options button:focus-visible,
+.lp-q-options button[aria-pressed="true"] {
+  color: var(--black) !important;
+  border-color: transparent !important;
+  background:
+    linear-gradient(var(--surface-tint), var(--surface-tint)) padding-box,
+    var(--ai-gradient) border-box !important;
+  box-shadow: var(--ai-glow-soft) !important;
+}
+
+/* Self-audit result: the scored output reads as an AI anchor */
+.audit-panel[data-result-panel] { border-radius: var(--r-lg) !important; padding: clamp(24px, 4vw, 40px); }
+.result-score { color: var(--black) !important; letter-spacing: -0.04em; }
+.result-row { border: 1px solid var(--light-grey) !important; }
+
+/* Carried-over self-audit context on the contact form */
+.contact-context {
+  border-left-width: 1px !important;
+  border-radius: var(--r-md) !important;
+  --anchor-bg: var(--surface-tint);
+}
+
+/* Trust pages */
+.trust-toc { border-top: 0 !important; padding-top: 0; }
+.trust-toc a:hover { color: var(--black); }
+.trust-hero { border-bottom: 1px solid var(--light-grey); }
+
+/* Badges: quiet chips */
+.nav-badge,
+.hero-badge,
+.featured-tag,
+.article-cat {
+  border-radius: var(--r-pill) !important;
+  color: var(--ink-2) !important;
+  background: var(--white) !important;
+  border: 1px solid var(--light-grey) !important;
+}
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; }
+
+/* ── Mobile conversion bar: one compact action ───────────────── */
+.mobile-conversion-bar {
+  background: var(--paper) !important;
+  border-top: 1px solid var(--light-grey) !important;
+  box-shadow: none !important;
+}
+.mobile-conversion-bar span { display: none; }
+
+/* ── Hairlines replace heavy ink rules ───────────────────────── */
+.ed-facts-strip,
+.ed-chain ol,
+.editorial .process-steps,
+.process-steps,
+.faq-list,
+.editorial .faq-block,
+.trust-toc,
+.pilot-cards,
+.editorial .pilot-card,
+.lp-pains article,
+.lp-steps li { border-top-color: var(--light-grey) !important; }
+.founder-proof-photo { border-top: 0 !important; background: none !important; padding-top: 0 !important; }
+.founder-proof-photo img { border-radius: var(--r-lg); }
+.founder-proof-link { color: var(--ink-2); text-decoration-color: var(--hairline-strong); }
+.founder-proof-link:hover { color: var(--black); }
+
+/* Evidence desk: one workspace label with a live dot; the second
+   kicker repeats the chapter name */
+.ed-question .ed-kicker span:last-child { display: none; }
+.ed-question .ed-kicker span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-2);
+}
+.ed-question .ed-kicker span:first-child::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ai-gradient);
+  box-shadow: 0 0 0 3px rgba(95,66,251,.16), 0 0 10px rgba(95,66,251,.55);
+}
+
+.hero-reassurance { font-size: 13px; color: var(--dark-grey); }
+.hero-reassurance span { color: var(--hairline-strong); }
+.process-step .step-tag { color: var(--dark-grey); font-size: 13px; }
+.ed-start-title { color: var(--dark-grey); }
+
+/* Self-audit sidebar, about founder card, use-case chips and results */
+.audit-aside {
+  border: 1px solid var(--light-grey) !important;
+  background: var(--white);
+  padding: 24px !important;
+}
+.founder-profile { border-top: 1px solid var(--light-grey) !important; }
+.cs-tag {
+  border-radius: var(--r-pill) !important;
+  border: 1px solid var(--light-grey) !important;
+  background: var(--white) !important;
+  color: var(--ink-2) !important;
+  font-weight: 500 !important;
+}
+.ba-card .ba-half:last-child { background: var(--surface-tint); }
+
+/* ── Review fixes ────────────────────────────────────────────── */
+/* Utility used by honeypot fields; not every page defined it */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* One gradient fill per view: the header CTA is the secondary pill,
+   the in-page CTA carries the gradient */
+.nav-right .btn-primary,
+.nav-right .btn-primary:hover {
+  color: var(--black);
+  background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
+  border: 1px solid transparent;
+  box-shadow: var(--shadow-sm);
+  animation: none;
+}
+.nav-right .btn-primary:hover {
+  background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
+  box-shadow: var(--ai-glow-soft);
+}
+@media (max-width: 640px) {
+  /* On /start the sticky bar is the one primary action on mobile */
+  body.lp .lp-cta-row .btn-primary,
+  body.lp .lp-get .btn-primary {
+    color: var(--black);
+    background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
+    border: 1px solid transparent;
+    box-shadow: var(--shadow-sm);
+    animation: none;
+  }
+}
+
+/* Home: outcome rows become real cards with breathing room */
+.outcomes-grid { border-top: 0 !important; gap: 12px !important; }
+.outcome-card,
+.outcome-card:hover {
+  padding: 24px 28px !important;
+  background: var(--white) !important;
+  box-shadow: var(--shadow-sm) !important;
+  border-color: var(--light-grey) !important;
+  transform: none !important;
+}
+@media (max-width: 768px) { .outcome-card, .outcome-card:hover { padding: 20px !important; } }
+
+/* Static cards do not react to hover */
+body.editorial .ed-dark .problem-card:hover { background: transparent !important; }
+.comparison .comparison-col,
+.comparison:has(.comparison-col:hover) .comparison-col:not(:hover) {
+  opacity: 1 !important;
+  transform: none !important;
+}
+.comparison .comparison-col:not(.highlighted):hover { box-shadow: var(--shadow-sm) !important; }
+
+/* Capability panels: let the focus ring and the board glow show */
+.capability-panels,
+.editorial .capability-panels { overflow: visible !important; }
+.capability-panel:focus-visible { border-radius: var(--r-lg); outline-offset: 4px; }
+.journey-line { align-items: stretch !important; }
+.journey-line > span { align-self: center; }
+.quality-rows > div { border-radius: 0 !important; align-items: baseline; }
+.quality-rows > div:last-child { border-bottom: 0 !important; }
+
+/* Founder blocks on home and about */
+.founder-proof-statement { border-color: var(--light-grey) !important; }
+.receipt-proof-list { border-top-color: var(--light-grey) !important; }
+.founder-proof-link { border-bottom-color: var(--hairline-strong) !important; }
+.founder-proof-link:hover { border-bottom-color: currentColor !important; }
+.founder-photo { border-radius: var(--r-lg); overflow: hidden; border-color: var(--light-grey); box-shadow: var(--shadow-sm); }
+.founder-photo::after { content: none !important; }
+.founder-profile { border-top: 0 !important; padding-top: 0 !important; }
+
+/* Remaining micro labels */
+.problem-note { font: 500 12px/1.3 var(--ff-sub) !important; letter-spacing: 0 !important; }
+.receipt-proof-item { align-items: baseline; }
+.receipt-proof-item > span { font: 500 12px/1.5 var(--ff-sub) !important; letter-spacing: 0 !important; font-variant-numeric: tabular-nums; }
+/* Pilot step counters ("01 / SOURCE") repeat the heading under them */
+.editorial .pilot-card-num { display: none !important; }
+.editorial #how-it-works .pilot-heading { margin-bottom: clamp(28px, 3vw, 40px); }
+.hero-reassurance span:first-child { color: var(--violet); }
+
+/* Mobile menu toggle: no white square after a tap, visible over the dark chapter */
+.nav-mobile-toggle { border-radius: var(--r-pill) !important; }
+.nav-mobile-toggle:hover { background: rgba(95,66,251,.06) !important; }
+.nav.ed-nav-dark .nav-mobile-toggle:hover { background: rgba(244,244,248,.10) !important; }
+
+/* Pilot page columns stay open columns, not cards */
+.editorial .pilot-card { border-radius: 0 !important; box-shadow: none !important; }
+
+/* /start dark band: muted text uses the light secondary */
+body.lp .lp-dark { --dark-grey: var(--stone); }
+body.lp .lp-dark .lp-eyebrow { color: var(--stone) !important; }
+
+/* Services hero: room under the CTA for its glow and focus ring */
+.hero .hero-content > .hero-cta:last-child { padding-bottom: 48px; }
+
+/* Headings use the brand display face everywhere */
+.featured-headline,
+.audit-panel h1,
+.audit-panel h2 { font-weight: 500 !important; }
+.article-kicker { font-weight: 500; }
+.cs-headline {
+  font-family: var(--ff-display) !important;
+  font-weight: 500 !important;
+  font-size: clamp(28px, 3vw, 36px);
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+}
+
+/* ── Review fixes, round 2 ────────────────────────────────────── */
+/* Trust pages: anchors and the sticky contents land below the 76px header */
+.trust-toc { top: 100px; }
+.trust-copy section { scroll-margin-top: 100px; }
+.trust-copy a { color: var(--violet); text-decoration: underline; text-decoration-color: rgba(95,66,251,.4); text-underline-offset: 3px; }
+.trust-copy a:hover { text-decoration-color: currentColor; }
+.trust-copy ul { list-style: disc; }
+.trust-copy li::marker { color: var(--violet); }
+.trust-nav-inner,
+.trust-shell,
+.trust-footer-inner { width: min(1120px, calc(100% - 48px)); }
+.trust-footer-inner,
+.lp-footer-inner { align-items: center; }
+
+/* 404: centered column, spaced buttons */
+main.trust-shell[style*="text-align:center"] .trust-title,
+main.trust-shell[style*="text-align:center"] .trust-lead { margin-left: auto; margin-right: auto; }
+main.trust-shell[style*="text-align:center"] > p:has(> .btn) { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+/* Closing CTAs sit clear of their lead paragraph */
+.cta-actions { margin-top: 32px; }
+
+/* Mobile menu marks the current page; sticky bar label is readable */
+#mobile-menu .mobile-nav-link.active {
+  align-self: flex-start;
+  color: var(--black);
+  background-image: var(--ai-gradient);
+  background-repeat: no-repeat;
+  background-size: 100% 2px;
+  background-position: 0 calc(100% - 6px);
+}
+.mobile-conversion-bar strong { font-size: 13px; line-height: 1.25; }
+
+/* Mobile: the sticky bar is the one gradient action; repeated in-page
+   self-audit CTAs become the secondary pill (not on editorial pages,
+   which hide the bar) */
+@media (max-width: 768px) {
+  body:not(.editorial):has(.mobile-conversion-bar) main a[href="/revenue-self-audit"]:is(.btn-primary, .btn-green):not(.mobile-conversion-bar *) {
+    color: var(--black);
+    background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
+    border: 1px solid transparent;
+    box-shadow: var(--shadow-sm);
+    animation: none;
+  }
+}
+
+/* Use cases: headline before the card on mobile */
+@media (max-width: 900px) { .cs-layout.reversed > :first-child { order: 2; } }
+.feature-card p { font-size: 14px; line-height: 1.6; }
+
+/* About: comparison columns are separate cards, not a frame of cards */
+.comparison { border: 0 !important; gap: 16px; }
+.comparison-col { border: 1px solid var(--light-grey) !important; }
+.comparison-col.highlighted { margin: 0; padding: 32px 28px; }
+
+/* Contact form controls share one height and rhythm */
+.form-row .form-field { align-content: end; }
+.form-field select { min-height: 49px; }
+@media (max-width: 768px) { .form-row:not(.form-row-names) { row-gap: 0; } }
+
+/* Article aside meters */
+.meter-fill { border-radius: inherit; }
+.meter-fill.green { background: var(--ink-2); }
+
+/* Self-audit */
+.result-grid { background: transparent !important; border: 0 !important; gap: 12px; }
+.audit-option label { font-size: 15px; font-weight: 500; color: var(--black) !important; min-height: 56px; }
+.audit-option label:hover { border-color: var(--stone) !important; }
+.audit-option input:checked + label {
+  color: var(--violet) !important;
+  background:
+    linear-gradient(rgba(95,66,251,.10), rgba(95,66,251,.10)) padding-box,
+    linear-gradient(var(--white), var(--white)) padding-box,
+    var(--ai-gradient) border-box !important;
+  box-shadow: inset 0 0 0 1px rgba(95,66,251,.55), var(--ai-glow-soft) !important;
+}
+.lead-field label { font-size: 14px !important; font-weight: 600 !important; color: var(--black) !important; }
+.audit-question { padding: 24px 0 28px; }
+.audit-question legend { float: left; width: 100%; margin: 0 0 14px; }
+.audit-question .audit-options { clear: both; }
+.audit-panel:not([data-result-panel]) .audit-step-label { display: none; }
+.audit-panel:not([data-result-panel]) h2 { margin-top: 0; }
+.audit-error { color: var(--error) !important; font-weight: 500; }
+.audit-error:not(:empty) { padding: 10px 14px; border: 1px solid var(--error-line); background: var(--error-bg); border-radius: 12px; }
+.audit-panel:has([data-step-error]:not(:empty)) .audit-question:not(:has(input:checked)) legend { color: var(--error); }
+.audit-aside li { align-items: center; }
+.audit-aside li span {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font: 600 12px/1 var(--ff-sub) !important;
+  color: var(--violet) !important;
+  background: var(--white);
+  border: 1px solid var(--light-grey) !important;
+}
+.result-followup { border-color: var(--light-grey) !important; background: var(--surface-tint); }
+
+/* /start sticky bar: hidden from keyboard and screen readers until shown */
+@media (max-width: 640px) {
+  .lp-sticky { visibility: hidden; transition: transform .25s ease, visibility 0s linear .25s; }
+  .lp-sticky.is-visible { visibility: visible; transition-delay: 0s; }
+}
+@media (prefers-reduced-motion: reduce) { .lp-sticky { transition: none; } }
+
+/* ── Final pass ─────────────────────────────────────────────── */
+/* Pilot dark chapter heading lines up with the other sections */
+.trust-shell.ed-cinema-inner { width: min(1120px, calc(100% - 48px)); }
+@media (max-width: 520px) {
+  .trust-shell,
+  .trust-nav-inner,
+  .trust-footer-inner { width: calc(100% - 40px) !important; max-width: none !important; }
+  .pilot-grid > div,
+  .pilot-grid > aside { width: 100% !important; max-width: 100% !important; }
+}
+
+/* Article aside CTA is secondary: the closing CTA carries the gradient */
+.article-aside .btn-primary {
+  color: var(--black);
+  background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
+  border: 1px solid transparent;
+  box-shadow: var(--shadow-sm);
+  animation: none;
+}
+
+/* Hover for every CTA demoted to the secondary pill */
+.article-aside .btn-primary:hover {
+  color: var(--black);
+  background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
+  box-shadow: var(--ai-glow-soft);
+}
+@media (max-width: 768px) {
+  body:not(.editorial):has(.mobile-conversion-bar) .newsletter-form .btn-primary {
+    color: var(--black);
+    background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
+    border: 1px solid transparent;
+    box-shadow: var(--shadow-sm);
+    animation: none;
+  }
+  body:not(.editorial):has(.mobile-conversion-bar) main a[href="/revenue-self-audit"]:is(.btn-primary, .btn-green):not(.mobile-conversion-bar *):hover,
+  body:not(.editorial):has(.mobile-conversion-bar) .newsletter-form .btn-primary:hover {
+    color: var(--black);
+    background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
+    box-shadow: var(--ai-glow-soft);
+  }
+}
+@media (max-width: 640px) {
+  body.lp .lp-cta-row .btn-primary:hover,
+  body.lp .lp-get .btn-primary:hover {
+    color: var(--black);
+    background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
+    box-shadow: var(--ai-glow-soft);
+  }
+}
+
+/* ================================================================
+   DEPTH: THREE PLANES
+   Plane 0, ground: the page canvas. A fixed field of ambient AI light
+     and a faint dot grid that stays put while content scrolls over it.
+   Plane 1, surface: content sheets and cards. White, hairline edge,
+     a soft ink-tinted shadow (--elev-1).
+   Plane 2, float: what the visitor acts on or what the product
+     produces: the header pill, AI anchors, primary actions, sticky bars,
+     hovered link cards (--elev-2, plus the gradient glow on anchors).
+   ================================================================ */
+:root {
+  --elev-1: 0 1px 2px rgba(25,25,32,.04), 0 2px 6px -2px rgba(25,25,32,.05), 0 14px 34px -20px rgba(25,25,32,.16);
+  --elev-2: 0 1px 2px rgba(25,25,32,.05), 0 8px 18px -8px rgba(25,25,32,.12), 0 30px 64px -30px rgba(25,25,32,.30);
+  --sheet-inset: clamp(8px, 1.6vw, 24px);
+  --sheet-radius: clamp(20px, 2.4vw, 32px);
+  --shadow-sm: var(--elev-1);
+  --shadow-md: var(--elev-2);
+  --shadow-lg: var(--elev-2);
+  --ai-glow-soft: var(--elev-2), 0 18px 44px -24px rgba(95,66,251,.45), 0 8px 24px -18px rgba(40,103,228,.35);
+}
+
+/* Plane 0: the ground */
+body { background: var(--paper); }
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+body::before {
+  background:
+    radial-gradient(42% 52% at 92% -6%, rgba(95,66,251,.11), transparent 70%),
+    radial-gradient(30% 42% at 70% 6%, rgba(40,103,228,.07), transparent 70%),
+    radial-gradient(36% 46% at -4% 104%, rgba(187,41,166,.06), transparent 70%);
+}
+body::after {
+  background-image: radial-gradient(rgba(25,25,32,.07) 1px, transparent 1.3px);
+  background-size: 24px 24px;
+  -webkit-mask-image: radial-gradient(120% 70% at 50% 0%, #000 0%, transparent 72%);
+          mask-image: radial-gradient(120% 70% at 50% 0%, #000 0%, transparent 72%);
+}
+
+/* Sections stop painting their own field, so the ground shows through */
+section,
+.section,
+.bg-page,
+.bg-dark,
+.bg-dark-2,
+.hero,
+.ed-hero,
+.ed-start,
+.trust-hero,
+.pilot-hero,
+.article-hero,
+.capability-section,
+.founder-proof,
+.cta-section,
+.pilot-cta,
+.audit-page,
+body.lp .lp-hero {
+  background: transparent !important;
+}
+
+/* Plane 1: sheets. Sections that carried a white field become inset,
+   rounded sheets above the ground; the dark chapters are dark sheets. */
+.bg-surface,
+#capabilities.capability-section,
+#platform.bg-dark,
+body.editorial .ed-dark,
+body.lp .lp-dark {
+  margin-inline: var(--sheet-inset);
+  border-radius: var(--sheet-radius);
+  box-shadow: var(--elev-1);
+  overflow: clip;
+}
+.bg-surface,
+#capabilities.capability-section,
+#platform.bg-dark {
+  background: var(--white) !important;
+  border: 1px solid var(--light-grey);
+  /* cards inside a sheet sit on the same plane: hairline, no shadow */
+  --shadow-sm: 0 0 0 transparent;
+}
+body.editorial .ed-dark,
+body.lp .lp-dark { box-shadow: 0 30px 70px -40px rgba(14,13,28,.55); }
+/* sheets keep a strip of ground between them and their neighbours */
+.bg-surface,
+#capabilities.capability-section,
+#platform.bg-dark,
+body.editorial .ed-dark,
+body.lp .lp-dark { margin-block: var(--sheet-inset); }
+/* full-bleed section rules would cut across the ground plane */
+section,
+.section,
+.trust-hero,
+.ed-start { border-top: 0 !important; border-bottom: 0 !important; }
+/* overflow: clip keeps the radius but must not clip focus rings or the
+   anchor glow inside the sheet */
+#capabilities.capability-section,
+#platform.bg-dark { overflow: visible; }
+
+/* Plane 2: the header becomes a floating pill */
+.nav { top: 10px; height: 60px; }
+.nav::before,
+.nav.light::before {
+  left: 50%;
+  right: auto;
+  width: min(calc(var(--maxw) - 2 * var(--gutter) + 40px), calc(100% - 24px));
+  transform: translateX(-50%);
+  border: 1px solid var(--light-grey) !important;
+  border-radius: var(--r-pill);
+  background: var(--white) !important;
+  box-shadow: var(--elev-2);
+}
+.nav.ed-nav-dark::before { border-color: rgba(244,244,248,.12) !important; box-shadow: 0 20px 48px -24px rgba(0,0,0,.6); }
+@media (max-width: 768px) {
+  .nav-inner { padding: 0 calc(var(--gutter) + 6px); }
+}
+.trust-nav {
+  position: sticky;
+  top: 10px;
+  height: 60px;
+  width: min(1160px, calc(100% - 24px));
+  margin: 10px auto 0;
+  border: 1px solid var(--light-grey) !important;
+  border-radius: var(--r-pill);
+  background: var(--white) !important;
+  box-shadow: var(--elev-2);
+}
+.trust-nav .trust-nav-inner { width: calc(100% - 40px) !important; }
+
+/* Plane 2: floating bars and the sticky article aside */
+.mobile-conversion-bar {
+  left: 10px !important;
+  right: 10px !important;
+  bottom: 10px !important;
+  border: 1px solid var(--light-grey) !important;
+  border-radius: 20px;
+  background: var(--white) !important;
+  box-shadow: var(--elev-2) !important;
+}
+.article-aside { box-shadow: var(--elev-2); }
+
+/* Link cards rise from plane 1 to plane 2 when hovered */
+a.article-card,
+a.featured-card,
+a.case-card,
+.article-card:has(a),
+.featured-card:has(a) { transition: box-shadow .25s var(--ease-out), transform .25s var(--ease-out), border-color .2s; }
+a.article-card:hover,
+a.featured-card:hover,
+a.case-card:hover,
+.article-card:has(a:hover),
+.featured-card:has(a:hover) { transform: translateY(-2px); }
+
+/* ================================================================
+   LAYOUT: FLOATING HEADER, LABEL PILLS, FAQ ROWS
+   Site-wide pieces of the product-led layout. Page compositions live
+   in their own layers (home.css, request.css).
+   ================================================================ */
+
+/* Header: a floating rounded bar. The wordmark, a divider, the links
+   beside it, and one ink action on the right. */
+.nav::before,
+.nav.light::before,
+.trust-nav { border-radius: 18px !important; }
+@media (min-width: 769px) {
+  .nav-inner { justify-content: flex-start; gap: 0; }
+  .nav-logo { position: relative; flex: none; padding-right: 20px; margin-right: 12px; }
+  .nav-logo::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 1px;
+    height: 22px;
+    transform: translateY(-50%);
+    background: var(--light-grey);
+  }
+  .nav.ed-nav-dark .nav-logo::after { background: rgba(244,244,248,.16); }
+  .nav-links { gap: 2px; }
+  .nav-right { margin-left: auto; }
+}
+/* Tablets: the divider spacing and the chevron give way so the action stays
+   inside the bar */
+@media (min-width: 769px) and (max-width: 900px) {
+  .nav-logo { padding-right: 10px; margin-right: 4px; }
+  .nav-links { gap: 0; }
+  .nav-links a,
+  .nav.light .nav-links a { padding-inline: 6px !important; }
+  .nav-right .btn-primary::after { display: none; }
+}
+.nav-right .btn-primary,
+.nav-right .btn-primary:hover {
+  color: #FFFFFF;
+  background: var(--black);
+  border: 1px solid var(--black);
+  box-shadow: var(--elev-1);
+  animation: none;
+}
+.nav-right .btn-primary:hover {
+  background: #2B2B36;
+  border-color: #2B2B36;
+  box-shadow: var(--ai-glow);
+}
+.nav-right .btn-primary::after {
+  content: "";
+  flex: none;
+  width: 12px;
+  height: 12px;
+  margin-left: 2px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4.5 2.5 8 6l-3.5 3.5' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4.5 2.5 8 6l-3.5 3.5' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: transform .2s var(--ease-out);
+}
+.nav-right .btn-primary:hover::after { transform: translateX(2px); }
+.nav.ed-nav-dark .nav-right .btn-primary,
+.nav.ed-nav-dark .nav-right .btn-primary:hover {
+  color: var(--band);
+  background: #F4F4F8;
+  border-color: #F4F4F8;
+}
+
+/* Labels: a small hairline pill above a heading */
+.eyebrow,
+.chapter-name,
+.trust-kicker,
+.ed-eyebrow {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  padding: 4px 12px !important;
+  border: 1px solid var(--light-grey);
+  border-radius: var(--r-pill);
+  background: var(--white);
+  line-height: 1.2 !important;
+  color: var(--ink-2) !important;
+}
+.eyebrow::before,
+.eyebrow::after { display: none !important; }
+.chapter-meta { align-items: center; }
+.ed-dark .chapter-name,
+.ed-dark .eyebrow,
+.ed-cinema-section .chapter-name {
+  border-color: rgba(244,244,248,.16);
+  background: rgba(244,244,248,.04);
+  color: #D9D9E3 !important;
+}
+/* Centered labels draw a hairline out to each side */
+.pill-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  max-width: 560px;
+  margin: 0 auto 20px;
+}
+.pill-rule::before,
+.pill-rule::after {
+  content: "";
+  flex: 1 1 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--hairline-strong));
+}
+.pill-rule::after { background: linear-gradient(90deg, var(--hairline-strong), transparent); }
+.pill-rule > * { flex: none; margin: 0 !important; }
+
+/* FAQ: rounded rows, each with a round plus button */
+.faq-list {
+  display: grid;
+  gap: 10px;
+  border-top: 0 !important;
+}
+.faq-list details,
+.editorial .faq-block {
+  padding: 0 20px;
+  border: 1px solid var(--light-grey) !important;
+  border-radius: 18px;
+  background: var(--white);
+  transition: border-color .2s;
+}
+.faq-list details:hover,
+.faq-list details[open] { border-color: var(--hairline-strong) !important; }
+.editorial .faq-block { padding: 22px 20px 24px; }
+.faq-list summary {
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  padding: 16px 56px 16px 0 !important;
+  border-radius: 18px;
+  font: 500 16px/1.4 var(--ff-sub) !important;
+  color: var(--black);
+}
+.faq-list summary::after,
+.faq-list details[open] summary::after {
+  content: "" !important;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 34px;
+  height: 34px;
+  margin-top: -17px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 50%;
+  color: var(--black) !important;
+  background:
+    linear-gradient(currentColor, currentColor) center / 12px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 1.5px 12px no-repeat;
+  transition: transform .25s var(--ease-out), border-color .2s, background-color .2s;
+}
+.faq-list summary:hover::after { border-color: var(--black); }
+.faq-list details[open] summary::after {
+  transform: rotate(180deg);
+  background:
+    linear-gradient(currentColor, currentColor) center / 12px 1.5px no-repeat;
+}
+.faq-list details p { margin: 0 56px 0 0 !important; padding-bottom: 20px; }
+.faq-list details p + p { margin-top: -8px !important; }
+.faq-list summary:focus-visible { outline-offset: 2px; }
+/* Forced colors drop gradient images: keep the drawn plus and minus */
+@media (forced-colors: active) {
+  .faq-list summary::after,
+  .faq-list details[open] summary::after {
+    forced-color-adjust: none;
+    color: CanvasText !important;
+    border-color: CanvasText !important;
+    background-color: Canvas;
+  }
+  .nav-right .btn-primary::after { forced-color-adjust: none; background: ButtonText; }
+}
+
+/* ── Motion preferences ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .pilot-btn,
+  .audit-btn { animation: none !important; transform: none !important; }
+  a.article-card:hover,
+  a.featured-card:hover,
+  a.case-card:hover,
+  .article-card:has(a:hover),
+  .featured-card:has(a:hover) { transform: none; }
+}
+html.motion-off .btn,
+html.motion-off .pilot-btn,
+html.motion-off .audit-btn { animation: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .nav-right .btn-primary::after,
+  .faq-list summary::after { transition: none; }
+  .nav-right .btn-primary:hover::after { transform: none; }
+}
+html.motion-off .nav-right .btn-primary::after,
+html.motion-off .faq-list summary::after { transition: none; }
+html.motion-off .nav-right .btn-primary:hover::after { transform: none; }
+
+/* ── Small screens ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .capability-tabs,
+  .editorial .capability-tabs { border-radius: 16px !important; }
+  .receipt-sheet { box-shadow: var(--ai-glow-soft) !important; }
+}

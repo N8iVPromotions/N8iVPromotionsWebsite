@@ -9,7 +9,10 @@ const FROM_EMAIL =
   process.env.EMAIL_FROM ||
   'N8iV Promotions <no-reply@n8ivpromotions.com>';
 
-const REQUIRED_FIELDS = ['firstName', 'lastName', 'email', 'company'];
+// The request form asks only for these; everything else is optional context
+// (for example the Revenue Self-Audit handoff fills lastName and challenge).
+const REQUIRED_FIELDS = ['firstName', 'email', 'company'];
+const FIELD_LABELS = { firstName: 'first name', email: 'work email', company: 'company' };
 
 module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') {
@@ -34,12 +37,24 @@ module.exports = async function handler(req, res) {
     const submission = normalizeSubmission(body);
     const missing = REQUIRED_FIELDS.filter((field) => !submission[field]);
     if (missing.length) {
-      return res.status(400).json({ error: `Missing required fields: ${missing.join(', ')}` });
+      // Shown to the visitor as written, so name the fields the way the form does;
+      // `field` lets the form move focus to the first one.
+      return res.status(400).json({
+        error: `Please add your ${missing.map((field) => FIELD_LABELS[field]).join(', ')}.`,
+        field: missing[0],
+      });
     }
 
     if (!isValidEmail(submission.email)) {
-      return res.status(400).json({ error: 'Please enter a valid work email.' });
+      return res.status(400).json({ error: 'Please enter a valid work email.', field: 'email' });
     }
+
+    if (hasLink(submission.firstName)) {
+      return res.status(400).json({ error: 'Please enter your name without links.', field: 'firstName' });
+    }
+    // The last name arrives in a hidden field from the self-audit handoff, so the
+    // visitor cannot correct it; drop it rather than block the request.
+    if (hasLink(submission.lastName)) submission.lastName = '';
 
     const verified = await verifyTurnstile(body['cf-turnstile-response'], getClientIp(req));
     if (!verified) {
@@ -70,15 +85,15 @@ function parseBody(body) {
 
 function normalizeSubmission(body) {
   return {
-    firstName: clean(body.firstName),
-    lastName: clean(body.lastName),
-    email: clean(body.email).toLowerCase(),
-    company: clean(body.company),
-    role: clean(body.role),
-    investment: clean(body.investment),
-    crm: clean(body.crm),
+    firstName: line(body.firstName, 80),
+    lastName: line(body.lastName, 80),
+    email: line(body.email, 320).toLowerCase(),
+    company: line(body.company, 160),
+    role: line(body.role),
+    investment: line(body.investment),
+    crm: line(body.crm),
     challenge: clean(body.challenge, 3000),
-    sourcePage: clean(body.sourcePage || 'N8iV Promotions contact page'),
+    sourcePage: line(body.sourcePage || 'N8iV Promotions contact page'),
     conversionPage: clean(body.conversion_page, 1500),
     attribution: normalizeAttribution(body.attribution),
     submittedAt: new Date().toISOString(),
@@ -87,6 +102,16 @@ function normalizeSubmission(body) {
 
 function clean(value, maxLength = 500) {
   return String(value || '').trim().slice(0, maxLength);
+}
+
+// Single-line fields: no line breaks or control characters (the company name
+// goes into the email subject).
+function line(value, maxLength = 500) {
+  return clean(String(value || '').replace(/[\u0000-\u001F\u007F]+/g, ' ').replace(/\s+/g, ' '), maxLength);
+}
+
+function hasLink(value) {
+  return /(https?:\/\/|www\.|<|>)/i.test(value);
 }
 
 function normalizeAttribution(value) {
@@ -113,7 +138,7 @@ function formatTouch(touch) {
 }
 
 function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  return email.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 async function sendAuditRequestEmail(submission) {
@@ -188,11 +213,15 @@ function parseEmailAddress(value) {
   };
 }
 
+function fullName(submission) {
+  return [submission.firstName, submission.lastName].filter(Boolean).join(' ');
+}
+
 function buildTextEmail(submission) {
   return [
     'New N8iV Promotions Revenue Intelligence Audit Request',
     '',
-    `Name: ${submission.firstName} ${submission.lastName}`,
+    `Name: ${fullName(submission)}`,
     `Email: ${submission.email}`,
     `Company: ${submission.company}`,
     `Role: ${submission.role || 'Not provided'}`,
@@ -215,7 +244,7 @@ function buildTextEmail(submission) {
 
 function buildHtmlEmail(submission) {
   const rows = [
-    ['Name', `${submission.firstName} ${submission.lastName}`],
+    ['Name', fullName(submission)],
     ['Email', submission.email],
     ['Company', submission.company],
     ['Role', submission.role || 'Not provided'],
