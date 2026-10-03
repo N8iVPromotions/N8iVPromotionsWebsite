@@ -299,7 +299,7 @@ body.lp .lp-hero {
 .nav::before,
 .nav.light::before,
 .trust-nav {
-  background: rgba(250,250,253,.92) !important;
+  background: var(--paper) !important;
   border-bottom: 1px solid var(--light-grey) !important;
 }
 .nav-links a,
@@ -329,7 +329,7 @@ body.lp .lp-hero {
 
 /* Header over the dark chapter */
 .nav.ed-nav-dark::before {
-  background: rgba(14,13,28,.94) !important;
+  background: var(--band) !important;
   border-bottom-color: rgba(244,244,248,.10) !important;
 }
 .nav.ed-nav-dark .nav-links a.active {
@@ -388,6 +388,7 @@ body.lp .btn-primary:hover {
   border-color: transparent;
   background-color: var(--ai-2);
   background-image: var(--ai-gradient-loop);
+  background-size: 300% 100%;
   box-shadow: var(--ai-glow-strong);
   transform: translateY(-1px);
 }
@@ -536,6 +537,7 @@ a.case-card:hover,
 .capability-panel.active .capability-board,
 .editorial .capability-panel.active .capability-board,
 .lp-q-card,
+.lp-get,
 .report-card,
 .comparison-col.highlighted,
 .contact-context,
@@ -829,7 +831,7 @@ body.lp .lp-dark .lp-get { --anchor-bg: var(--band-2); }
 
 /* ── Mobile conversion bar: one compact action ───────────────── */
 .mobile-conversion-bar {
-  background: rgba(250,250,253,.96) !important;
+  background: var(--paper) !important;
   border-top: 1px solid var(--light-grey) !important;
   box-shadow: none !important;
 }
@@ -844,8 +846,10 @@ body.lp .lp-dark .lp-get { --anchor-bg: var(--band-2); }
 .editorial .faq-block,
 .trust-toc,
 .pilot-cards,
-.editorial .pilot-card { border-top-color: var(--light-grey) !important; }
-.founder-proof-photo { border-top: 0 !important; }
+.editorial .pilot-card,
+.lp-pains article,
+.lp-steps li { border-top-color: var(--light-grey) !important; }
+.founder-proof-photo { border-top: 0 !important; background: none !important; padding-top: 0 !important; }
 .founder-proof-photo img { border-radius: var(--r-lg); }
 .founder-proof-link { color: var(--ink-2); text-decoration-color: var(--hairline-strong); }
 .founder-proof-link:hover { color: var(--black); }
@@ -888,6 +892,121 @@ body.lp .lp-dark .lp-get { --anchor-bg: var(--band-2); }
   font-weight: 500 !important;
 }
 .ba-card .ba-half:last-child { background: var(--ai-tint), var(--white); }
+
+/* ── Review fixes ────────────────────────────────────────────── */
+/* Utility used by honeypot fields; not every page defined it */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* One gradient fill per view: the header CTA is the secondary pill,
+   the in-page CTA carries the gradient */
+.nav-right .btn-primary,
+.nav-right .btn-primary:hover {
+  color: var(--black);
+  background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
+  border: 1px solid transparent;
+  box-shadow: var(--shadow-sm);
+  animation: none;
+}
+.nav-right .btn-primary:hover {
+  background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
+  box-shadow: var(--ai-glow-soft);
+}
+@media (max-width: 640px) {
+  /* On /start the sticky bar is the one primary action on mobile */
+  body.lp .lp-cta-row .btn-primary,
+  body.lp .lp-get .btn-primary {
+    color: var(--black);
+    background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
+    border: 1px solid transparent;
+    box-shadow: var(--shadow-sm);
+    animation: none;
+  }
+}
+
+/* Home: outcome rows become real cards with breathing room */
+.outcomes-grid { border-top: 0 !important; gap: 12px !important; }
+.outcome-card,
+.outcome-card:hover {
+  padding: 24px 28px !important;
+  background: var(--white) !important;
+  box-shadow: var(--shadow-sm) !important;
+  border-color: var(--light-grey) !important;
+  transform: none !important;
+}
+@media (max-width: 768px) { .outcome-card, .outcome-card:hover { padding: 20px !important; } }
+
+/* Static cards do not react to hover */
+body.editorial .ed-dark .problem-card:hover { background: transparent !important; }
+.comparison .comparison-col,
+.comparison:has(.comparison-col:hover) .comparison-col:not(:hover) {
+  opacity: 1 !important;
+  transform: none !important;
+}
+.comparison .comparison-col:not(.highlighted):hover { box-shadow: var(--shadow-sm) !important; }
+
+/* Capability panels: let the focus ring and the board glow show */
+.capability-panels,
+.editorial .capability-panels { overflow: visible !important; }
+.capability-panel:focus-visible { border-radius: var(--r-lg); outline-offset: 4px; }
+.journey-line { align-items: stretch !important; }
+.journey-line > span { align-self: center; }
+.quality-rows > div { border-radius: 0 !important; align-items: baseline; }
+.quality-rows > div:last-child { border-bottom: 0 !important; }
+
+/* Founder blocks on home and about */
+.founder-proof-statement { border-color: var(--light-grey) !important; }
+.receipt-proof-list { border-top-color: var(--light-grey) !important; }
+.founder-proof-link { border-bottom-color: var(--hairline-strong) !important; }
+.founder-proof-link:hover { border-bottom-color: currentColor !important; }
+.founder-photo { border-radius: var(--r-lg); overflow: hidden; border-color: var(--light-grey); box-shadow: var(--shadow-sm); }
+.founder-photo::after { content: none !important; }
+.founder-profile { border-top: 0 !important; padding-top: 0 !important; }
+
+/* Remaining micro labels */
+.problem-note { font: 500 12px/1.3 var(--ff-sub) !important; letter-spacing: 0 !important; }
+.receipt-proof-item { align-items: baseline; }
+.receipt-proof-item > span { font: 500 12px/1.5 var(--ff-sub) !important; letter-spacing: 0 !important; font-variant-numeric: tabular-nums; }
+.editorial .pilot-card-num {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+.hero-reassurance span:first-child { color: var(--violet); }
+
+/* Mobile menu toggle: no white square after a tap, visible over the dark chapter */
+.nav-mobile-toggle { border-radius: var(--r-pill) !important; }
+.nav-mobile-toggle:hover { background: rgba(95,66,251,.06) !important; }
+.nav.ed-nav-dark .nav-mobile-toggle:hover { background: rgba(244,244,248,.10) !important; }
+
+/* Pilot page columns stay open columns, not cards */
+.editorial .pilot-card { border-radius: 0 !important; box-shadow: none !important; }
+
+/* /start dark band: muted text uses the light secondary */
+body.lp .lp-dark { --dark-grey: var(--stone); }
+body.lp .lp-dark .lp-eyebrow { color: var(--stone) !important; }
+
+/* Services hero: room under the CTA for its glow and focus ring */
+.hero .hero-content > .hero-cta:last-child { padding-bottom: 48px; }
+
+/* Headings use the brand display face everywhere */
+.cs-headline {
+  font-family: var(--ff-display) !important;
+  font-weight: 500 !important;
+  font-size: clamp(28px, 3vw, 36px);
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+}
 
 /* ── Motion preferences ──────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
