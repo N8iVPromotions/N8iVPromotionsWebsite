@@ -428,7 +428,8 @@ body.lp .btn-primary:active { transform: translateY(0); box-shadow: var(--ai-glo
 }
 /* Busy submit buttons keep a readable label ("Calculating...", "Sending...") */
 .audit-btn[type="submit"]:disabled,
-.btn[aria-busy="true"] { opacity: 1 !important; }
+.btn[aria-busy="true"],
+.btn[aria-busy="true"]:hover { opacity: 1 !important; }
 
 /* Secondary: a quiet white pill; hover draws the gradient ring */
 .btn-secondary,
@@ -768,8 +769,8 @@ body.lp { --lp-display: clamp(40px, 5.4vw, 76px); }
 body.editorial .ed-dark .problem-card:hover { background: var(--band-2) !important; }
 body.editorial .ed-dark .problem-note { background: var(--band-2) !important; color: #D9D9E3 !important; border-radius: var(--r-sm); }
 body.editorial .ed-dark .problem-card.finance .problem-note {
-  background: linear-gradient(var(--band-2), var(--band-2)) padding-box, var(--ai-gradient) border-box !important;
-  border: 1px solid transparent;
+  background: var(--band-2) !important;
+  border: 1px solid rgba(154,134,255,.45);
   color: #F4F4F8 !important;
 }
 body.editorial .ed-dark .problem-card-logo .logo-dot.brand-logo { background: #F4F4F8; }
@@ -1003,12 +1004,9 @@ body.editorial .ed-dark .problem-card:hover { background: transparent !important
 .problem-note { font: 500 12px/1.3 var(--ff-sub) !important; letter-spacing: 0 !important; }
 .receipt-proof-item { align-items: baseline; }
 .receipt-proof-item > span { font: 500 12px/1.5 var(--ff-sub) !important; letter-spacing: 0 !important; font-variant-numeric: tabular-nums; }
-.editorial .pilot-card-num {
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  text-transform: none !important;
-  letter-spacing: 0 !important;
-}
+/* Pilot step counters ("01 / SOURCE") repeat the heading under them */
+.editorial .pilot-card-num { display: none !important; }
+.editorial #how-it-works .pilot-heading { margin-bottom: clamp(28px, 3vw, 40px); }
 .hero-reassurance span:first-child { color: var(--violet); }
 
 /* Mobile menu toggle: no white square after a tap, visible over the dark chapter */
@@ -1144,6 +1142,56 @@ main.trust-shell[style*="text-align:center"] > p:has(> .btn) { display: flex; fl
   .lp-sticky.is-visible { visibility: visible; transition-delay: 0s; }
 }
 @media (prefers-reduced-motion: reduce) { .lp-sticky { transition: none; } }
+
+/* ── Final pass ─────────────────────────────────────────────── */
+/* Pilot dark chapter heading lines up with the other sections */
+.trust-shell.ed-cinema-inner { width: min(1120px, calc(100% - 48px)); }
+@media (max-width: 520px) {
+  .trust-shell,
+  .trust-nav-inner,
+  .trust-footer-inner { width: calc(100% - 40px) !important; max-width: none !important; }
+  .pilot-grid > div,
+  .pilot-grid > aside { width: 100% !important; max-width: 100% !important; }
+}
+
+/* Article aside CTA is secondary: the closing CTA carries the gradient */
+.article-aside .btn-primary {
+  color: var(--black);
+  background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
+  border: 1px solid transparent;
+  box-shadow: var(--shadow-sm);
+  animation: none;
+}
+
+/* Hover for every CTA demoted to the secondary pill */
+.article-aside .btn-primary:hover {
+  color: var(--black);
+  background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
+  box-shadow: var(--ai-glow-soft);
+}
+@media (max-width: 768px) {
+  body:not(.editorial):has(.mobile-conversion-bar) .newsletter-form .btn-primary {
+    color: var(--black);
+    background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
+    border: 1px solid transparent;
+    box-shadow: var(--shadow-sm);
+    animation: none;
+  }
+  body:not(.editorial):has(.mobile-conversion-bar) main a[href="/revenue-self-audit"]:is(.btn-primary, .btn-green):not(.mobile-conversion-bar *):hover,
+  body:not(.editorial):has(.mobile-conversion-bar) .newsletter-form .btn-primary:hover {
+    color: var(--black);
+    background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
+    box-shadow: var(--ai-glow-soft);
+  }
+}
+@media (max-width: 640px) {
+  body.lp .lp-cta-row .btn-primary:hover,
+  body.lp .lp-get .btn-primary:hover {
+    color: var(--black);
+    background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
+    box-shadow: var(--ai-glow-soft);
+  }
+}
 
 /* ── Motion preferences ──────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
