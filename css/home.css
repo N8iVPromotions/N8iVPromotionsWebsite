@@ -283,6 +283,9 @@ html.motion-off .scene-tile { animation: none !important; }
   color: var(--black) !important;
   text-align: center;
 }
+/* Static by default (no script, reduced motion, Motion off): one centered,
+   wrapping row. The scroll below takes over when motion is allowed. */
+.stack-track { display: flex; justify-content: center; }
 .stack-row {
   display: flex;
   flex-wrap: wrap;
@@ -292,6 +295,7 @@ html.motion-off .scene-tile { animation: none !important; }
   padding: 0;
   list-style: none;
 }
+.stack-row[aria-hidden="true"] { display: none; }
 .stack-row li {
   display: inline-flex;
   align-items: center;
@@ -315,6 +319,74 @@ html.motion-off .scene-tile { animation: none !important; }
 }
 .stack-logo img { width: 18px; height: 18px; }
 .stack-note { max-width: 62ch; margin: 20px auto 0; font-size: 14px; line-height: 1.55; color: var(--dark-grey); }
+
+/* Continuous scroll: four identical rows on one track; moving the track by
+   half its width lands the third row exactly where the first began. */
+@keyframes stack-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.ed-js:not(.motion-off) .stack-marquee {
+    overflow: hidden;
+    /* run out to the edges of the container; room for the chips' shadows;
+       the edges fade into the ground */
+    margin: -14px calc(-1 * var(--gutter));
+    padding-block: 14px;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+  }
+  html.ed-js:not(.motion-off) .stack-track {
+    justify-content: flex-start;
+    width: max-content;
+    animation: stack-scroll 80s linear infinite;
+    will-change: transform;
+  }
+  html.ed-js:not(.motion-off) .stack-row {
+    flex: none;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding-right: 8px; /* the gap between the last chip and the next row's first */
+  }
+  html.ed-js:not(.motion-off) .stack-row[aria-hidden="true"] { display: flex; }
+  html.ed-js:not(.motion-off) .stack-marquee.is-paused .stack-track { animation-play-state: paused; }
+  @media (hover: hover) {
+    html.ed-js:not(.motion-off) .stack-marquee:hover .stack-track { animation-play-state: paused; }
+  }
+}
+
+/* Pause / play: moving content that runs on its own needs a way to stop it */
+.stack-toggle {
+  display: none;
+  align-items: center;
+  gap: 7px;
+  min-height: 32px;
+  margin: 16px auto 0;
+  padding: 4px 13px 4px 11px;
+  border: 1px solid var(--light-grey);
+  border-radius: 999px;
+  background: var(--white);
+  font: 500 13px/1 var(--ff-sub);
+  color: var(--ink-2);
+  transition: border-color .2s, color .2s;
+}
+.stack-toggle:hover { border-color: var(--hairline-strong); color: var(--black); }
+@media (prefers-reduced-motion: no-preference) {
+  html.ed-js:not(.motion-off) .stack-toggle:not([hidden]) { display: inline-flex; }
+}
+.stack-toggle-icon {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  background:
+    linear-gradient(currentColor, currentColor) left / 3px 100% no-repeat,
+    linear-gradient(currentColor, currentColor) right / 3px 100% no-repeat;
+}
+.stack-toggle[data-paused="true"] .stack-toggle-icon {
+  background: currentColor;
+  -webkit-clip-path: polygon(10% 0, 100% 50%, 10% 100%);
+          clip-path: polygon(10% 0, 100% 50%, 10% 100%);
+}
 
 /* ── How starting works: three cards ─────────────────────────── */
 .ed-start { padding: clamp(24px, 3vw, 40px) 0 clamp(48px, 6vw, 80px) !important; }

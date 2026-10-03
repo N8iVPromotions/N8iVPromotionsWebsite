@@ -124,7 +124,11 @@ A product-led layout, built from a few repeated parts:
   front plane drifts a few pixels, still under reduced motion and the Motion
   toggle. The scene reuses the page's illustrative example and says so.
 - **Proof row**: the pilot facts, centered, split by hairlines.
-- **Integrations**: a label pill, one line, and the stack as logo chips.
+- **Integrations**: a label pill, one line, and the stack as logo chips in a
+  continuous horizontal scroll that fades out at both edges. Hover and a
+  visible Pause button stop it; under reduced motion, the Motion toggle, or
+  without JavaScript it is a static, centered row. The copies that close the
+  loop are hidden from assistive tech, so screen readers hear one list.
 - **Feature rows**: copy beside a stage, alternating sides. The product board
   rests on the stage and runs off its far edge. Rows replace the old tabs, so
   every view is visible without a click.

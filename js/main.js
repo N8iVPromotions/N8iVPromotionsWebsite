@@ -453,6 +453,22 @@
   activate(tabs.find(tab => tab.classList.contains('active')) || tabs[0]);
 })();
 
+// Integrations scroll: a visible pause / play control (hover also pauses).
+(function initStackMarquee() {
+  const marquee = document.querySelector('[data-stack-marquee]');
+  const toggle = document.querySelector('[data-stack-toggle]');
+  if (!marquee || !toggle) return;
+  const text = toggle.querySelector('.stack-toggle-text');
+  toggle.hidden = false;
+  toggle.addEventListener('click', () => {
+    const paused = !marquee.classList.contains('is-paused');
+    marquee.classList.toggle('is-paused', paused);
+    toggle.dataset.paused = String(paused);
+    if (text) text.textContent = paused ? 'Play' : 'Pause';
+    toggle.setAttribute('aria-label', paused ? 'Play the integrations scroll' : 'Pause the integrations scroll');
+  });
+})();
+
 (function initCardTilt() {
   document.querySelectorAll('.problem-card').forEach(card => {
     card.addEventListener('mousemove', e => {
