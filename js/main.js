@@ -212,17 +212,6 @@
     button.innerHTML = pending ? 'Sending&hellip;' : buttonHtml;
   }
 
-  function buildFallbackMailto(data) {
-    const subject = encodeURIComponent('Fit Review Request');
-    const lines = [
-      `Name: ${[data.firstName, data.lastName].filter(Boolean).join(' ')}`,
-      `Email: ${data.email}`,
-      `Company: ${data.company}`,
-    ];
-    if (data.challenge) lines.push('', data.challenge);
-    return `mailto:zajen@n8ivpromotions.com?subject=${subject}&body=${encodeURIComponent(lines.join('\n'))}`;
-  }
-
   // Keep a draft in this tab so a refresh or back swipe doesn't wipe it.
   const DRAFT_KEY = 'n8iv_fit_review_draft';
   const DRAFT_SKIP = new Set(['website', 'sourcePage', 'cf-turnstile-response']);
@@ -259,15 +248,8 @@
   }
   form.addEventListener('input', event => event.target.removeAttribute?.('aria-invalid'));
 
-  function showFallback(href, reason) {
-    if (!status) return;
-    status.className = 'form-status error';
-    status.textContent = `${reason || 'Something blocked the automatic send.'} Your details are still here. `;
-    const link = document.createElement('a');
-    link.href = href;
-    link.className = 'form-status-link';
-    link.textContent = 'Email this request instead';
-    status.append(link);
+  function showRetry(reason, action = 'Please try submitting again in a moment.') {
+    setStatus(`${reason || 'We could not confirm your request was sent.'} Your details are still here. ${action}`, 'error');
   }
 
   let tokenWaits = 0;
@@ -289,13 +271,14 @@
 
     if (!form.reportValidity()) return;
 
+    saveDraft();
     const data = Object.fromEntries(new FormData(form).entries());
     // The Turnstile widget only shows itself when it needs the visitor; until
     // its token arrives the server would reject the request. If it still has
-    // no token on the next try (blocked script, widget error), offer the email.
+    // no token on the next try, explain how to reload the check.
     if (form.querySelector('.cf-turnstile') && !data['cf-turnstile-response']) {
       if (tokenWaits++ > 0) {
-        showFallback(buildFallbackMailto(data), 'The human check did not load.');
+        showRetry('The human check did not load.', 'Check your connection, then reload this page to retry the human check.');
         return;
       }
       setStatus('Still checking that you are human. Try again in a moment.', 'error');
@@ -304,7 +287,7 @@
     tokenWaits = 0; // a token is here: the next wait (after reset) starts with the grace again
     Object.assign(data, window.N8iVAttribution?.getPayload?.() || {});
     setPending(true);
-    setStatus('Sending your Fit Review request...', '');
+    setStatus('Sending your request...', '');
 
     try {
       const response = await fetch(form.action, {
@@ -326,25 +309,26 @@
           return;
         }
         // Anything else (the human check, the origin check, the rate limit) may
-        // not clear on a retry: show the reason and keep the email route open.
+        // not clear immediately: show the reason and a form-only next step.
         if (response.status >= 400 && response.status < 500 && result.error) {
-          showFallback(buildFallbackMailto(data), result.error);
+          showRetry(result.error, response.status === 429 ? 'Wait a few minutes before submitting again.' : 'Reload this page to retry the human check, then submit again.');
           return;
         }
         throw new Error(result.error || 'The request could not be sent.');
       }
 
+      if (result.ok !== true) throw new Error('The response did not confirm delivery.');
       form.reset();
       clearDraft();
-      window.N8iVAttribution?.track?.('fit_review_requested', {
-        form: 'fit_review_request'
+      window.N8iVAttribution?.track?.('contact_request_sent', {
+        form: 'contact_request'
       });
-      setStatus('Your Fit Review request was sent. Expect a reply within 1 business day.', 'success');
+      setStatus('Your request was sent. Expect a reply within 1 business day.', 'success');
       showDone();
     } catch (error) {
       console.error(error);
-      // Same pre-filled email fallback, opened by the visitor instead of automatically.
-      showFallback(buildFallbackMailto(data));
+      // Keep the form and draft available until delivery is confirmed.
+      showRetry('We could not confirm your request was sent.', 'Check your connection and try submitting again. If this continues, return to this form later.');
     } finally {
       setPending(false);
       // Turnstile tokens are single-use; fetch a fresh one for the next submit.

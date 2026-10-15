@@ -84,7 +84,7 @@ section.request-screen::before {
   color: #F4F4F8;
 }
 .request-req { margin-left: 3px; color: #B9AAFF; }
-.request-field input {
+.request-field :is(input, textarea) {
   display: block;
   width: 100%;
   margin-top: 8px;
@@ -100,20 +100,20 @@ section.request-screen::before {
   caret-color: #B9AAFF;
   transition: background-size .35s var(--ease-out), border-color .2s;
 }
-.request-field input::placeholder { color: #7C7B93; opacity: 1; }
-.request-field input:hover { border-bottom-color: rgba(244,244,248,.7); }
+.request-field :is(input, textarea)::placeholder { color: #7C7B93; opacity: 1; }
+.request-field :is(input, textarea):hover { border-bottom-color: rgba(244,244,248,.7); }
 /* focus: the gradient underline draws across */
-.request-field input:focus,
-.request-field input:focus-visible {
+.request-field :is(input, textarea):focus,
+.request-field :is(input, textarea):focus-visible {
   outline: none;
   box-shadow: none;
   border-bottom-color: transparent;
   background-size: 100% 2px;
 }
-.request-field input:user-invalid { border-bottom-color: #FF9C94; }
-.request-field input:-webkit-autofill,
-.request-field input:-webkit-autofill:hover,
-.request-field input:-webkit-autofill:focus {
+.request-field :is(input, textarea):user-invalid { border-bottom-color: #FF9C94; }
+.request-field :is(input, textarea):-webkit-autofill,
+.request-field :is(input, textarea):-webkit-autofill:hover,
+.request-field :is(input, textarea):-webkit-autofill:focus {
   -webkit-text-fill-color: #F4F4F8;
   -webkit-box-shadow: 0 0 0 1000px var(--band) inset;
   transition: background-color 9999s ease-out 0s;
@@ -243,11 +243,13 @@ section.request-screen::before {
 }
 .request-screen .contact-context { --anchor-bg: var(--band-2); }
 @media (prefers-reduced-motion: reduce) {
-  .request-field input { transition: none; }
+  .request-field :is(input, textarea) { transition: none; }
 }
-html.motion-off .request-field input { transition: none; }
+html.motion-off .request-field :is(input, textarea) { transition: none; }
 /* Forced colors drop the gradient underline: show focus as a system-colour line */
 @media (forced-colors: active) {
-  .request-field input:focus,
-  .request-field input:focus-visible { border-bottom: 2px solid Highlight; }
+  .request-field :is(input, textarea):focus,
+  .request-field :is(input, textarea):focus-visible { border-bottom: 2px solid Highlight; }
 }
+
+.request-field textarea { resize: vertical; min-height: 120px; }
