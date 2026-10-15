@@ -142,7 +142,7 @@ function isValidEmail(email) {
 }
 
 async function sendAuditRequestEmail(submission) {
-  const subject = `New ARIE audit request: ${submission.company}`;
+  const subject = `New N8iV Fit Review request: ${submission.company}`;
   const text = buildTextEmail(submission);
   const html = buildHtmlEmail(submission);
 
@@ -219,7 +219,7 @@ function fullName(submission) {
 
 function buildTextEmail(submission) {
   return [
-    'New N8iV Promotions Revenue Intelligence Audit Request',
+    'New N8iV Promotions Fit Review Request',
     '',
     `Name: ${fullName(submission)}`,
     `Email: ${submission.email}`,
@@ -266,7 +266,7 @@ function buildHtmlEmail(submission) {
 
   return `
     <div style="font-family:Inter,Arial,sans-serif;color:#111827;line-height:1.5;">
-      <h1 style="font-size:22px;margin:0 0 16px;">New Revenue Intelligence Audit Request</h1>
+      <h1 style="font-size:22px;margin:0 0 16px;">New Fit Review Request</h1>
       <table style="border-collapse:collapse;width:100%;max-width:680px;border:1px solid #e5e7eb;">${rowsHtml}</table>
       <h2 style="font-size:16px;margin:24px 0 8px;">Biggest Marketing Visibility Challenge</h2>
       <p style="white-space:pre-wrap;background:#f9fafb;border:1px solid #e5e7eb;padding:14px 16px;border-radius:8px;">${escapeHtml(submission.challenge || 'Not provided')}</p>
