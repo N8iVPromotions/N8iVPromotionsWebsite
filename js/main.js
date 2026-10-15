@@ -423,9 +423,9 @@
     const title = context.querySelector('strong');
     const note = context.querySelector('span');
     if (title) title.textContent = result ? `Your Revenue Self-Audit score: ${result.score}/100 (${result.band}).` : 'You came from the Revenue Self-Audit.';
-    if (note) note.textContent = 'Your details are filled in. Send this to get your written Fit Summary within 48 hours of your self-audit.';
+    if (note) note.textContent = 'Your score is context for the review, not a verified attribution result. Add or confirm your details to request a free Fit Review. Your written Fit Summary follows within 48 hours after the completed review.';
     context.hidden = false;
-    if (source) source.value = result ? `N8iV Revenue Self-Audit → Fit Summary (score ${result.score}/100)` : 'N8iV Revenue Self-Audit → Fit Summary';
+    if (source) source.value = result ? `N8iV Revenue Self-Audit → Fit Review (score ${result.score}/100)` : 'N8iV Revenue Self-Audit → Fit Review';
     return;
   }
   if (params.get('pilot') !== 'b2b-attribution') return;

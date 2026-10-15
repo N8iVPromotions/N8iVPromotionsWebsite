@@ -31,7 +31,6 @@
   if (!form) return;
   const intro = document.querySelector('[data-audit-intro]');
   const panelsWrap = form.querySelector('[data-question-panels]');
-  const leadPanel = form.querySelector('[data-lead-panel]');
   const resultPanel = form.querySelector('[data-result-panel]');
   const error = form.querySelector('[data-audit-error]');
   let step = 0;
@@ -41,18 +40,18 @@
 
   function showStep(nextStep) {
     step = nextStep;
-    [...questionPanels, leadPanel, resultPanel].forEach(panel => panel.classList.remove('active'));
-    const panel = step < sections.length ? questionPanels[step] : step === sections.length ? leadPanel : resultPanel;
+    [...questionPanels, resultPanel].forEach(panel => panel.classList.remove('active'));
+    const panel = step < sections.length ? questionPanels[step] : resultPanel;
     panel.classList.add('active');
-    const progress = Math.min(100, Math.round(((step + 1) / (sections.length + 1)) * 100));
-    form.querySelector('[data-progress-label]').textContent = step < sections.length ? `Section ${step + 1} of ${sections.length}` : step === sections.length ? 'Your details' : 'Complete';
+    const progress = Math.min(100, Math.round(((step + 1) / sections.length) * 100));
+    form.querySelector('[data-progress-label]').textContent = step < sections.length ? `Section ${step + 1} of ${sections.length}` : 'Complete';
     form.querySelector('[data-progress-percent]').textContent = `${progress}%`;
     form.querySelector('[data-progress-bar]').style.transform = `scaleX(${progress / 100})`;
     window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }
   // Keep answers in this tab so a refresh or back swipe doesn't wipe them.
   const DRAFT_KEY = 'n8iv_self_audit_draft';
-  const DRAFT_SKIP = new Set(['website', 'cf-turnstile-response']);
+  const DRAFT_SKIP = new Set(['website', 'cf-turnstile-response', 'followUpConsent']);
   function saveDraft() {
     try {
       const draft = {};
@@ -62,14 +61,12 @@
       sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
     } catch (e) {}
   }
-  function clearDraft() {
-    try { sessionStorage.removeItem(DRAFT_KEY); } catch (e) {}
-  }
   let resumeStep = 0;
   try {
     const draft = JSON.parse(sessionStorage.getItem(DRAFT_KEY) || 'null');
     if (draft) {
       Object.entries(draft).forEach(([name, value]) => {
+        if (DRAFT_SKIP.has(name)) return;
         if (/^q\d+$/.test(name)) {
           const radio = form.querySelector(`input[name="${name}"][value="${value}"]`);
           if (radio) radio.checked = true;
@@ -87,7 +84,7 @@
   form.addEventListener('change', saveDraft);
   form.addEventListener('input', saveDraft);
 
-  function startAudit() { intro.hidden = true; form.hidden = false; showStep(resumeStep); }
+  function startAudit() { intro.hidden = true; form.hidden = false; if (resumeStep === sections.length) completeAudit(); else showStep(resumeStep); }
   document.querySelector('[data-start-audit]').addEventListener('click', startAudit);
   // Landing pages link here with ?start=1 after the visitor has already
   // answered a question, so skip the intro and go straight to the form.
@@ -98,35 +95,45 @@
       const missing = [...panel.querySelectorAll('fieldset')].find(fieldset => !fieldset.querySelector('input:checked'));
       panel.querySelector('[data-step-error]').textContent = missing ? 'Choose one answer for each statement to continue.' : '';
       if (missing) { missing.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
-      showStep(step + 1);
+      if (step === sections.length - 1) completeAudit(); else showStep(step + 1);
     }
     if (event.target.closest('[data-back]')) showStep(Math.max(0, step - 1));
   });
+  function readAnswers() {
+    const data = new FormData(form);
+    return Array.from({ length: 15 }, (_, i) => data.has(`q${i}`) ? Number(data.get(`q${i}`)) : NaN);
+  }
+  function completeAudit() {
+    const result = window.N8iVAuditScore(readAnswers());
+    renderResult(result);
+    saveFitSummaryHandoff({}, result);
+    window.N8iVAttribution?.track?.('self_audit_completed', { score_band: result.band });
+    showStep(sections.length);
+  }
   form.addEventListener('submit', async event => {
     event.preventDefault(); error.textContent = '';
-    if (!form.reportValidity()) { error.textContent = 'Please complete your name, work email, and company.'; return; }
+    if (step < sections.length) return;
+    if (!form.reportValidity()) { error.textContent = 'To email a copy, complete your name, work email, and company. Your score is available above.'; return; }
     const submit = form.querySelector('button[type="submit"]');
-    submit.disabled = true; submit.textContent = 'Calculating...';
+    submit.disabled = true; submit.textContent = 'Sending...';
     const data = Object.fromEntries(new FormData(form).entries());
-    data.answers = Array.from({length:15},(_,i) => Number(data[`q${i}`]));
+    data.answers = readAnswers();
     data.followUpConsent = data.followUpConsent === 'yes';
+    const localResult = window.N8iVAuditScore(data.answers);
+    saveFitSummaryHandoff(data, localResult);
     Object.assign(data, window.N8iVAttribution?.getPayload?.() || {});
     try {
       const response = await fetch(form.action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
       const result = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(result.error || 'We could not submit your audit.');
-      renderResult(result, data.followUpConsent);
-      clearDraft();
-      saveFitSummaryHandoff(data, result);
-      window.N8iVAttribution?.track?.('self_audit_completed', {
-        score_band: result.band,
-        follow_up_consent: data.followUpConsent ? 'yes' : 'no'
-      });
-      // Meta Pixel conversion for ad optimization (pages without the pixel skip this).
-      window.fbq?.('track', 'Lead', { content_name: 'Revenue Self-Audit', score_band: result.band });
-      showStep(sections.length + 1);
-    } catch (err) { error.textContent = `${err.message} Please try again or email zajen@n8ivpromotions.com.`; }
-    finally { submit.disabled = false; submit.textContent = 'Show my result'; }
+      if (!response.ok || result.ok !== true || typeof result.emailDelivered !== 'boolean') throw new Error(result.error || 'We could not confirm your email request.');
+      const delivery = result.emailDelivered ? 'Your email copy was accepted by our email provider; inbox delivery is not confirmed.' : 'Your email copy could not be sent. Your score remains available above.';
+      resultPanel.querySelector('[data-followup-message]').textContent = `${delivery} ${data.followUpConsent ? 'You opted in to follow-up about this audit.' : 'You did not opt in to follow-up about this audit.'} A Fit Review requires a separate request.`;
+      window.N8iVAttribution?.track?.('self_audit_email_requested', { score_band: localResult.band, follow_up_consent: data.followUpConsent ? 'yes' : 'no' });
+    } catch (err) { error.textContent = `${err.message} Your score is still available above. You can retry the email copy or request a free Fit Review separately.`; }
+    finally {
+      submit.disabled = false; submit.textContent = 'Email my score';
+      window.turnstile?.reset?.();
+    }
   });
   // Carry the visitor's details and score to the Fit Summary request in one
   // click. Stored in this tab only (sessionStorage), never in the URL.
@@ -144,12 +151,11 @@
       sessionStorage.setItem('n8iv_self_audit_result', JSON.stringify({ score: result.score, band: result.band }));
     } catch (e) {}
   }
-  function renderResult(result, consent) {
+  function renderResult(result) {
     resultPanel.querySelector('[data-score]').textContent = result.score;
     resultPanel.querySelector('[data-score-band]').textContent = result.band;
     resultPanel.querySelector('[data-score-copy]').textContent = result.summary;
     resultPanel.querySelector('[data-category-results]').innerHTML = result.categories.map(item => `<div class="result-row"><span>${item.name}</span><strong>${item.score}%</strong></div>`).join('');
-    const delivery = result.emailDelivered ? 'A copy of your score has been emailed to you.' : 'Your result is available here, but the email copy could not be delivered.';
-    resultPanel.querySelector('[data-followup-message]').textContent = consent ? `You agreed to follow-up. N8iV may contact you with a practical observation about your result. ${delivery}` : `You did not opt in to follow-up, so N8iV will not contact you about this audit. ${delivery}`;
+    resultPanel.querySelector('[data-followup-message]').textContent = 'Your score is based on your answers, not a verified review of your systems. No email or follow-up is required. Request the free Fit Review below when you are ready.';
   }
 })();
