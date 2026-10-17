@@ -12,10 +12,7 @@ section.request-screen {
   padding: clamp(48px, 7vw, 96px) 0 clamp(48px, 6vw, 80px);
   overflow: clip;
   border-radius: var(--sheet-radius);
-  background:
-    radial-gradient(50% 60% at 50% 0%, rgba(95,66,251,.24), transparent 70%),
-    radial-gradient(36% 50% at 100% 100%, rgba(187,41,166,.10), transparent 70%),
-    var(--band) !important;
+  background: var(--band) !important;
   box-shadow: 0 30px 70px -40px rgba(14,13,28,.55);
   color: #F4F4F8;
   --anchor-bg: var(--band-2);
@@ -26,13 +23,11 @@ section.request-screen::before {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-image:
-    linear-gradient(rgba(244,244,248,.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(244,244,248,.055) 1px, transparent 1px);
+  background-image: none;
   background-size: 56px 56px;
   background-position: center -1px;
-  -webkit-mask-image: radial-gradient(90% 75% at 50% 0%, #000 30%, transparent 85%);
-          mask-image: radial-gradient(90% 75% at 50% 0%, #000 30%, transparent 85%);
+
+
   pointer-events: none;
 }
 .request-inner { width: min(780px, calc(100% - 2 * var(--gutter))); margin: 0 auto; }
@@ -93,7 +88,7 @@ section.request-screen::before {
   border-bottom: 1px solid rgba(244,244,248,.45); /* 4.2:1 on the band: a visible control boundary */
   border-radius: 0;
   background: transparent no-repeat left bottom / 0 2px;
-  background-image: var(--ai-gradient);
+  background-image: none;
   color: #F4F4F8;
   font: 400 clamp(22px, 2.5vw, 30px)/1.25 var(--ff-sub);
   letter-spacing: -0.01em;
@@ -102,12 +97,12 @@ section.request-screen::before {
 }
 .request-field :is(input, textarea)::placeholder { color: #7C7B93; opacity: 1; }
 .request-field :is(input, textarea):hover { border-bottom-color: rgba(244,244,248,.7); }
-/* focus: the gradient underline draws across */
+/* Focus uses a solid Signal Deep underline. */
 .request-field :is(input, textarea):focus,
 .request-field :is(input, textarea):focus-visible {
   outline: none;
   box-shadow: none;
-  border-bottom-color: transparent;
+  border-bottom-color: #5F42FB;
   background-size: 100% 2px;
 }
 .request-field :is(input, textarea):user-invalid { border-bottom-color: #FF9C94; }
@@ -246,7 +241,7 @@ section.request-screen::before {
   .request-field :is(input, textarea) { transition: none; }
 }
 html.motion-off .request-field :is(input, textarea) { transition: none; }
-/* Forced colors drop the gradient underline: show focus as a system-colour line */
+/* Forced colors use a system-colour focus line. */
 @media (forced-colors: active) {
   .request-field :is(input, textarea):focus,
   .request-field :is(input, textarea):focus-visible { border-bottom: 2px solid Highlight; }

@@ -1,14 +1,4 @@
-/* ================================================================
-   N8iV Promotions — Executive SaaS layer (design system v2)
-   Loaded last on every page. Keeps the brand (mark, wordmark, Action
-   and Signal Purple, Helvetica Now Display over Inter, pill buttons,
-   all copy) and restyles it for clarity, focus and low cognitive load.
-   The multi-tone AI gradient is reserved for primary actions,
-   interactive state and AI anchors. See DESIGN.md.
-   Older layers still load underneath, so some rules here repeat their
-   selectors (and their !important) to win the cascade.
-   ================================================================ */
-
+/* N8iV brand v1.0: flat surfaces and solid Signal Deep actions. */
 :root {
   /* Brand primitives, retuned: neutrals lean toward the brand violet */
   --black:      #191920;
@@ -34,27 +24,15 @@
   --error-bg: #FEF1F1;
   --error-line: #F5C2C0;
 
-  /* AI gradient: every stop keeps white text at WCAG AA (5.1 to 6.3:1) */
-  --ai-1: #2867E4;
-  --ai-2: #5F42FB;
-  --ai-3: #862BE2;
-  --ai-4: #BB29A6;
-  --ai-gradient: linear-gradient(115deg, var(--ai-1) 0%, var(--ai-2) 36%, var(--ai-3) 68%, var(--ai-4) 100%);
-  --ai-gradient-loop: linear-gradient(115deg, var(--ai-1), var(--ai-2), var(--ai-3), var(--ai-4), var(--ai-3), var(--ai-2), var(--ai-1));
-  --ai-tint: linear-gradient(115deg, rgba(40,103,228,.07), rgba(95,66,251,.07) 40%, rgba(187,41,166,.07));
-  --ai-glow: 0 6px 20px -6px rgba(95,66,251,.55), 0 2px 8px -2px rgba(40,103,228,.35), 0 10px 28px -12px rgba(187,41,166,.45);
-  --ai-glow-strong: 0 10px 30px -6px rgba(95,66,251,.65), 0 4px 14px -2px rgba(40,103,228,.45), 0 14px 38px -10px rgba(187,41,166,.55);
-  --ai-glow-soft: 0 1px 2px rgba(25,25,32,.04), 0 18px 44px -24px rgba(95,66,251,.45), 0 8px 24px -18px rgba(40,103,228,.35);
-
-  --grad-primary: var(--ai-gradient);
-  --grad-primary-soft: var(--ai-tint);
+  --grad-primary: #5F42FB;
+  --grad-primary-soft: var(--surface-tint);
   --grad-field: var(--white);
 
   /* Elevation: quiet, ink-tinted */
   --shadow-sm: 0 1px 2px rgba(25,25,32,.04), 0 1px 1px rgba(25,25,32,.02);
   --shadow-md: 0 1px 2px rgba(25,25,32,.04), 0 10px 28px -14px rgba(25,25,32,.16);
   --shadow-lg: 0 2px 6px rgba(25,25,32,.04), 0 28px 56px -28px rgba(25,25,32,.22);
-  --shadow-blue: var(--ai-glow);
+  --shadow-blue: none;
 
   --ease-out: cubic-bezier(.22, 1, .36, 1);
 }
@@ -72,13 +50,10 @@ summary:focus-visible,
 [tabindex]:focus-visible {
   outline: 2px solid var(--violet);
   outline-offset: 3px;
-  box-shadow: 0 0 0 6px rgba(95,66,251,.14);
+  box-shadow: none;
 }
 
-@keyframes ai-drift {
-  from { background-position: 0% 50%; }
-  to { background-position: 100% 50%; }
-}
+
 
 /* ── Type: confident, never viewport-filling ─────────────────── */
 .display-xl { font-size: clamp(40px, 5vw, 64px); letter-spacing: -0.035em; line-height: 1.04; }
@@ -112,7 +87,7 @@ summary:focus-visible,
 
 .lead, .hero-sub, .pilot-lead, .trust-lead, .audit-intro { color: var(--ink-2); }
 
-/* Headline accents stay one solid brand color (never gradient text) */
+
 .editorial .ed-accent,
 .display-xl em, .display-lg em, .display-md em, .display-sm em { color: var(--violet) !important; }
 
@@ -281,18 +256,14 @@ section,
 .footer { background: var(--white) !important; }
 .footer { border-top: 1px solid var(--light-grey); }
 
-/* Hero fields: one soft ambient glow of the AI gradient, top right */
+
 .hero,
 .ed-hero,
 .trust-hero,
 .pilot-hero,
 .article-hero,
 body.lp .lp-hero {
-  background:
-    radial-gradient(42% 60% at 92% 0%, rgba(95,66,251,.10), transparent 70%),
-    radial-gradient(30% 45% at 70% 12%, rgba(40,103,228,.07), transparent 70%),
-    radial-gradient(26% 40% at 100% 38%, rgba(187,41,166,.06), transparent 70%),
-    var(--paper) !important;
+  background: var(--paper) !important;
 }
 .pilot-hero { background-color: var(--paper) !important; }
 
@@ -320,7 +291,7 @@ body.lp .lp-hero {
 .nav.light .nav-links a.active {
   color: var(--black);
   font-weight: 500;
-  background-image: var(--ai-gradient);
+  background-image: none;
   background-repeat: no-repeat;
   background-size: calc(100% - 28px) 2px;
   background-position: 50% calc(100% - 2px);
@@ -335,7 +306,7 @@ body.lp .lp-hero {
 }
 .nav.ed-nav-dark .nav-links a.active {
   text-decoration: none;
-  background-image: var(--ai-gradient);
+  background-image: none;
 }
 .nav.ed-nav-dark .nav-links a:hover { background-color: rgba(244,244,248,.08) !important; }
 
@@ -351,7 +322,7 @@ body.lp .lp-hero {
   transition: box-shadow .25s var(--ease-out), transform .25s var(--ease-out), background-color .2s, color .2s, border-color .2s;
 }
 
-/* Primary: the AI gradient, drifting slowly, with its own light */
+
 .btn-primary,
 .btn-dark,
 .btn-green,
@@ -366,12 +337,12 @@ body.lp .lp-hero {
 body.lp .btn-primary {
   color: #fff;
   border: 1px solid transparent;
-  background-color: var(--ai-2);
-  background-image: var(--ai-gradient-loop);
+  background-color: #5F42FB;
+  background-image: none;
   background-size: 300% 100%;
   background-position: 0% 50%;
-  box-shadow: var(--ai-glow);
-  animation: ai-drift 14s ease-in-out infinite alternate;
+  box-shadow: none;
+  animation: none;
 }
 .btn-primary:hover,
 .btn-dark:hover,
@@ -387,11 +358,11 @@ body.lp .btn-primary {
 body.lp .btn-primary:hover {
   color: #fff;
   border-color: transparent;
-  background-color: var(--ai-2);
-  background-image: var(--ai-gradient-loop);
+  background-color: #5F42FB;
+  background-image: none;
   background-size: 300% 100%;
   background-position: 0% 50%;
-  box-shadow: var(--ai-glow-strong);
+  box-shadow: none;
   transform: translateY(-1px);
 }
 .btn-primary:active,
@@ -405,14 +376,14 @@ body.lp .btn-primary:hover {
 .cta-section .btn-primary:active,
 .cta-section .btn-dark:active,
 .cta-section .btn-green:active,
-body.lp .btn-primary:active { transform: translateY(0); box-shadow: var(--ai-glow); }
+body.lp .btn-primary:active { transform: translateY(0); box-shadow: none; }
 .btn-primary:focus-visible,
 .btn-green:focus-visible,
 .pilot-btn:focus-visible,
 .audit-btn:focus-visible {
   outline: 2px solid var(--violet);
   outline-offset: 3px;
-  box-shadow: var(--ai-glow-strong);
+  box-shadow: none;
 }
 .btn:disabled,
 .btn[aria-busy="true"],
@@ -431,7 +402,7 @@ body.lp .btn-primary:active { transform: translateY(0); box-shadow: var(--ai-glo
 .btn[aria-busy="true"],
 .btn[aria-busy="true"]:hover { opacity: 1 !important; }
 
-/* Secondary: a quiet white pill; hover draws the gradient ring */
+
 .btn-secondary,
 .btn-ghost,
 .btn-ghost-dark,
@@ -441,8 +412,8 @@ body.lp .btn-primary:active { transform: translateY(0); box-shadow: var(--ai-glo
 .founder-proof .btn-primary,
 .footer-brand .btn {
   color: var(--black);
-  background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
-  border: 1px solid transparent;
+  background: var(--white);
+  border: 1px solid var(--hairline-strong);
   box-shadow: var(--shadow-sm);
   text-decoration: none;
   padding-left: 22px;
@@ -459,9 +430,9 @@ body.lp .btn-primary:active { transform: translateY(0); box-shadow: var(--ai-glo
 .founder-proof .btn-primary:hover,
 .footer-brand .btn:hover {
   color: var(--black);
-  background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
-  border-color: transparent;
-  box-shadow: var(--ai-glow-soft);
+  background: var(--white);
+  border-color: var(--hairline-strong);
+  box-shadow: none;
   text-decoration: none;
   transform: translateY(-1px);
 }
@@ -554,7 +525,7 @@ a.case-card:hover,
 }
 .method-card:hover { transform: none !important; box-shadow: var(--shadow-sm); }
 
-/* ── AI anchors: a 1px gradient ring and a soft glow ─────────── */
+
 .ed-output,
 .receipt-sheet,
 .pilot-ticket,
@@ -568,10 +539,8 @@ a.case-card:hover,
 .audit-panel[data-result-panel],
 .featured-visual {
   border: 1px solid transparent !important;
-  background:
-    linear-gradient(var(--anchor-bg, var(--white)), var(--anchor-bg, var(--white))) padding-box,
-    var(--ai-gradient) border-box !important;
-  box-shadow: var(--ai-glow-soft) !important;
+  background: var(--anchor-bg, var(--white)) !important; border-color: var(--hairline-strong) !important;
+  box-shadow: none;
 }
 .receipt-sheet { border-radius: var(--r-lg) !important; }
 .receipt-sheet::before {
@@ -583,7 +552,7 @@ a.case-card:hover,
   text-transform: none !important;
 }
 
-/* The evidence-desk output: a dark instrument with a glowing ring */
+
 .ed-output {
   --anchor-bg: var(--band);
   color: #F4F4F8;
@@ -605,8 +574,8 @@ a.case-card:hover,
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--ai-gradient);
-  box-shadow: 0 0 0 3px rgba(95,66,251,.16), 0 0 10px rgba(95,66,251,.55);
+  background: #5F42FB;
+  box-shadow: none;
 }
 .board-header em {
   display: inline-flex;
@@ -621,15 +590,15 @@ a.case-card:hover,
   border-radius: var(--r-md) !important;
   background: var(--band) !important;
   color: #F4F4F8 !important;
-  box-shadow: 0 0 0 1px rgba(134,43,226,.45), 0 12px 32px -14px rgba(95,66,251,.65) !important;
+  box-shadow: none;
 }
 .receipt-decision-label { color: var(--stone) !important; font-size: 12px !important; }
 
-/* The finance card resolves the conflicting numbers: gradient bar */
-.problem-card::before { background: transparent !important; }
-.problem-card.finance::before { background: var(--ai-gradient) !important; height: 3px; }
 
-/* ── Capability tabs: neutral, with a gradient underline when active */
+.problem-card::before { background: transparent !important; }
+.problem-card.finance::before { background: #5F42FB !important; height: 3px; }
+
+
 .capability-tabs,
 .editorial .capability-tabs {
   border-radius: var(--r-pill) !important;
@@ -656,11 +625,9 @@ a.case-card:hover,
 .editorial .capability-tab.active,
 body.editorial .capability-tab.active {
   color: var(--black) !important;
-  background:
-    linear-gradient(var(--white), var(--white)) padding-box,
-    var(--ai-gradient) border-box !important;
+  background: var(--white) !important; border-color: var(--hairline-strong) !important;
   border: 1px solid transparent !important;
-  box-shadow: var(--ai-glow-soft) !important;
+  box-shadow: none;
 }
 
 /* ── Forms ───────────────────────────────────────────────────── */
@@ -682,7 +649,7 @@ body.editorial .capability-tab.active {
 .newsletter-input:focus {
   outline: none !important;
   border-color: var(--violet) !important;
-  box-shadow: 0 0 0 4px rgba(95,66,251,.14) !important;
+  box-shadow: none;
 }
 .form-field input::placeholder,
 .form-field textarea::placeholder,
@@ -753,11 +720,7 @@ body.editorial .ed-dark {
 }
 .ed-cinema {
   min-height: 0 !important;
-  background:
-    radial-gradient(48% 70% at 88% 8%, rgba(95,66,251,.34), transparent 70%),
-    radial-gradient(34% 50% at 62% 18%, rgba(40,103,228,.20), transparent 70%),
-    radial-gradient(30% 50% at 100% 60%, rgba(187,41,166,.16), transparent 70%),
-    var(--band) !important;
+  background: var(--band) !important;
 }
 .ed-stagger { padding-top: 0; }
 .editorial .ed-cinema-section .chapter-meta { margin-bottom: clamp(24px, 3vw, 32px); }
@@ -777,10 +740,7 @@ body.editorial .ed-dark .problem-card-logo .logo-dot.brand-logo { background: #F
 
 /* Landing page dark band */
 body.lp .lp-dark {
-  background:
-    radial-gradient(50% 70% at 90% 0%, rgba(95,66,251,.30), transparent 70%),
-    radial-gradient(36% 60% at 0% 100%, rgba(40,103,228,.18), transparent 70%),
-    var(--band) !important;
+  background: var(--band) !important;
 }
 body.lp .lp-dark .lp-get { --anchor-bg: var(--band-2); }
 
@@ -792,8 +752,8 @@ body.lp .lp-dark .lp-get { --anchor-bg: var(--band-2); }
 .audit-progress-bar {
   width: 100% !important;
   border-radius: var(--r-pill);
-  background: var(--ai-gradient) !important;
-  box-shadow: 0 0 12px rgba(95,66,251,.5);
+  background: #5F42FB !important;
+  box-shadow: none;
 }
 .audit-option label {
   border-radius: 12px !important;
@@ -806,10 +766,8 @@ body.lp .lp-dark .lp-get { --anchor-bg: var(--band-2); }
 .audit-option input:checked + label {
   color: var(--black) !important;
   border-color: transparent !important;
-  background:
-    linear-gradient(var(--surface-tint), var(--surface-tint)) padding-box,
-    var(--ai-gradient) border-box !important;
-  box-shadow: var(--ai-glow-soft) !important;
+  background: var(--surface-tint) !important; border-color: var(--hairline-strong) !important;
+  box-shadow: none;
   font-weight: 600;
 }
 .lp-q-options button {
@@ -821,10 +779,8 @@ body.lp .lp-dark .lp-get { --anchor-bg: var(--band-2); }
 .lp-q-options button[aria-pressed="true"] {
   color: var(--black) !important;
   border-color: transparent !important;
-  background:
-    linear-gradient(var(--surface-tint), var(--surface-tint)) padding-box,
-    var(--ai-gradient) border-box !important;
-  box-shadow: var(--ai-glow-soft) !important;
+  background: var(--surface-tint) !important; border-color: var(--hairline-strong) !important;
+  box-shadow: none;
 }
 
 /* Self-audit result: the scored output reads as an AI anchor */
@@ -895,8 +851,8 @@ body.lp .lp-dark .lp-get { --anchor-bg: var(--band-2); }
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--ai-gradient);
-  box-shadow: 0 0 0 3px rgba(95,66,251,.16), 0 0 10px rgba(95,66,251,.55);
+  background: #5F42FB;
+  box-shadow: none;
 }
 
 .hero-reassurance { font-size: 13px; color: var(--dark-grey); }
@@ -935,26 +891,25 @@ body.lp .lp-dark .lp-get { --anchor-bg: var(--band-2); }
   border: 0 !important;
 }
 
-/* One gradient fill per view: the header CTA is the secondary pill,
-   the in-page CTA carries the gradient */
+
 .nav-right .btn-primary,
 .nav-right .btn-primary:hover {
   color: var(--black);
-  background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
-  border: 1px solid transparent;
+  background: var(--white);
+  border: 1px solid var(--hairline-strong);
   box-shadow: var(--shadow-sm);
   animation: none;
 }
 .nav-right .btn-primary:hover {
-  background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
-  box-shadow: var(--ai-glow-soft);
+  background: var(--white); border-color: var(--hairline-strong);
+  box-shadow: none;
 }
 @media (max-width: 640px) {
   /* On /start the sticky bar is the one primary action on mobile */
   body.lp .lp-cta-row .btn-primary,
   body.lp .lp-get .btn-primary {
     color: var(--black);
-    background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
+    background: var(--white); border-color: var(--hairline-strong);
     border: 1px solid transparent;
     box-shadow: var(--shadow-sm);
     animation: none;
@@ -982,7 +937,7 @@ body.editorial .ed-dark .problem-card:hover { background: transparent !important
 }
 .comparison .comparison-col:not(.highlighted):hover { box-shadow: var(--shadow-sm) !important; }
 
-/* Capability panels: let the focus ring and the board glow show */
+
 .capability-panels,
 .editorial .capability-panels { overflow: visible !important; }
 .capability-panel:focus-visible { border-radius: var(--r-lg); outline-offset: 4px; }
@@ -1063,20 +1018,18 @@ main.trust-shell[style*="text-align:center"] > p:has(> .btn) { display: flex; fl
 #mobile-menu .mobile-nav-link.active {
   align-self: flex-start;
   color: var(--black);
-  background-image: var(--ai-gradient);
+  background-image: none;
   background-repeat: no-repeat;
   background-size: 100% 2px;
   background-position: 0 calc(100% - 6px);
 }
 .mobile-conversion-bar strong { font-size: 13px; line-height: 1.25; }
 
-/* Mobile: the sticky bar is the one gradient action; repeated in-page
-   self-audit CTAs become the secondary pill (not on editorial pages,
-   which hide the bar) */
+
 @media (max-width: 768px) {
   body:not(.editorial):has(.mobile-conversion-bar) main a[href="/revenue-self-audit"]:is(.btn-primary, .btn-green):not(.mobile-conversion-bar *) {
     color: var(--black);
-    background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
+    background: var(--white); border-color: var(--hairline-strong);
     border: 1px solid transparent;
     box-shadow: var(--shadow-sm);
     animation: none;
@@ -1107,11 +1060,8 @@ main.trust-shell[style*="text-align:center"] > p:has(> .btn) { display: flex; fl
 .audit-option label:hover { border-color: var(--stone) !important; }
 .audit-option input:checked + label {
   color: var(--violet) !important;
-  background:
-    linear-gradient(rgba(95,66,251,.10), rgba(95,66,251,.10)) padding-box,
-    linear-gradient(var(--white), var(--white)) padding-box,
-    var(--ai-gradient) border-box !important;
-  box-shadow: inset 0 0 0 1px rgba(95,66,251,.55), var(--ai-glow-soft) !important;
+  background: var(--white) !important; border-color: var(--hairline-strong) !important;
+  box-shadow: none;
 }
 .lead-field label { font-size: 14px !important; font-weight: 600 !important; color: var(--black) !important; }
 .audit-question { padding: 24px 0 28px; }
@@ -1154,11 +1104,11 @@ main.trust-shell[style*="text-align:center"] > p:has(> .btn) { display: flex; fl
   .pilot-grid > aside { width: 100% !important; max-width: 100% !important; }
 }
 
-/* Article aside CTA is secondary: the closing CTA carries the gradient */
+
 .article-aside .btn-primary {
   color: var(--black);
-  background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
-  border: 1px solid transparent;
+  background: var(--white);
+  border: 1px solid var(--hairline-strong);
   box-shadow: var(--shadow-sm);
   animation: none;
 }
@@ -1166,13 +1116,13 @@ main.trust-shell[style*="text-align:center"] > p:has(> .btn) { display: flex; fl
 /* Hover for every CTA demoted to the secondary pill */
 .article-aside .btn-primary:hover {
   color: var(--black);
-  background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
-  box-shadow: var(--ai-glow-soft);
+  background: var(--white); border-color: var(--hairline-strong);
+  box-shadow: none;
 }
 @media (max-width: 768px) {
   body:not(.editorial):has(.mobile-conversion-bar) .newsletter-form .btn-primary {
     color: var(--black);
-    background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(var(--hairline-strong), var(--hairline-strong)) border-box;
+    background: var(--white); border-color: var(--hairline-strong);
     border: 1px solid transparent;
     box-shadow: var(--shadow-sm);
     animation: none;
@@ -1180,29 +1130,20 @@ main.trust-shell[style*="text-align:center"] > p:has(> .btn) { display: flex; fl
   body:not(.editorial):has(.mobile-conversion-bar) main a[href="/revenue-self-audit"]:is(.btn-primary, .btn-green):not(.mobile-conversion-bar *):hover,
   body:not(.editorial):has(.mobile-conversion-bar) .newsletter-form .btn-primary:hover {
     color: var(--black);
-    background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
-    box-shadow: var(--ai-glow-soft);
+    background: var(--white); border-color: var(--hairline-strong);
+    box-shadow: none;
   }
 }
 @media (max-width: 640px) {
   body.lp .lp-cta-row .btn-primary:hover,
   body.lp .lp-get .btn-primary:hover {
     color: var(--black);
-    background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
-    box-shadow: var(--ai-glow-soft);
+    background: var(--white); border-color: var(--hairline-strong);
+    box-shadow: none;
   }
 }
 
-/* ================================================================
-   DEPTH: THREE PLANES
-   Plane 0, ground: the page canvas. A fixed field of ambient AI light
-     and a faint dot grid that stays put while content scrolls over it.
-   Plane 1, surface: content sheets and cards. White, hairline edge,
-     a soft ink-tinted shadow (--elev-1).
-   Plane 2, float: what the visitor acts on or what the product
-     produces: the header pill, AI anchors, primary actions, sticky bars,
-     hovered link cards (--elev-2, plus the gradient glow on anchors).
-   ================================================================ */
+
 :root {
   --elev-1: 0 1px 2px rgba(25,25,32,.04), 0 2px 6px -2px rgba(25,25,32,.05), 0 14px 34px -20px rgba(25,25,32,.16);
   --elev-2: 0 1px 2px rgba(25,25,32,.05), 0 8px 18px -8px rgba(25,25,32,.12), 0 30px 64px -30px rgba(25,25,32,.30);
@@ -1211,7 +1152,7 @@ main.trust-shell[style*="text-align:center"] > p:has(> .btn) { display: flex; fl
   --shadow-sm: var(--elev-1);
   --shadow-md: var(--elev-2);
   --shadow-lg: var(--elev-2);
-  --ai-glow-soft: var(--elev-2), 0 18px 44px -24px rgba(95,66,251,.45), 0 8px 24px -18px rgba(40,103,228,.35);
+
 }
 
 /* Plane 0: the ground */
@@ -1225,16 +1166,13 @@ body::after {
   pointer-events: none;
 }
 body::before {
-  background:
-    radial-gradient(42% 52% at 92% -6%, rgba(95,66,251,.11), transparent 70%),
-    radial-gradient(30% 42% at 70% 6%, rgba(40,103,228,.07), transparent 70%),
-    radial-gradient(36% 46% at -4% 104%, rgba(187,41,166,.06), transparent 70%);
+  background: none;
 }
 body::after {
-  background-image: radial-gradient(rgba(25,25,32,.07) 1px, transparent 1.3px);
+  background-image: none;
   background-size: 24px 24px;
-  -webkit-mask-image: radial-gradient(120% 70% at 50% 0%, #000 0%, transparent 72%);
-          mask-image: radial-gradient(120% 70% at 50% 0%, #000 0%, transparent 72%);
+
+
 }
 
 /* Sections stop painting their own field, so the ground shows through */
@@ -1398,7 +1336,7 @@ a.case-card:hover,
 .nav-right .btn-primary:hover {
   background: #2B2B36;
   border-color: #2B2B36;
-  box-shadow: var(--ai-glow);
+  box-shadow: none;
 }
 .nav-right .btn-primary::after {
   content: "";
@@ -1459,9 +1397,9 @@ a.case-card:hover,
   content: "";
   flex: 1 1 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--hairline-strong));
+  background: var(--hairline-strong);
 }
-.pill-rule::after { background: linear-gradient(90deg, var(--hairline-strong), transparent); }
+.pill-rule::after { background: var(--hairline-strong); }
 .pill-rule > * { flex: none; margin: 0 !important; }
 
 /* FAQ: rounded rows, each with a round plus button */
@@ -1502,21 +1440,18 @@ a.case-card:hover,
   border: 1px solid var(--hairline-strong);
   border-radius: 50%;
   color: var(--black) !important;
-  background:
-    linear-gradient(currentColor, currentColor) center / 12px 1.5px no-repeat,
-    linear-gradient(currentColor, currentColor) center / 1.5px 12px no-repeat;
+  background: none;
   transition: transform .25s var(--ease-out), border-color .2s, background-color .2s;
 }
 .faq-list summary:hover::after { border-color: var(--black); }
 .faq-list details[open] summary::after {
   transform: rotate(180deg);
-  background:
-    linear-gradient(currentColor, currentColor) center / 12px 1.5px no-repeat;
+  background: none;
 }
 .faq-list details p { margin: 0 56px 0 0 !important; padding-bottom: 20px; }
 .faq-list details p + p { margin-top: -8px !important; }
 .faq-list summary:focus-visible { outline-offset: 2px; }
-/* Forced colors drop gradient images: keep the drawn plus and minus */
+
 @media (forced-colors: active) {
   .faq-list summary::after,
   .faq-list details[open] summary::after {
@@ -1555,5 +1490,59 @@ html.motion-off .nav-right .btn-primary:hover::after { transform: none; }
 @media (max-width: 768px) {
   .capability-tabs,
   .editorial .capability-tabs { border-radius: 16px !important; }
-  .receipt-sheet { box-shadow: var(--ai-glow-soft) !important; }
+  .receipt-sheet { box-shadow: none; }
+}
+
+/* Brand v1.0: solid actions, quiet headings, and visible keyboard focus. */
+body :is(.btn-primary, .btn-dark, .btn-green, .pilot-btn, .audit-btn) {
+  background: #5F42FB !important;
+  color: #FFFFFF !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+body :is(.btn-primary, .btn-dark, .btn-green, .pilot-btn, .audit-btn):is(:hover, :active),
+body .nav-right .btn-primary {
+  background: var(--black) !important;
+  color: #FFFFFF !important;
+}
+body :is(.btn-primary, .btn-dark, .btn-green, .pilot-btn, .audit-btn):focus-visible {
+  outline: 2px solid #5F42FB !important;
+  outline-offset: 3px;
+  box-shadow: none !important;
+}
+.editorial .ed-accent,
+.display-xl em, .display-lg em, .display-md em, .display-sm em,
+.lp-accent { color: inherit !important; }
+.editorial .ed-display-hero .ed-accent { color: #7860FC !important; }
+.editorial .process-step-num, .process-step-num, .ed-step-num,
+.audit-step-num, .step-num, .lp-num, .method-num, .pilot-card-num {
+  color: var(--dark-grey) !important;
+}
+.nav-links a.active, .nav.light .nav-links a.active,
+.nav.ed-nav-dark .nav-links a.active, #mobile-menu .mobile-nav-link.active {
+  text-decoration: underline;
+  text-decoration-color: #5F42FB;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
+}
+.audit-option input:checked + label,
+.lp-q-options button:is(:hover, :focus-visible, [aria-pressed="true"]) {
+  background: #5F42FB !important;
+  border-color: #5F42FB !important;
+  color: #FFFFFF !important;
+  box-shadow: none !important;
+}
+.capability-tab.active, .editorial .capability-tab.active,
+body.editorial .capability-tab.active { border-bottom-color: #5F42FB !important; }
+.faq-list summary::after { content: "+" !important; display: grid; place-items: center; }
+.faq-list details[open] summary::after { content: "−" !important; }
+
+body.editorial .ed-dark :is(.btn-primary, .btn-dark, .btn-green, .pilot-btn, .audit-btn):is(:hover, :active) {
+  background: #191920 !important;
+}
+.form-field input:focus-visible, .form-field select:focus-visible,
+.form-field textarea:focus-visible, .lead-field input:focus-visible,
+.newsletter-input:focus-visible {
+  outline: 2px solid #5F42FB !important;
+  outline-offset: 3px;
 }

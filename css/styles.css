@@ -462,9 +462,9 @@ textarea:focus-visible {
   animation: pulse-green 2s ease-out infinite;
 }
 @keyframes pulse-green {
-  0%   { box-shadow: 0 0 0 0 rgba(95,66,251,0.45); }
-  70%  { box-shadow: 0 0 0 8px rgba(95,66,251,0); }
-  100% { box-shadow: 0 0 0 0 rgba(95,66,251,0); }
+  0%   { box-shadow: none; }
+  70%  { box-shadow: none; }
+  100% { box-shadow: none; }
 }
 
 /* ================================================================
@@ -1609,7 +1609,7 @@ textarea:focus-visible {
   color: var(--black);
   border: 1px solid var(--light-grey);
   padding: clamp(26px, 4vw, 46px);
-  box-shadow: 18px 18px 0 rgba(95,66,251,0.16);
+  box-shadow: none;
 }
 .receipt-sheet::before {
   content: 'SAMPLE';
@@ -1733,7 +1733,7 @@ body {
 .cta-section .btn-green {
   background: var(--blue);
   color: #fff;
-  box-shadow: 0 10px 30px rgba(95,66,251,0.18);
+  box-shadow: none;
 }
 .btn-primary:hover,
 .btn-dark:hover,
@@ -2234,7 +2234,7 @@ body {
 }
 .receipt-sheet {
   border-radius: var(--r-sm);
-  box-shadow: 22px 22px 0 rgba(95,66,251,.12), var(--shadow-lg);
+  box-shadow: none;
 }
 .receipt-decision { border-radius: var(--r-sm); }
 .cta-section {
@@ -2403,7 +2403,7 @@ form[aria-busy="true"] .form-field { opacity: .72; }
   .founder-proof-grid,
   .receipt-preview { grid-template-columns: 1fr; }
   .founder-proof-photo { max-width: 320px; }
-  .receipt-sheet { box-shadow: 10px 10px 0 rgba(95,66,251,0.16); }
+  .receipt-sheet { box-shadow: none; }
   .nav-links, .nav-badge, .nav-right { display: none; }
   .nav .nav-mobile-toggle { display: flex; }
 }
