@@ -33,3 +33,20 @@ Google: `gclid`, `gbraid`, `wbraid`; Meta: `fbclid`; Microsoft: `msclkid`; Linke
 - `self_audit_completed`
 
 These Vercel Analytics events intentionally exclude names, email addresses, company names, and full campaign payloads.
+
+## HubSpot tracking
+
+Every public page loads the na2 tracking script for portal `245566926`. Server submissions use
+`HUBSPOT_PORTAL_ID` (default `245566926`) and `HUBSPOT_FORM_GUID` (default
+`49fb0c89-a865-4f99-85bf-91de60556c61`). `HUBSPOT_FAILURE_NOTIFY=false` disables failure
+alerts; otherwise alerts use the existing Resend configuration and operator recipient.
+The CSP host allowlist is kept in the Content-Security-Policy header in `vercel.json`.
+
+The existing `/privacy?ga_optout=1` switch sets `n8iv_ga_opt_out=1`, suppressing the
+HubSpot loader and server handoff. Neither cookie nor page context is submitted on opt-out.
+Self-Audit submissions reach HubSpot only with follow-up consent. Email remains the
+system of record; HubSpot errors do not change visitor success responses.
+
+At production go-live (not before), turn off HubSpot → Settings → Forms → Non-HubSpot
+Forms → "Collect data from website forms" to prevent duplicate collection. Confirm the
+CSP hosts and tracked attribution on the Vercel preview before production.
