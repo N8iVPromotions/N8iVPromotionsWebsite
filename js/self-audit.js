@@ -122,6 +122,16 @@
     const localResult = window.N8iVAuditScore(data.answers);
     saveFitSummaryHandoff(data, localResult);
     Object.assign(data, window.N8iVAttribution?.getPayload?.() || {});
+    let hubspotOptOut = false;
+    try { hubspotOptOut = localStorage.getItem('n8iv_ga_opt_out') === '1'; } catch (e) {}
+    if (hubspotOptOut) {
+      data.hubspotOptOut = true;
+    } else {
+      const cookie = (document.cookie || '').split(';').map(value => value.trim()).find(value => value.startsWith('hubspotutk='));
+      if (cookie) data.hutk = cookie.slice('hubspotutk='.length);
+      data.pageUri = typeof location !== 'undefined' ? location.href : '';
+      data.pageName = document.title;
+    }
     try {
       const response = await fetch(form.action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
       const result = await response.json().catch(() => ({}));

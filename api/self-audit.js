@@ -1,3 +1,4 @@
+const { submitToHubSpot } = require('./_lib/hubspot');
 const { rejectDisallowedOrigin } = require('./_lib/origin-check');
 const { rejectIfRateLimited } = require('./_lib/rate-limit');
 const { verifyTurnstile } = require('./_lib/turnstile');
@@ -41,6 +42,13 @@ module.exports = async function handler(req, res) {
     if (!verified) return res.status(400).json({ error: 'We could not verify you are human. Please retry the form.' });
     const result = scoreAudit(submission.answers);
     const emailDelivered = await sendEmails(submission, result);
+    if (submission.followUpConsent && !body.hubspotOptOut) {
+      await submitToHubSpot({
+        fields: { email: submission.email, firstname: submission.name, company: submission.company,
+          message: `Revenue Self-Audit score ${result.score}/100` },
+        hutk: body.hutk, pageUri: body.pageUri, pageName: body.pageName, ipAddress: getClientIp(req),
+      });
+    }
     return res.status(200).json({ ok: true, emailDelivered, ...result });
   } catch (error) {
     console.error('Self-audit submission failed:', error);

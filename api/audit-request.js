@@ -1,3 +1,5 @@
+const { sendWithResend } = require('./_lib/resend');
+const { submitToHubSpot } = require('./_lib/hubspot');
 const { rejectDisallowedOrigin } = require('./_lib/origin-check');
 const { rejectIfRateLimited } = require('./_lib/rate-limit');
 const { verifyTurnstile } = require('./_lib/turnstile');
@@ -62,6 +64,13 @@ module.exports = async function handler(req, res) {
     }
 
     await sendAuditRequestEmail(submission);
+    if (!body.hubspotOptOut) {
+      await submitToHubSpot({
+        fields: { email: submission.email, firstname: submission.firstName,
+          lastname: submission.lastName, company: submission.company, message: submission.challenge },
+        hutk: body.hutk, pageUri: body.pageUri, pageName: body.pageName, ipAddress: getClientIp(req),
+      });
+    }
     return res.status(200).json({ ok: true });
   } catch (error) {
     console.error('Audit request failed:', error);
@@ -159,27 +168,6 @@ async function sendAuditRequestEmail(submission) {
   throw new Error('Email provider is not configured. Set RESEND_API_KEY or SENDGRID_API_KEY in Vercel.');
 }
 
-async function sendWithResend({ subject, text, html, replyTo }) {
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: FROM_EMAIL,
-      to: [TO_EMAIL],
-      reply_to: replyTo,
-      subject,
-      text,
-      html,
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Resend failed with status ${response.status}: ${await response.text()}`);
-  }
-}
 
 async function sendWithSendGrid({ subject, text, html, replyTo }) {
   const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
