@@ -286,6 +286,16 @@
     }
     tokenWaits = 0; // a token is here: the next wait (after reset) starts with the grace again
     Object.assign(data, window.N8iVAttribution?.getPayload?.() || {});
+    let hubspotOptOut = false;
+    try { hubspotOptOut = localStorage.getItem('n8iv_ga_opt_out') === '1'; } catch (e) {}
+    if (hubspotOptOut) {
+      data.hubspotOptOut = true;
+    } else {
+      const cookie = (document.cookie || '').split(';').map(value => value.trim()).find(value => value.startsWith('hubspotutk='));
+      if (cookie) data.hutk = cookie.slice('hubspotutk='.length);
+      data.pageUri = typeof location !== 'undefined' ? location.href : '';
+      data.pageName = document.title;
+    }
     setPending(true);
     setStatus('Sending your request...', '');
 
