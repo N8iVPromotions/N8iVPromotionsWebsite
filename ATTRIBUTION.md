@@ -50,3 +50,11 @@ system of record; HubSpot errors do not change visitor success responses.
 At production go-live (not before), turn off HubSpot → Settings → Forms → Non-HubSpot
 Forms → "Collect data from website forms" to prevent duplicate collection. Confirm the
 CSP hosts and tracked attribution on the Vercel preview before production.
+
+**If inquiries don't appear in HubSpot, check the form's Spam tab first.** HubSpot accepts a
+submission and *then* may block it as spam (for example "Unregistered Site Domain"), so the
+handoff sees success, logs nothing and sends no failure alert. Every domain that submits must
+be listed in HubSpot → Settings → Tracking & Analytics → Advanced Tracking → Additional site
+domains (`n8ivpromotions.com` is). To test on a Vercel preview, temporarily add the exact
+preview hostname there **and** to the Cloudflare Turnstile widget's hostnames (otherwise
+Turnstile error 110200 blocks the form), then remove both after the test.
