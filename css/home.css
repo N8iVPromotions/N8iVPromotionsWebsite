@@ -11,11 +11,7 @@
 
 :root {
   --stage-pad: clamp(20px, 3.2vw, 44px);
-  --stage-wash:
-    radial-gradient(60% 70% at 88% 6%, rgba(95,66,251,.16), transparent 70%),
-    radial-gradient(50% 60% at 6% 96%, rgba(40,103,228,.12), transparent 70%),
-    radial-gradient(40% 50% at 100% 100%, rgba(187,41,166,.09), transparent 70%),
-    var(--surface-tint);
+  --stage-wash: var(--paper);
   --grid-line: rgba(95,66,251,.075);
   --grid-line-dark: rgba(244,244,248,.055);
 }
@@ -37,13 +33,11 @@
   inset: 0;
   z-index: -1;
   border-radius: inherit;
-  background-image:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-image: none;
   background-size: 32px 32px;
   background-position: -1px -1px;
-  -webkit-mask-image: radial-gradient(85% 85% at 50% 40%, #000 25%, transparent 85%);
-          mask-image: radial-gradient(85% 85% at 50% 40%, #000 25%, transparent 85%);
+
+
   pointer-events: none;
 }
 
@@ -111,7 +105,7 @@
 }
 .scene-rail li.is-active {
   border-color: transparent;
-  background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
+  background: var(--white); border-color: var(--hairline-strong);
 }
 .scene-main { min-width: 0; padding: 14px 16px 18px; }
 .scene-ask {
@@ -171,8 +165,8 @@
   padding: 16px 18px 18px;
   border: 1px solid transparent;
   border-radius: 18px;
-  background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box;
-  box-shadow: var(--ai-glow-soft);
+  background: var(--white); border-color: var(--hairline-strong);
+  box-shadow: none;
 }
 .scene-brief p { margin: 0; }
 .scene-brief-head {
@@ -198,8 +192,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--ai-gradient);
-  box-shadow: 0 0 0 3px rgba(95,66,251,.16), 0 0 10px rgba(95,66,251,.55);
+  background: #5F42FB;
+  box-shadow: none;
 }
 
 /* In front: insight chips and app tiles at different depths */
@@ -225,7 +219,7 @@
   flex: none;
   width: 8px;
   height: 8px;
-  border: 1.5px solid var(--ai-4);
+  border: 1.5px solid var(--hairline-strong);
   border-radius: 50%;
 }
 .scene-tile {
@@ -381,9 +375,7 @@ html.motion-off .scene-tile { animation: none !important; }
   flex: none;
   width: 10px;
   height: 10px;
-  background:
-    linear-gradient(currentColor, currentColor) left / 3px 100% no-repeat,
-    linear-gradient(currentColor, currentColor) right / 3px 100% no-repeat;
+  background: none;
 }
 @media (forced-colors: active) {
   .stack-toggle-icon { forced-color-adjust: none; color: ButtonText; }
@@ -427,7 +419,7 @@ html.motion-off .scene-tile { animation: none !important; }
   border-bottom-width: 0 !important;
   border-radius: 16px 0 0 0 !important;
   padding: 20px 22px 24px;
-  box-shadow: var(--elev-2), 0 18px 44px -24px rgba(95,66,251,.45) !important;
+  box-shadow: none;
 }
 .feature-rows .feature-row:nth-child(even) .feature-stage .capability-board {
   border-right-width: 1px !important;
@@ -437,7 +429,7 @@ html.motion-off .scene-tile { animation: none !important; }
 /* every board is the product's output: the AI anchor ring */
 .feature-rows .capability-board {
   border-color: transparent !important;
-  background: linear-gradient(var(--white), var(--white)) padding-box, var(--ai-gradient) border-box !important;
+  background: var(--white) !important; border-color: var(--hairline-strong) !important;
 }
 @media (max-width: 1180px) {
   .feature-stage .journey-line { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px !important; }
@@ -507,27 +499,20 @@ html.motion-off .scene-tile { animation: none !important; }
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-image:
-    linear-gradient(var(--grid-line-dark) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px);
+  background-image: none;
   background-size: 56px 56px;
   background-position: center -1px;
-  -webkit-mask-image: radial-gradient(90% 75% at 50% 0%, #000 30%, transparent 85%);
-          mask-image: radial-gradient(90% 75% at 50% 0%, #000 30%, transparent 85%);
+
+
   pointer-events: none;
 }
 #platform.ed-dark,
 #before-you-commit.ed-dark { position: relative; isolation: isolate; }
 #platform.ed-dark {
-  background:
-    radial-gradient(46% 60% at 90% 0%, rgba(95,66,251,.30), transparent 70%),
-    radial-gradient(34% 50% at 0% 100%, rgba(40,103,228,.16), transparent 70%),
-    var(--band) !important;
+  background: var(--band) !important;
 }
 #before-you-commit.ed-dark {
-  background:
-    radial-gradient(50% 60% at 50% 0%, rgba(95,66,251,.22), transparent 70%),
-    var(--band) !important;
+  background: var(--band) !important;
 }
 
 /* Problem: a centered statement among the platforms that disagree */
@@ -548,7 +533,7 @@ html.motion-off .scene-tile { animation: none !important; }
   border: 1px solid rgba(255,255,255,.6);
   border-radius: 18px;
   background: #F4F4F8;
-  box-shadow: 0 18px 40px -16px rgba(0,0,0,.7), 0 0 36px -4px var(--tile-glow, rgba(95,66,251,.55));
+  box-shadow: none;
 }
 .ft-1 { top: 16%; left: 7%; width: 76px; height: 76px; border-radius: 21px; --tile-glow: rgba(40,103,228,.6); }
 .ft-2 { top: 12%; right: 8%; --tile-glow: rgba(95,66,251,.6); }
@@ -625,3 +610,7 @@ html.motion-off .scene-tile { animation: none !important; }
   #question .ed-chain ol { grid-template-columns: minmax(0, 1fr) !important; }
   #question .ed-output { width: auto; margin: -40px 12px 0; }
 }
+
+/* Flat pause glyph replaces the painted stripes. */
+.stack-toggle-icon { background: none; border-left: 3px solid currentColor; border-right: 3px solid currentColor; }
+.stack-toggle[data-paused="true"] .stack-toggle-icon { border: 0; background: currentColor; }

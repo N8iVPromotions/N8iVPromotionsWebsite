@@ -139,7 +139,7 @@
       <p>The difficult part is not buying more software. It is defining identifiers, lifecycle events, validation rules, attribution limits, and reporting decisions that can survive across systems.</p>
       <div class="article-callout">Build the evidence chain before choosing the dashboard.</div>
 
-      <h2>Layer 1: Business Definitions</h2>
+      <h2>Business Definitions</h2>
       <p>Begin with definitions that marketing, sales, finance, and leadership can share:</p>
       <ul>
         <li>What counts as a lead, qualified lead, opportunity, and customer?</li>
@@ -150,7 +150,7 @@
       </ul>
       <p>Software cannot resolve a disagreement about definitions. If the organization changes the meaning of qualified pipeline from report to report, the stack will automate confusion.</p>
 
-      <h2>Layer 2: Campaign and Acquisition Context</h2>
+      <h2>Campaign and Acquisition Context</h2>
       <p>Preserve the information that explains how a visitor arrived. A practical acquisition layer may include UTMs, advertising click identifiers, landing page, referring domain, campaign ID, ad group, creative, keyword or audience, device, and capture time.</p>
       <p>Use a documented naming system and preserve both first-touch and latest-touch context. Store original values before automation overwrites them.</p>
       <ul>
@@ -161,7 +161,7 @@
       </ul>
       <p>Do not treat missing parameters as direct traffic by default. “Unknown” is a valid and important category.</p>
 
-      <h2>Layer 3: Behavioral and Content Signals</h2>
+      <h2>Behavioral and Content Signals</h2>
       <p>Capture meaningful touchpoints rather than every available event. Useful events might include:</p>
       <ul>
         <li>High-intent page views</li>
@@ -173,12 +173,12 @@
       </ul>
       <p>Consent, retention, and identity rules belong in the design. Collecting more events does not create better attribution if those events cannot connect to a stable contact or opportunity.</p>
 
-      <h2>Layer 4: CRM Lifecycle and Identity</h2>
+      <h2>CRM Lifecycle and Identity</h2>
       <p>The CRM is where anonymous marketing activity begins to meet a business process. The stack needs stable contact, company, and opportunity identifiers; original and latest source context; lifecycle timestamps; deal stages; values; owners; and close outcomes.</p>
       <p>Identity resolution should be conservative. Email, CRM IDs, form submissions, and authenticated activity can provide strong links. Shared devices, cross-domain journeys, offline introductions, and privacy controls create unavoidable gaps.</p>
       <p>Track stage changes as events instead of reading only the current stage. A deal that moved from discovery to proposal and back contains different information from a deal that was created directly as closed-won.</p>
 
-      <h2>Layer 5: Revenue Evidence</h2>
+      <h2>Revenue Evidence</h2>
       <p>CRM closed-won value is useful, but it may not equal money received. When the business question requires it and access is authorized, enrich the model with invoicing or payment evidence.</p>
       <ol>
         <li>Match transactions to the correct customer or opportunity.</li>
@@ -189,7 +189,7 @@
       </ol>
       <p>Not every organization needs payment enrichment in the first version. Use the closest reliable outcome required for the decision.</p>
 
-      <h2>Layer 6: Storage, Normalization, and Validation</h2>
+      <h2>Storage, Normalization, and Validation</h2>
       <p>Raw sources should remain traceable. Keep an immutable or reproducible raw layer, then normalize dates, currencies, source names, campaign identifiers, lifecycle values, and entity relationships into analysis-ready records.</p>
       <p>Validation should run before attribution:</p>
       <ul>
@@ -202,12 +202,12 @@
       </ul>
       <p>A warehouse such as Google Cloud or Databricks can support larger pipelines, but a disciplined export workflow may be enough for a focused pilot. Architecture should match the decision frequency and data volume.</p>
 
-      <h2>Layer 7: Attribution Views</h2>
+      <h2>Attribution Views</h2>
       <p>Attribution is a set of lenses, not a single truth. First touch explains acquisition. Last touch explains the final known marketing interaction. Assisted views show participation across a journey. Position-based or time-decay models distribute credit according to explicit assumptions.</p>
       <p>Run multiple views when the data supports them and explain where they disagree. Never mix platform self-reported conversions with CRM-attributed revenue as if they were the same measure.</p>
       <p>The model should fit the sales cycle and the decision. It should also include a visible unattributed category so the report does not reward false completeness.</p>
 
-      <h2>Layer 8: Decision-Ready Reporting</h2>
+      <h2>Decision-Ready Reporting</h2>
       <p>The final layer translates the model into action. A report should summarize the business question, source window, included systems, data-quality findings, attribution views, important changes, confidence limits, and prioritized next steps.</p>
       <p>N8iV Promotions normalizes available evidence and runs this workflow the same way on every engagement. That does not remove the need for judgment. It makes the validation and analysis more repeatable so human attention can focus on scope, interpretation, and decisions.</p>
       <p>Build the first version around one important question and one bounded time window. Prove the evidence chain. Then add sources, automation, and cadence only when they improve a real decision.</p>
