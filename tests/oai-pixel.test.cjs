@@ -44,5 +44,7 @@ test('CSP permits the exact SDK and reporting hosts without inline script permis
   const directives = Object.fromEntries(csp.split('; ').map(d => { const [key, ...values] = d.split(' '); return [key, values]; }));
   assert.ok(directives['script-src'].includes('https://bzrcdn.openai.com'));
   assert.ok(directives['connect-src'].includes('https://bzr.openai.com'));
+  assert.ok(directives['connect-src'].includes('https://bzrcdn.openai.com'));
+  assert.ok(directives['img-src'].includes('https://bzr.openai.com'));
   assert.ok(!directives['script-src'].includes("'unsafe-inline'"));
 });

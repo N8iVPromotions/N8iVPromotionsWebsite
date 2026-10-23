@@ -114,7 +114,7 @@ test('CSP preserves original directives and adds only specified hosts', () => {
     'frame-src': 'https://*.hubspot.com',
   };
   const actual = JSON.parse(fs.readFileSync(path.join(root, 'vercel.json'))).headers[0].headers.find(h => h.key === 'Content-Security-Policy').value;
-  const withoutOpenAI = actual.replace(' https://bzrcdn.openai.com', '').replace(' https://bzr.openai.com', '');
+  const withoutOpenAI = actual.replaceAll(' https://bzrcdn.openai.com', '').replaceAll(' https://bzr.openai.com', '');
   assert.equal(withoutOpenAI, original.split('; ').map(d => d + (additions[d.split(' ')[0]] ? ' ' + additions[d.split(' ')[0]] : '')).join('; '));
 });
 for (const file of ['js/main.js', 'js/self-audit.js']) {
