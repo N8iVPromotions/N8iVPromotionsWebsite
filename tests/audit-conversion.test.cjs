@@ -16,6 +16,8 @@ test('completion shares event ID and does not repeat after reload', () => {
   const b = browser(null); b.run(Array(15).fill(2)); b.run(Array(15).fill(2));
   assert.equal(b.calls.length, 1); assert.equal(b.requests.length, 1);
   assert.equal(b.calls[0][3].event_id, JSON.parse(b.requests[0][1].body).id);
+  assert.equal(JSON.parse(b.requests[0][1].body).answers, undefined);
+  assert.equal(JSON.parse(b.requests[0][1].body).completed, true);
   assert.equal(b.calls[0][3].custom_event_name, 'self_audit_completed');
   const reload = browser(null,b.saved); reload.run(Array(15).fill(2)); assert.equal(reload.calls.length,0);
 });
@@ -34,8 +36,8 @@ test('server validates completion and forwards only minimal fixed event', async 
     await handler({method:'POST',headers:{origin,'content-type':'application/json','x-forwarded-for':'192.0.2.41',cookie:'__oppref=ref-test; __obref=browser-test; unrelated=ignored'},body},res);return res;
   };
   try {
-    const body={id,timestamp:Date.now(),answers:Array(15).fill(2),measurementAllowed:true};
-    assert.equal((await run({...body,answers:[]})).code,400);
+    const body={id,timestamp:Date.now(),completed:true,measurementAllowed:true};
+    assert.equal((await run({...body,completed:false})).code,400);
     assert.equal((await run(body,'https://evil.example')).code,403);
     assert.equal((await run({...body,measurementAllowed:false})).code,400);
     assert.equal((await run(body)).code,200);
@@ -55,7 +57,7 @@ test('preview deployments never forward conversions, upstream failure stays gene
   let calls=0;
   global.fetch=async()=>{calls++;throw new Error('private upstream detail');};
   process.env.OPENAI_CONVERSIONS_API_KEY='test-only';
-  const req={method:'POST',headers:{origin:'https://www.n8ivpromotions.com','content-type':'application/json','x-forwarded-for':'192.0.2.42'},body:{id,timestamp:Date.now(),answers:Array(15).fill(1),measurementAllowed:true}};
+  const req={method:'POST',headers:{origin:'https://www.n8ivpromotions.com','content-type':'application/json','x-forwarded-for':'192.0.2.42'},body:{id,timestamp:Date.now(),completed:true,measurementAllowed:true}};
   const run=async()=>{const res={setHeader(){},status(n){this.code=n;return this;},json(v){this.value=v;return this;}};await handler(req,res);return res;};
   try {
     process.env.VERCEL_ENV='preview';assert.equal((await run()).code,503);assert.equal(calls,0);

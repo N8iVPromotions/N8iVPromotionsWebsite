@@ -15,10 +15,10 @@
     sent = true;
     try { sessionStorage.setItem(key, JSON.stringify({ id, timestamp, sent: true })); } catch (_) {}
     try { window.oaiq?.('measure', 'custom', { type: 'custom' }, { custom_event_name: 'self_audit_completed', event_id: id }); } catch (_) {}
-    // The server validates completion; answers are never forwarded to OpenAI.
+    // Report completion only; answers stay in the tab.
     fetch('/api/audit-completed', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
-      body: JSON.stringify({ id, timestamp, answers, measurementAllowed: true })
+      body: JSON.stringify({ id, timestamp, completed: true, measurementAllowed: true })
     }).catch(() => {});
   };
 })();

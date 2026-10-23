@@ -1,5 +1,4 @@
 const { rejectIfRateLimited } = require('./_lib/rate-limit');
-const scoreAudit = require('../js/audit-scoring');
 const ORIGINS = new Set(['https://www.n8ivpromotions.com', 'https://n8ivpromotions.com']);
 
 module.exports = async function handler(req, res) {
@@ -9,12 +8,11 @@ module.exports = async function handler(req, res) {
   if (!/^application\/json(?:;|$)/i.test(req.headers['content-type'] || '')) return res.status(415).json({ ok: false });
   if (rejectIfRateLimited(req, res, 'audit-completed')) return;
   const body = req.body;
-  if (!body || body.measurementAllowed !== true || typeof body.id !== 'string' ||
+  if (!body || body.measurementAllowed !== true || body.completed !== true || typeof body.id !== 'string' ||
       !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(body.id) ||
       !Number.isSafeInteger(body.timestamp) || body.timestamp < Date.now() - 86400000 || body.timestamp > Date.now() + 60000) {
     return res.status(400).json({ ok: false });
   }
-  try { scoreAudit(body.answers); } catch (_) { return res.status(400).json({ ok: false }); }
   if (process.env.VERCEL_ENV !== 'production' || !process.env.OPENAI_CONVERSIONS_API_KEY) {
     return res.status(503).json({ ok: false });
   }

@@ -3,8 +3,8 @@
 A visitor completing all 15 questions and seeing their score triggers the custom
 OpenAI event `self_audit_completed`. Requesting an email copy is independent.
 The integration sends no revenue value, score, answers, or contact information
-to OpenAI. The server validates the answers locally and forwards only the fixed
-event metadata and available Pixel attribution cookies (`__oppref`, `__obref`).
+to OpenAI. Answers stay in the browser. The server accepts a completion flag and forwards
+only the fixed event metadata and available Pixel attribution cookies (`__oppref`, `__obref`).
 
 Browser and server use the same UUID and custom event name for OpenAI deduplication.
 Session storage suppresses repeated completions and restored results in the same
@@ -17,7 +17,7 @@ hostnames. Server forwarding also requires `VERCEL_ENV=production` and the sensi
 server-only `OPENAI_CONVERSIONS_API_KEY` variable. No secret values are returned
 or logged. A redeployment is needed after environment-variable changes.
 
-The endpoint accepts only same-origin JSON POSTs with valid completion answers,
+The endpoint accepts only same-origin JSON POSTs with a completion flag,
 a UUID and a recent timestamp, and uses the existing per-instance rate limiter.
 These checks reduce accidental or casual misuse; this public self-assessment is
 not an authenticated or independently verified business transaction.
