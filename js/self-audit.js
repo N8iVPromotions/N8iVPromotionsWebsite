@@ -109,6 +109,7 @@
     saveFitSummaryHandoff({}, result);
     window.N8iVAttribution?.track?.('self_audit_completed', { score_band: result.band });
     showStep(sections.length);
+    try { window.N8iVAuditConversion?.(readAnswers()); } catch (_) { /* Measurement must never block results. */ }
   }
   form.addEventListener('submit', async event => {
     event.preventDefault(); error.textContent = '';
