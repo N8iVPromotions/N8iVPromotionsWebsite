@@ -1,0 +1,28 @@
+@font-face{font-family:N8iVNavigation;src:url('/assets/clarity/Inter.ttf') format('truetype');font-weight:100 900;font-display:swap}
+/* One header shared by the homepage and all main site pages. */
+html{scrollbar-gutter:stable;scroll-padding-top:100px}
+.clarity-home{padding-top:86px}
+.n8iv-header,.n8iv-header *{box-sizing:border-box}
+.n8iv-header{position:fixed;z-index:100;top:0;left:0;right:0;height:86px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;gap:24px;background:#fff;border-bottom:1px solid #f0f0ea;font-family:N8iVNavigation,Arial,sans-serif;color:#161616}
+.n8iv-header a{color:#161616;text-decoration:none;font-weight:400;letter-spacing:0;line-height:1.4}
+.n8iv-header .n8iv-header-brand{display:block;flex:none;width:238px;margin:0;padding:0}
+.n8iv-header-brand img{display:block;width:238px;height:auto;max-width:100%}
+#n8iv-navigation{display:flex;align-items:center;gap:24px;margin:0;padding:0;font-size:12px}
+#n8iv-navigation>a:not(.n8iv-header-cta){padding:12px 0;white-space:nowrap}
+#n8iv-navigation>a:hover,#n8iv-navigation>a[aria-current="page"]{color:#6248d6}
+#n8iv-navigation .n8iv-header-cta{width:216px;display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:44px;padding:11px 20px;border:1px solid #161616;border-radius:999px;background:#161616;color:#fff;font-size:13px;font-weight:500;white-space:nowrap}
+#n8iv-navigation .n8iv-header-cta:hover{background:#383832}
+.n8iv-header-cta span{font-size:18px;line-height:1}
+.n8iv-header :is(a,button):focus-visible{outline:2px solid #6248d6;outline-offset:4px}
+.n8iv-menu-toggle{display:none;border:0;background:none;color:#161616;padding:12px;cursor:pointer;width:44px;height:44px}
+.n8iv-menu-toggle span{display:block;width:22px;height:1px;background:currentColor;margin:6px 0}
+@media(max-width:1000px){
+ .n8iv-header{height:76px;padding:0 24px}
+ .clarity-home{padding-top:76px}
+ .n8iv-header .n8iv-header-brand,.n8iv-header-brand img{width:210px}
+ .n8iv-menu-toggle{display:block}
+ #n8iv-navigation{display:none;position:absolute;top:75px;left:0;right:0;background:#fff;padding:24px;gap:8px;border-bottom:1px solid #e8e8e1;box-shadow:0 12px 20px #16161608}
+ #n8iv-navigation.open{display:flex;flex-direction:column;align-items:stretch}
+ #n8iv-navigation>a:not(.n8iv-header-cta){padding:12px 0;font-size:15px}
+ #n8iv-navigation .n8iv-header-cta{margin-top:10px;width:100%}
+}

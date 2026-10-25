@@ -1,7 +1,4 @@
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
-const menu=$('.menu-toggle'), nav=$('#navigation');
-menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',open);menu.setAttribute('aria-label',open?'Close navigation':'Open navigation');nav.classList.toggle('open',open)});
-$$('#navigation a,#navigation .audit-trigger').forEach(el=>el.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Open navigation')}));
 const evidence=[
 {name:'Campaign spend',status:'Known',cls:'known',description:'A campaign export establishes the spend and dates. It tells us what was invested; it does not establish which revenue it caused.',source:'Campaign export · analysis period',next:'Match source identifiers to CRM records'},
 {name:'Source capture',status:'Missing',cls:'missing',description:'In this example, the original campaign identifier was not retained on the contact. The revenue trail has a gap that must stay visible.',source:'Contact record · original source field absent',next:'Repair source capture and assess historical recovery'},
@@ -18,5 +15,4 @@ $$('[data-audience]').forEach((b,i)=>b.addEventListener('click',()=>selectAudien
 function download(filename,content){const blob=new Blob([content],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 $('#download-receipt').addEventListener('click',()=>download('N8iV_Illustrative_Revenue_Receipt.txt',`N8iV Promotions | Revenue Receipt\nILLUSTRATIVE OUTLINE — not client data\n\nQuestion: Can we trace this deal back to marketing?\n\n${evidence.map((x,i)=>`${i+1}. ${x.name} — ${x.status}\n${x.description}\nEvidence: ${x.source}\nNext check: ${x.next}`).join('\n\n')}\n\nConclusion: A campaign-level revenue claim is not supported until the source gap is resolved. Closed-won value and collected cash must remain separate.\n\nRevenue deserves receipts.\nhttps://www.n8ivpromotions.com/contact`));
 
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&nav.classList.contains("open")){nav.classList.remove("open");menu.setAttribute("aria-expanded","false");menu.setAttribute("aria-label","Open navigation");menu.focus();}});
 const legacyAnchors={question:"home",problem:"approach",capabilities:"approach",platform:"receipt",outcomes:"receipt",system:"approach","before-you-commit":"questions"};if(legacyAnchors[location.hash.slice(1)])document.getElementById(legacyAnchors[location.hash.slice(1)]).scrollIntoView();
