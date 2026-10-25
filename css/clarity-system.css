@@ -153,3 +153,9 @@ body .founder-photo img{display:block;width:100%;height:100%;aspect-ratio:1;obje
   :is(.btn,.button,.pilot-btn,.audit-btn)[aria-busy="true"]{opacity:.75!important;cursor:progress!important}
   @media(prefers-reduced-motion:reduce){:is(.btn,.button,.pilot-btn,.audit-btn){transition:none!important}}
 }
+
+/* Keep the pilot's dark Problem headline panel readable. */
+#problem .ed-cinema{background:#161616!important;color:#fff!important}
+#problem .ed-cinema :is(h2,.ed-stagger-small,.ed-stagger-big){color:#fff!important;opacity:1!important}
+#problem .ed-cinema :is(.chapter-meta,.chapter-num,.chapter-name,.chapter-aside){color:#d9d9d3!important;opacity:1!important}
+#problem .ed-cinema .chapter-meta{border-color:#50504b!important}
