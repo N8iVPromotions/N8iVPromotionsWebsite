@@ -115,3 +115,8 @@ body .result-row strong{font-family:Inter,Arial,sans-serif;font-weight:500}
  body .newsletter-input{width:100%;flex:auto}
  body .audit-title{font-size:clamp(36px,8vw,54px)}
 }
+
+/* Founder portrait: a responsive circular frame. */
+body .founder-photo{width:100%;max-width:320px;aspect-ratio:1;border-radius:50%;overflow:hidden;box-shadow:none}
+body .founder-photo picture{display:block;width:100%;height:100%}
+body .founder-photo img{display:block;width:100%;height:100%;aspect-ratio:1;object-fit:cover;object-position:center;border-radius:50%}
