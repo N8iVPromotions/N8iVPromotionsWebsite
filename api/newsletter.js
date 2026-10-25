@@ -1,3 +1,5 @@
+console.info(JSON.stringify({ event: 'node-runtime', node: process.version, openssl: process.versions.openssl, undici: process.versions.undici }));
+
 const { rejectDisallowedOrigin } = require('./_lib/origin-check');
 const { rejectIfRateLimited } = require('./_lib/rate-limit');
 const { verifyTurnstile } = require('./_lib/turnstile');
