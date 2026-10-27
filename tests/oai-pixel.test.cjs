@@ -48,3 +48,13 @@ test('CSP permits the exact SDK and reporting hosts without inline script permis
   assert.ok(directives['img-src'].includes('https://bzr.openai.com'));
   assert.ok(!directives['script-src'].includes("'unsafe-inline'"));
 });
+
+test('CSP permits the hosts gtag.js sends GA4 and Google Ads hits to', () => {
+  const csp = JSON.parse(fs.readFileSync(path.join(root, 'vercel.json'))).headers[0].headers.find(h => h.key === 'Content-Security-Policy').value;
+  const directives = Object.fromEntries(csp.split('; ').map(d => { const [key, ...values] = d.split(' '); return [key, values]; }));
+  // *.analytics.google.com does not cover the bare host gtag.js posts to.
+  for (const host of ['https://analytics.google.com', 'https://www.google.com', 'https://stats.g.doubleclick.net']) {
+    assert.ok(directives['connect-src'].includes(host), host);
+  }
+  for (const host of ['https://www.google.com', 'https://stats.g.doubleclick.net']) assert.ok(directives['img-src'].includes(host), host);
+});
