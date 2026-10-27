@@ -333,6 +333,9 @@
       window.N8iVAttribution?.track?.('contact_request_sent', {
         form: 'contact_request'
       });
+      // Google Ads imports this GA4 event as the lead conversion, so it fires
+      // only after the server confirms delivery. ga-init.js honours the opt-out.
+      window.gtag?.('event', 'generate_lead', { form_id: 'contact_request' });
       setStatus('Your request was sent. Expect a reply within 1 business day.', 'success');
       showDone();
     } catch (error) {
