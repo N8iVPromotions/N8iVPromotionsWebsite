@@ -83,3 +83,46 @@
 .trust-footer-links { align-items: center; }
 .trust-footer-links a,
 .trust-footer-links .ed-motion { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Illustrative Revenue Receipt: neutral evidence table with contained scrolling. */
+.receipt-sample {
+  grid-column: 1 / -1;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: clamp(16px, 3vw, 28px);
+  border: 1px solid var(--hairline-strong, var(--border));
+  color: var(--ink);
+  font: 400 14px/1.55 var(--ff-sub);
+}
+.receipt-sample .receipt-sample-label {
+  margin: 0 0 8px;
+  color: var(--dark-grey);
+  font-size: 12px;
+  text-transform: none;
+}
+.receipt-sample h3 {
+  margin: 0 0 20px;
+  font: 500 clamp(20px, 3vw, 26px)/1.25 var(--ff-display);
+  letter-spacing: -.02em;
+}
+.receipt-sample-scroll { max-width: 100%; overflow-x: auto; }
+.receipt-sample-scroll:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.receipt-sample table { width: 100%; min-width: 620px; border-collapse: collapse; }
+.receipt-sample th,
+.receipt-sample td { padding: 12px; border-bottom: 1px solid var(--hairline, var(--border)); text-align: left; vertical-align: top; }
+.receipt-sample th { font-weight: 600; }
+.receipt-sample th:nth-child(2),
+.receipt-sample td:nth-child(2) { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.receipt-sample .receipt-sample-summary { margin: 20px 0 12px; }
+.receipt-sample figcaption { color: var(--dark-grey); font-size: 13px; }
+@media (max-width: 640px) {
+  .receipt-sample table { min-width: 0; }
+  .receipt-sample thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .receipt-sample tr { display: block; padding: 12px 0; border-bottom: 1px solid var(--hairline, var(--border)); }
+  .receipt-sample td { display: grid; grid-template-columns: 76px 1fr; gap: 8px; padding: 4px 0; border: 0; }
+  .receipt-sample td:nth-child(2) { text-align: left; }
+  .receipt-sample td::before { content: attr(data-label); color: var(--dark-grey); }
+  .receipt-sample td:first-child { display: block; font-weight: 600; }
+  .receipt-sample td:first-child::before { content: none; }
+}
