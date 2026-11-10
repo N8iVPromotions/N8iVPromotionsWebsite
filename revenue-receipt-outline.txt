@@ -1,0 +1,31 @@
+N8iV Promotions | Revenue Receipt outline
+
+This is an illustrative report outline, not a client result.
+
+1. The business question
+One focused question, agreed before analysis.
+
+2. Analysis window
+The last complete month of ad spend. Delivery timing is agreed after data readiness is confirmed.
+
+3. Sources and definitions
+Marketing exports, CRM records, and available revenue records.
+Document identifiers, source continuity, deal stages, and the distinction between closed-won value and collected cash.
+
+4. Finding
+State what is known, what is inferred, and what remains unresolved.
+
+5. Evidence
+Attach a clear source trail, relevant records, the attribution model, and exclusions.
+
+6. Limits and gaps
+Describe missing identifiers and records. Observed attribution does not establish causal lift.
+
+7. Next decision
+A recommendation to scale, test, or repair, with the evidence beside it.
+
+Explore the $750 one-time B2B Attribution Pilot:
+https://www.n8ivpromotions.com/b2b-attribution-pilot
+
+Start the free 15-question self-audit:
+https://www.n8ivpromotions.com/revenue-self-audit

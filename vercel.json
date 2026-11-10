@@ -2,30 +2,132 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/index.html", "destination": "/", "permanent": true },
-    { "source": "/services.html", "destination": "/services", "permanent": true },
-    { "source": "/case-studies", "destination": "/use-cases", "permanent": true },
-    { "source": "/insights.html", "destination": "/insights", "permanent": true },
-    { "source": "/about.html", "destination": "/about", "permanent": true },
-    { "source": "/contact.html", "destination": "/contact", "permanent": true },
-    { "source": "/revenue-self-audit.html", "destination": "/revenue-self-audit", "permanent": true },
-    { "source": "/start.html", "destination": "/start", "permanent": true }
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/services.html",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies",
+      "destination": "/use-cases",
+      "permanent": true
+    },
+    {
+      "source": "/insights.html",
+      "destination": "/insights",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/revenue-self-audit.html",
+      "destination": "/revenue-self-audit",
+      "permanent": true
+    },
+    {
+      "source": "/start.html",
+      "destination": "/start",
+      "permanent": true
+    }
   ],
   "rewrites": [
-    { "source": "/services", "destination": "/services.html" },
-    { "source": "/use-cases", "destination": "/case-studies" },
-    { "source": "/insights", "destination": "/insights.html" },
-    { "source": "/about", "destination": "/about.html" },
-    { "source": "/contact", "destination": "/contact.html" },
-    { "source": "/revenue-self-audit", "destination": "/revenue-self-audit.html" },
-    { "source": "/start", "destination": "/start.html" },
-    { "source": "/insights/agencies-optimizing-40-percent-of-the-funnel", "destination": "/blog/agencies-optimizing-40-percent-of-the-funnel" },
-    { "source": "/insights/performance-marketing-done-guessing-revenue-proof", "destination": "/blog/performance-marketing-done-guessing-revenue-proof" },
-    { "source": "/insights/search-console-revenue-led-seo-roadmap", "destination": "/blog/search-console-revenue-led-seo-roadmap" },
-    { "source": "/insights/buyer-signals-content-pillars", "destination": "/blog/buyer-signals-content-pillars" },
-    { "source": "/insights/monthly-marketing-report-founders-need", "destination": "/blog/monthly-marketing-report-founders-need" },
-    { "source": "/insights/productize-revenue-reporting-across-client-accounts", "destination": "/blog/productize-revenue-reporting-across-client-accounts" },
-    { "source": "/insights/revenue-intelligence-stack-from-scratch", "destination": "/blog/revenue-intelligence-stack-from-scratch" }
+    {
+      "source": "/services",
+      "destination": "/services.html"
+    },
+    {
+      "source": "/use-cases",
+      "destination": "/case-studies"
+    },
+    {
+      "source": "/insights",
+      "destination": "/insights.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/revenue-self-audit",
+      "destination": "/revenue-self-audit.html"
+    },
+    {
+      "source": "/start",
+      "destination": "/start.html"
+    },
+    {
+      "source": "/insights/agencies-optimizing-40-percent-of-the-funnel",
+      "destination": "/blog/agencies-optimizing-40-percent-of-the-funnel"
+    },
+    {
+      "source": "/insights/performance-marketing-done-guessing-revenue-proof",
+      "destination": "/blog/performance-marketing-done-guessing-revenue-proof"
+    },
+    {
+      "source": "/insights/search-console-revenue-led-seo-roadmap",
+      "destination": "/blog/search-console-revenue-led-seo-roadmap"
+    },
+    {
+      "source": "/insights/buyer-signals-content-pillars",
+      "destination": "/blog/buyer-signals-content-pillars"
+    },
+    {
+      "source": "/insights/monthly-marketing-report-founders-need",
+      "destination": "/blog/monthly-marketing-report-founders-need"
+    },
+    {
+      "source": "/insights/productize-revenue-reporting-across-client-accounts",
+      "destination": "/blog/productize-revenue-reporting-across-client-accounts"
+    },
+    {
+      "source": "/insights/revenue-intelligence-stack-from-scratch",
+      "destination": "/blog/revenue-intelligence-stack-from-scratch"
+    },
+    {
+      "source": "/assets/world/scene-01.mp4",
+      "destination": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LtqkBPpi8iEeBDt4ey4cGIYWgP/1cdcfe6b-4bc3-4e2d-9243-90f643508c00.mp4"
+    },
+    {
+      "source": "/assets/world/scene-01-mobile.mp4",
+      "destination": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LtqkBPpi8iEeBDt4ey4cGIYWgP/ea9fcfa4-f92e-46de-82b9-e19b6a190c91.mp4"
+    },
+    {
+      "source": "/assets/world/scene-01-poster.png",
+      "destination": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LtqkBPpi8iEeBDt4ey4cGIYWgP/7215915d-69a9-424a-98ad-297f1e2c51a1.png"
+    },
+    {
+      "source": "/assets/world/scene-01-mobile-poster.png",
+      "destination": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LtqkBPpi8iEeBDt4ey4cGIYWgP/a6ace9ad-150a-469a-b438-cbaccf7a3f32.png"
+    },
+    {
+      "source": "/assets/images/optical-close.webp",
+      "destination": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LtqkBPpi8iEeBDt4ey4cGIYWgP/08ce1dfd-62c7-4b2e-bc79-b7e89bf3afd7.webp"
+    },
+    {
+      "source": "/assets/images/optical-edge.webp",
+      "destination": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LtqkBPpi8iEeBDt4ey4cGIYWgP/e8bacb19-916e-45d0-8bb7-78f53f6d5120.webp"
+    },
+    {
+      "source": "/assets/home-og.png",
+      "destination": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LtqkBPpi8iEeBDt4ey4cGIYWgP/d0d74818-78af-4fdb-9ae7-b07c1e0d00cd.png"
+    }
   ],
   "headers": [
     {
@@ -33,13 +135,28 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' https://bzrcdn.openai.com https://*.googletagmanager.com https://challenges.cloudflare.com https://connect.facebook.net https://*.hs-scripts.com https://*.hs-analytics.net https://*.hs-banner.com https://*.hscollectedforms.net https://*.hsadspixel.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://bzr.openai.com https://www.facebook.com https://*.google-analytics.com https://*.googletagmanager.com https://*.hubspot.com https://track.hubspot.com https://*.hsforms.com https://www.google.com https://stats.g.doubleclick.net; connect-src 'self' https://bzr.openai.com https://bzrcdn.openai.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://challenges.cloudflare.com https://www.facebook.com https://connect.facebook.net https://*.hubspot.com https://*.hs-banner.com https://*.hscollectedforms.net https://*.hs-analytics.net https://*.hsforms.com https://analytics.google.com https://www.google.com https://stats.g.doubleclick.net; frame-src https://challenges.cloudflare.com https://*.hubspot.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+          "value": "default-src 'self'; script-src 'self' https://bzrcdn.openai.com https://*.googletagmanager.com https://challenges.cloudflare.com https://connect.facebook.net https://*.hs-scripts.com https://*.hs-analytics.net https://*.hs-banner.com https://*.hscollectedforms.net https://*.hsadspixel.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://bzr.openai.com https://www.facebook.com https://*.google-analytics.com https://*.googletagmanager.com https://*.hubspot.com https://track.hubspot.com https://*.hsforms.com https://www.google.com https://stats.g.doubleclick.net; connect-src 'self' https://bzr.openai.com https://bzrcdn.openai.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://challenges.cloudflare.com https://www.facebook.com https://connect.facebook.net https://*.hubspot.com https://*.hs-banner.com https://*.hscollectedforms.net https://*.hs-analytics.net https://*.hsforms.com https://analytics.google.com https://www.google.com https://stats.g.doubleclick.net; frame-src https://challenges.cloudflare.com https://*.hubspot.com; media-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
         },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()" },
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        }
       ]
     }
   ]
