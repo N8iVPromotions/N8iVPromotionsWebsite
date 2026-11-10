@@ -255,3 +255,6 @@ body.n8iv-flow-page .lead-field input:user-invalid{border-color:#b42318!importan
 
 body.n8iv-flow-page .ed-rail a[aria-current="true"]{background:#5c45bf!important;color:#ffffff!important;border-color:#5c45bf!important}
 body.n8iv-flow-page .ed-rail a[aria-current="true"] :is(.ed-rail-num,.ed-rail-name){color:#ffffff!important}
+
+@layer n8iv-buttons{body.n8iv-flow-page .audit-panel [data-next]::after{-webkit-mask-image:url("/assets/icons/flow-arrow-right.svg")!important;mask-image:url("/assets/icons/flow-arrow-right.svg")!important}}
+body.n8iv-flow-page .pilot-ticket li{display:grid;grid-template-columns:20px minmax(0,1fr);column-gap:10px;align-items:start}
