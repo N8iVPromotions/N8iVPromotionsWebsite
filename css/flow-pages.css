@@ -24,6 +24,7 @@ body.n8iv-flow-page :is(.audit-aside,.result-followup,.audit-card,.pilot-ticket,
 body.n8iv-flow-page :is(.pilot-card,.contact-detail,.result-row){background:#ffffff!important;color:#161616;border-color:#dedede!important;box-shadow:none!important}
 body.n8iv-flow-page :is(.bg-dark,.ed-dark){
  background:#f0f0f0!important;color:#161616!important;
+ --paper:#ffffff;--white:#ffffff;--black:#161616;--ink:#161616;--ink-2:#464646;--muted:#626262;--border:#dedede;--border-2:#b8b8b8;--surface:#ffffff;--surface-2:#f0f0f0;--violet:#5c45bf;--blue:#5c45bf;--blue-light:#f0f0f0;
  --dark:#f0f0f0;--dark-2:#f0f0f0;--dark-3:#ffffff;--on-dark:#161616;--on-dark-2:#464646;--on-dark-muted:#626262;--dark-border:#dedede;--dark-border-2:#dedede
 }
 body.n8iv-flow-page #problem .ed-cinema{background:#f0f0f0!important;color:#161616!important}
