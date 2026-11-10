@@ -249,4 +249,8 @@ body.n8iv-flow-page .request-screen .form-status.error{color:#b42318!important}
 body.n8iv-flow-page .request-screen .form-status.success{color:#0e7a55!important}
 body.n8iv-flow-page .request-field :is(input,textarea)[aria-invalid="true"],
 body.n8iv-flow-page .request-field :is(input,textarea):user-invalid,
-body.n8iv-flow-page .lead-field input[aria-invalid="true"]{border-color:#b42318!important}
+body.n8iv-flow-page .lead-field input[aria-invalid="true"],
+body.n8iv-flow-page .lead-field input:user-invalid{border-color:#b42318!important}
+
+body.n8iv-flow-page .ed-rail a[aria-current="true"]{background:#5c45bf!important;color:#ffffff!important;border-color:#5c45bf!important}
+body.n8iv-flow-page .ed-rail a[aria-current="true"] :is(.ed-rail-num,.ed-rail-name){color:#ffffff!important}
