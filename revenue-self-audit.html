@@ -31,9 +31,9 @@ src="https://www.facebook.com/tr?id=1752381592484843&ev=PageView&noscript=1"
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/assets/clarity/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="/assets/n8iv-promotions-app-icon.png" />
-<meta name="theme-color" content="#F7F6F3" />
+<meta name="theme-color" content="#FFFFFF" />
 <link rel="stylesheet" href="css/styles.css">
 <style>
   .audit-page{min-height:100vh;background:var(--page);padding:48px 0 96px}.audit-shell{width:min(1120px,calc(100% - 40px));margin:auto}.audit-top{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:54px}.audit-brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:800;text-decoration:none}.audit-exit{color:var(--muted);font-size:14px;text-decoration:none}.audit-layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(260px,.7fr);gap:72px;align-items:start}.audit-kicker{font:700 12px/1 JetBrains Mono,monospace;color:var(--blue);letter-spacing:.08em;text-transform:uppercase}.audit-title{font-size:clamp(40px,6vw,76px);line-height:.98;letter-spacing:-.055em;margin:20px 0 24px;max-width:820px}.audit-intro{font-size:18px;line-height:1.65;color:var(--muted);max-width:640px}.audit-meta{display:flex;gap:26px;flex-wrap:wrap;margin:34px 0 42px;color:var(--ink-2);font-size:14px}.audit-meta span{display:flex;align-items:center;gap:9px}.audit-meta i{width:8px;height:8px;border-radius:50%;background:var(--green)}.audit-btn{appearance:none;border:0;cursor:pointer}.audit-btn[disabled]{cursor:not-allowed;opacity:.55}.audit-note{font-size:13px;color:var(--muted);margin:14px 0 0}.audit-aside{position:sticky;top:28px;border-top:1px solid var(--border-2);padding-top:22px}.audit-aside strong{font-size:14px}.audit-aside ol{padding:0;margin:22px 0 0;list-style:none;display:grid;gap:18px}.audit-aside li{display:grid;grid-template-columns:28px 1fr;gap:10px;font-size:13px;line-height:1.45;color:var(--muted)}.audit-aside li span{font:700 11px/28px JetBrains Mono,monospace;text-align:center;border:1px solid var(--border-2);border-radius:50%;color:var(--ink)}
@@ -56,14 +56,15 @@ src="https://www.facebook.com/tr?id=1752381592484843&ev=PageView&noscript=1"
 <script src="/js/motion-init.js"></script>
 <link rel="stylesheet" href="/css/saas.css">
 <link rel="stylesheet" href="/css/clarity-system.css">
+<link rel="stylesheet" href="/css/flow-pages.css">
 </head>
-<body>
+<body class="n8iv-flow-page n8iv-audit-page">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
 <main id="main-content" tabindex="-1" class="audit-page">
   <div class="audit-shell">
     <div class="audit-top">
-      <a class="audit-brand" href="/"><span class="nav-logo-mark"><svg class="brand-mark" width="38" height="22" viewBox="0 0 68.2 40" fill="none" aria-hidden="true"><rect x="0" y="8.25" width="8.9" height="23.5" rx="4.45" fill="#7860FC"/><rect x="14.8" y="0" width="8.9" height="40" rx="4.45" fill="currentColor"/><rect x="29.7" y="5.65" width="8.9" height="28.7" rx="4.45" fill="#7860FC"/><rect x="44.5" y="1.05" width="8.9" height="37.9" rx="4.45" fill="currentColor"/><rect x="59.3" y="8.65" width="8.9" height="22.7" rx="4.45" fill="#7860FC"/></svg></span><span class="brand-word"><span class="brand-word-name">N8iV</span> Promotions</span></a>
+      <a class="audit-brand" href="/" aria-label="N8iV Promotions home"><img src="/assets/clarity/logo.svg" width="1000" height="150" alt="N8iV Promotions"></a>
       <a class="audit-exit" href="/">Exit Self-Audit</a>
     </div>
 
@@ -72,7 +73,7 @@ src="https://www.facebook.com/tr?id=1752381592484843&ev=PageView&noscript=1"
         <div class="audit-kicker">Free diagnostic · Revenue receipt self-audit</div>
         <h1 class="audit-title">Can you prove what created the revenue?</h1>
         <p class="audit-intro">Answer 15 practical questions about your source data, CRM, attribution, and reporting. You will get an instant Revenue Receipt score and the first gap to fix.</p>
-        <div class="audit-meta"><span><i></i>About 4 minutes</span><span><i></i>Instant result</span><span><i></i>No sales call required</span></div>
+        <div class="audit-meta"><span><svg class="n8iv-icon" width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><use href="/assets/icons/n8iv-ui.svg#clock"></use></svg>About 4 minutes</span><span><svg class="n8iv-icon" width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><use href="/assets/icons/n8iv-ui.svg#check-circle"></use></svg>Instant result</span><span><svg class="n8iv-icon" width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><use href="/assets/icons/n8iv-ui.svg#shield-check"></use></svg>No sales call required</span></div>
         <button class="btn btn-primary btn-lg audit-btn" type="button" data-start-audit>Start the Self-Audit</button>
         <p class="audit-note">Your score appears here with no email required. Your answers stay in this tab unless you choose to email a copy.</p>
       </div>
