@@ -1,0 +1,61 @@
+/* Supplemental neutral treatment for legacy content pages.
+   Load after flow-pages.css. Bodies also keep n8iv-flow-page for shared UI. */
+body.n8iv-content-page{
+ --stone:#8a8a8a;--subtle:#777777;--hairline:#dedede;--hairline-strong:#b8b8b8;--band-line:#dedede;
+ --elev-1:none;--elev-2:none;background:#ffffff!important;color:#161616
+}
+body.n8iv-content-page :is(.hero,.article-hero,.trust-hero,.bg-page){background:#ffffff!important}
+body.n8iv-content-page :is(.bg-dark,.bg-dark-2,.cta-section,.bg-surface,.featured-card,.article-callout,.article-aside,.trust-callout){
+ --black:#161616;--white:#ffffff;--paper:#ffffff;--ink:#161616;--ink-2:#464646;--ink-3:#464646;--muted:#626262;
+ --on-dark:#161616;--on-dark-2:#464646;--on-dark-muted:#626262;--dark:#f0f0f0;--dark-2:#f7f7f7;--dark-3:#ffffff;--dark-4:#dedede;
+ --dark-border:#dedede;--dark-border-2:#b8b8b8;--surface:#ffffff;--surface-2:#f0f0f0;--surface-3:#f7f7f7;--border:#dedede;--border-2:#b8b8b8;
+ background:#f0f0f0!important;color:#161616!important;box-shadow:none!important
+}
+body.n8iv-content-page :is(h1,h2,h3,h4,.display-xl,.display-lg,.display-md,.cta-section .eyebrow,.trust-brand){color:#161616!important}
+body.n8iv-content-page :is(.hero-sub,.article-deck,.article-meta,.article-kicker,.featured-meta,.featured-excerpt,.featured-visual-label,.featured-stat-row-label,.trust-meta,.footer-tagline){color:#626262!important}
+body.n8iv-content-page :is(.featured-visual,.article-card,.case-card,.outcome-card,.method-card,.comparison-col,.offer-facts){background:#ffffff!important;border-color:#dedede!important;box-shadow:none!important}
+body.n8iv-content-page :is(.featured-card,.article-aside,.article-callout,.article-card,.case-card,.trust-callout){border-color:#dedede!important}
+body.n8iv-content-page .article-callout{border-left:2px solid #7a63ff!important}
+body.n8iv-content-page :is(.featured-stat-row,.trust-copy section){border-color:#dedede!important}
+body.n8iv-content-page .trust-copy :is(p,li){color:#464646}
+body.n8iv-content-page .trust-copy section{scroll-margin-top:94px}
+
+/* Legal pages retain their working navigation and document structure. */
+body.n8iv-content-page .trust-nav{background:#ffffff!important;border-color:#dedede!important;color:#161616!important;box-shadow:none}
+body.n8iv-content-page .trust-nav-links{color:#626262}
+body.n8iv-content-page .trust-nav-links a{display:inline-flex;align-items:center;min-height:44px}
+body.n8iv-content-page .trust-toc{top:104px;border-color:#161616}
+body.n8iv-content-page:has(.n8iv-header) .trust-hero{padding-top:154px}
+
+/* Preserve newsletter validation, payload and human checks. */
+body.n8iv-content-page .newsletter-input{
+ background:#ffffff!important;color:#161616!important;border:1px solid #929292!important;border-radius:8px!important;min-height:54px;
+ font:400 16px/1.5 Inter,Arial,sans-serif!important;caret-color:#5c45bf
+}
+body.n8iv-content-page .newsletter-input::placeholder{color:#737373!important;opacity:1}
+body.n8iv-content-page .newsletter-input:focus-visible{outline:2px solid #5c45bf!important;outline-offset:3px;border-color:#5c45bf!important}
+body.n8iv-content-page .newsletter-input:-webkit-autofill{-webkit-text-fill-color:#161616!important;-webkit-box-shadow:0 0 0 1000px #ffffff inset!important}
+body.n8iv-content-page .newsletter-status:not(:empty){background:#f0f0f0!important;border-color:#dedede!important;color:#464646!important}
+body.n8iv-content-page .newsletter-status.error{color:#b42318!important}
+body.n8iv-content-page .newsletter-status.success{color:#0e7a55!important}
+body.n8iv-content-page .newsletter-input:user-invalid{border-color:#b42318!important}
+
+/* Wordmarks and inline forward actions match the shared vector system. */
+body.n8iv-content-page .footer,body.n8iv-content-page .trust-footer{background:#ffffff!important;border-top:1px solid #dedede;box-shadow:none!important}
+body.n8iv-content-page .footer-logo-wrap img,body.n8iv-content-page .trust-brand img{display:block;width:210px;max-width:100%;height:auto}
+body.n8iv-content-page .footer-logo-wrap>a{display:block;max-width:100%}
+body.n8iv-content-page .footer :is(p,a,.brand-word),body.n8iv-content-page .trust-footer :is(a,span){color:#626262!important}
+body.n8iv-content-page .footer a:hover,body.n8iv-content-page .trust-footer a:hover{color:#5c45bf!important}
+body.n8iv-content-page a>.n8iv-icon{vertical-align:middle;flex:none}
+body.n8iv-content-page .n8iv-inline-arrow{margin-left:8px}
+body.n8iv-content-page .mobile-conversion-bar{background:#ffffff!important;border-color:#dedede!important;box-shadow:none!important}
+body.n8iv-content-page .mobile-conversion-bar span{color:#626262}
+
+@media(max-width:800px){
+ body.n8iv-content-page .trust-toc{position:static;top:auto}
+ body.n8iv-content-page:has(.n8iv-header) .trust-hero{padding-top:120px}
+ body.n8iv-content-page .trust-nav-inner{flex-wrap:wrap;row-gap:12px}
+ body.n8iv-content-page .trust-nav{position:relative;top:auto;height:auto;min-height:76px;padding-block:16px}
+ body.n8iv-content-page .trust-nav-links{flex-wrap:wrap;gap:18px}
+}
+@media(prefers-reduced-motion:reduce){body.n8iv-content-page *,body.n8iv-content-page *::before,body.n8iv-content-page *::after{transition:none!important}}
