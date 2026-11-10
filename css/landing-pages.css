@@ -1,0 +1,80 @@
+/* Neutral customer journey treatment for /start and the 404 page.
+   Load after flow-pages.css and content-pages.css; preserve landing.js states. */
+body.n8iv-start-page{
+ --lp-display:clamp(40px,5.4vw,76px);--stone:#626262;
+ --anchor-bg:#ffffff;--surface-tint:#f0f0f0;--hairline-strong:#b8b8b8;
+ background:#ffffff!important;color:#161616
+}
+body.n8iv-start-page .lp-header{background:#ffffff!important;border-color:#dedede!important}
+body.n8iv-start-page .lp-header-inner{min-height:78px}
+body.n8iv-start-page .lp-brand{display:inline-flex;max-width:100%}
+body.n8iv-start-page .lp-brand img{display:block;width:230px;max-width:100%;height:auto}
+body.n8iv-start-page :is(.lp-header-note,.lp-eyebrow,.lp-num,.lp-q-step,.lp-q-note,.lp-final-note){color:#626262!important}
+body.n8iv-start-page :is(.lp-h1,.lp-h2,.lp-accent,.lp-q-card legend,.lp-sign strong){color:#161616!important}
+body.n8iv-start-page :is(.lp-hero,.lp-section,.lp-founder-section,.lp-footer){background:#ffffff!important;border-color:#dedede!important;box-shadow:none!important}
+body.n8iv-start-page .lp-dark{
+ --paper:#ffffff;--white:#ffffff;--black:#161616;--stone:#626262;--ink:#161616;--muted:#626262;--border:#dedede;
+ --on-dark:#161616;--on-dark-2:#464646;--on-dark-muted:#626262;--band:#f0f0f0;--anchor-bg:#ffffff;
+ background:#f0f0f0!important;color:#161616!important;box-shadow:none!important
+}
+body.n8iv-start-page :is(.lp-q-card,.lp-get){background:#ffffff!important;border:1px solid #dedede!important;border-radius:12px!important;box-shadow:none!important}
+body.n8iv-start-page .lp-q-card legend{font-family:Inter,Arial,sans-serif;font-weight:500}
+body.n8iv-start-page .lp-q-options button{
+ min-height:56px;background:#ffffff!important;color:#464646!important;border:1px solid #929292!important;
+ border-radius:8px!important;font:400 15px/1.4 Inter,Arial,sans-serif!important;box-shadow:none!important
+}
+body.n8iv-start-page .lp-q-options button:is(:hover,:focus-visible){background:#f7f7f7!important;color:#161616!important;border-color:#5c45bf!important}
+body.n8iv-start-page .lp-q-options button[aria-pressed="true"]{background:#f0f0f0!important;color:#161616!important;border:2px solid #5c45bf!important;font-weight:500!important}
+body.n8iv-start-page :is(.lp-areas li,.lp-get-list li){color:#626262!important;border-color:#dedede!important}
+body.n8iv-start-page :is(.lp-areas strong,.lp-get-list strong,.lp-ticks,.lp-faq summary){color:#161616!important}
+body.n8iv-start-page .lp-areas li>span{color:#626262!important}
+body.n8iv-start-page :is(.lp-pains article,.lp-steps li,.lp-faq details){border-color:#dedede!important}
+body.n8iv-start-page .lp-ticks li::before,
+body.n8iv-start-page .lp-get-list li::before{
+ content:"";display:block;flex:none;width:20px;height:20px;border-radius:0;background:#5c45bf!important;
+ -webkit-mask:url("/assets/icons/flow-check.svg") center/contain no-repeat;mask:url("/assets/icons/flow-check.svg") center/contain no-repeat;pointer-events:none
+}
+body.n8iv-start-page .lp-get-list li::before{top:2px}
+body.n8iv-start-page .lp-faq summary::after{
+ content:""!important;display:block;flex:none;width:20px;height:20px;background:#5c45bf!important;
+ -webkit-mask:url("/assets/icons/flow-plus.svg") center/contain no-repeat;mask:url("/assets/icons/flow-plus.svg") center/contain no-repeat;
+ transform:none;transition:transform .2s;pointer-events:none
+}
+body.n8iv-start-page .lp-faq details[open] summary::after{transform:rotate(45deg)}
+body.n8iv-start-page .lp-footer{border-top:1px solid #dedede}
+body.n8iv-start-page .lp-footer a{color:#626262!important}
+body.n8iv-start-page .lp-footer a:hover{color:#5c45bf!important}
+body.n8iv-start-page .lp-sticky{background:#ffffff!important;border-color:#dedede!important;box-shadow:none!important}
+body.n8iv-start-page .lp-sticky span{color:#626262!important}
+body.n8iv-start-page .lp-sticky strong{color:#161616!important}
+@layer n8iv-buttons{
+ body.n8iv-start-page [data-lp-cta]::after{
+  content:""!important;display:block!important;flex:none;width:20px;height:20px;background:currentColor!important;
+  -webkit-mask:url("/assets/icons/flow-arrow-up-right.svg") center/contain no-repeat;mask:url("/assets/icons/flow-arrow-up-right.svg") center/contain no-repeat;pointer-events:none
+ }
+}
+
+/* Keep the not-found page short, legible and aligned with the legal navigation. */
+body.n8iv-not-found-page{min-height:100dvh;display:flex;flex-direction:column}
+body.n8iv-not-found-page :is(.trust-nav,.trust-footer){flex:none}
+body.n8iv-not-found-page main.trust-shell{flex:1;padding-block:96px!important}
+body.n8iv-not-found-page :is(.trust-title,.trust-lead){margin-inline:auto}
+body.n8iv-not-found-page .trust-title{max-width:18ch}
+body.n8iv-not-found-page main.trust-shell>p:last-child{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin-top:32px}
+body.n8iv-not-found-page .n8iv-return-icon{transform:rotate(180deg)}
+
+@media(max-width:640px){
+ body.n8iv-start-page .lp-header-inner{min-height:70px}
+ body.n8iv-start-page .lp-brand img{width:200px}
+ body.n8iv-start-page .lp-q-card,body.n8iv-start-page .lp-get{padding:24px}
+ @layer n8iv-buttons{body.n8iv-start-page .lp-sticky .btn{padding-inline:16px!important;gap:10px!important}}
+ body.n8iv-not-found-page main.trust-shell{padding-block:64px!important}
+ body.n8iv-not-found-page main.trust-shell>p:last-child .btn{width:100%;justify-content:center}
+}
+@media(max-width:360px){
+ body.n8iv-start-page .lp-brand img{width:180px}
+ body.n8iv-start-page .lp-q-options{grid-template-columns:1fr}
+ body.n8iv-start-page .lp-sticky{gap:8px;padding-inline:12px}
+ body.n8iv-start-page .lp-sticky span{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){body.n8iv-start-page .lp-faq summary::after{transition:none}}
