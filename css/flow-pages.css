@@ -66,7 +66,7 @@ body.n8iv-flow-page .request-fields{gap:26px;margin-top:36px}
 body.n8iv-flow-page :is(.request-field label,.lead-field label){display:block;font:500 14px/1.5 Inter,Arial,sans-serif!important;text-transform:none;letter-spacing:0;color:#161616!important}
 body.n8iv-flow-page .request-req{color:#5c45bf}
 body.n8iv-flow-page .request-field :is(input,textarea),body.n8iv-flow-page .lead-field input{
- width:100%;background:#ffffff!important;color:#161616!important;border:1px solid #a8a8a8!important;border-radius:8px!important;
+ width:100%;background:#ffffff!important;color:#161616!important;border:1px solid #929292!important;border-radius:8px!important;
  padding:15px 16px!important;min-height:54px;font:400 16px/1.5 Inter,Arial,sans-serif!important;letter-spacing:0;box-shadow:none!important;caret-color:#5c45bf
 }
 body.n8iv-flow-page .request-field textarea{min-height:140px;resize:vertical}
@@ -105,7 +105,7 @@ body.n8iv-flow-page .audit-aside li{font-size:13px;line-height:1.65;color:#62626
 body.n8iv-flow-page .audit-aside li span{border-color:#b8b8b8;color:#161616;font-weight:400}
 body.n8iv-flow-page .audit-question{padding:28px 0;border-color:#dedede}
 body.n8iv-flow-page .audit-question legend{font-size:17px;font-weight:500;line-height:1.55}
-body.n8iv-flow-page .audit-option label{background:#ffffff!important;color:#464646!important;border:1px solid #a8a8a8!important;border-radius:8px!important;min-height:62px;font-size:14px;line-height:1.5;font-weight:400}
+body.n8iv-flow-page .audit-option label{background:#ffffff!important;color:#464646!important;border:1px solid #929292!important;border-radius:8px!important;min-height:62px;font-size:14px;line-height:1.5;font-weight:400}
 body.n8iv-flow-page .audit-option input:checked+label{background:#f0f0f0!important;color:#161616!important;border:2px solid #5c45bf!important;font-weight:500}
 body.n8iv-flow-page .audit-option input:focus-visible+label{outline:2px solid #5c45bf!important;outline-offset:3px}
 body.n8iv-flow-page .audit-progress{background:#dedede}
@@ -156,7 +156,7 @@ body.n8iv-flow-page .ed-motion{border-color:#b8b8b8;color:#626262;background:#ff
   background:#161616!important;color:#ffffff!important;font:500 14px/1.4 Inter,Arial,sans-serif!important;box-shadow:none!important
  }
  body.n8iv-flow-page :is(.btn,.pilot-btn,.audit-btn):hover{background:#333333!important;color:#ffffff!important;border-color:#333333!important}
- body.n8iv-flow-page :is(.btn-secondary,.btn-ghost,.btn-ghost-dark){background:#ffffff!important;color:#161616!important;border-color:#a8a8a8!important}
+ body.n8iv-flow-page :is(.btn-secondary,.btn-ghost,.btn-ghost-dark){background:#ffffff!important;color:#161616!important;border-color:#929292!important}
  body.n8iv-flow-page :is(.btn-secondary,.btn-ghost,.btn-ghost-dark):hover{background:#f0f0f0!important;color:#161616!important;border-color:#161616!important}
  body.n8iv-flow-page :is(.btn,.pilot-btn,.audit-btn) .n8iv-icon{width:20px!important;height:20px!important}
  body.n8iv-flow-page :is(.audit-btn,.pilot-btn,.request-actions .btn,.request-done-actions .btn,.audit-panel>a.btn,[data-next])::after{
@@ -243,3 +243,10 @@ body.n8iv-flow-page .faq-list details[open] summary::after,body.n8iv-flow-page [
 }
 
 body.n8iv-flow-page .pilot-ticket li::before{content:""!important;display:block;width:20px;height:20px;flex:none;background:#5c45bf!important;-webkit-mask:url("/assets/icons/flow-check.svg") center/contain no-repeat;mask:url("/assets/icons/flow-check.svg") center/contain no-repeat;pointer-events:none}
+
+/* Keep validation feedback distinct from the neutral status surface. */
+body.n8iv-flow-page .request-screen .form-status.error{color:#b42318!important}
+body.n8iv-flow-page .request-screen .form-status.success{color:#0e7a55!important}
+body.n8iv-flow-page .request-field :is(input,textarea)[aria-invalid="true"],
+body.n8iv-flow-page .request-field :is(input,textarea):user-invalid,
+body.n8iv-flow-page .lead-field input[aria-invalid="true"]{border-color:#b42318!important}
