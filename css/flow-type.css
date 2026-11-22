@@ -1,0 +1,476 @@
+/* Shared typography and spacing for the audit, contact and attribution pilot.
+   Load after flow-pages.css. This file changes no form or disclosure states. */
+body.n8iv-flow-page:is(.n8iv-audit-page, .n8iv-contact-page, .n8iv-pilot-page) {
+  --flow-space-copy: clamp(1.25rem,1rem + 1vw,2rem);
+  font-size: var(--type-body);
+  line-height: 1.7;
+}
+
+/* Contact: a clear title, full-size explanations and consistent field rhythm. */
+body.n8iv-flow-page.n8iv-contact-page section.request-screen {
+  padding-block: clamp(2rem, 4vw, 4.5rem) var(--space-section) !important;
+}
+
+body.n8iv-flow-page.n8iv-contact-page .request-title {
+  font-size: min(var(--type-display), 4.5rem) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -.04em !important;
+  max-width: 20ch;
+}
+
+body.n8iv-flow-page.n8iv-contact-page .request-sub {
+  font-size: var(--type-body) !important;
+  line-height: 1.75 !important;
+  margin-top: var(--flow-space-copy);
+  max-width: 64ch;
+}
+
+body.n8iv-flow-page.n8iv-contact-page .request-fields {
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+body.n8iv-flow-page.n8iv-contact-page .request-actions {
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+body.n8iv-flow-page.n8iv-contact-page .request-note {
+  font-size: var(--type-small) !important;
+  line-height: 1.65 !important;
+  margin-top: 1rem;
+}
+
+body.n8iv-flow-page.n8iv-contact-page .request-done-actions {
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+body.n8iv-flow-page.n8iv-contact-page .request-screen :is(.form-status, .contact-context) {
+  font-size: var(--type-small);
+  line-height: 1.7;
+}
+
+body.n8iv-flow-page.n8iv-contact-page .contact-context {
+  margin-bottom: 2rem;
+}
+
+body.n8iv-flow-page.n8iv-contact-page .request-expect {
+  padding-block: var(--space-section);
+}
+
+body.n8iv-flow-page.n8iv-contact-page .request-expect-title {
+  font-size: var(--type-title) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -.04em !important;
+  max-width: 22ch;
+  margin: 0 auto clamp(2rem,4vw,3rem);
+}
+
+body.n8iv-flow-page.n8iv-contact-page .expect-grid {
+  gap: 1.5rem;
+}
+
+body.n8iv-flow-page.n8iv-contact-page .contact-detail-label {
+  font-size: var(--type-label);
+  line-height: 1.5;
+}
+
+body.n8iv-flow-page.n8iv-contact-page .expect-grid .contact-detail-value {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  letter-spacing: -.02em;
+  margin-top: .5rem;
+}
+
+body.n8iv-flow-page.n8iv-contact-page .expect-grid .contact-detail-note {
+  font-size: var(--type-body);
+  line-height: 1.7;
+  margin-top: .75rem;
+}
+
+body.n8iv-flow-page.n8iv-contact-page .request-more {
+  grid-template-columns: minmax(0,1fr);
+  margin-top: 1.5rem;
+}
+
+body.n8iv-flow-page.n8iv-contact-page .request-alt {
+  font-size: var(--type-small);
+  line-height: 1.65;
+  gap: 1rem 1.5rem;
+}
+
+/* Audit: distinguish the introduction, section questions and optional email copy. */
+body.n8iv-flow-page.n8iv-audit-page .audit-page {
+  padding-bottom: var(--space-section);
+}
+
+body.n8iv-flow-page.n8iv-audit-page .audit-top {
+  margin-bottom: var(--space-section);
+}
+
+body.n8iv-flow-page.n8iv-audit-page :is(.audit-kicker, .audit-step-label, .audit-progress-copy) {
+  font-size: var(--type-label) !important;
+  line-height: 1.5;
+  letter-spacing: .06em;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .audit-title {
+  font-size: var(--type-display) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -.045em !important;
+  margin: 1.25rem 0 var(--flow-space-copy);
+  max-width: 14ch;
+}
+
+body.n8iv-flow-page.n8iv-audit-page :is(.audit-intro, .audit-step-intro, .result-copy) {
+  font-size: var(--type-body);
+  line-height: 1.75;
+  max-width: 62ch;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .audit-meta {
+  gap: 1rem 1.5rem;
+  margin: 2rem 0;
+}
+
+body.n8iv-flow-page.n8iv-audit-page :is(.audit-meta span, .audit-note, .audit-exit, .audit-aside li, .result-handoff-note, .result-followup, .consent-row) {
+  font-size: var(--type-small);
+  line-height: 1.65;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .audit-note {
+  max-width: 60ch;
+  margin-top: 1rem;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .audit-aside {
+  padding: clamp(1.5rem,2.5vw,2rem) !important;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .audit-aside>strong {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .audit-aside ol {
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .audit-progress-wrap {
+  margin-bottom: 2.5rem;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .audit-panel>h2 {
+  font-size: var(--type-title) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -.04em !important;
+  margin: 1rem 0 1.25rem;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .audit-step-intro {
+  margin-bottom: 2rem;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .audit-question {
+  padding-block: 1.75rem;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .audit-question legend {
+  font-size: var(--type-body);
+  font-weight: 500;
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .audit-option label {
+  font-size: var(--type-small);
+  line-height: 1.5;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .audit-actions {
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .audit-error {
+  font-size: var(--type-small);
+  line-height: 1.65;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .result-score {
+  font-size: clamp(4.5rem,10vw,7.5rem);
+  line-height: 1;
+  letter-spacing: -.06em;
+  font-variant-numeric: tabular-nums;
+  margin: 2rem 0 1rem;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .result-band {
+  font-size: var(--type-subtitle);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -.025em;
+  margin-bottom: 1rem;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .result-grid {
+  margin: 2rem 0;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .result-row {
+  padding: 1.5rem;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .result-row span {
+  font-size: var(--type-small);
+  line-height: 1.5;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .result-row strong {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .result-followup {
+  margin-bottom: 2rem;
+}
+
+body.n8iv-flow-page.n8iv-audit-page [data-lead-panel] {
+  margin-top: 2.5rem;
+  padding-top: .75rem;
+}
+
+body.n8iv-flow-page.n8iv-audit-page [data-lead-panel]>summary {
+  font-size: var(--type-small);
+  line-height: 1.5;
+}
+
+body.n8iv-flow-page.n8iv-audit-page [data-lead-panel]>h2 {
+  font-size: var(--type-subtitle) !important;
+  line-height: 1.25 !important;
+  letter-spacing: -.025em !important;
+  margin: 1.5rem 0 1rem;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .lead-fields {
+  gap: 1.5rem;
+}
+
+body.n8iv-flow-page.n8iv-audit-page .consent-row {
+  margin-top: 1.5rem;
+}
+
+/* Pilot: the same heading scale, readable evidence and measured section gaps. */
+body.n8iv-flow-page.n8iv-pilot-page .ed-pilot-hero {
+  padding-top: calc(78px + var(--space-section));
+  padding-bottom: var(--space-section);
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .ed-pilot-hero .pilot-title {
+  font-size: var(--type-display) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -.045em !important;
+  max-width: 17ch;
+  margin: 0 0 clamp(2.5rem,5vw,4rem);
+}
+
+body.n8iv-flow-page.n8iv-pilot-page :is(.pilot-lead, .trust-lead, .pilot-list, .pilot-card p, .faq-list details p, .pilot-cta p) {
+  font-size: var(--type-body) !important;
+  line-height: 1.75;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page :is(.pilot-lead, .trust-lead, .pilot-cta p) {
+  max-width: 62ch;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .ed-start-compact {
+  margin-top: 2.5rem;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .ed-start-title {
+  font-size: var(--type-small) !important;
+  line-height: 1.5 !important;
+  letter-spacing: .04em !important;
+  font-weight: 500 !important;
+  margin-bottom: 1.5rem;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .ed-start-compact .ed-steps {
+  gap: 1.5rem;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .ed-steps h3 {
+  font-size: 1.125rem;
+  line-height: 1.4;
+  margin: .25rem 0 .5rem;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .ed-steps p {
+  font-size: var(--type-body);
+  line-height: 1.7;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .pilot-ticket {
+  padding: clamp(1.5rem,3vw,2rem);
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .pilot-price {
+  font-size: var(--type-display) !important;
+  line-height: 1 !important;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .pilot-ticket :is(li,dt,dd, .pilot-ticket-label) {
+  font-size: var(--type-small);
+  line-height: 1.7;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .pilot-terms-title {
+  font-size: var(--type-label);
+  line-height: 1.5;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .pilot-section {
+  padding-block: var(--space-section);
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .pilot-section .chapter-meta {
+  margin-bottom: clamp(2rem,4vw,3rem);
+}
+
+body.n8iv-flow-page.n8iv-pilot-page :is(.chapter-meta, .pilot-card-num, .trust-kicker) {
+  font-size: var(--type-label) !important;
+  line-height: 1.5;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .pilot-heading,
+body.n8iv-flow-page.n8iv-pilot-page .pilot-cta h2 {
+  font-size: var(--type-title) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -.04em !important;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .pilot-heading {
+  margin-bottom: 2rem;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .pilot-card h3 {
+  font-size: clamp(1.375rem,1.2rem + .6vw,1.75rem);
+  line-height: 1.25;
+  letter-spacing: -.025em;
+  margin: 1.5rem 0 1rem;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .pilot-card p {
+  margin-bottom: 0;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .pilot-list li {
+  font-size: var(--type-body);
+  line-height: 1.7;
+  padding-block: 1rem;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .pilot-note {
+  font-size: var(--type-small);
+  line-height: 1.7;
+  margin-top: 1.5rem;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .ed-stagger-small {
+  font-size: var(--type-title);
+  line-height: 1.12;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .ed-stagger-big {
+  font-size: var(--type-display);
+  line-height: 1.06;
+  letter-spacing: -.045em;
+  margin-top: .2em;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .ed-cinema {
+  margin-bottom: var(--space-section);
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .receipt-sample {
+  padding: clamp(1.125rem,3vw,2rem);
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .receipt-sample h3 {
+  font-size: var(--type-subtitle);
+  line-height: 1.25;
+  letter-spacing: -.025em;
+  margin-bottom: 1.5rem;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .receipt-sample :is(table, .receipt-sample-summary,figcaption) {
+  font-size: var(--type-small);
+  line-height: 1.65;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .receipt-sample .receipt-sample-label {
+  font-size: var(--type-label);
+  line-height: 1.5;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .receipt-sample .receipt-sample-summary {
+  margin: 1.5rem 0 .75rem;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .faq-list summary {
+  font-size: clamp(1.125rem,1rem + .4vw,1.375rem);
+  line-height: 1.45;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .pilot-cta {
+  padding-block: var(--space-section);
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .pilot-cta h2 {
+  margin-bottom: 1.5rem;
+}
+
+body.n8iv-flow-page.n8iv-pilot-page .pilot-cta p {
+  margin-bottom: 2rem;
+}
+
+@media(max-width:800px) {
+  body.n8iv-flow-page.n8iv-audit-page .audit-layout {
+    gap: 2.5rem;
+  }
+
+  body.n8iv-flow-page.n8iv-contact-page .request-fields {
+    margin-top: 2rem;
+  }
+
+  body.n8iv-flow-page.n8iv-pilot-page .ed-pilot-hero {
+    padding-top: calc(70px + var(--space-section));
+  }
+
+  body.n8iv-flow-page.n8iv-pilot-page :is(.pilot-grid, .pilot-two) {
+    gap: 2rem;
+  }
+
+}
+
+@media(max-width:480px) {
+  body.n8iv-flow-page.n8iv-audit-page .audit-top {
+    margin-bottom: 2.5rem;
+  }
+
+  body.n8iv-flow-page.n8iv-audit-page .result-row {
+    padding: 1.25rem;
+  }
+
+  body.n8iv-flow-page.n8iv-contact-page .expect-grid .contact-detail {
+    padding: 1.5rem;
+  }
+
+  body.n8iv-flow-page.n8iv-contact-page .request-alt {
+    padding: 1.25rem;
+  }
+
+}

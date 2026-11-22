@@ -1,0 +1,42 @@
+/* Shared scale for the N8iV site. The responsive sizes are in rem so
+   browser text preferences apply to headings, captions and navigation. */
+:root {
+  --type-display: clamp(2.75rem, 2.15rem + 3.7vw, 5.5rem);
+  --type-title: clamp(2rem, 1.55rem + 2.3vw, 3.75rem);
+  --type-subtitle: clamp(1.375rem, 1.12rem + 1.05vw, 2rem);
+  --type-body: 1rem;
+  --type-small: 0.875rem;
+  --type-label: 0.75rem;
+  --space-section: clamp(3.5rem, 2.25rem + 5vw, 7rem);
+}
+
+body.n8iv-flow-page #n8iv-navigation > a,
+body.n8iv-flow-page #n8iv-navigation .n8iv-header-cta {
+  font-size: var(--type-small);
+  line-height: 1.4;
+}
+
+body.n8iv-flow-page .footer-main {
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  padding-block: clamp(2.25rem, 4vw, 4rem) clamp(1.5rem, 3vw, 3rem);
+}
+
+body.n8iv-flow-page .footer-col h4 {
+  margin-block: 0 0.5rem;
+  font-size: var(--type-label);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+body.n8iv-flow-page .footer-col ul a,
+body.n8iv-flow-page .footer-tagline {
+  font-size: var(--type-small);
+  line-height: 1.55;
+}
+
+body.n8iv-flow-page .footer-bottom,
+body.n8iv-flow-page .footer-bottom-links a,
+body.n8iv-flow-page .trust-footer-inner {
+  font-size: var(--type-label);
+  line-height: 1.5;
+}

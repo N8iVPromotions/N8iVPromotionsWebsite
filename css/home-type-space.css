@@ -1,0 +1,187 @@
+/* Homepage type and spacing. Load after production-home.css and type-space.css.
+   Animation geometry, media positioning, content and icon sizes stay with the
+   original homepage stylesheet. */
+body.n8iv-home {
+  font-size:var(--type-body,1rem);
+  line-height:1.7;
+}
+body.n8iv-home h2 {
+  font-size:var(--type-title,clamp(2rem,1.55rem + 2.3vw,3.75rem));
+  line-height:1.14;
+  font-weight:400;
+  letter-spacing:-.035em;
+  overflow-wrap:normal;
+}
+body.n8iv-home h3 {
+  font-size:var(--type-subtitle,clamp(1.375rem,1.12rem + 1.05vw,2rem));
+  line-height:1.25;
+  font-weight:450;
+  letter-spacing:-.025em;
+}
+body.n8iv-home :is(
+  .receipt-intro>p:not(.section-kicker),.journey-note p,.approach-row p,
+  .offers-heading p,.offer-description p,.founder-copy p,.questions details p
+) {
+  font-size:var(--type-body,1rem);
+  line-height:1.7;
+}
+body.n8iv-home :is(
+  .main-navigation,.menu-toggle .menu-label,.hero-ticket,.hero-path,
+  .receipt-pilot,.outline-link,.journey-receipt-link,.offer-action,
+  .pilot-action,.review-stamp,.founder-link,.receipt-tabs button,
+  .receipt-sheet-top,.receipt-standards summary,.footer-top nav,
+  .footer-bottom,.footer-bottom nav
+) {
+  font-size:var(--type-small,.875rem);
+  line-height:1.5;
+}
+body.n8iv-home :is(
+  .section-kicker,.source-stack p,.offer-name .offer-cost,.illustrative,
+  .evidence-status,.receipt-sheet-bottom,.founder-portrait figcaption,
+  .pilot-price>span
+) {
+  font-size:var(--type-label,.75rem);
+  line-height:1.5;
+}
+body.n8iv-home .section-kicker { margin-bottom:1.25rem;letter-spacing:.1em; }
+body.n8iv-home .evidence-journey .scroll-scrub__title {
+  font-size:var(--type-display,clamp(2.75rem,2.15rem + 3.7vw,5.5rem));
+  line-height:1.06;
+  letter-spacing:-.045em;
+  max-width:17ch;
+}
+body.n8iv-home .evidence-journey .scroll-scrub__kicker {
+  font-size:var(--type-label,.75rem);
+  line-height:1.5;
+  letter-spacing:.08em;
+  margin-bottom:1.25rem;
+}
+body.n8iv-home .evidence-journey .scroll-scrub__body {
+  font-size:var(--type-body,1rem);
+  line-height:1.7;
+  max-width:48ch;
+  margin-top:1.25rem;
+}
+body.n8iv-home .evidence-journey .scroll-scrub__actions { margin-top:1.5rem; }
+body.n8iv-home .journey-note h2 { font-size:var(--type-title,clamp(2rem,1.55rem + 2.3vw,3.75rem));line-height:1.14; }
+body.n8iv-home .journey-note p { margin-top:1.25rem; }
+
+body.n8iv-home :is(.receipt-section,.offers-section,.founder-section) {
+  padding-block:var(--space-section,clamp(3.5rem,2.25rem + 5vw,7rem));
+}
+body.n8iv-home .approach-section {
+  padding-block:var(--space-section,clamp(3.5rem,2.25rem + 5vw,7rem));
+}
+body.n8iv-home .receipt-section {
+  gap:clamp(3rem,6vw,5rem);
+  align-items:start;
+}
+body.n8iv-home .receipt-intro h2 { max-width:14ch; }
+body.n8iv-home .receipt-intro>p:not(.section-kicker) { max-width:40ch;margin-top:1.5rem; }
+body.n8iv-home .receipt-pilot { margin-top:1.75rem;min-height:3rem; }
+body.n8iv-home .outline-link { margin-top:1rem;min-height:3rem; }
+body.n8iv-home .receipt-sheet-top { flex-wrap:wrap;row-gap:.5rem; }
+body.n8iv-home .receipt-tabs { margin-top:1.5rem; }
+body.n8iv-home .receipt-tabs button { min-height:3rem; }
+body.n8iv-home .receipt-panel { min-height:24rem;padding-top:1.5rem; }
+body.n8iv-home .finding-heading { align-items:flex-start;flex-wrap:wrap;gap:.75rem; }
+body.n8iv-home .finding-heading h3 { font-size:min(var(--type-subtitle,1.75rem),1.75rem);line-height:1.25; }
+body.n8iv-home .finding-copy {
+  font-size:var(--type-body,1rem);
+  line-height:1.7;
+  min-height:0;
+  margin-top:1.25rem;
+}
+body.n8iv-home .evidence-details { margin-top:1.5rem; }
+body.n8iv-home .evidence-details>div {
+  grid-template-columns:5.25rem minmax(0,1fr);
+  gap:1rem;
+  padding-block:1rem;
+  font-size:var(--type-small,.875rem);
+  line-height:1.6;
+}
+body.n8iv-home .evidence-boundary {
+  font-size:var(--type-small,.875rem);
+  line-height:1.6;
+  margin-top:.75rem;
+}
+body.n8iv-home .receipt-sheet-bottom { margin-top:1.5rem;padding-top:1rem; }
+body.n8iv-home .receipt-standards { max-width:40ch;margin-top:1.5rem; }
+body.n8iv-home .receipt-standards summary { min-height:3.25rem; }
+body.n8iv-home .receipt-standards :is(dt,dd) { font-size:var(--type-small,.875rem);line-height:1.6; }
+body.n8iv-home .receipt-standards>p { font-size:var(--type-small,.875rem);line-height:1.6;margin-top:1rem; }
+
+body.n8iv-home .approach-title { margin-bottom:clamp(2rem,4vw,3.5rem); }
+body.n8iv-home .approach-title h2 { font-size:var(--type-title,clamp(2rem,1.55rem + 2.3vw,3.75rem));max-width:12ch; }
+body.n8iv-home .approach-row { padding-block:1.75rem; }
+body.n8iv-home .approach-row h3 { font-size:var(--type-subtitle,clamp(1.375rem,1.12rem + 1.05vw,2rem));line-height:1.25; }
+body.n8iv-home .approach-row p { max-width:42ch; }
+
+body.n8iv-home .offers-heading { margin-bottom:clamp(2rem,4vw,3.5rem); }
+body.n8iv-home .offers-heading p { max-width:52ch; }
+body.n8iv-home .offer-ledger>div,
+body.n8iv-home .offer-ledger>a { padding-block:2rem; }
+body.n8iv-home .offer-name h3 { font-size:var(--type-subtitle,clamp(1.375rem,1.12rem + 1.05vw,2rem));line-height:1.25;max-width:15ch; }
+body.n8iv-home .offer-description strong { font-size:var(--type-body,1rem);line-height:1.5;font-weight:500; }
+body.n8iv-home .offer-description p { max-width:48ch;margin-top:.75rem; }
+body.n8iv-home .pilot-price { font-size:var(--type-title,clamp(2rem,1.55rem + 2.3vw,3.75rem));line-height:1.1; }
+body.n8iv-home .pilot-note { font-size:var(--type-small,.875rem);line-height:1.7;max-width:80ch;margin-top:1.5rem; }
+
+body.n8iv-home .founder-story { gap:clamp(2rem,6vw,5rem); }
+body.n8iv-home .founder-copy h2 { font-size:var(--type-title,clamp(2rem,1.55rem + 2.3vw,3.75rem));line-height:1.14; }
+body.n8iv-home .founder-copy p { max-width:54ch;margin-top:1.5rem; }
+body.n8iv-home .founder-copy p+p { margin-top:1rem; }
+body.n8iv-home .questions-layout { margin-top:var(--space-section,clamp(3.5rem,2.25rem + 5vw,7rem)); }
+body.n8iv-home .questions summary { font-size:clamp(1rem,.91rem + .4vw,1.25rem);line-height:1.5;letter-spacing:-.015em;min-height:4.5rem;padding-block:1.25rem; }
+body.n8iv-home .questions details p { padding-bottom:1.5rem; }
+body.n8iv-home .closing-section { min-height:clamp(28rem,50vw,38rem); }
+body.n8iv-home .closing-inner {
+  min-height:inherit;
+  padding-block:var(--space-section,clamp(3.5rem,2.25rem + 5vw,7rem));
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:3rem;
+}
+body.n8iv-home .closing-inner h2 { font-size:var(--type-title,clamp(2rem,1.55rem + 2.3vw,3.75rem));line-height:1.14;max-width:20ch; }
+body.n8iv-home .closing-ticket { margin-top:0;font-size:var(--type-body,1rem); }
+body.n8iv-home .closing-ticket>small { font-size:var(--type-label,.75rem);line-height:1.5; }
+body.n8iv-home .site-footer { padding-block:2rem; }
+body.n8iv-home .footer-top nav,
+body.n8iv-home .footer-bottom nav { gap:.75rem 1.5rem; }
+body.n8iv-home .footer-bottom { margin-top:1.5rem; }
+
+/* Preserve authored sentence breaks while letting the smaller section-title
+   level keep each phrase readable on narrow screens. */
+@media(max-width:860px) {
+  body.n8iv-home .evidence-journey .scroll-scrub__title { font-size:clamp(2.5rem,10vw,3.5rem);max-width:18ch;line-height:1.08; }
+  body.n8iv-home .evidence-journey .scroll-scrub__kicker { max-width:40ch;margin-bottom:1rem; }
+  body.n8iv-home .hero-actions { flex-wrap:wrap;gap:1rem 1.375rem; }
+  body.n8iv-home .receipt-section { gap:2.5rem; }
+  body.n8iv-home .receipt-intro h2 { max-width:18ch; }
+  body.n8iv-home .receipt-intro>p:not(.section-kicker) { max-width:52ch; }
+  body.n8iv-home .receipt-panel { min-height:0; }
+  body.n8iv-home .receipt-standards { max-width:52ch; }
+  body.n8iv-home .approach-row { padding-block:1.5rem;row-gap:.75rem; }
+  body.n8iv-home .approach-row p { margin-top:0; }
+  body.n8iv-home .offer-ledger>div,
+  body.n8iv-home .offer-ledger>a { padding-block:1.75rem;gap:1.25rem; }
+  body.n8iv-home .offer-name h3 { max-width:none; }
+  body.n8iv-home .questions-layout { gap:1.5rem; }
+  body.n8iv-home .questions details p { padding-right:0; }
+  body.n8iv-home .closing-inner { gap:2.5rem; }
+  body.n8iv-home .closing-ticket>span { gap:1rem;padding-inline:1rem; }
+  body.n8iv-home .closing-ticket>small { padding-inline:.875rem; }
+}
+@media(max-width:480px) {
+  body.n8iv-home .finding-heading { gap:.625rem; }
+  body.n8iv-home .evidence-details>div { grid-template-columns:1fr;gap:.375rem; }
+  body.n8iv-home .questions summary { gap:1rem; }
+}
+@media(max-height:650px) and (min-width:600px) {
+  body.n8iv-home .evidence-journey .scroll-scrub__title { font-size:clamp(2rem,4.8vw,3.25rem);line-height:1.06;max-width:20ch; }
+  body.n8iv-home .evidence-journey .scroll-scrub__kicker { font-size:.6875rem;line-height:1.4;margin-bottom:.75rem; }
+  body.n8iv-home .evidence-journey .scroll-scrub__body { font-size:var(--type-small,.875rem);line-height:1.5;margin-top:.75rem;max-width:60ch; }
+  body.n8iv-home .evidence-journey .scroll-scrub__actions { margin-top:1rem; }
+}
