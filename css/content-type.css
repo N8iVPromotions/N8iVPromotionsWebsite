@@ -1,0 +1,222 @@
+/* Editorial, service, trust and entry pages. Keep navigation and form hit areas independent of the reading scale. */
+body.n8iv-content-page {
+  --content-header-height: 4.875rem;
+  --content-intro-space: clamp(2.25rem, 1.25rem + 3vw, 4.5rem);
+  --content-stack: clamp(1.5rem, 1rem + 1.5vw, 2.5rem);
+  --content-measure: 64ch;
+}
+
+/* A single top inset accounts for the fixed header on marketing and article pages. */
+body.n8iv-content-page :is(.hero, .article-hero) {
+  padding-block: calc(var(--content-header-height) + var(--content-intro-space)) var(--content-intro-space) !important;
+}
+
+body.n8iv-content-page .hero .hero-content,
+body.n8iv-content-page .hero .hero-content > .hero-cta:last-child {
+  padding-bottom: 0;
+}
+
+body.n8iv-content-page .hero-content > .hero-cta {
+  margin-top: var(--content-stack);
+}
+
+body.n8iv-content-page :is(.section, .section-lg, .lp-section) {
+  padding-block: var(--space-section);
+}
+
+body.n8iv-content-page .section-sm {
+  padding-block: var(--content-intro-space);
+}
+
+body.n8iv-content-page :is(.hero h1, .article-title, .trust-title, .lp-h1) {
+  max-width: 22ch !important;
+  font-size: min(var(--type-display), clamp(2.25rem, 1.5rem + 3.75vw, 4.5rem)) !important;
+  font-weight: 400 !important;
+  line-height: 1.07;
+  letter-spacing: -.045em !important;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+body.n8iv-content-page :is(.hero h1, .article-title, .trust-title) {
+  margin-block: 0 1.25rem !important;
+}
+
+body.n8iv-content-page :is(.display-md, .cta-section h2, .cs-headline, .lp-h2) {
+  font-size: min(var(--type-title), 3rem) !important;
+  font-weight: 425 !important;
+  line-height: 1.14;
+  letter-spacing: -.035em !important;
+  text-wrap: balance;
+}
+
+body.n8iv-content-page :is(.method-card h3, .article-card h3, .lp-pains h3, .lp-steps h3) {
+  font-size: min(var(--type-subtitle), 1.625rem);
+  font-weight: 500 !important;
+  line-height: 1.25;
+  letter-spacing: -.025em;
+}
+
+body.n8iv-content-page :is(.hero-sub, .article-deck, .trust-lead, .lp-lead) {
+  max-width: 56ch;
+  font-size: clamp(1.0625rem, 1rem + .35vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+body.n8iv-content-page :is(.hero-sub, .article-deck, .trust-lead) {
+  margin-block: 0;
+}
+
+body.n8iv-content-page :is(.eyebrow, .article-kicker, .trust-kicker, .lp-eyebrow) {
+  min-height: 0;
+  padding: 0 !important;
+  margin-block: 0 .875rem;
+  font-size: var(--type-label) !important;
+  font-weight: 550 !important;
+  line-height: 1.4 !important;
+  letter-spacing: .045em;
+}
+
+/* Trust labels retain their inset inside the existing outlined pill. */
+body.n8iv-content-page .trust-kicker {
+  padding: .25rem .625rem !important;
+}
+
+body.n8iv-content-page :is(.section-label, .section-label-inline) {
+  margin-bottom: var(--content-stack);
+}
+
+body.n8iv-content-page :is(.section-label, .section-label-inline) .eyebrow:only-child {
+  margin-bottom: 0;
+}
+
+body.n8iv-content-page :is(.body, .body-md, .cs-body-text, .article-excerpt, .featured-excerpt, .lp-body) {
+  max-width: var(--content-measure);
+  font-size: var(--type-body);
+  line-height: 1.65;
+}
+
+body.n8iv-content-page :is(.feature-card, .audit-step) h4 {
+  font-size: var(--type-body);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+body.n8iv-content-page :is(.feature-card, .audit-step) p {
+  font-size: var(--type-small);
+  line-height: 1.6;
+}
+
+body.n8iv-content-page .featured-card {
+  padding: clamp(1.25rem, .75rem + 2vw, 2.75rem);
+  gap: var(--content-stack);
+}
+
+body.n8iv-content-page .featured-headline {
+  font-size: min(var(--type-title), 2.625rem);
+  font-weight: 450 !important;
+  line-height: 1.15;
+  letter-spacing: -.035em !important;
+}
+
+body.n8iv-content-page .article-card {
+  padding-block: var(--content-stack);
+  gap: 1rem;
+}
+
+body.n8iv-content-page :is(.article-cat, .featured-tag, .featured-meta, .article-meta, .trust-meta, .lp-q-step) {
+  font-size: var(--type-label);
+  line-height: 1.5;
+}
+
+/* Longer articles use a subordinate section title and a steady paragraph rhythm. */
+body.n8iv-content-page .article-body {
+  max-width: var(--content-measure);
+  font-size: clamp(1rem, .955rem + .25vw, 1.125rem);
+}
+
+body.n8iv-content-page .article-body :is(p, li) {
+  font-size: inherit;
+  line-height: 1.7;
+}
+
+body.n8iv-content-page .article-body p {
+  margin: 0 0 1.125em;
+}
+
+body.n8iv-content-page :is(.article-body, .trust-copy) h2 {
+  max-width: 32ch;
+  margin: var(--content-stack) 0 .65em;
+  font-size: var(--type-subtitle);
+  font-weight: 500 !important;
+  letter-spacing: -.025em !important;
+  line-height: 1.2;
+}
+
+body.n8iv-content-page :is(.article-body, .trust-copy section) > :first-child {
+  margin-top: 0;
+}
+
+body.n8iv-content-page .article-callout {
+  margin-block: var(--content-stack);
+  padding: 1.125rem 1.5rem;
+  font-size: clamp(1.0625rem, 1rem + .4vw, 1.25rem);
+  line-height: 1.55;
+}
+
+body.n8iv-content-page .trust-hero,
+body.n8iv-content-page .lp-hero {
+  padding-block: var(--content-intro-space);
+}
+
+body.n8iv-content-page .trust-layout {
+  padding-block: var(--content-intro-space) var(--space-section);
+}
+
+body.n8iv-content-page .trust-copy section {
+  margin-bottom: var(--content-stack);
+  padding-bottom: var(--content-stack);
+}
+
+body.n8iv-content-page .trust-copy :is(p, li) {
+  max-width: var(--content-measure);
+  font-size: var(--type-body);
+  line-height: 1.65;
+}
+
+body.n8iv-content-page .trust-copy p + p {
+  margin-top: 1em;
+}
+
+body.n8iv-content-page .lp-lead {
+  margin-top: 1.25rem;
+}
+
+body.n8iv-content-page .lp-q-card legend {
+  font-size: min(var(--type-subtitle), 1.5rem);
+  line-height: 1.3;
+}
+
+body.n8iv-content-page .lp-q-note {
+  font-size: var(--type-small);
+  line-height: 1.55;
+}
+
+body.n8iv-not-found-page main.trust-shell {
+  padding-block: var(--space-section) !important;
+}
+
+@media (max-width: 800px) {
+  body.n8iv-content-page {
+    --content-header-height: 4.375rem;
+  }
+
+  body.n8iv-content-page :is(.article-frame, .trust-layout, .two-col, .cs-layout, .founder-grid, .philosophy-cols, .lp-hero-grid) {
+    gap: var(--content-stack);
+  }
+
+  body.n8iv-content-page .trust-hero .trust-title {
+    max-width: 20ch !important;
+  }
+}
