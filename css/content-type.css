@@ -30,7 +30,7 @@ body.n8iv-content-page .section-sm {
 
 body.n8iv-content-page :is(.hero h1, .article-title, .trust-title, .lp-h1) {
   max-width: 22ch !important;
-  font-size: min(var(--type-display), 4.5rem) !important;
+  font-size: min(var(--type-display), clamp(2.25rem, 1.5rem + 3.75vw, 4.5rem)) !important;
   font-weight: 400 !important;
   line-height: 1.07;
   letter-spacing: -.045em !important;
