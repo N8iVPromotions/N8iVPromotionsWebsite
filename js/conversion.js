@@ -12,7 +12,7 @@
     'fbclid', 'msclkid', 'li_fat_id', 'ttclid', 'twclid', 'sccid'
   ];
   const campaignStorageKey = 'n8iv_conversion_campaign_v1';
-  const reviewCalendarUrl = 'https://calendar.app.google/oahGzxrEsXUGS6oBA';
+  const reviewCalendarUrl = 'https://meetings-na2.hubspot.com/zajen/agency-fit-review';
 
   // Install the documented queue before a deferred analytics module loads.
   // A blocked or unavailable analytics script never blocks navigation.
