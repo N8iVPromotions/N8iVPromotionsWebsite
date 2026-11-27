@@ -71,7 +71,9 @@
   }
   function preserveBookingQuery(link) {
     try {
-      const url = new URL(link.getAttribute('href'), window.location.href);
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#')) return;
+      const url = new URL(href, window.location.href);
       if (url.origin !== window.location.origin || pathOf(url) !== '/book') return;
       const params = new URLSearchParams();
       Object.entries(campaign).forEach(([key, value]) => params.set(key, value));
@@ -94,7 +96,7 @@
   document.querySelectorAll('a[href]').forEach(preserveBookingQuery);
   document.addEventListener('click', event => {
     const link = event.target instanceof Element ? event.target.closest('a[href]') : null;
-    if (!link) return;
+    if (!link || link.getAttribute('href').startsWith('#')) return;
     preserveBookingQuery(link);
     try {
       const url = new URL(link.getAttribute('href'), window.location.href);
