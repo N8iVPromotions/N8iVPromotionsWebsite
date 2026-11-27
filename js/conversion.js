@@ -15,6 +15,7 @@
   const campaignStorageKey = 'n8iv_conversion_campaign_v1';
   const meetingsOrigins = new Set([
     'https://meetings.hubspot.com',
+    'https://meetings-na2.hubspot.com',
     'https://meetings-eu1.hubspot.com'
   ]);
 

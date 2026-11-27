@@ -4,6 +4,6 @@ window.N8iVConversionConfig = Object.freeze({
   // TODO: Real client quote from Joseph Gennaro, Founder, Inside Narrative Media.
   quote: '',
   quoteAttribution: 'Joseph Gennaro, Founder, Inside Narrative Media',
-  // TODO: HUBSPOT_MEETINGS_URL. Paste the HTTPS meetings.hubspot.com or meetings-eu1.hubspot.com scheduling link.
-  meetingsUrl: ''
+  // HubSpot’s existing N8iV scheduling page. Reuse the owner’s current availability.
+  meetingsUrl: 'https://meetings-na2.hubspot.com/zajen'
 });

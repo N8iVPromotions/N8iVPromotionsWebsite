@@ -76,3 +76,13 @@ test('the self-audit is optional and shown only in the home footer', () => {
   assert.doesNotMatch(booking, /href="\/revenue-self-audit"/);
   assert.match(booking, /No questionnaire or data upload/);
 });
+
+test('the Fit Review uses the verified regional calendar and keeps a direct link', () => {
+  const url = 'https://meetings-na2.hubspot.com/zajen';
+  assert.ok(read('js/conversion-config.js').includes("meetingsUrl: '" + url + "'"));
+  assert.ok(read('js/conversion.js').includes("'https://meetings-na2.hubspot.com'"));
+  assert.ok(booking.includes('href="' + url + '"'));
+  assert.match(booking, /Select 30 mins/);
+  assert.match(booking, /data-meetings-embed/);
+  assert.match(booking, /mailto:/);
+});
