@@ -10,7 +10,7 @@ const booking = read('book.html');
 const routes = JSON.parse(read('vercel.json'));
 
 test('paid visitors see the price and booking action before the receipt', () => {
-  assert.match(pilot, /Find out which ads actually paid off\./);
+  assert.match(pilot, /Bring one client’s budget question\./);
   assert.match(pilot, /noindex,\s*follow/i);
   const firstBook = pilot.indexOf('href="/book"');
   assert.ok(firstBook > pilot.indexOf('$750'));
@@ -29,10 +29,12 @@ test('paid visitors see the price and booking action before the receipt', () => 
 test('both receipts clearly identify the illustrative data and optional quote', () => {
   for (const page of [homepage, pilot]) {
     assert.match(page, /Illustrative sample, not client data\./i);
-    for (const figure of ['$18,400', '$41,250', '2.2x']) assert.ok(page.includes(figure));
+    for (const figure of ['$18,400', '$41,250', '$36,800', '$4,450']) assert.ok(page.includes(figure));
     assert.match(page, /data-fit-quote/);
     assert.doesNotMatch(page, /\[TODO: real client quote\]/);
-    assert.match(page, /\[TODO: X\]/);
+    assert.doesNotMatch(page, /\[TODO: X\]|Proven return/i);
+    assert.match(page, /Payments linked to Meta/);
+    assert.match(page, /Payments still unresolved/);
   }
 });
 
@@ -43,7 +45,10 @@ test('the three primary routes use the booking destination and sentence punctuat
     const visible = page.replace(/<!--[\s\S]*?-->|<[^>]+>/g, ' ');
     assert.doesNotMatch(visible, /[—–]|&(?:mdash|ndash|#(?:8211|8212));/i);
   }
-  assert.match(booking, /Book your fit call/);
+  assert.match(booking, /Request a free agency Fit Review/);
+  assert.match(booking, /Email Zajen to request a time/);
+  assert.match(homepage, /Revenue attribution for performance agencies/);
+  assert.match(pilot, /the \$750 pilot fee is credited to your first month/);
 });
 
 test('legacy routes use HTTP 301 and only indexable pages appear in the sitemap', () => {
