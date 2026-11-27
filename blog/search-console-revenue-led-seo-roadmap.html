@@ -87,20 +87,37 @@
 <script src="/js/motion-init.js"></script>
 <link rel="stylesheet" href="/css/saas.css">
 <link rel="stylesheet" href="/css/clarity-system.css">
-<link rel="stylesheet" href="/css/navigation.css"><script src="/js/navigation.js" defer></script><link rel="stylesheet" href="/css/flow-pages.css">
+<link rel="stylesheet" href="/css/flow-pages.css">
 <link rel="stylesheet" href="/css/content-pages.css">
 
 <link rel="stylesheet" href="/css/type-space.css">
 <link rel="stylesheet" href="/css/content-type.css">
+<link rel="stylesheet" href="/css/conversion.css">
+<script src="/js/conversion-config.js" defer></script>
+<script src="/js/conversion.js" defer></script>
 </head>
 <body class="n8iv-flow-page n8iv-content-page">
-<a class="skip-link" href="#main-content">Skip to main content</a>
+<a class="conversion-skip" href="#main">Skip to main content</a>
+<header class="conversion-header">
+  <div class="conversion-shell conversion-header-inner">
+    <a class="conversion-brand" href="/" aria-label="N8iV Promotions home">
+      <img src="/assets/clarity/logo.svg" width="1000" height="150" alt="N8iV Promotions">
+    </a>
+    <button class="conversion-menu-toggle" type="button" aria-expanded="false" aria-controls="conversion-navigation">
+      <span>Menu</span>
+      <svg class="conversion-menu-open" width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><use href="/assets/icons/homepage-icons.svg#list"></use></svg>
+      <svg class="conversion-menu-close" width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><use href="/assets/icons/homepage-icons.svg#x"></use></svg>
+    </button>
+    <nav id="conversion-navigation" class="conversion-navigation" aria-label="Main navigation">
+      <a href="/#how">How it works</a>
+      <a href="/#price">Pricing</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <a class="conversion-button conversion-header-cta" href="/book" data-location="header">Book a fit call</a>
+  </div>
+</header>
 
-
-<header class="n8iv-header"><a class="n8iv-header-brand" href="/" aria-label="N8iV Promotions home"><img src="/assets/clarity/logo.svg" alt="N8iV Promotions" width="1000" height="150"></a><button class="n8iv-menu-toggle" aria-label="Open navigation" aria-controls="n8iv-navigation" aria-expanded="false"><svg class="n8iv-icon n8iv-menu-open" width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><use href="/assets/icons/n8iv-ui.svg#list"></use></svg><svg class="n8iv-icon n8iv-menu-close" width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><use href="/assets/icons/n8iv-ui.svg#x"></use></svg></button><nav id="n8iv-navigation" aria-label="Main navigation"><a href="/#approach">Our approach</a><a href="/#receipt">Revenue Receipt</a><a href="/insights">Insights</a><a href="/#pilot">The pilot</a><a class="n8iv-header-cta" href="/revenue-self-audit">Start the free self-audit <svg class="n8iv-icon" width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false"><use href="/assets/icons/n8iv-ui.svg#arrow-up-right"></use></svg></a></nav></header>
-
-
-
+<main id="main" tabindex="-1">
 <header class="article-hero">
   <div class="wrap">
     <a href="/insights" class="article-kicker"><span>Insights</span><span>SEO Strategy</span><span>April 14, 2026</span><span>5 min read</span></a>
@@ -109,7 +126,7 @@
   </div>
 </header>
 
-<main id="main-content" tabindex="-1" class="section bg-page">
+<div class="section bg-page">
   <div class="wrap article-frame">
     <article class="article-body">
       <p>Google Search Console is one of the most useful sources in a B2B marketing stack. It shows the queries that earn impressions, the pages Google chooses to rank, the positions those pages occupy, and the clicks searchers make.</p>
@@ -195,10 +212,10 @@
         <div class="meter-row"><span>Demand</span><div class="meter-track"><div class="meter-fill" style="width: 82%;"></div></div></div>
         <div class="meter-row"><span>Fit</span><div class="meter-track"><div class="meter-fill green" style="width: 68%;"></div></div></div>
       </div>
-      <a href="/revenue-self-audit" class="btn btn-primary btn-sm">Start the free self-audit</a>
+      <a href="/revenue-self-audit" data-location="article" class="btn btn-primary btn-sm">Start the free self-audit</a>
     </aside>
   </div>
-</main>
+</div>
 
 <section class="section bg-dark">
   <div class="wrap on-dark" style="text-align: center;">
@@ -206,26 +223,27 @@
     <h2 class="display-md reveal stagger-1" style="margin: 8px auto 0; max-width: 640px;">Build the SEO roadmap around evidence.</h2>
     <p class="lead reveal stagger-2" style="margin: 16px auto 0;">N8iV connects search demand, CRM visibility, and revenue evidence so the next SEO priority is easier to defend.</p>
     <div class="cta-actions reveal stagger-3">
-      <a href="/revenue-self-audit" class="btn btn-green btn-xl">Start the free self-audit</a>
+      <a href="/revenue-self-audit" data-location="article" class="btn btn-green btn-xl">Start the free self-audit</a>
     </div>
   </div>
 </section>
 
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-main">
-      <div class="footer-brand">
-        <div class="footer-logo-wrap"><a href="/" aria-label="N8iV Promotions home"><img src="/assets/clarity/logo.svg" width="1000" height="150" alt="N8iV Promotions"></a></div>
-        <p class="footer-tagline">Closed-loop revenue attribution for B2B marketing teams.</p>
-        <a href="/revenue-self-audit" class="btn btn-primary btn-sm">Start the free self-audit</a>
-      </div>
-      <div class="footer-col"><h4>Platform</h4><ul><li><a href="/#approach">How It Works</a></li><li><a href="/#receipt">Dashboard</a></li><li><a href="/revenue-self-audit">Free Self-Audit</a></li><li><a href="/services">All Services</a></li></ul></div>
-      <div class="footer-col"><h4>Company</h4><ul><li><a href="/about">About</a></li><li><a href="/use-cases">Use Cases</a></li><li><a href="/insights">Insights</a></li><li><a href="/contact">Contact</a></li></ul></div>
-      <div class="footer-col"><h4>Connect</h4><ul><li><a href="/contact">Contact</a></li></ul></div>
-    </div>
-      <div class="footer-bottom"><span>&copy; 2026 N8iV Promotions LLC.</span><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/security">Security</a><a href="/contact">Contact</a></div></div>
+
+</main>
+
+<footer class="conversion-footer">
+  <div class="conversion-shell conversion-footer-inner">
+    <p>© 2026 N8iV Promotions LLC</p>
+    <nav aria-label="Footer">
+      <a href="/insights">Insights</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/security">Security</a>
+      <a href="https://www.instagram.com/n8ivpromotions/">Instagram</a>
+    </nav>
   </div>
 </footer>
+
 
 <script src="/js/main.js" defer></script>
 <script type="module" src="/js/analytics.js"></script>

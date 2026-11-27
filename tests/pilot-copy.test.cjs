@@ -3,90 +3,88 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 
-const html = fs.readFileSync(path.join(__dirname, '../b2b-attribution-pilot.html'), 'utf8');
+const read = name => fs.readFileSync(path.join(__dirname, '..', name), 'utf8');
+const pilot = read('pilot.html');
+const homepage = read('index.html');
+const booking = read('book.html');
+const routes = JSON.parse(read('vercel.json'));
 
-test('pilot copy excludes unsupported deliverable promises', () => {
-  for (const phrase of [
-    'confidence range', 'stress test', 'budget split', 'designed test',
-    'test design', 'scale, test, repair', 'each channel actually produced', 'how sure',
-  ]) {
-    assert.ok(!html.toLowerCase().includes(phrase), `Unexpected phrase: ${phrase}`);
+test('paid visitors see the price and booking action before the receipt', () => {
+  assert.match(pilot, /Bring one client’s budget question\./);
+  assert.doesNotMatch(pilot, /noindex/i);
+  const firstBook = pilot.indexOf('href="/book"');
+  assert.ok(firstBook > pilot.indexOf('$750'));
+  assert.ok(pilot.indexOf('$750') > 0);
+  assert.ok(firstBook < pilot.indexOf('$18,400'));
+  const header = pilot.match(/<header\b[^>]*>([\s\S]*?)<\/header>/i);
+  assert.ok(header, 'The pilot has a logo header');
+  assert.doesNotMatch(header[1], /<nav\b|<a\b/i);
+  assert.doesNotMatch(pilot, /href="\/revenue-self-audit"/i);
+  const footer = pilot.match(/<footer\b[^>]*>([\s\S]*?)<\/footer>/i);
+  assert.ok(footer, 'The pilot has a legal footer');
+  assert.deepEqual(Array.from(footer[1].matchAll(/href="([^"]+)"/g), m => m[1]), ['/privacy', '/terms']);
+  assert.match(pilot, /data-location="pilot_sticky"/);
+});
+
+test('both receipts clearly identify the illustrative data and optional quote', () => {
+  for (const page of [homepage, pilot]) {
+    assert.match(page, /Illustrative sample, not client data\./i);
+    for (const figure of ['$18,400', '$41,250', '$36,800', '$4,450']) assert.ok(page.includes(figure));
+    assert.match(page, /data-fit-quote/);
+    assert.doesNotMatch(page, /\[TODO: real client quote\]/);
+    assert.doesNotMatch(page, /\[TODO: X\]|Proven return/i);
+    assert.match(page, /Payments linked to Meta/);
+    assert.match(page, /Payments still unresolved/);
   }
 });
 
-test('pilot meta description promises a Revenue Receipt without em or en dashes', () => {
-  const description = html.match(/<meta name="description" content="([^"]*)"/);
-  assert.ok(description, 'Meta description exists');
-  assert.match(description[1], /Revenue Receipt/);
-  assert.doesNotMatch(description[1], /[—–]/);
+test('the three primary routes use the booking destination and sentence punctuation', () => {
+  for (const page of [homepage, pilot, booking]) {
+    assert.match(page, /<main\b[^>]*\bid="main"/);
+    assert.doesNotMatch(page, /href="\/contact(?:[?#"]|\.html)/);
+    const visible = page.replace(/<!--[\s\S]*?-->|<[^>]+>/g, ' ');
+    assert.doesNotMatch(visible, /[—–]|&(?:mdash|ndash|#(?:8211|8212));/i);
+  }
+  assert.match(booking, /Request a free agency Fit Review/);
+  assert.match(booking, /Email Zajen to request a time/);
+  assert.match(homepage, /Revenue attribution for performance agencies/);
+  assert.match(pilot, /the \$750 pilot fee is credited to your first month/);
 });
 
-test('price card limits attributed revenue to payments linked to a tracked ad source', () => {
-  const card = html.match(/<aside class="pilot-ticket">([\s\S]*?)<\/aside>/);
-  assert.ok(card, 'Price card exists');
-  assert.match(card[1], /<li>Attributed revenue only where a payment links to a tracked ad source<\/li>/);
-});
-
-const visibleText = markup => markup.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-
-test('pilot hero uses approved platform-neutral copy', () => {
-  const h1 = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/);
-  const lede = html.match(/<p class="pilot-lead">([\s\S]*?)<\/p>/);
-  assert.ok(h1 && lede, 'Hero heading and lede exist');
-  assert.equal(visibleText(h1[1]), 'Match your ad spend to real deals and payments.');
-  assert.equal(visibleText(lede[1]), 'We review your ad, CRM, and payment records by hand. You see which revenue ties to a tracked ad source, which money is unresolved, and what to fix in your tracking.');
-  for (const text of [h1[1], lede[1]]) assert.doesNotMatch(text, /Meta|HubSpot/);
-});
-
-test('data safety FAQ precedes readiness FAQ and explains access and retention', () => {
-  const faq = html.match(/<section[^>]*id="faq"[\s\S]*?<\/section>/);
-  assert.ok(faq, 'FAQ exists');
-  const answer = '<details><summary>Is my data safe?</summary><p>N8iV uses read-only access to your ad and CRM accounts and never changes your records, campaigns, or settings. Bank account numbers are cut to the last 4 digits, and original bank files are deleted 30 days after you accept your Receipt.</p></details>';
-  assert.ok(faq[0].includes(answer));
-  assert.ok(faq[0].indexOf(answer) < faq[0].indexOf("Will you tell us if we're not ready?"));
-});
-
-test('sample Receipt is illustrative and distinguishes matched from attributed revenue', () => {
-  const receive = html.match(/<section[^>]*id="receive"[\s\S]*?<\/section>/);
-  assert.ok(receive);
-  assert.match(receive[0], /<\/ul>\s*<figure class="receipt-sample">/);
-  const sample = receive[0].match(/<figure class="receipt-sample">([\s\S]*?)<\/figure>/);
-  assert.ok(sample);
-  assert.match(sample[1], /Illustrative sample, not client data/);
-  assert.match(sample[1], /Revenue Receipt, sample month/);
-  const rows = [...sample[1].matchAll(/<tr>([\s\S]*?)<\/tr>/g)].map(row =>
-    [...row[1].matchAll(/<t[hd]\b[^>]*>(.*?)<\/t[hd]>/g)].map(cell => cell[1]));
-  assert.deepEqual(rows, [
-    ['Payment', 'Amount', 'Status', 'Reason'],
-    ['Invoice 1042, bank transfer', '$4,800', 'Matched', 'Linked to deal Brand refresh. Source: tracked paid social campaign.'],
-    ['Invoice 1047, card', '$1,250', 'Matched', 'Linked to deal Q4 retainer. Source: organic search, not paid.'],
-    ['Bank deposit, no reference', '$2,000', 'Unresolved', 'No invoice or deal number. Payer needs confirming.'],
-    ['Owner transfer', '$5,000', 'Excluded', 'Not a customer payment.'],
-  ]);
-  assert.ok(sample[1].includes('Matched $6,050. Unresolved $2,000. Excluded $5,000. Attributed to a tracked ad source: $4,800.'));
-  assert.ok(sample[1].includes('<figcaption>A real Receipt lists every payment in the month, with the evidence behind each status.</figcaption>'));
-  assert.doesNotMatch(sample[1], /ed-accent/);
-});
-
-test('pilot and supporting pages use a complete month instead of a 30-day window', () => {
-  for (const file of ['b2b-attribution-pilot.html', 'index.html', 'about.html', 'contact.html']) {
-    const page = fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
-    assert.doesNotMatch(page, /30-day/i, file);
-    assert.match(page, /your last complete month of ad spend/i, file);
+test('legacy routes use HTTP 301 and only indexable pages appear in the sitemap', () => {
+  for (const [source, destination] of Object.entries({
+    '/b2b-attribution-pilot': '/pilot', '/services': '/', '/use-cases': '/',
+    '/about': '/', '/contact': '/book', '/blog/:slug': '/insights/:slug'
+  })) {
+    assert.ok(routes.redirects.some(r => r.source === source && r.destination === destination && r.statusCode === 301), source);
+  }
+  const locations = Array.from(read('sitemap.xml').matchAll(/<loc>([^<]+)<\/loc>/g), m => new URL(m[1]).pathname);
+  for (const route of ['/', '/pilot', '/book']) assert.ok(locations.includes(route));
+  assert.match(homepage, /href="\/pilot"/);
+  assert.match(homepage, /id="receipt"/);
+  assert.ok(locations.includes('/revenue-self-audit'));
+  for (const old of ['/services', '/use-cases', '/about', '/contact', '/b2b-attribution-pilot']) {
+    assert.ok(!locations.includes(old), old);
   }
 });
 
-test('changed pilot visible copy contains no em or en dashes', () => {
-  const regions = [
-    /<header class="pilot-hero[\s\S]*?<\/header>/,
-    /<section[^>]*id="receive"[\s\S]*?<\/section>/,
-    /<section[^>]*id="how-it-works"[\s\S]*?<\/section>/,
-    /<section[^>]*id="faq"[\s\S]*?<\/section>/,
-    /<section class="pilot-cta">[\s\S]*?<\/section>/,
-  ];
-  for (const pattern of regions) {
-    const region = html.match(pattern);
-    assert.ok(region, `Changed region exists: ${pattern}`);
-    assert.doesNotMatch(visibleText(region[0]), /[—–]|&(?:mdash|ndash|#(?:8211|8212)|#x201[34]);/i);
-  }
+test('the self-audit is optional and shown only in the home footer', () => {
+  const main = homepage.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i);
+  const footer = homepage.match(/<footer\b[^>]*>([\s\S]*?)<\/footer>/i);
+  assert.ok(main && footer);
+  assert.match(main[1], /href="\/book"\s+data-location="home_hero"/);
+  assert.doesNotMatch(main[1], /href="\/revenue-self-audit"/);
+  assert.match(footer[1], /href="\/revenue-self-audit"\s+data-location="home_footer"/);
+  assert.doesNotMatch(booking, /href="\/revenue-self-audit"/);
+  assert.match(booking, /No questionnaire or data upload/);
+});
+
+test('the Fit Review uses the verified regional calendar and keeps a direct link', () => {
+  const url = 'https://meetings-na2.hubspot.com/zajen';
+  assert.ok(read('js/conversion-config.js').includes("meetingsUrl: '" + url + "'"));
+  assert.ok(read('js/conversion.js').includes("'https://meetings-na2.hubspot.com'"));
+  assert.ok(booking.includes('href="' + url + '" data-meetings-direct'));
+  assert.match(booking, /Select 30 mins/);
+  assert.match(booking, /data-meetings-embed/);
+  assert.match(booking, /mailto:/);
 });
