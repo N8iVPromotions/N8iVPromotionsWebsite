@@ -1,7 +1,6 @@
-/* Shared navigation, conversion events and optional HubSpot Meetings embed.
+/* Shared navigation, campaign links and conversion events.
    Static-site event shape follows the Vercel Web Analytics client API.
-   https://vercel.com/docs/analytics/custom-events
-   https://knowledge.hubspot.com/meetings-tool/embed-the-meeting-widget-on-a-page */
+   https://vercel.com/docs/analytics/custom-events */
 (function () {
   'use strict';
   if (window.N8iVConversion) return;
@@ -13,11 +12,9 @@
     'fbclid', 'msclkid', 'li_fat_id', 'ttclid', 'twclid', 'sccid'
   ];
   const campaignStorageKey = 'n8iv_conversion_campaign_v1';
-  const meetingsOrigins = new Set([
-    'https://meetings.hubspot.com',
-    'https://meetings-na2.hubspot.com',
-    'https://meetings-eu1.hubspot.com'
-  ]);
+  const calendarCampaignKeys = [
+    'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'utm_source_platform'
+  ];
 
   // Install the documented queue before a deferred analytics module loads.
   // A blocked or unavailable analytics script never blocks navigation.
@@ -30,7 +27,7 @@
 
   function track(name, values) {
     try {
-      if (!['cta_click', 'audit_link_click', 'audit_complete', 'call_booked'].includes(name)) return;
+      if (!['cta_click', 'audit_link_click', 'audit_complete'].includes(name)) return;
       const data = {};
       if ((name === 'cta_click' || name === 'audit_link_click') && typeof values?.location === 'string') {
         data.location = values.location.slice(0, 80);
@@ -101,6 +98,10 @@
     preserveBookingQuery(link);
     try {
       const url = new URL(link.getAttribute('href'), window.location.href);
+      if (link.matches('[data-meetings-direct]') && url.origin === 'https://meetings-na2.hubspot.com' && url.pathname === '/zajen') {
+        track('cta_click', { location: 'book_calendar' });
+        return;
+      }
       if (url.origin !== window.location.origin) return;
       const location = link.dataset.location || (link.closest('header') ? 'header' : 'page');
       if (pathOf(url) === '/book') track('cta_click', { location });
@@ -155,94 +156,15 @@
 
   window.N8iVConversion = Object.freeze({ track });
 
-  const calendar = document.querySelector('[data-booking]');
-  const embed = document.querySelector('[data-meetings-embed]');
-  if (!document.body.classList.contains('conversion-book') || !calendar || !embed) return;
-  const status = document.querySelector('[data-booking-status]');
-  const fallback = document.querySelector('[data-booking-fallback]');
-  let confirmed = false;
-  let timeout;
-
-  function setBookingState(state) {
-    calendar.dataset.bookingState = state;
-    embed.hidden = state === 'fallback';
-    if (fallback) fallback.hidden = false;
-    if (status) status.textContent = state === 'loading' ? 'Loading available times.' : '';
-  }
-  function failBooking() {
-    clearTimeout(timeout);
-    setBookingState('fallback');
-  }
-  let meetingsUrl;
-  try {
-    meetingsUrl = new URL(config.meetingsUrl);
-    if (!meetingsOrigins.has(meetingsUrl.origin) || meetingsUrl.username || meetingsUrl.password || meetingsUrl.pathname === '/') {
-      throw new Error('Invalid scheduling link');
-    }
-    meetingsUrl.searchParams.set('embed', 'true');
-    Object.entries(campaign).forEach(([key, value]) => {
-      if (!meetingsUrl.searchParams.has(key)) meetingsUrl.searchParams.set(key, value);
-    });
-    // The official embed forwards the parent query. Remove only temporary
-    // preview-access parameters before loading third-party calendar code.
-    const pageUrl = new URL(window.location.href);
-    const privateKeys = Array.from(pageUrl.searchParams.keys()).filter(isPrivatePreviewParameter);
-    if (privateKeys.length) {
-      privateKeys.forEach(key => pageUrl.searchParams.delete(key));
-      window.history.replaceState(window.history.state, '', pageUrl.pathname + pageUrl.search + pageUrl.hash);
-    }
-  } catch (_) { failBooking(); return; }
-
   const directLink = document.querySelector('[data-meetings-direct]');
-  if (directLink) {
-    const directUrl = new URL(meetingsUrl);
-    directUrl.search = '';
-    for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'utm_source_platform']) {
+  if (!directLink) return;
+  try {
+    const directUrl = new URL(directLink.href);
+    if (directUrl.origin !== 'https://meetings-na2.hubspot.com' || directUrl.pathname !== '/zajen' ||
+        directUrl.username || directUrl.password) return;
+    for (const key of calendarCampaignKeys) {
       if (campaign[key]) directUrl.searchParams.set(key, campaign[key]);
     }
     directLink.href = directUrl.href;
-  }
-  embed.dataset.src = meetingsUrl.href;
-  setBookingState('loading');
-  function onFrameReady() {
-    clearTimeout(timeout);
-    setBookingState('ready');
-  }
-  function observeFrames() {
-    embed.querySelectorAll('iframe').forEach(frame => {
-      if (frame.dataset.conversionObserved) return;
-      frame.dataset.conversionObserved = 'true';
-      if (!frame.title) frame.title = 'Book a free 30-minute fit call with Zajen';
-      frame.addEventListener('load', onFrameReady, { once: true });
-      frame.addEventListener('error', failBooking, { once: true });
-    });
-  }
-  const observer = new MutationObserver(observeFrames);
-  observer.observe(embed, { childList: true, subtree: true });
-  observeFrames();
-  window.addEventListener('message', event => {
-    if (!meetingsOrigins.has(event.origin) || event.origin !== meetingsUrl.origin) return;
-    const fromCalendar = Array.from(embed.querySelectorAll('iframe')).some(frame => event.source === frame.contentWindow);
-    if (!fromCalendar || !event.data || typeof event.data !== 'object' || Array.isArray(event.data)) return;
-    if (event.data.meetingBookSucceeded !== true || confirmed) return;
-    confirmed = true;
-    onFrameReady();
-    track('call_booked');
-    // Keep the existing GA4 lead event for confirmed bookings on the live site only.
-    try {
-      if (window.location.hostname === 'www.n8ivpromotions.com' && !window['ga-disable-G-HXEBK6Y9LJ'] &&
-          localStorage.getItem('n8iv_ga_opt_out') !== '1') {
-        window.gtag?.('event', 'generate_lead', { form_id: 'agency_fit_review_booking' });
-      }
-    } catch (_) { /* Measurement must never interrupt booking. */ }
-  });
-
-  timeout = window.setTimeout(() => {
-    if (calendar.dataset.bookingState === 'loading') failBooking();
-  }, 15000);
-  const script = document.createElement('script');
-  script.src = 'https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js';
-  script.async = true;
-  script.addEventListener('error', failBooking, { once: true });
-  document.body.appendChild(script);
+  } catch (_) { /* The original native link remains usable. */ }
 })();
