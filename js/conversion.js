@@ -128,7 +128,7 @@
     document.addEventListener('click', event => {
       if (!header.contains(event.target)) setMenuOpen(false, false);
     });
-    const desktop = window.matchMedia('(min-width: 768px)');
+    const desktop = window.matchMedia('(min-width: 861px)');
     desktop.addEventListener?.('change', event => { if (event.matches) setMenuOpen(false, false); });
     setMenuOpen(false, false);
     header.classList.add('is-enhanced');
