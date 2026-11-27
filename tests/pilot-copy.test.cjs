@@ -65,3 +65,14 @@ test('legacy routes use HTTP 301 and only indexable pages appear in the sitemap'
     assert.ok(!locations.includes(old), old);
   }
 });
+
+test('the self-audit is optional and shown only in the home footer', () => {
+  const main = homepage.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i);
+  const footer = homepage.match(/<footer\b[^>]*>([\s\S]*?)<\/footer>/i);
+  assert.ok(main && footer);
+  assert.match(main[1], /href="\/book"\s+data-location="home_hero"/);
+  assert.doesNotMatch(main[1], /href="\/revenue-self-audit"/);
+  assert.match(footer[1], /href="\/revenue-self-audit"\s+data-location="home_footer"/);
+  assert.doesNotMatch(booking, /href="\/revenue-self-audit"/);
+  assert.match(booking, /No questionnaire or data upload/);
+});
