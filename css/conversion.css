@@ -615,6 +615,7 @@ html:has(> body.n8iv-content-page > .conversion-header) {
   .conversion-header .conversion-header-inner { gap: 4px; padding-inline: 18px; }
   .conversion-brand { flex-basis: 180px; width: 180px; }
   .conversion-header .conversion-header-cta { padding-inline: 12px; }
+  .conversion-header .conversion-header-cta::after { display: none; }
   .conversion-footer .conversion-footer-inner { padding-inline: 22px; }
 }
 
@@ -657,7 +658,7 @@ html:has(> body.n8iv-content-page > .conversion-header) {
 }
 @media(prefers-reduced-motion:no-preference) {
   .conversion-home .conversion-home-art img {
-    animation:conversion-home-optical-drift 18s ease-in-out infinite alternate;
+    animation:conversion-home-optical-drift 4.5s ease-out both;
   }
 }
 @keyframes conversion-home-optical-drift {
