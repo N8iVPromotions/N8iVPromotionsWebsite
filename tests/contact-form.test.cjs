@@ -18,6 +18,23 @@ test('confirmed request sends one GA4 generate_lead without form data',async()=>
 test('confirmed request clears draft, shows completion, and tracks once',async()=>{const f=fixture();await f.submit();assert.equal(f.done.hidden,false);assert.equal(f.form.hidden,true);assert.equal(f.storage.size,0);assert.deepEqual(f.counts(),{resets:1,requests:1,conversions:1,challengeResets:1});assert.equal(f.button.disabled,false)});
 for(const options of [{offline:true},{statusCode:500,result:{error:'Unavailable'}},{statusCode:429,result:{error:'Too many requests'}},{statusCode:400,result:{error:'Please retry verification'}},{result:{}}]) test(`failure preserves form and draft: ${JSON.stringify(options)}`,async()=>{const f=fixture(options);await f.submit();assert.equal(f.fields.get('challenge'),'Score 67/100');assert.ok(f.storage.has('n8iv_fit_review_draft'));assert.equal(f.form.hidden,false);assert.equal(f.counts().conversions,0);assert.equal(f.gtagCalls.length,0);assert.equal(f.counts().resets,0);assert.equal(f.button.disabled,false);assert.match(f.status.textContent,/details are still here/);assert.doesNotMatch(f.status.textContent,/mailto|email.*instead/i)});
 test('missing human check blocks requests and offers reload while preserving draft',async()=>{const f=fixture({token:''});await f.submit();await f.submit();assert.equal(f.counts().requests,0);assert.match(f.status.textContent,/reload this page/);assert.ok(f.storage.has('n8iv_fit_review_draft'))});
-test('all public HTML and browser JS omit direct phone/email contact',()=>{const root=path.join(__dirname,'..');function scan(dir){for(const ent of fs.readdirSync(dir,{withFileTypes:true})){if(['.git','node_modules','api','tests'].includes(ent.name))continue;const p=path.join(dir,ent.name);if(ent.isDirectory())scan(p);else if(/\.(html|js)$/.test(p))assert.doesNotMatch(fs.readFileSync(p,'utf8'),/mailto:|tel:|zajen@n8ivpromotions\.com|480.{0,8}269.{0,8}3185/i,p)}}scan(root);assert.match(fs.readFileSync(path.join(root,'contact.html'),'utf8'),/id="request-form"/)});
+test('direct email links are limited to booking and legal contact', () => {
+  const root = path.join(__dirname, '..');
+  const allowed = new Set(['book.html', 'privacy.html', 'terms.html', 'security.html']);
+  const email = 'zajen@n8ivpromotions.com';
+  for (const directory of ['.', 'blog', 'js']) {
+    for (const name of fs.readdirSync(path.join(root, directory))) {
+      if (!/\.(?:html|js)$/.test(name)) continue;
+      const filename = path.join(directory, name);
+      let source = fs.readFileSync(path.join(root, filename), 'utf8');
+      if (allowed.has(filename)) {
+        source = source.replaceAll('mailto:' + email, '').replaceAll(email, '');
+      }
+      assert.doesNotMatch(source, /mailto:|tel:|zajen@n8ivpromotions\.com|480.{0,8}269.{0,8}3185/i, filename);
+    }
+  }
+  const book = fs.readFileSync(path.join(root, 'book.html'), 'utf8');
+  assert.match(book, /mailto:zajen@n8ivpromotions\.com\?subject=Fit(?:%20| )call(?:%20| )request/i);
+});
 
 test('general inquiries have an optional editable message field',()=>{const html=fs.readFileSync(path.join(__dirname,'../contact.html'),'utf8');assert.match(html,/<textarea id="challenge" name="challenge" rows="4" maxlength="3000"/);assert.doesNotMatch(html,/<input type="hidden" name="challenge"/);assert.doesNotMatch(html,/<textarea[^>]*required/);assert.match(html,/data-submit-label="Send request"/)});
