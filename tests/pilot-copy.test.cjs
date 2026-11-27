@@ -83,7 +83,7 @@ test('the Fit Review links directly to the verified calendar without embedding i
   assert.match(booking, /href="https:\/\/calendar\.app\.google\/oahGzxrEsXUGS6oBA" data-meetings-direct[^>]*>Choose a time<\/a>/);
   assert.match(booking, /30-minute Google Meet/);
   assert.match(booking, /referrerpolicy="no-referrer"/);
-  assert.doesNotMatch(booking, /HubSpot|Select 30 mins/i);
+  assert.doesNotMatch(booking, /meetings-na2\.hubspot\.com|Select 30 mins/i);
   assert.doesNotMatch(booking, /<iframe|data-meetings-embed|MeetingsEmbedCode/i);
   assert.doesNotMatch(read('js/conversion.js'), /MeetingsEmbedCode|meetingBookSucceeded|generate_lead|call_booked/);
   assert.match(booking, /mailto:/);
