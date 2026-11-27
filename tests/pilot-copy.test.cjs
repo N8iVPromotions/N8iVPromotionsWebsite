@@ -80,16 +80,18 @@ test('the self-audit is optional and shown only in the home footer', () => {
 });
 
 test('the Fit Review links directly to the verified calendar without embedding it', () => {
-  assert.match(booking, /href="https:\/\/meetings-na2\.hubspot\.com\/zajen" data-meetings-direct[^>]*>Choose a time<\/a>/);
-  assert.match(booking, /Select 30 mins/);
+  assert.match(booking, /href="https:\/\/calendar\.app\.google\/oahGzxrEsXUGS6oBA" data-meetings-direct[^>]*>Choose a time<\/a>/);
+  assert.match(booking, /30-minute Google Meet/);
+  assert.match(booking, /referrerpolicy="no-referrer"/);
+  assert.doesNotMatch(booking, /HubSpot|Select 30 mins/i);
   assert.doesNotMatch(booking, /<iframe|data-meetings-embed|MeetingsEmbedCode/i);
   assert.doesNotMatch(read('js/conversion.js'), /MeetingsEmbedCode|meetingBookSucceeded|generate_lead|call_booked/);
   assert.match(booking, /mailto:/);
 });
 
-test('the calendar handoff forwards only campaign UTMs and counts a click, not a booking', () => {
+test('the calendar handoff keeps campaign parameters on the site and counts a click, not a booking', () => {
   const vm = require('node:vm');
-  const url = 'https://meetings-na2.hubspot.com/zajen';
+  const url = 'https://calendar.app.google/oahGzxrEsXUGS6oBA';
   class Link {
     href = url;
     matches(selector) { return selector === '[data-meetings-direct]'; }
@@ -111,7 +113,7 @@ test('the calendar handoff forwards only campaign UTMs and counts a click, not a
       addEventListener: (name, handler) => { handlers[name] = handler; }
     }
   });
-  assert.equal(link.href, url + '?utm_source=qa&utm_campaign=agency');
+  assert.equal(link.href, url);
   assert.equal(events.length, 0);
   handlers.click({ target: link });
   assert.equal(JSON.stringify(events), JSON.stringify([['event', { name: 'cta_click', data: { location: 'book_calendar' } }]]));

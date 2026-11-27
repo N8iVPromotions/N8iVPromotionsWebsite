@@ -12,9 +12,7 @@
     'fbclid', 'msclkid', 'li_fat_id', 'ttclid', 'twclid', 'sccid'
   ];
   const campaignStorageKey = 'n8iv_conversion_campaign_v1';
-  const calendarCampaignKeys = [
-    'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'utm_source_platform'
-  ];
+  const reviewCalendarUrl = 'https://calendar.app.google/oahGzxrEsXUGS6oBA';
 
   // Install the documented queue before a deferred analytics module loads.
   // A blocked or unavailable analytics script never blocks navigation.
@@ -98,7 +96,7 @@
     preserveBookingQuery(link);
     try {
       const url = new URL(link.getAttribute('href'), window.location.href);
-      if (link.matches('[data-meetings-direct]') && url.origin === 'https://meetings-na2.hubspot.com' && url.pathname === '/zajen') {
+      if (link.matches('[data-meetings-direct]') && url.href === reviewCalendarUrl) {
         track('cta_click', { location: 'book_calendar' });
         return;
       }
@@ -155,16 +153,4 @@
   });
 
   window.N8iVConversion = Object.freeze({ track });
-
-  const directLink = document.querySelector('[data-meetings-direct]');
-  if (!directLink) return;
-  try {
-    const directUrl = new URL(directLink.href);
-    if (directUrl.origin !== 'https://meetings-na2.hubspot.com' || directUrl.pathname !== '/zajen' ||
-        directUrl.username || directUrl.password) return;
-    for (const key of calendarCampaignKeys) {
-      if (campaign[key]) directUrl.searchParams.set(key, campaign[key]);
-    }
-    directLink.href = directUrl.href;
-  } catch (_) { /* The original native link remains usable. */ }
 })();
