@@ -11,7 +11,7 @@ const routes = JSON.parse(read('vercel.json'));
 
 test('paid visitors see the price and booking action before the receipt', () => {
   assert.match(pilot, /Bring one client’s budget question\./);
-  assert.match(pilot, /noindex,\s*follow/i);
+  assert.doesNotMatch(pilot, /noindex/i);
   const firstBook = pilot.indexOf('href="/book"');
   assert.ok(firstBook > pilot.indexOf('$750'));
   assert.ok(pilot.indexOf('$750') > 0);
@@ -59,9 +59,11 @@ test('legacy routes use HTTP 301 and only indexable pages appear in the sitemap'
     assert.ok(routes.redirects.some(r => r.source === source && r.destination === destination && r.statusCode === 301), source);
   }
   const locations = Array.from(read('sitemap.xml').matchAll(/<loc>([^<]+)<\/loc>/g), m => new URL(m[1]).pathname);
-  assert.ok(locations.includes('/book'));
+  for (const route of ['/', '/pilot', '/book']) assert.ok(locations.includes(route));
+  assert.match(homepage, /href="\/pilot"/);
+  assert.match(homepage, /id="receipt"/);
   assert.ok(locations.includes('/revenue-self-audit'));
-  for (const old of ['/services', '/use-cases', '/about', '/contact', '/b2b-attribution-pilot', '/pilot']) {
+  for (const old of ['/services', '/use-cases', '/about', '/contact', '/b2b-attribution-pilot']) {
     assert.ok(!locations.includes(old), old);
   }
 });
@@ -81,7 +83,7 @@ test('the Fit Review uses the verified regional calendar and keeps a direct link
   const url = 'https://meetings-na2.hubspot.com/zajen';
   assert.ok(read('js/conversion-config.js').includes("meetingsUrl: '" + url + "'"));
   assert.ok(read('js/conversion.js').includes("'https://meetings-na2.hubspot.com'"));
-  assert.ok(booking.includes('href="' + url + '"'));
+  assert.ok(booking.includes('href="' + url + '" data-meetings-direct'));
   assert.match(booking, /Select 30 mins/);
   assert.match(booking, /data-meetings-embed/);
   assert.match(booking, /mailto:/);

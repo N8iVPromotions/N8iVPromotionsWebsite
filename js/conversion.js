@@ -193,6 +193,15 @@
     }
   } catch (_) { failBooking(); return; }
 
+  const directLink = document.querySelector('[data-meetings-direct]');
+  if (directLink) {
+    const directUrl = new URL(meetingsUrl);
+    directUrl.search = '';
+    for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'utm_source_platform']) {
+      if (campaign[key]) directUrl.searchParams.set(key, campaign[key]);
+    }
+    directLink.href = directUrl.href;
+  }
   embed.dataset.src = meetingsUrl.href;
   setBookingState('loading');
   function onFrameReady() {
@@ -219,6 +228,13 @@
     confirmed = true;
     onFrameReady();
     track('call_booked');
+    // Keep the existing GA4 lead event for confirmed bookings on the live site only.
+    try {
+      if (window.location.hostname === 'www.n8ivpromotions.com' && !window['ga-disable-G-HXEBK6Y9LJ'] &&
+          localStorage.getItem('n8iv_ga_opt_out') !== '1') {
+        window.gtag?.('event', 'generate_lead', { form_id: 'agency_fit_review_booking' });
+      }
+    } catch (_) { /* Measurement must never interrupt booking. */ }
   });
 
   timeout = window.setTimeout(() => {
