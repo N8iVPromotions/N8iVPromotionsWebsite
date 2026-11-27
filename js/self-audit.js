@@ -34,6 +34,7 @@
   const resultPanel = form.querySelector('[data-result-panel]');
   const error = form.querySelector('[data-audit-error]');
   let step = 0;
+  let completionTracked = false;
 
   panelsWrap.innerHTML = sections.map((section, sectionIndex) => `<section class="audit-panel" data-section="${sectionIndex}"><div class="audit-step-label">Section ${sectionIndex + 1} of ${sections.length}</div><h2>${section.title}</h2><p class="audit-step-intro">${section.intro}</p>${section.questions.map((question, questionIndex) => { const index = sectionIndex * 3 + questionIndex; return `<fieldset class="audit-question"><legend>${index + 1}. ${question}</legend><div class="audit-options">${choices.map(([label,value]) => `<div class="audit-option"><input id="q${index}-${value}" type="radio" name="q${index}" value="${value}" required><label for="q${index}-${value}">${label}</label></div>`).join('')}</div></fieldset>`; }).join('')}<div class="audit-error" data-step-error role="alert"></div><div class="audit-actions">${sectionIndex ? '<button class="audit-back" type="button" data-back>Back</button>' : '<span></span>'}<button class="btn btn-primary audit-btn" type="button" data-next>${sectionIndex === sections.length - 1 ? 'Get my result' : 'Next section'}</button></div></section>`).join('');
   const questionPanels = [...form.querySelectorAll('[data-section]')];
@@ -107,8 +108,12 @@
     const result = window.N8iVAuditScore(readAnswers());
     renderResult(result);
     saveFitSummaryHandoff({}, result);
-    window.N8iVAttribution?.track?.('self_audit_completed', { score_band: result.band });
+    try { window.N8iVAttribution?.track?.('self_audit_completed', { score_band: result.band }); } catch (_) {}
     showStep(sections.length);
+    if (!completionTracked) {
+      completionTracked = true;
+      try { window.N8iVConversion?.track?.('audit_complete', { score_band: result.band }); } catch (_) {}
+    }
     try { window.N8iVAuditConversion?.(readAnswers()); } catch (_) { /* Measurement must never block results. */ }
   }
   form.addEventListener('submit', async event => {
@@ -138,9 +143,9 @@
       const result = await response.json().catch(() => ({}));
       if (!response.ok || result.ok !== true || typeof result.emailDelivered !== 'boolean') throw new Error(result.error || 'We could not confirm your email request.');
       const delivery = result.emailDelivered ? 'Your email copy was accepted by our email provider; inbox delivery is not confirmed.' : 'Your email copy could not be sent. Your score remains available above.';
-      resultPanel.querySelector('[data-followup-message]').textContent = `${delivery} ${data.followUpConsent ? 'You opted in to follow-up about this audit.' : 'You did not opt in to follow-up about this audit.'} A Fit Review requires a separate request.`;
+      resultPanel.querySelector('[data-followup-message]').textContent = `${delivery} ${data.followUpConsent ? 'You opted in to follow-up about this audit.' : 'You did not opt in to follow-up about this audit.'} A fit call requires a separate booking.`;
       window.N8iVAttribution?.track?.('self_audit_email_requested', { score_band: localResult.band, follow_up_consent: data.followUpConsent ? 'yes' : 'no' });
-    } catch (err) { error.textContent = `${err.message} Your score is still available above. You can retry the email copy or request a free Fit Review separately.`; }
+    } catch (err) { error.textContent = `${err.message} Your score is still available above. You can retry the email copy or book a free fit call separately.`; }
     finally {
       submit.disabled = false; submit.textContent = 'Email my score';
       window.turnstile?.reset?.();
@@ -167,6 +172,6 @@
     resultPanel.querySelector('[data-score-band]').textContent = result.band;
     resultPanel.querySelector('[data-score-copy]').textContent = result.summary;
     resultPanel.querySelector('[data-category-results]').innerHTML = result.categories.map(item => `<div class="result-row"><span>${item.name}</span><strong>${item.score}%</strong></div>`).join('');
-    resultPanel.querySelector('[data-followup-message]').textContent = 'Your score is based on your answers, not a verified review of your systems. No email or follow-up is required. Request the free Fit Review below when you are ready.';
+    resultPanel.querySelector('[data-followup-message]').textContent = 'Your score is based on your answers, not a verified review of your systems. No email or follow-up is required. Book the free fit call below when you are ready.';
   }
 })();
