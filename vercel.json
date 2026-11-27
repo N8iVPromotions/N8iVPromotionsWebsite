@@ -3,18 +3,83 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/index.html",
+      "source": "/b2b-attribution-pilot",
+      "destination": "/pilot",
+      "statusCode": 301
+    },
+    {
+      "source": "/b2b-attribution-pilot.html",
+      "destination": "/pilot",
+      "statusCode": 301
+    },
+    {
+      "source": "/start",
+      "destination": "/pilot",
+      "statusCode": 301
+    },
+    {
+      "source": "/start.html",
+      "destination": "/pilot",
+      "statusCode": 301
+    },
+    {
+      "source": "/services",
       "destination": "/",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/services.html",
-      "destination": "/services",
-      "permanent": true
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/use-cases",
+      "destination": "/",
+      "statusCode": 301
     },
     {
       "source": "/case-studies",
-      "destination": "/use-cases",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/case-studies.html",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/about",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/about.html",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/contact",
+      "destination": "/book",
+      "statusCode": 301
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/book",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/:slug.html",
+      "destination": "/insights/:slug",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/insights/:slug",
+      "statusCode": 301
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
       "permanent": true
     },
     {
@@ -23,54 +88,19 @@
       "permanent": true
     },
     {
-      "source": "/about.html",
-      "destination": "/about",
-      "permanent": true
-    },
-    {
-      "source": "/contact.html",
-      "destination": "/contact",
-      "permanent": true
-    },
-    {
       "source": "/revenue-self-audit.html",
       "destination": "/revenue-self-audit",
-      "permanent": true
-    },
-    {
-      "source": "/start.html",
-      "destination": "/start",
       "permanent": true
     }
   ],
   "rewrites": [
     {
-      "source": "/services",
-      "destination": "/services.html"
-    },
-    {
-      "source": "/use-cases",
-      "destination": "/case-studies"
-    },
-    {
       "source": "/insights",
       "destination": "/insights.html"
     },
     {
-      "source": "/about",
-      "destination": "/about.html"
-    },
-    {
-      "source": "/contact",
-      "destination": "/contact.html"
-    },
-    {
       "source": "/revenue-self-audit",
       "destination": "/revenue-self-audit.html"
-    },
-    {
-      "source": "/start",
-      "destination": "/start.html"
     },
     {
       "source": "/insights/agencies-optimizing-40-percent-of-the-funnel",
@@ -135,7 +165,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' https://bzrcdn.openai.com https://*.googletagmanager.com https://challenges.cloudflare.com https://connect.facebook.net https://*.hs-scripts.com https://*.hs-analytics.net https://*.hs-banner.com https://*.hscollectedforms.net https://*.hsadspixel.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://bzr.openai.com https://www.facebook.com https://*.google-analytics.com https://*.googletagmanager.com https://*.hubspot.com https://track.hubspot.com https://*.hsforms.com https://www.google.com https://stats.g.doubleclick.net; connect-src 'self' https://bzr.openai.com https://bzrcdn.openai.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://challenges.cloudflare.com https://www.facebook.com https://connect.facebook.net https://*.hubspot.com https://*.hs-banner.com https://*.hscollectedforms.net https://*.hs-analytics.net https://*.hsforms.com https://analytics.google.com https://www.google.com https://stats.g.doubleclick.net; frame-src https://challenges.cloudflare.com https://*.hubspot.com; media-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+          "value": "default-src 'self'; script-src 'self' https://static.hsappstatic.net https://bzrcdn.openai.com https://*.googletagmanager.com https://challenges.cloudflare.com https://connect.facebook.net https://*.hs-scripts.com https://*.hs-analytics.net https://*.hs-banner.com https://*.hscollectedforms.net https://*.hsadspixel.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://bzr.openai.com https://www.facebook.com https://*.google-analytics.com https://*.googletagmanager.com https://*.hubspot.com https://track.hubspot.com https://*.hsforms.com https://www.google.com https://stats.g.doubleclick.net; connect-src 'self' https://bzr.openai.com https://bzrcdn.openai.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://challenges.cloudflare.com https://www.facebook.com https://connect.facebook.net https://*.hubspot.com https://*.hs-banner.com https://*.hscollectedforms.net https://*.hs-analytics.net https://*.hsforms.com https://analytics.google.com https://www.google.com https://stats.g.doubleclick.net; frame-src https://challenges.cloudflare.com https://*.hubspot.com; media-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
         },
         {
           "key": "X-Frame-Options",
