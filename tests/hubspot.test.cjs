@@ -108,7 +108,7 @@ test('every public HTML includes the loader after existing opt-out initializatio
 test('CSP preserves original directives and allows only same-origin Blob media', () => {
   const original = "default-src 'self'; script-src 'self' https://*.googletagmanager.com https://challenges.cloudflare.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.facebook.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://challenges.cloudflare.com https://www.facebook.com https://connect.facebook.net; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'";
   const additions = {
-    'script-src': 'https://*.hs-scripts.com https://*.hs-analytics.net https://*.hs-banner.com https://*.hscollectedforms.net https://*.hsadspixel.net',
+    'script-src': 'https://*.hs-scripts.com https://*.hs-analytics.net https://*.hs-banner.com https://*.hscollectedforms.net https://*.hsadspixel.net https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js',
     'connect-src': 'https://*.hubspot.com https://*.hs-banner.com https://*.hscollectedforms.net https://*.hs-analytics.net https://*.hsforms.com',
     'img-src': 'https://*.hubspot.com https://track.hubspot.com https://*.hsforms.com',
     'frame-src': 'https://*.hubspot.com',
