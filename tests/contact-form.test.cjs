@@ -34,7 +34,7 @@ test('direct email links are limited to booking and legal contact', () => {
     }
   }
   const book = fs.readFileSync(path.join(root, 'book.html'), 'utf8');
-  assert.match(book, /mailto:zajen@n8ivpromotions\.com\?subject=Fit(?:%20| )call(?:%20| )request/i);
+  assert.match(book, /mailto:zajen@n8ivpromotions\.com\?subject=Agency%20Fit%20Review%20request/i);
 });
 
 test('general inquiries have an optional editable message field',()=>{const html=fs.readFileSync(path.join(__dirname,'../contact.html'),'utf8');assert.match(html,/<textarea id="challenge" name="challenge" rows="4" maxlength="3000"/);assert.doesNotMatch(html,/<input type="hidden" name="challenge"/);assert.doesNotMatch(html,/<textarea[^>]*required/);assert.match(html,/data-submit-label="Send request"/)});

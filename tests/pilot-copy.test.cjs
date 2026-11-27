@@ -79,12 +79,40 @@ test('the self-audit is optional and shown only in the home footer', () => {
   assert.match(booking, /No questionnaire or data upload/);
 });
 
-test('the Fit Review uses the verified regional calendar and keeps a direct link', () => {
-  const url = 'https://meetings-na2.hubspot.com/zajen';
-  assert.ok(read('js/conversion-config.js').includes("meetingsUrl: '" + url + "'"));
-  assert.ok(read('js/conversion.js').includes("'https://meetings-na2.hubspot.com'"));
-  assert.ok(booking.includes('href="' + url + '" data-meetings-direct'));
+test('the Fit Review links directly to the verified calendar without embedding it', () => {
+  assert.match(booking, /href="https:\/\/meetings-na2\.hubspot\.com\/zajen" data-meetings-direct[^>]*>Choose a time<\/a>/);
   assert.match(booking, /Select 30 mins/);
-  assert.match(booking, /data-meetings-embed/);
+  assert.doesNotMatch(booking, /<iframe|data-meetings-embed|MeetingsEmbedCode/i);
+  assert.doesNotMatch(read('js/conversion.js'), /MeetingsEmbedCode|meetingBookSucceeded|generate_lead|call_booked/);
   assert.match(booking, /mailto:/);
+});
+
+test('the calendar handoff forwards only campaign UTMs and counts a click, not a booking', () => {
+  const vm = require('node:vm');
+  const url = 'https://meetings-na2.hubspot.com/zajen';
+  class Link {
+    href = url;
+    matches(selector) { return selector === '[data-meetings-direct]'; }
+    closest() { return this; }
+    getAttribute() { return this.href; }
+  }
+  const link = new Link();
+  const location = new URL('https://www.n8ivpromotions.com/book?utm_source=qa&utm_campaign=agency&gclid=test&_vercel_probe=test&email=test');
+  const events = [];
+  const handlers = {};
+  vm.runInNewContext(read('js/conversion.js'), {
+    URL, URLSearchParams, Element: Link,
+    window: { location, va: (...args) => events.push(args) },
+    sessionStorage: { setItem() {} },
+    document: {
+      querySelectorAll: selector => selector === 'a[href]' ? [link] : [],
+      querySelector: selector => selector === '[data-meetings-direct]' ? link : null,
+      getElementById: () => null,
+      addEventListener: (name, handler) => { handlers[name] = handler; }
+    }
+  });
+  assert.equal(link.href, url + '?utm_source=qa&utm_campaign=agency');
+  assert.equal(events.length, 0);
+  handlers.click({ target: link });
+  assert.equal(JSON.stringify(events), JSON.stringify([['event', { name: 'cta_click', data: { location: 'book_calendar' } }]]));
 });

@@ -288,12 +288,9 @@ body:is(.conversion-home,.conversion-pilot,.conversion-book) {
 }
 .book-intro {margin-top:20px!important;max-width:65ch;color:var(--conversion-graphite);font:400 16px/24px var(--conversion-body);}
 .book-meta {margin-top:16px!important;max-width:65ch;color:var(--conversion-graphite);font:400 14px/20px var(--conversion-body);}
-.book-calendar {margin-top:32px;min-width:0;}
-.booking-status {margin-bottom:16px!important;color:var(--conversion-graphite);font:400 14px/20px var(--conversion-body);}
-.booking-status:empty {display:none;}
-[data-meetings-embed]:not([hidden]) {min-height:700px;border-radius:12px;background:var(--conversion-white);overflow:clip;}
-[data-meetings-embed] iframe {display:block;width:100%;max-width:100%;min-height:700px;border:0;}
-.booking-fallback {margin:0;padding:24px;border:1px solid var(--conversion-stone);border-radius:12px;background:var(--conversion-white);color:var(--conversion-graphite);font:400 16px/24px var(--conversion-body);}
+.book-actions {display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin-top:24px;}
+.book-calendar-note,.booking-fallback {color:var(--conversion-graphite);font:400 14px/20px var(--conversion-body);}
+.booking-fallback {margin-top:12px!important;}
 .booking-fallback a {display:inline-flex;align-items:center;min-height:44px;padding-block:10px;color:var(--conversion-deep);font:500 16px/24px var(--conversion-body);text-decoration:underline;text-underline-offset:3px;}
 @layer n8iv-buttons {
   body.n8iv-audit-page .conversion-button[data-location="audit_result"] {
@@ -350,8 +347,7 @@ body:is(.conversion-home,.conversion-pilot,.conversion-book) {
   .conversion-closing p {font-size:16px;line-height:24px;}
   .conversion-closing .conversion-button {width:100%;margin-top:24px;}
   .book-main {padding-block:40px 48px;}
-  .book-calendar {margin-top:28px;}
-  .booking-fallback {padding:20px;}
+  .book-actions .conversion-button {width:100%;}
 }
 @media(prefers-reduced-motion:reduce) {
   .conversion-button,.conversion-faq summary::after {transition:none;}
@@ -706,28 +702,17 @@ html:has(> body.n8iv-content-page > .conversion-header) {
 .conversion-pilot .pilot-steps h3{margin-top:4px}
 .conversion-pilot .pilot-quick-answers{padding-bottom:40px}
 
-/* The booking page keeps the contact page's 800px reading measure and a
-   neutral action panel. Hidden/empty calendars never reserve empty space. */
+/* The booking page keeps a compact reading measure and neutral action panel. */
 .conversion-book .book-main{padding-block:clamp(3rem,5vw,5rem) var(--conversion-section-space)}
 .conversion-book .book-main .book-shell{max-width:864px}
 .conversion-book .book-introduction{max-width:100%}
 .conversion-book .book-intro{margin-top:24px!important}
 .conversion-book .book-panel{
- --book-panel-padding:clamp(20px,3vw,32px);
- margin-top:32px;padding:var(--book-panel-padding);
+ margin-top:32px;padding:clamp(20px,3vw,32px);
  border:1px solid var(--conversion-stone);border-radius:12px;
  background:var(--conversion-panel);min-width:0
 }
 .conversion-book .book-panel>.book-meta{margin-top:0!important}
-.conversion-book .book-calendar{margin-top:24px;min-width:0}
-.conversion-book .booking-fallback{margin:0;background:var(--conversion-white)}
-.conversion-book .book-panel [data-meetings-embed]:not([hidden]){
- width:calc(100% + 2 * var(--book-panel-padding));max-width:none;
- margin-inline:calc(-1 * var(--book-panel-padding));border-radius:0
-}
-.conversion-book .book-panel [data-meetings-embed] iframe{min-width:0!important}
-.conversion-book [data-booking-state="ready"] .booking-fallback,
-.conversion-book [data-booking-state="loading"] .booking-fallback{margin-top:24px}
 @media(max-width:767px){
  .conversion-pilot .pilot-report-frame{margin-top:32px}
  .conversion-pilot .pilot-quick-answers{padding-bottom:24px}
