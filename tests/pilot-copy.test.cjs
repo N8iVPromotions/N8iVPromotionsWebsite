@@ -16,7 +16,13 @@ test('paid visitors see the price and booking action before the receipt', () => 
   assert.ok(firstBook > pilot.indexOf('$750'));
   assert.ok(pilot.indexOf('$750') > 0);
   assert.ok(firstBook < pilot.indexOf('$18,400'));
-  assert.doesNotMatch(pilot, /<nav\b|href="\/revenue-self-audit"/i);
+  const header = pilot.match(/<header\b[^>]*>([\s\S]*?)<\/header>/i);
+  assert.ok(header, 'The pilot has a logo header');
+  assert.doesNotMatch(header[1], /<nav\b|<a\b/i);
+  assert.doesNotMatch(pilot, /href="\/revenue-self-audit"/i);
+  const footer = pilot.match(/<footer\b[^>]*>([\s\S]*?)<\/footer>/i);
+  assert.ok(footer, 'The pilot has a legal footer');
+  assert.deepEqual(Array.from(footer[1].matchAll(/href="([^"]+)"/g), m => m[1]), ['/privacy', '/terms']);
   assert.match(pilot, /data-location="pilot_sticky"/);
 });
 
